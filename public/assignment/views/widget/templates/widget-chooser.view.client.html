@@ -1,0 +1,63 @@
+
+<nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container-fluid">
+        <div class="navbar-text pull-left">
+            <a href="#/user/{{model.userID}}/website/{{model.websiteID}}/page/{{model.pageID}}/widget">
+                <span class="glyphicon glyphicon-chevron-left"></span>
+            </a>
+        </div>
+
+        <div class="navbar-header">
+            <a class="navbar-brand" href="">
+                Choose Widget
+            </a>
+        </div>
+    </div>
+</nav>
+
+<div class="container-fluid">
+
+    <ul class="list-group">
+        <li class="list-group-item">
+            <a ng-click="model.newHeaderWidget()" href="">Header</a>
+        </li>
+        <li class="list-group-item">
+            <a>Label</a>
+        </li>
+        <li class="list-group-item">
+            <a>HTML</a>
+        </li>
+        <li class="list-group-item">
+            <a>Text Input</a>
+        </li>
+        <li class="list-group-item">
+            <a>Link</a>
+        </li>
+        <li class="list-group-item">
+            <a>Button</a>
+        </li>
+        <li class="list-group-item">
+            <a ng-click="model.newImageWidget()" href="">Image</a>
+        </li>
+        <li class="list-group-item">
+            <a ng-click="model.newYouTubeWidget()" href="">YouTube</a>
+        </li>
+        <li class="list-group-item">
+            <a>Data Table</a>
+        </li>
+        <li class="list-group-item">
+            <a>Repeater</a>
+        </li>
+    </ul>
+</div>
+
+<nav class="navbar navbar-default navbar-fixed-bottom">
+    <div class="container-fluid">
+        <div class="navbar-text pull-right">
+            <a href="#/user/{{model.userID}}">
+                <span class="glyphicon glyphicon-user"></span>
+            </a>
+        </div>
+    </div>
+</nav>
+

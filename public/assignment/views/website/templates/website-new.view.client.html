@@ -1,0 +1,110 @@
+
+<nav class="navbar navbar-default navbar-fixed-top">
+    <div class="row container-fluid">
+        <div class="col-sm-4 hidden-xs">
+            <div class="navbar-text pull-left">
+                <a href="#/user/{{model.userID}}/website">
+                    <span class="glyphicon glyphicon-chevron-left"></span>
+                </a>
+            </div>
+            <div class="navbar-header">
+                <a class="navbar-brand">
+                    Websites
+                </a>
+            </div>
+            <div class="navbar-text pull-right">
+                <a href="">
+                    <span class="glyphicon glyphicon-plus"></span>
+                </a>
+            </div>
+
+        </div>
+        <div class="col-sm-8">
+            <div class="navbar-text pull-left visible-xs">
+                <a href="#/user/{{model.userID}}/website">
+                    <span class="glyphicon glyphicon-chevron-left"></span>
+                </a>
+            </div>
+            <div class="navbar-text pull-right">
+                <a ng-click="model.createWebsite(model.website)" href="">
+                    <span class="glyphicon glyphicon-ok"></span>
+                </a>
+            </div>
+            <div class="navbar-header">
+                <a class="navbar-brand" href="#">
+                    New Website
+                </a>
+            </div>
+        </div>
+    </div>
+</nav>
+
+<div class="container-fluid">
+
+
+    <div class="col-sm-4 pull-left hidden-xs">
+        <ul class="list-group">
+            <li class="list-group-item">
+                <div class="row">
+                    <div class="col-xs-6">
+                        Name
+                    </div>
+                    <div class="col-xs-6">
+                        <a href="#/user/{{model.userID}}/website/new" class="pull-right">
+                            <span class="glyphicon glyphicon-plus"></span>
+                        </a>
+                    </div>
+
+                </div>
+
+
+            </li>
+            <li ng-repeat="website in model.websites" class="list-group-item">
+                <div class="row">
+                    <div class="col-xs-6">
+                        {{website.name}}
+                    </div>
+                    <div class="col-xs-6">
+                        <a href="#/user/{{website.developerId}}/website/{{website._id}}" class="pull-right">
+                            <span class="glyphicon glyphicon-cog"></span>
+                        </a>
+                    </div>
+                </div>
+            </li>
+
+        </ul>
+    </div>
+
+    <div class="col-sm-8">
+        <label for="website-new-website-name">Name</label>
+        <input ng-model="model.website.name"
+               class="form-control"
+               id="website-new-website-name"
+               placeholder="Website Name" type="text"/>
+
+        <div class="form-group">
+        <label for="website-new-website-new-description">Description</label>
+        <textarea ng-model="model.website.description"
+                  class="form-control"
+                  placeholder="Description"
+                  id="website-new-website-new-description" rows="4"></textarea>
+        </div>
+
+        <a class="btn btn-danger btn-block" ng-click="model.createWebsite(model.website)">
+            Create
+        </a>
+
+    </div>
+
+</div>
+
+<nav class="navbar navbar-default navbar-fixed-bottom">
+    <div class="container-fluid">
+        <div class="navbar-text pull-right">
+            <a href="#/user/{{model.userID}}">
+                <span class="glyphicon glyphicon-user"></span>
+            </a>
+        </div>
+    </div>
+</nav>
+

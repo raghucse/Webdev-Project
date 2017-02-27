@@ -1,0 +1,93 @@
+
+<nav class="navbar navbar-default navbar-fixed-top">
+    <div class="row container-fluid">
+        <div class="col-sm-4 hidden-xs">
+            <div class="navbar-text pull-left">
+                <a href="#/user/{{model.userID}}/website/{{model.websiteID}}/page">
+                    <span class="glyphicon glyphicon-chevron-left"></span>
+                </a>
+            </div>
+            <div class="navbar-header">
+                <a class="navbar-brand">
+                    Pages
+                </a>
+            </div>
+            <div class="navbar-text pull-right">
+                <a href="">
+                    <span class="glyphicon glyphicon-plus"></span>
+                </a>
+            </div>
+
+        </div>
+        <div class="col-sm-8">
+            <div class="navbar-text pull-left visible-xs">
+                <a href="#/user/{{model.userID}}/website/{{model.websiteID}}/page">
+                    <span class="glyphicon glyphicon-chevron-left"></span>
+                </a>
+            </div>
+            <div class="navbar-text pull-right" ng-click="model.createPage(model.page)">
+                <a href="">
+                    <span class="glyphicon glyphicon-ok"></span>
+                </a>
+            </div>
+            <div class="navbar-header">
+                <a class="navbar-brand" href="">
+                    New Page
+                </a>
+            </div>
+        </div>
+    </div>
+</nav>
+
+<div class="container-fluid">
+
+
+    <div class="col-sm-4 pull-left hidden-xs">
+        <ul class="list-group">
+            <li ng-repeat="page in model.pages" class="list-group-item">
+                <div class="row">
+                    <div class="col-xs-6">
+                        <a href="#/user/{{model.userID}}/website/{{model.websiteID}}/page/{{page._id}}/widget">
+                            {{page.name}}
+                        </a>
+                    </div>
+                    <div class="col-xs-6">
+                        <a href="#/user/{{model.userID}}/website/{{model.websiteID}}/page/{{page._id}}" class="pull-right">
+                            <span class="glyphicon glyphicon-cog"></span>
+                        </a>
+                    </div>
+                </div>
+            </li>
+        </ul>
+    </div>
+
+    <div class="col-sm-8">
+
+        <label for="page-new-page-name">Name</label>
+        <input class="form-control"
+               ng-model="model.page.name"
+               id="page-new-page-name"
+               placeholder="Page Name" type="text"/>
+
+        <label for="page-new-page-title">Title</label>
+        <input class="form-control"
+               ng-model="model.page.description"
+               placeholder="Page Title"
+               id="page-new-page-title" type="text"></input>
+
+
+    </div>
+
+</div>
+
+
+<nav class="navbar navbar-default navbar-fixed-bottom">
+    <div class="container-fluid">
+        <div class="navbar-text pull-right">
+            <a href="#/user/{{model.userID}}">
+                <span class="glyphicon glyphicon-user"></span>
+            </a>
+        </div>
+    </div>
+</nav>
+
