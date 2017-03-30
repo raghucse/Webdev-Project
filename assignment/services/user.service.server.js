@@ -1,5 +1,16 @@
 
 module.exports = function (app) {
+
+
+    var q = require("q");
+    var passport = require('passport');
+    var auth = authorized;
+    var LocalStrategy = require('passport-local').Strategy;
+    passport.use(new LocalStrategy(localStrategy));
+    passport.serializeUser(serializeUser);
+    passport.deserializeUser(deserializeUser);
+
+    app.post('/api/login', passport.authenticate('local'), login);
     app.get("/api/user", findUser);
     app.get("/api/user/:userID", findUserByID);
     app.put("/api/user/:userID", updateUser);
@@ -10,6 +21,50 @@ module.exports = function (app) {
         {_id: "345", username: "charly",   password: "charly",   firstName: "Charly", lastName: "Garcia", email: "charly123@gmail.com"  },
         {_id: "456", username: "jannunzi", password: "jannunzi", firstName: "Jose",   lastName: "Annunzi", email: "jose2323@gmail.com" }
     ];
+
+    function authorized (req, res, next) {
+        if (!req.isAuthenticated()) {
+            res.send(401);
+        } else {
+            next();
+        }
+    }
+
+    function localStrategy(username, password, done) {
+        findUserByCredentials(username, password)
+            .then(
+                function(user) {
+                    if (!user) { return done(null, false); }
+                    return done(null, user);
+                },
+                function(err) {
+                    if (err) { return done(err); }
+                }
+            );
+    }
+
+    function serializeUser(user, done) {
+        done(null, user);
+    }
+
+    function deserializeUser(user, done) {
+        findUserById(user._id)
+            .then(
+                function(user){
+                    done(null, user);
+                },
+                function(err){
+                    done(err, null);
+                }
+            );
+    }
+
+    function login(req, res) {
+        var user = req.user;
+        res.json(user);
+    }
+
+
 
     function findUser(req,res) {
         var username = req.query.username;
@@ -36,23 +91,34 @@ module.exports = function (app) {
         }
     }
 
-    function findUserByCredentials(req, res) {
-        var username = req.query.username;
-        var password = req.query.password;
-        console.log("from api server");
+    function findUserByCredentials(username, password) {
+        var deferred = q.defer();
+        console.log("from api server - findUserByCredentials");
         var user = users.find(function (user) {
             return user.username == username && user.password == password;
-        })
-
-        res.json(user);
+        });
+        if(user){
+            deferred.resolve(user);
+        }
+        else {
+            deferred.reject();
+        }
+        return deferred.promise;
     }
 
     function findUserByID(req, res) {
+        var deferred = q.defer();
         var userID = req.params.userID;
         var user = users.find(function (u) {
             return u._id == userID;
         });
-        res.send(user);
+        if(user){
+            deferred.resolve(user);
+        }
+        else {
+            deferred.reject();
+        }
+        return deferred.promise;
     }
 
     function updateUser(req, res) {
@@ -70,5 +136,5 @@ module.exports = function (app) {
             }
         }
     }
-}
+};
 

@@ -17,9 +17,14 @@
             "findUserByUsername" : findUserByUsername,
             "findUserByCredentials" : findUserByCredentials,
             "updateUser" : updateUser,
-            "deleteUser" : deleteUser
+            "deleteUser" : deleteUser,
+            "login" : login
         };
         return api;
+
+        function login(user) {
+            return $http.post("/api/login", user);
+        }
         
         function createUser(user) {
             user._id = (new Date()).getTime();
