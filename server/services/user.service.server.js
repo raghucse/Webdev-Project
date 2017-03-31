@@ -34,11 +34,13 @@ module.exports = function (app) {
         findUserByCredentials(username, password)
             .then(
                 function(user) {
-                    if (!user) { return done(null, false); }
+                    if (!user) {
+                        return done(null, false);
+                    }
                     return done(null, user);
                 },
                 function(err) {
-                    if (err) { return done(err); }
+                    if (err) { return done(err, null); }
                 }
             );
     }

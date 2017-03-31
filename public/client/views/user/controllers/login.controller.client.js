@@ -18,9 +18,10 @@
                 .login(user)
                 .then(function (user) {
                 if(user){
-                    $rootScope.currentUser = user;
-                    console.log(user._id);
-                    $location.url("/user/" + user._id);
+                    user = user.data;
+                    $rootScope.currentUser = user[0];
+                    //console.log(user[0]._id);
+                    $location.url("/user/" + user[0]._id);
                 }
                 else{
                     vm.error = "User not found";
