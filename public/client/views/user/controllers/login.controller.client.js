@@ -16,16 +16,18 @@
         function login(user) {
             UserService
                 .login(user)
-                .then(function (user) {
-                if(user){
-                    user = user.data;
-                    $rootScope.currentUser = user[0];
-                    //console.log(user[0]._id);
-                    $location.url("/user/" + user[0]._id);
+                .then(function (response) {
+                if(response){
+                    user = response.data;
+                    if(user[0]){
+                        $rootScope.currentUser = user[0];
+                        $location.url("/user/" + user[0]._id);
+                    }
+                    else{
+                        vm.error = "User not found";
+                    }
                 }
-                else{
-                    vm.error = "User not found";
-                }
+
             });
         }
     }
