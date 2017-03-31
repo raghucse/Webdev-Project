@@ -48,7 +48,7 @@ module.exports = function (app) {
     }
 
     function deserializeUser(user, done) {
-        findUserById(user._id)
+        findUserByID(user._id)
             .then(
                 function(user){
                     done(null, user);
@@ -93,7 +93,6 @@ module.exports = function (app) {
 
     function findUserByCredentials(username, password) {
         var deferred = q.defer();
-        console.log("from api server - findUserByCredentials");
         var user = users.find(function (user) {
             return user.username == username && user.password == password;
         });
@@ -106,9 +105,8 @@ module.exports = function (app) {
         return deferred.promise;
     }
 
-    function findUserByID(req, res) {
+    function findUserByID(userID) {
         var deferred = q.defer();
-        var userID = req.params.userID;
         var user = users.find(function (u) {
             return u._id == userID;
         });

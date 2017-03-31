@@ -3,7 +3,7 @@
         .module("WebAppMaker")
         .controller("LoginController", loginController);
 
-    function loginController(UserService, $location) {
+    function loginController(UserService, $location, $rootScope) {
         var vm = this;
 
         //event handlers
@@ -18,8 +18,8 @@
                 .login(user)
                 .then(function (user) {
                 if(user){
-                    //$rootScope.currentUser = user;
-                    //console.log(user);
+                    $rootScope.currentUser = user;
+                    console.log(user._id);
                     $location.url("/user/" + user._id);
                 }
                 else{
