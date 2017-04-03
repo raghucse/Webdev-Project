@@ -22,7 +22,7 @@ module.exports = function (app) {
     var model = require('./model/model.server')(mongoose);
 
     require("./services/user.service.server.js")(app, model.userModel);
-    require("./services/website.service.server.js")(app);
-    require("./services/page.service.server.js")(app);
-    require("./services/widget.service.server.js")(app);
+    require("./services/event.service.server.js")(app, model.serviceModel);
+    require("./services/product.service.server.js")(app, model.productModel);
+    require("./services/service.service.server.js")(app, model.serviceModel);
 };
