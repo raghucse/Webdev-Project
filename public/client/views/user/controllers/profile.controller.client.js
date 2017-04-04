@@ -6,6 +6,7 @@
     function profileController(UserService, $routeParams, $location) {
         var vm = this;
         var userID = $routeParams['uid'];
+        var hostID = $routeParams['hid'];
 
         //event handlers
         vm.update = update;

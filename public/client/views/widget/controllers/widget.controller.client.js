@@ -53,7 +53,7 @@
         function newHeaderWidget() {
             var headerWidget ={"widgetType": "HEADER", "size": "2", "text": "GIZMODO"};
             var newWidget = WidgetService.createWidget(vm.pageID, headerWidget);
-            $location.url("/user/" + vm.userID + "/website/" + vm.websiteID + "/page/" +
+            $location.url("/user/" + vm.userID + "/event/" + vm.websiteID + "/page/" +
                             vm.pageID + "/widget/" + newWidget._id);
 
         }
@@ -62,7 +62,7 @@
             var imageWidget = {"widgetType": "IMAGE", "width": "100%",
                 "url": "http://lorempixel.com/400/200/"};
             var newImgWidget = WidgetService.createWidget(vm.pageID, imageWidget);
-            $location.url("/user/" + vm.userID + "/website/" + vm.websiteID + "/page/" +
+            $location.url("/user/" + vm.userID + "/event/" + vm.websiteID + "/page/" +
                             vm.pageID + "/widget/" + newImgWidget._id);
 
         }
@@ -71,7 +71,7 @@
             var youTubeWidget ={"widgetType": "YOUTUBE", "width": "100%",
                 "url": "https://youtu.be/AM2Ivdi9c4E" };
             var newYTWidget = WidgetService.createWidget(vm.pageID, youTubeWidget);
-            $location.url("/user/" + vm.userID + "/website/" + vm.websiteID + "/page/" +
+            $location.url("/user/" + vm.userID + "/event/" + vm.websiteID + "/page/" +
                             vm.pageID + "/widget/" + newYTWidget._id);
         }
     }

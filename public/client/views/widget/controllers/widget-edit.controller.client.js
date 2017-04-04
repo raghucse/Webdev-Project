@@ -23,12 +23,12 @@
 
         function updateWid(widget) {
             WidgetService.updateWidget(vm.widgetID, widget);
-            $location.url("/user/" + vm.userID + "/website/" + vm.websiteID + "/page/" + vm.pageID + "/widget");
+            $location.url("/user/" + vm.userID + "/event/" + vm.websiteID + "/page/" + vm.pageID + "/widget");
         }
 
         function deleteWidget() {
             WidgetService.deleteWidget(vm.widgetID);
-            $location.url("/user/" + vm.userID + "/website/" + vm.websiteID + "/page/" + vm.pageID + "/widget");
+            $location.url("/user/" + vm.userID + "/event/" + vm.websiteID + "/page/" + vm.pageID + "/widget");
         }
 
     }

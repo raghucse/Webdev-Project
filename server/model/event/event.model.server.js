@@ -60,8 +60,8 @@ module.exports = function (mongoose, q) {
         EventModel.update(
             { _id:eventId },
 
-                // name: website.name,
-                // description: website.description
+                // name: event.name,
+                // description: event.description
                 event
             , function (err, event) {
                 if(err){

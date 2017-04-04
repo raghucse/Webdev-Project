@@ -17,7 +17,7 @@ module.exports = function (mongoose) {
 
     // UserSchema.post('remove', function () {
     //     var user = this;
-    //     var websiteModel = require('../website/website.model.server');
+    //     var websiteModel = require('../event/event.model.server');
     //     var PageModel = require('../page/page.model.server');
     //     var widgetModel = require('../widget/widget.model.server');
     //     PageModel.find({_website: {$in: user.websites}}, '_id', function (err, pages) {

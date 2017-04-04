@@ -2,18 +2,18 @@
 <nav class="navbar navbar-default navbar-fixed-top">
     <div class="container-fluid">
         <div class="navbar-text pull-left">
-            <a href="#/user/{{model.userID}}">
+            <a href="#/host/{{model.hostID}}">
                 <span class="glyphicon glyphicon-chevron-left"></span>
             </a>
         </div>
         <div class="navbar-text pull-right">
-            <a href="#/user/{{model.userID}}/website/new">
+            <a href="#/host/{{model.hostID}}/event/new">
                 <span class="glyphicon glyphicon-plus"></span>
             </a>
         </div>
         <div class="navbar-header">
             <a class="navbar-brand" href="">
-                Websites
+                Events
             </a>
         </div>
     </div>
@@ -25,37 +25,37 @@
         <li class="list-group-item">
             <div class="row">
                 <div class="col-xs-6">
-                    Name
+                    Event Name
                 </div>
                 <div class="col-xs-3 hidden-xs">
                     Last Modified
                 </div>
                 <div class="col-xs-2 hidden-xs">
-                    Owner
+                    Host
                 </div>
                 <div class="col-sm-1 col-xs-6">
-                    <a href="#/user/{{model.userID}}/website/new" class="pull-right">
+                    <a href="#/host/{{model.hostID}}/event/new" class="pull-right">
                         <span class="glyphicon glyphicon-plus"></span>
                     </a>
                 </div>
             </div>
         </li>
 
-        <li ng-repeat="website in model.websites" class="list-group-item">
+        <li ng-repeat="event in model.events" class="list-group-item">
             <div class="row">
                 <div class="col-xs-6">
-                    <a href="#/user/{{website.developerId}}/website/{{website._id}}/page">
-                        {{website.name}}
+                    <a href="#/host/{{event.host}}/website/{{event._id}}/page">
+                        {{event.name}}
                     </a>
                 </div>
                 <div class="col-xs-3 hidden-xs">
-                    {{website.created | date}}
+                    {{event.created | date}}
                 </div>
                 <div class="col-xs-2 hidden-xs">
-                    {{website.developerId}}
+                    {{event.host}}
                 </div>
                 <div class="col-sm-1 col-xs-6">
-                    <a href="#/user/{{website.developerId}}/website/{{website._id}}" class="pull-right">
+                    <a href="#/host/{{event.host}}/website/{{event._id}}" class="pull-right">
                         <span class="glyphicon glyphicon-cog"></span>
                     </a>
                 </div>
@@ -69,7 +69,7 @@
 <nav class="navbar navbar-default navbar-fixed-bottom">
     <div class="container-fluid">
         <div class="navbar-text pull-right">
-            <a href="#/user/{{model.userID}}">
+            <a href="#/host/{{model.hostID}}">
                 <span class="glyphicon glyphicon-user"></span>
             </a>
         </div>

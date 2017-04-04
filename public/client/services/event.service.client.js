@@ -17,12 +17,6 @@
 
         return api;
 
-
-        app.put("/api/event/:eventId", updateEvent);
-        app.delete("/api/event/:eventId", deleteEvent);
-        app.put("/api/event/:eventId/service/:serviceId", addService);
-        app.put("/api/event/:eventId/product/:productId", addProduct);
-
         function createEventForUser(hostId, event) {
             return $http.post("/api/user/" + hostId + "/event", event);
         }
@@ -36,22 +30,19 @@
         }
 
         function updateEvent(eventId, event) {
-            for(var w in websites){
-                if(websites[w]._id == websiteId){
-                    websites[w].name = website.name;
-                    websites[w].description = website.description;
-                    return websites[w];
-                }
-            }
-            return null;
+            return $http.put("/api/event/" + eventId, event);
         }
 
-        function deleteWebsite(websiteId) {
-            for(var w in websites){
-                if(websites[w]._id == websiteId){
-                    websites.splice(w, 1);
-                }
-            }
+        function deleteEvent(eventID) {
+            return $http.delete("/api/event/" + eventID);
+        }
+        
+        function addService(eventId, serviceId) {
+            return $http.put("/api/event/"+eventId+"/service/"+serviceId);
+        }
+
+        function addProduct(eventId, productId) {
+            return $http.put("/api/event/"+eventId+"/product/"+productId);
         }
 
     }

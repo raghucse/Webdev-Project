@@ -20,52 +20,52 @@
                 controller: "RegisterController",
                 controllerAs: "model"
             })
-            .when("/user/:uid",{
+            .when("/host/:hid",{
                 templateUrl: "views/user/templates/profile.view.client.html",
                 controller: "ProfileController",
                 controllerAs: "model"
             })
-            .when("/user/:uid/website",{
-                templateUrl: "views/website/templates/website-list.view.client.html",
-                controller: "WebsiteListController",
+            .when("/host/:hid/event",{
+                templateUrl: "views/event/templates/event-list.view.client.html",
+                controller: "EventListController",
                 controllerAs: "model"
             })
-            .when("/user/:uid/website/new",{
-                templateUrl: "views/website/templates/website-new.view.client.html",
-                controller: "WebsiteNewController",
+            .when("/host/:hid/event/new",{
+                templateUrl: "views/event/templates/event-new.view.client.html",
+                controller: "EventNewController",
                 controllerAs: "model"
             })
-            .when("/user/:uid/website/:wid",{
-                templateUrl: "views/website/templates/website-edit.view.client.html",
-                controller: "WebsiteEditController",
+            .when("/host/:hid/event/:eid",{
+                templateUrl: "views/event/templates/event-edit.view.client.html",
+                controller: "EventEditController",
                 controllerAs: "model"
             })
-            .when("/user/:uid/website/:wid/page",{
+            .when("/user/:uid/event/:wid/page",{
                 templateUrl: "views/page/templates/page-list.view.client.html",
                 controller: "PageListController",
                 controllerAs: "model"
             })
-            .when("/user/:uid/website/:wid/page/new",{
+            .when("/user/:uid/event/:wid/page/new",{
                 templateUrl: "views/page/templates/page-new.view.client.html",
                 controller: "PageNewController",
                 controllerAs: "model"
             })
-            .when("/user/:uid/website/:wid/page/:pid",{
+            .when("/user/:uid/event/:wid/page/:pid",{
                 templateUrl: "views/page/templates/page-edit.view.client.html",
                 controller: "PageEditController",
                 controllerAs: "model"
             })
-            .when("/user/:uid/website/:wid/page/:pid/widget",{
+            .when("/user/:uid/event/:wid/page/:pid/widget",{
                 templateUrl: "views/widget/templates/widget-list.view.client.html",
                 controller: "WidgetListController",
                 controllerAs: "model"
             })
-            .when("/user/:uid/website/:wid/page/:pid/widget/new",{
+            .when("/user/:uid/event/:wid/page/:pid/widget/new",{
                 templateUrl: "views/widget/templates/widget-chooser.view.client.html",
                 controller: "NewWidgetController",
                 controllerAs: "model"
             })
-            .when("/user/:uid/website/:wid/page/:pid/widget/:wgid",{
+            .when("/user/:uid/event/:wid/page/:pid/widget/:wgid",{
                 templateUrl: "views/widget/templates/widget-edit.view.client.html",
                 controller: "EditWidgetController",
                 controllerAs: "model"

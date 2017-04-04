@@ -11,7 +11,7 @@ module.exports = function (app, eventModel) {
     function createEvent(req, res) {
         var hostID = req.params.hostId;
         var newEvent = req.body;
-        eventModel.createEventForUser(userID, newEvent)
+        eventModel.createEventForUser(hostID, newEvent)
             .then(function (event) {
                 res.json(event);
             }, function (err) {
