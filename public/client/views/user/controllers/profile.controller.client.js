@@ -9,6 +9,7 @@
 
         //event handlers
         vm.update = update;
+        vm.logout = logout;
 
         function init() {
             var promise = UserService.findUserById(userID);
@@ -29,6 +30,16 @@
                     }
                 });
         }
+
+        function logout() {
+            UserService
+                .logout()
+                .then(function(response) {
+                        $rootScope.currentUser = null;
+                        $location.url("/");
+                    });
+        }
     }
+
     
 })();

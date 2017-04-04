@@ -1226,7 +1226,7 @@ setDocument = Sizzle.setDocument = function( node ) {
 
 		assert(function( div ) {
 			// Support: Windows 8 Native Apps
-			// The type and name attributes are restricted during .innerHTML assignment
+			// The type and name attributes are restricted during .innerHTML server
 			var input = document.createElement("input");
 			input.setAttribute( "type", "hidden" );
 			div.appendChild( input ).setAttribute( "name", "D" );
@@ -3669,7 +3669,7 @@ Data.prototype = {
 		var value = initial || {};
 
 		// If it is a node unlikely to be stringify-ed or looped over
-		// use plain assignment
+		// use plain server
 		if ( owner.nodeType ) {
 			owner[ this.expando ] = value;
 
@@ -3707,7 +3707,7 @@ Data.prototype = {
 			if ( acceptData( owner ) ) {
 
 				// If it is a node unlikely to be stringify-ed or looped over
-				// use plain assignment
+				// use plain server
 				if ( owner.nodeType ) {
 					owner[ this.expando ] = value;
 

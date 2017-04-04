@@ -25,11 +25,9 @@
         function login(user) {
             return $http.post("/api/login", user);
         }
-        
+
         function createUser(user) {
-            user._id = (new Date()).getTime();
-            users.push(user);
-            return user;
+            return $http.post("/api/user", user);
         }
 
         function findUserById(userId) {
@@ -37,11 +35,7 @@
         }
 
         function findUserByUsername(username) {
-            for(var i in users){
-                if(users[i].username == username)
-                    return angular.copy(users[i]);
-            }
-            return null;
+            return $http.get("/api/user?username=" + username);
         }
 
         function findUserByCredentials(username, password) {
@@ -53,11 +47,11 @@
         }
 
         function deleteUser(userId) {
-            for(var u in users){
-                if(users[u]._id == userId){
-                    users.splice(u, 1);
-                }
-            }
+            return $http.delete("/api/user/" + userId);
+        }
+
+        function addWebsite(userId, websiteId) {
+            return $http.put("/api/user/"+userId+"/website/"+websiteId);
         }
     }
 
