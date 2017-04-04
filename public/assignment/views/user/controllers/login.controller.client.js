@@ -17,9 +17,9 @@
             UserService
                 .login(user)
                 .then(function (user) {
-                if(user){
+                    user = user.data;
                     $rootScope.currentUser = user;
-                    console.log(user._id);
+                if(user){
                     $location.url("/user/" + user._id);
                 }
                 else{

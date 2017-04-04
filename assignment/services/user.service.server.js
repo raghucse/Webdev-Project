@@ -34,6 +34,7 @@ module.exports = function (app) {
         findUserByCredentials(username, password)
             .then(
                 function(user) {
+                    user = user[0];
                     if (!user) { return done(null, false); }
                     return done(null, user);
                 },
