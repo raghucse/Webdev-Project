@@ -1,6 +1,8 @@
 module.exports = function (mongoose) {
 
+    var types = ['USER', 'VENDOR'];
     var UserSchema = mongoose.Schema({
+        type: {type: String, enum: types},
         username: String,
         password: String,
         firstName: String,
@@ -8,6 +10,7 @@ module.exports = function (mongoose) {
         email: String,
         phone: String,
         address: String,
+        services: [{type:mongoose.Schema.Types.ObjectId, ref: 'ServiceModel'}],
         //websites: [{type:mongoose.Schema.Types.ObjectId, ref: 'WebsiteModel'}],
         dateCreated: { type: Date, default: Date.now }
     }, {collection: 'myPartyPlanDB.user'});
