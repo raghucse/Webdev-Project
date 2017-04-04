@@ -15,32 +15,107 @@ module.exports = function (mongoose, q) {
 
     return api;
     
-    function createEventForUser() {
-        
+    function createEventForUser(hostId, event) {
+        var deferred = q.defer();
+        event.host = hostId;
+        EventModel.create(event, function (err, doc) {
+            if(err){
+                deferred.reject(err);
+            }
+            else {
+                deferred.resolve(doc);
+            }
+        });
+        return deferred.promise;
     }
     
-    function findAllEventsForUser() {
-        
+    function findAllEventsForUser(hostId) {
+        var deferred = q.defer();
+        EventModel.find({host: hostId}, function (err, events) {
+            if(err){
+                deferred.reject(err);
+            }
+            else {
+                deferred.resolve(events);
+            }
+        });
+        return deferred.promise;
     }
     
-    function findEventById() {
-        
+    function findEventById(eventId) {
+        var deferred = q.defer();
+        EventModel.findById(eventId, function (err, event) {
+            if(err){
+                deferred.reject(err);
+            }
+            else{
+                deferred.resolve(event);
+            }
+        });
+        return deferred.promise;
     }
     
-    function updateEvent() {
-        
+    function updateEvent(eventId, event) {
+        var deferred = q.defer();
+        EventModel.update(
+            { _id:eventId },
+
+                // name: website.name,
+                // description: website.description
+                event
+            , function (err, event) {
+                if(err){
+                    deferred.reject(err);
+                }
+                else {
+                    deferred.resolve(event);
+                }
+            });
+        return deferred.promise;
     }
     
-    function deleteEvent() {
-        
+    function deleteEvent(eventId) {
+        var deferred = q.defer();
+        EventModel.findByIdAndRemove({_id: eventId}, function (err, event) {
+            if(err){
+                deferred.reject(err);
+            }
+            else {
+                event.remove();
+                deferred.resolve(event);
+            }
+        });
+        return deferred.promise;
     }
     
-    function addService() {
-        
+    function addService(eventId, serviceId) {
+        var deferred = q.defer();
+        EventModel.findById(eventId, function (err, event) {
+            if(err){
+                deferred.reject(err);
+            }
+            else {
+                event.services.push(serviceId);
+                event.save();
+                deferred.resolve();
+            }
+        });
+        return deferred.promise;
     }
 
-    function addProduct() {
-        
+    function addProduct(eventId, productId) {
+        var deferred = q.defer();
+        EventModel.findById(eventId, function (err, event) {
+            if(err){
+                deferred.reject(err);
+            }
+            else {
+                event.products.push(productId);
+                event.save();
+                deferred.resolve();
+            }
+        });
+        return deferred.promise;
     }
 
 };
