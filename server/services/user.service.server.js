@@ -18,7 +18,7 @@ module.exports = function (app, userModel) {
     app.put("/api/user/:userID", updateUser);
     app.post("/api/user", createUser);
     app.delete("/api/user/:userID", deleteUser);
-    app.put("/api/user/:userId/website/:websiteId", addWebsite);
+    app.put("/api/user/:userId/event/:websiteId", addWebsite);
 
     var users = [
         {_id: "123", username: "alice",    password: "alice",    firstName: "Alice",  lastName: "Wonder", email: "alice@gmail.com" },

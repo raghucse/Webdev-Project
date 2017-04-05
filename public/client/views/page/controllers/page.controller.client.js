@@ -39,12 +39,12 @@
 
         function deletePage() {
             PageService.deletePage(vm.pageID);
-            $location.url("/user/" + vm.userID + "/website/" + vm.websiteID + "/page");
+            $location.url("/user/" + vm.userID + "/event/" + vm.websiteID + "/page");
         }
 
         function editPage(newPage) {
             PageService.updatePage(vm.pageID, newPage);
-            $location.url("/user/" + vm.userID + "/website/" + vm.websiteID + "/page");
+            $location.url("/user/" + vm.userID + "/event/" + vm.websiteID + "/page");
 
         }
 
@@ -66,7 +66,7 @@
 
         function createPage(newPage) {
             PageService.createPage(vm.websiteID, newPage);
-            $location.url("/user/" + vm.userID + "/website/" + vm.websiteID + "/page");
+            $location.url("/user/" + vm.userID + "/event/" + vm.websiteID + "/page");
         }
 
     }

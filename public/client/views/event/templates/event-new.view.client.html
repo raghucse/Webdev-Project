@@ -3,17 +3,17 @@
     <div class="row container-fluid">
         <div class="col-sm-4 hidden-xs">
             <div class="navbar-text pull-left">
-                <a href="#/user/{{model.userID}}/website">
+                <a href="#/host/{{model.hostID}}/event">
                     <span class="glyphicon glyphicon-chevron-left"></span>
                 </a>
             </div>
             <div class="navbar-header">
                 <a class="navbar-brand">
-                    Websites
+                    Events
                 </a>
             </div>
-            <div class="navbar-text pull-right" href="#/user/{{model.userID}}/website/new">
-                <a>
+            <div class="navbar-text pull-right">
+                <a href="">
                     <span class="glyphicon glyphicon-plus"></span>
                 </a>
             </div>
@@ -21,18 +21,18 @@
         </div>
         <div class="col-sm-8">
             <div class="navbar-text pull-left visible-xs">
-                <a href="#/user/{{model.userID}}/website">
+                <a href="#/host/{{model.hostID}}/event">
                     <span class="glyphicon glyphicon-chevron-left"></span>
                 </a>
-           </div>
-            <div class="navbar-text pull-right" ng-click="model.editWebsite(model.website)">
-                <a href="">
+            </div>
+            <div class="navbar-text pull-right">
+                <a ng-click="model.createEvent(model.event)" href="">
                     <span class="glyphicon glyphicon-ok"></span>
                 </a>
             </div>
             <div class="navbar-header">
                 <a class="navbar-brand" href="#">
-                    Edit Website
+                    New Event
                 </a>
             </div>
         </div>
@@ -47,23 +47,25 @@
             <li class="list-group-item">
                 <div class="row">
                     <div class="col-xs-6">
-                        Name
+                        Event Name
                     </div>
                     <div class="col-xs-6">
-                        <a href="#/user/{{model.userID}}/website/new" class="pull-right">
+                        <a href="#/host/{{model.hostID}}/event/new" class="pull-right">
                             <span class="glyphicon glyphicon-plus"></span>
                         </a>
                     </div>
 
                 </div>
+
+
             </li>
-            <li ng-repeat="website in model.websites" class="list-group-item">
+            <li ng-repeat="event in model.events" class="list-group-item">
                 <div class="row">
                     <div class="col-xs-6">
-                        {{website.name}}
+                        {{event.name}}
                     </div>
                     <div class="col-xs-6">
-                        <a href="#/user/{{website.developerId}}/website/{{website._id}}" class="pull-right">
+                        <a href="#/host/{{event.host}}/event/{{event._id}}" class="pull-right">
                             <span class="glyphicon glyphicon-cog"></span>
                         </a>
                     </div>
@@ -74,25 +76,22 @@
     </div>
 
     <div class="col-sm-8">
-
-        <label for="website-edit-website-name">Name</label>
-        <input class="form-control"
-               ng-model="model.website.name"
-               id="website-edit-website-name"
-               value="Address Book App"
-               type="text"/>
+        <label for="website-new-website-name">Event Name</label>
+        <input ng-model="model.event.name"
+               class="form-control"
+               id="website-new-website-name"
+               placeholder="Website Name" type="text"/>
 
         <div class="form-group">
-        <label for="wedsite-edit-website-new-description">Description</label>
-        <textarea class="form-control"
-                  ng-model="model.website.description"
-                  value="Description"
-                  id="wedsite-edit-website-new-description"
-                  rows="4"></textarea>
+        <label for="website-new-website-new-description">Event Description</label>
+        <textarea ng-model="model.event.description"
+                  class="form-control"
+                  placeholder="Description"
+                  id="website-new-website-new-description" rows="4"></textarea>
         </div>
 
-        <a class="btn btn-danger btn-block" ng-click="model.deleteSite()">
-            Delete
+        <a class="btn btn-danger btn-block" ng-click="model.createEvent(model.event)">
+            Create Event
         </a>
 
     </div>
@@ -102,7 +101,7 @@
 <nav class="navbar navbar-default navbar-fixed-bottom">
     <div class="container-fluid">
         <div class="navbar-text pull-right">
-            <a href="#/user/{{model.userID}}">
+            <a href="#/host/{{model.hostID}}">
                 <span class="glyphicon glyphicon-user"></span>
             </a>
         </div>
