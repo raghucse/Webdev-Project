@@ -21,8 +21,8 @@
         };
         return api;
 
-        function login(username, password) {
-            return $http.post("/api/login?username="+username+"&password="+password);
+        function login(vendorname, password) {
+            return $http.post("/api/login?vendorname="+vendorname+"&password="+password);
         }
 
         function logout() {
@@ -41,12 +41,12 @@
             return $http.get("/api/vendor/"+vendorId);
         }
 
-        function findVendorByVendorname(username) {
-            return $http.get("/api/vendor?username="+username);
+        function findVendorByVendorname(vendorname) {
+            return $http.get("/api/vendor?vendorname="+vendorname);
         }
 
-        function findVendorByCredentials(username, password) {
-            return $http.get("/api/vendor?username="+username+"&password="+password);
+        function findVendorByCredentials(vendorname, password) {
+            return $http.get("/api/vendor?vendorname="+vendorname+"&password="+password);
         }
 
         function updateVendor(vendorId, newVendor) {

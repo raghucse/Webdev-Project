@@ -24,39 +24,39 @@
         {{model.message}}
     </div>
 
-    <label for="profile-username">Username</label>
+    <label for="profile-vendorname">Vendorname</label>
     <input class="form-control"
-           ng-model="model.user.username"
-           id="profile-username"
+           ng-model="model.vendor.vendorname"
+           id="profile-vendorname"
            value="shashikiran"
            type="text"/>
 
     <label for="profile-mail">Email</label>
     <input class="form-control"
-           ng-model="model.user.email"
+           ng-model="model.vendor.email"
            value="shashikirangadhar@gmail.com"
            id="profile-mail"
            type="email"/>
 
     <label for="profile-fname">First Name</label>
     <input class="form-control"
-           ng-model="model.user.firstName"
+           ng-model="model.vendor.firstName"
            id="profile-fname"
            value="shashi"
            type="text"/>
 
     <label for="profile-lname">Last Name</label>
     <input class="form-control"
-           ng-model="model.user.lastName"
+           ng-model="model.vendor.lastName"
            id="profile-lname"
            value="gadhar"
            type="text"/>
 
-    <a ng-click="model.update(model.user)" class="btn btn-success btn-block" >
+    <a ng-click="model.update(model.vendor)" class="btn btn-success btn-block" >
         Update
     </a>
 
-    <a href="#/user/{{model.user._id}}/website" class="btn btn-primary btn-block" >
+    <a href="#/vendor/{{model.vendor._id}}/website" class="btn btn-primary btn-block" >
         Websites
     </a>
 
@@ -69,7 +69,7 @@
     <div class="container-fluid">
         <div class="navbar-text pull-right">
             <a href="">
-                <span class="glyphicon glyphicon-user"></span>
+                <span class="glyphicon glyphicon-vendor"></span>
             </a>
         </div>
     </div>

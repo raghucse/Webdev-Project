@@ -58,7 +58,7 @@ module.exports = function(app, vendorModel) {
                         var email = profile.emails[0].value;
                         var emailParts = email.split("@");
                         var newFacebookVendor = {
-                            username:  emailParts[0],
+                            vendorname:  emailParts[0],
                             firstName: profile.name.givenName,
                             lastName:  profile.name.familyName,
                             email:    email,
@@ -85,8 +85,8 @@ module.exports = function(app, vendorModel) {
     }
 
 
-    function localStrategy(username, password, done) {
-        vendorModel.findVendorByVendorname(username)
+    function localStrategy(vendorname, password, done) {
+        vendorModel.findVendorByVendorname(vendorname)
             .then(
                 function(vendor) {
                     if(vendor[0] && bcrypt.compareSync(password, vendor[0].password)) {
@@ -182,11 +182,11 @@ module.exports = function(app, vendorModel) {
     }
 
     function findVendor(req, res) {
-        var username = req.query.username;
+        var vendorname = req.query.vendorname;
         var password = req.query.password;
-        if(username && password) {
+        if(vendorname && password) {
             findVendorByCredentials(req, res);
-        } else if(username) {
+        } else if(vendorname) {
             findVendorByVendorname(req, res);
         }
     }
@@ -203,8 +203,8 @@ module.exports = function(app, vendorModel) {
     }
 
     function findVendorByVendorname(req, res) {
-        var username = req.query.username;
-        vendorModel.findVendorByVendorname(username)
+        var vendorname = req.query.vendorname;
+        vendorModel.findVendorByVendorname(vendorname)
             .then(function (vendor) {
                 res.json(vendor);
             }, function (err) {
@@ -213,9 +213,9 @@ module.exports = function(app, vendorModel) {
     }
 
     function findVendorByCredentials(req, res){
-        var username = req.query.username;
+        var vendorname = req.query.vendorname;
         var password = req.query.password;
-        vendorModel.findVendorByCreadentials(username, password)
+        vendorModel.findVendorByCreadentials(vendorname, password)
             .then(function (vendor) {
                 res.json(vendor);
             }, function (err) {

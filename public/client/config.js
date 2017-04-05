@@ -70,6 +70,21 @@
                 controller: "EditWidgetController",
                 controllerAs: "model"
             })
+            .when("/vendor/login",{
+                templateUrl: "views/user/templates/vendor.login.view.client.html",
+                controller: "VendorLoginController",
+                controllerAs: "model"
+            })
+            .when("/vendor/register",{
+                templateUrl: "views/user/templates/vendor.register.view.client.html",
+                controller: "VendorRegisterController",
+                controllerAs: "model"
+            })
+            .when("/vendor/:vid",{
+                templateUrl: "views/user/templates/vendor.profile.view.client.html",
+                controller: "VendorProfileController",
+                controllerAs: "model"
+            })
             .otherwise({
                 redirectTo: "/login"
             });

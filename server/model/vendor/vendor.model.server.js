@@ -57,9 +57,9 @@ module.exports = function (mongoose, q) {
         return deferred.promise;
     }
 
-    function findVendorByVendorname(username) {
+    function findVendorByVendorname(vendorname) {
         var deferred = q.defer();
-        VendorModel.find({username: username}, function (err, vendor) {
+        VendorModel.find({vendorname: vendorname}, function (err, vendor) {
             if(err){
                 deferred.reject(err);
             }
@@ -70,10 +70,10 @@ module.exports = function (mongoose, q) {
         return deferred.promise;
     }
 
-    function findVendorByCreadentials(username, password) {
+    function findVendorByCreadentials(vendorname, password) {
         var deferred = q.defer();
 
-        VendorModel.find({$and: [{username: username}, {password: password}]}, function (err, vendor) {
+        VendorModel.find({$and: [{vendorname: vendorname}, {password: password}]}, function (err, vendor) {
             if(err){
                 deferred.reject(err);
             }
