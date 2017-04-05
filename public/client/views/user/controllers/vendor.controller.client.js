@@ -72,9 +72,11 @@
             var promise = VendorService
                 .login(vendor.vendorname, vendor.password);
             promise.then(function(vendor){
+                console.log(vendor);
                 vendor = vendor.data;
+                console.log(vendor);
                 if(vendor[0]) {
-                    $location.url("/vendor/"+vendor[0]._id, vendor);
+                    $location.url("/vendor/"+vendor[0]._id);
                 } else {
                     vm.error = "Vendor not found";
                 }
