@@ -19,7 +19,7 @@ module.exports = function(app, vendorModel) {
 
     var auth = authorized;
 
-    app.post('/api/login', passport.authenticate('local'), login);
+    app.post('/vendor/login', passport.authenticate('local'), login);
     app.get ('/auth/facebook', passport.authenticate('facebook', { scope : 'email' }));
     app.post('/api/logout',logout);
     app.get('/api/loggedin',loggedin);
@@ -85,10 +85,12 @@ module.exports = function(app, vendorModel) {
     }
 
 
-    function localStrategy(vendorname, password, done) {
-        vendorModel.findVendorByVendorname(vendorname)
+    function localStrategy(username, password, done) {
+        console.log(username);
+        vendorModel.findVendorByVendorname(username)
             .then(
                 function(vendor) {
+                    console.log(vendor[0]);
                     if(vendor[0] && bcrypt.compareSync(password, vendor[0].password)) {
                         return done(null, vendor);
                     } else {
@@ -158,7 +160,7 @@ module.exports = function(app, vendorModel) {
     }
 
     function login(req, res) {
-        var vendor = req.vendor;
+        var vendor = req.user;
         res.json(vendor);
     }
 
