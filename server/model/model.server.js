@@ -5,13 +5,15 @@ module.exports = function (mongoose) {
     var eventModel = require('./event/event.model.server')(mongoose, q);
     var productModel = require('./product/product.model.server')(mongoose, q);
     var serviceModel = require('./service/service.model.server')(mongoose, q);
+    var vendorModel = require('./vendor/vendor.model.server')(mongoose, q);
 
 
     var model = {
         userModel: userModel,
         eventModel : eventModel,
         productModel : productModel,
-        serviceModel : serviceModel
+        serviceModel : serviceModel,
+        vendorModel : vendorModel
     };
 
     return model;

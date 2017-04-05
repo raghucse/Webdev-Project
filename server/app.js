@@ -25,4 +25,5 @@ module.exports = function (app) {
     require("./services/event.service.server.js")(app, model.serviceModel);
     require("./services/product.service.server.js")(app, model.productModel);
     require("./services/service.service.server.js")(app, model.serviceModel);
+    require("./services/vendor.service.server.js")(app, model.vendorModel);
 };
