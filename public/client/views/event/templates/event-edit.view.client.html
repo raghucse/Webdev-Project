@@ -9,7 +9,7 @@
             </div>
             <div class="navbar-header">
                 <a class="navbar-brand">
-                    Websites
+                    EVENTS
                 </a>
             </div>
             <div class="navbar-text pull-right" href="#/host/{{model.hostID}}/event/new">
@@ -75,21 +75,36 @@
 
     <div class="col-sm-8">
 
-        <label for="website-edit-website-name">Event Name</label>
+        <label for="event-edit-event-name">Event Name</label>
         <input class="form-control"
                ng-model="model.event.name"
-               id="website-edit-website-name"
+               id="event-edit-event-name"
                value="Address Book App"
                type="text"/>
 
         <div class="form-group">
-        <label for="wedsite-edit-website-new-description">Event Description</label>
+        <label for="event-edit-event-description">Event Description</label>
         <textarea class="form-control"
                   ng-model="model.event.description"
                   value="Description"
-                  id="wedsite-edit-website-new-description"
+                  id="event-edit-event-description"
                   rows="4"></textarea>
         </div>
+
+        <label for="event-edit-event-location">Event Location</label>
+        <input class="form-control"
+               ng-model="model.event.location"
+               id="event-edit-event-location"
+               value="Boston, MA"
+               type="text"/>
+
+        <label for="event-edit-event-time">Event Time</label>
+        <input class="form-control"
+               ng-model="model.event.time"
+               id="event-edit-event-time"
+               value="18:00 EST"
+               type="text"/>
+
 
         <a class="btn btn-danger btn-block" ng-click="model.deleteEvent()">
             Delete

@@ -50,6 +50,11 @@
                 controller: "EventHomeController",
                 controllerAs: "model"
             })
+            .when("/host/:hid/event/:eid/guests",{
+                templateUrl: "views/event/templates/event-guests.view.client.html",
+                controller: "EventGuestController",
+                controllerAs: "model"
+            })
             .when("/user/:uid/event/:wid/page",{
                 templateUrl: "views/page/templates/page-list.view.client.html",
                 controller: "PageListController",
