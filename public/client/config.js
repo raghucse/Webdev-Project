@@ -40,6 +40,11 @@
                 controller: "EventNewController",
                 controllerAs: "model"
             })
+            .when("/host/:hid/event/invites",{
+                templateUrl: "views/event/templates/event-invites.view.client.html",
+                controller: "EventInviteController",
+                controllerAs: "model"
+            })
             .when("/host/:hid/event/:eid",{
                 templateUrl: "views/event/templates/event-edit.view.client.html",
                 controller: "EventEditController",
@@ -53,6 +58,11 @@
             .when("/host/:hid/event/:eid/guests",{
                 templateUrl: "views/event/templates/event-guests.view.client.html",
                 controller: "EventGuestController",
+                controllerAs: "model"
+            })
+            .when("/guest/:gid/event/:eid/",{
+                templateUrl: "views/event/templates/event-guest-home.view.client.html",
+                controller: "GuestController",
                 controllerAs: "model"
             })
             .when("/user/:uid/event/:wid/page",{

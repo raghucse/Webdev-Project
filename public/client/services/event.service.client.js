@@ -11,8 +11,11 @@
             "findEventById": findEventById,
             "updateEvent": updateEvent,
             "deleteEvent": deleteEvent,
+            "addGuest": addGuest,
             "addService": addService,
-            "addProduct": addProduct
+            "addProduct": addProduct,
+            "findAllGuestsForEvent" : findAllGuestsForEvent,
+            "findAllProductsForEvent" : findAllProductsForEvent
         };
 
         return api;
@@ -36,6 +39,10 @@
         function deleteEvent(eventID) {
             return $http.delete("/api/event/" + eventID);
         }
+
+        function addGuest(eventId, guestId) {
+            return $http.put("/api/event/"+eventId+"/guest/"+guestId);
+        }
         
         function addService(eventId, serviceId) {
             return $http.put("/api/event/"+eventId+"/service/"+serviceId);
@@ -43,6 +50,14 @@
 
         function addProduct(eventId, productId) {
             return $http.put("/api/event/"+eventId+"/product/"+productId);
+        }
+
+        function findAllGuestsForEvent(eventId) {
+            return $http.get("/api/guest/event/guests/" + eventId );
+        }
+
+        function findAllProductsForEvent(eventId) {
+            return $http.get("/api/guest/event/products/" + eventId );
         }
 
     }

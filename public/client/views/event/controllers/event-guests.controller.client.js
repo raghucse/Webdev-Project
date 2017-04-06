@@ -32,18 +32,21 @@
                 .findUserByUsername(username)
                 .success(function (user) {
                     vm.guestname = user[0].username;
-                    console.log(vm.guestname);
+                    vm.guestID = user[0]._id;
+                    console.log(vm.guestID);
                 })
         }
 
-        //change 2nd argument to guestID later
         function createInvite() {
             InviteService
-                .createInvite(vm.hostID, vm.hostID, vm.eventID)
+                .createInvite(vm.hostID, vm.guestID, vm.eventID)
                 .success(function (invite) {
-                    vm.invitationsuccess = "Invitation Sent";
-                })
-
+                EventService
+                    .addGuest(vm.eventID, vm.guestID)
+                    .success(function (invitation) {
+                        vm.invitationsuccess = "Invitation Sent";
+                    });
+                });
         }
 
 

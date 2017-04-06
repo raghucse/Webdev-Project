@@ -6,9 +6,12 @@ module.exports = function (mongoose, q) {
     var api = {
         "createEventForUser": createEventForUser,
         "findAllEventsForUser": findAllEventsForUser,
+        "findAllGuestsForEvent" : findAllGuestsForEvent,
+        "findAllProductsForEvent" : findAllProductsForEvent,
         "findEventById": findEventById,
         "updateEvent": updateEvent,
         "deleteEvent": deleteEvent,
+        "addGuest": addGuest,
         "addService": addService,
         "addProduct": addProduct 
     };
@@ -41,6 +44,32 @@ module.exports = function (mongoose, q) {
         });
         return deferred.promise;
     }
+
+    function findAllGuestsForEvent(eventId) {
+        var deferred = q.defer();
+        EventModel.find({_id: eventId}, function (err, guests) {
+            if(err){
+                deferred.reject(err);
+            }
+            else {
+                deferred.resolve(guests);
+            }
+        });
+        return deferred.promise;
+    }
+
+    function findAllProductsForEvent(eventId) {
+        var deferred = q.defer();
+        EventModel.find({_id: eventId}, function (err, products) {
+            if(err){
+                deferred.reject(err);
+            }
+            else {
+                deferred.resolve(products);
+            }
+        });
+        return deferred.promise;
+    }
     
     function findEventById(eventId) {
         var deferred = q.defer();
@@ -57,12 +86,7 @@ module.exports = function (mongoose, q) {
     
     function updateEvent(eventId, event) {
         var deferred = q.defer();
-        EventModel.update(
-            { _id:eventId },
-
-                // name: event.name,
-                // description: event.description
-                event
+        EventModel.update({ _id:eventId },event
             , function (err, event) {
                 if(err){
                     deferred.reject(err);
@@ -83,6 +107,21 @@ module.exports = function (mongoose, q) {
             else {
                 event.remove();
                 deferred.resolve(event);
+            }
+        });
+        return deferred.promise;
+    }
+
+    function addGuest(eventId, guestId) {
+        var deferred = q.defer();
+        EventModel.findById(eventId, function (err, event) {
+            if(err){
+                deferred.reject(err);
+            }
+            else {
+                event.guests.push(guestId);
+                event.save();
+                deferred.resolve();
             }
         });
         return deferred.promise;
