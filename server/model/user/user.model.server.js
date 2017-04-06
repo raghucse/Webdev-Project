@@ -2,7 +2,7 @@ module.exports = function (mongoose, q) {
 
     var UserSchema = require('./user.schema.server')(mongoose);
     var UserModel = mongoose.model('UserModel', UserSchema);
-
+    var bcrypt = require("bcrypt-nodejs");
 
     UserModel.createUser = createUser;
     UserModel.findUserById = findUserById;
@@ -21,7 +21,8 @@ module.exports = function (mongoose, q) {
         "findUserByCredentials" : findUserByCredentials,
         "updateUser" : updateUser,
         "deleteUser" : deleteUser,
-        "addWebsite" : addWebsite
+        "addWebsite" : addWebsite,
+        "findUserByFacebookId" : findUserByFacebookId
     };
     return api;
 
@@ -129,4 +130,17 @@ module.exports = function (mongoose, q) {
         return deferred.promise;
     }
 
+    function findUserByFacebookId(facebookId) {
+        var deferred = q.defer();
+
+        UserModel.findOne({'facebook.id': facebookId}, function (err, user) {
+            if(err){
+                deferred.reject(err);
+            }
+            else {
+                deferred.resolve(user);
+            }
+        });
+        return deferred.promise;
+    }
 };

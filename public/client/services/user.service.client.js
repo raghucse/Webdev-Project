@@ -5,19 +5,30 @@
 
     function userService($http) {
 
-        var api ={
+        var api = {
             "createUser" : createUser,
             "findUserById" : findUserById,
             "findUserByUsername" : findUserByUsername,
             "findUserByCredentials" : findUserByCredentials,
             "updateUser" : updateUser,
             "deleteUser" : deleteUser,
-            "login" : login
+            "addWebsite" : addWebsite,
+            "login" : login,
+            "logout" : logout,
+            "register" : register
         };
         return api;
 
         function login(user) {
             return $http.post("/api/login", user);
+        }
+
+        function logout(user) {
+            return $http.post("/api/logout");
+        }
+
+        function register(user) {
+            return $http.post("/api/register", user);
         }
 
         function createUser(user) {
@@ -45,7 +56,7 @@
         }
 
         function addWebsite(userId, websiteId) {
-            return $http.put("/api/user/"+userId+"/event/"+websiteId);
+            return $http.put("/api/user/"+userId+"/website/"+websiteId);
         }
     }
 

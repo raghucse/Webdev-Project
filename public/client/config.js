@@ -20,12 +20,17 @@
                 controller: "RegisterController",
                 controllerAs: "model"
             })
-            .when("/host/:hid",{
+            .when("/host/:hid/event/profile",{
                 templateUrl: "views/user/templates/profile.view.client.html",
                 controller: "ProfileController",
                 controllerAs: "model"
             })
             .when("/host/:hid/event",{
+                templateUrl: "views/event/templates/event-list.view.client.html",
+                controller: "EventListController",
+                controllerAs: "model"
+            })
+            .when("/host/:hid/event/home",{
                 templateUrl: "views/event/templates/event-list.view.client.html",
                 controller: "EventListController",
                 controllerAs: "model"
@@ -38,6 +43,11 @@
             .when("/host/:hid/event/:eid",{
                 templateUrl: "views/event/templates/event-edit.view.client.html",
                 controller: "EventEditController",
+                controllerAs: "model"
+            })
+            .when("/host/:hid/event/:eid/home",{
+                templateUrl: "views/event/templates/event-home.view.client.html",
+                controller: "EventHomeController",
                 controllerAs: "model"
             })
             .when("/user/:uid/event/:wid/page",{

@@ -14,6 +14,8 @@
         init();
 
         function login(user) {
+            console.log("Function called");
+            console.log(user);
             UserService
                 .login(user)
                 .then(function (response) {
@@ -21,7 +23,7 @@
                     user = response.data;
                     if(user[0]){
                         $rootScope.currentUser = user[0];
-                        $location.url("/host/" + user[0]._id);
+                        $location.url("/host/" + user[0]._id + "/event");
                     }
                     else{
                         vm.error = "User not found";
