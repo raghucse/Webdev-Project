@@ -3,21 +3,41 @@ input.form-control {
 }
 
 body {
-    padding-top: 60px;
-    padding-bottom: 55px;
+    padding-top: 70px;
+    padding-bottom: 70px;
+    font: 400 15px Lato, sans-serif;
+    line-height: 1.8;
+    color: #818181;
 }
 
-.navbar-default{
+
+.navbar {
+    margin-bottom: 0;
     background-color: #f4511e;
-    border-color:rosybrown;
+    z-index: 9999;
+    border: 0;
+    font-size: 12px !important;
+    line-height: 1.42857143 !important;
+    letter-spacing: 4px;
+    border-radius: 0;
+    font-family: Montserrat, sans-serif;
+}
+.navbar li a, .navbar{
+    color: #fff !important;
 }
 
-.navbar-default .navbar-brand{
-    color: white;
+.navbar-brand {
+    color: #fed136;
+    font-family: "Kaushan Script", "Helvetica Neue", Helvetica, Arial, cursive;
 }
 
-.navbar a{
-    color:white;
+.navbar-nav li a:hover, .navbar-nav li.active a {
+    color: #f4511e !important;
+    background-color: #fff !important;
+}
+.navbar-default .navbar-toggle {
+    border-color: transparent;
+    color: #fff !important;
 }
 
 .jumbotron {
