@@ -7,7 +7,6 @@ module.exports =  function(app, ServiceModel) {
     app.put("/api/service/:serviceId", updateService);
     app.delete("/api/service/:serviceId", deleteService);
     app.post("/api/vendor/:vendorId/service", createService);
-
     app.put("/api/service/:serviceId/page/:pageId", updatePage);
 
     function createService(req, res) {

@@ -22,10 +22,12 @@
         init();
     }
 
+
     function NewServiceController($routeParams, ServiceService, $location, VendorService) {
         var vm = this;
         vm.vendorId = $routeParams["vid"];
         vm.createService = createService;
+        vm.dropChange = dropChange;
 
         function init() {
             ServiceService
@@ -36,8 +38,17 @@
         }
         init();
 
-        function createService() {
+        function dropChange() {
+            if(vm.service.type == 'food' || vm.service.type == 'place'){
+                vm.palceOrFood = true;
+            }
+            else {
+                vm.palceOrFood = false;
+            }
+        }
 
+        function createService() {
+            console.log(vm.service);
             ServiceService
                 .createService(vm.vendorId, vm.service)
                 .then(function (service) {
@@ -67,7 +78,13 @@
             ServiceService
                 .findServiceById(vm.serviceId)
                 .then(function (service) {
-                    vm.service = service.data;
+                            vm.service = service.data;
+                    if(vm.service.type == 'food' || vm.service.type == 'place'){
+                        vm.palceOrFood = true;
+                    }
+                    else {
+                        vm.palceOrFood = false;
+                    }
                 });
         }
         init();

@@ -69,6 +69,15 @@
     </div>
 
     <div class="col-sm-8 col-xs-12 wbdv-right-pane">
+
+        <label for="service-type" class="form-control-label">Service Type</label>
+        <select class="form-control" ng-model="model.service.type"
+                ng-change="model.dropChange()" id="service-type">
+            <option value="flower">Flower Service</option>
+            <option value="food">Food Service</option>
+            <option value="place">Place Service</option>
+        </select>
+
         <div id="newNAme" class="form-group">
             <label for="new-web-name" class="form-control-label">Name</label>
             <input ng-model="model.service.name"
@@ -85,8 +94,34 @@
                       rows="4"
                       cols="100"
                       placeholder="Description">
-
             </textarea>
+        </div>
+
+        <div class="form-group" ng-show="model.palceOrFood">
+            <label for="capacity" class="form-control-label">Maximum Capacity</label>
+            <input ng-model="model.service.capacity"
+                   id="capacity"
+                   class="form-control"
+                   type="text"
+                   placeholder="Max Capacity">
+        </div>
+
+        <div class="form-group">
+            <label for="address" class="form-control-label">Location Address</label>
+            <input ng-model="model.service.address"
+                   id="address"
+                   class="form-control"
+                   type="text"
+                   placeholder="Location Address">
+        </div>
+
+        <div class="form-group">
+            <label for="city" class="form-control-label">City</label>
+            <input ng-model="model.service.city"
+                   id="city"
+                   class="form-control"
+                   type="text"
+                   placeholder="City">
         </div>
 
     </div>

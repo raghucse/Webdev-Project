@@ -2,13 +2,15 @@ module.exports = function (mongoose) {
 
     var q = require('q');
 
-    var types = ['FOOD', 'PLACE', 'FLOWERS'];
+    var types = ['food', 'place', 'flower'];
     var ServiceSchema = mongoose.Schema({
         _vendor: {type: mongoose.Schema.Types.ObjectId, ref: 'VendorModel'},
         type: {type: String, enum: types},
         name: String,
         description: String,
-        url: String,
+        city: String,
+        address: String,
+        capacity: String,
         dateCreated: { type: Date, default: Date.now }
     }, {collection: 'myPartyPlanDB.service'});
 
