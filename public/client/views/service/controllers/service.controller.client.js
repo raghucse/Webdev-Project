@@ -13,7 +13,6 @@
         vm.vendorId = $routeParams["vid"];
 
         function init() {
-            console.log(vm.vendorId);
             ServiceService
                 .findAllServicesForVendor(vm.vendorId)
                 .then(function (services) {
