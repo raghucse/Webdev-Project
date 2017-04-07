@@ -1,0 +1,115 @@
+
+<nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="">Logo</a>
+        </div>
+        <div class="collapse navbar-collapse" id="myNavbar">
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="#/host/{{model.hostID}}/event/">EVENTS HOME</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<div class="container-fluid">
+
+    <div class="jumbotron text-center">
+        <h1>{{model.event.name}}</h1>
+        <p>{{model.event.description}}</p>
+    </div>
+
+    <div id="services" class="container text-center">
+        <br>
+        <div class="row slideanim">
+            <div class="col-sm-6">
+                <span class="glyphicon glyphicon-time logo-small">
+                </span>
+                <h4>{{model.event.time}}</h4>
+            </div>
+            <div class="col-sm-6">
+                <span class="glyphicon glyphicon-map-marker logo-small"></span>
+                <h4>{{model.event.location}}</h4>
+            </div>
+        </div>
+        <br><br>
+        <div class="row slideanim">
+            <div class="col-sm-6">
+                <a class="btn" data-toggle="modal" data-target="#products">
+                    <span class="glyphicon glyphicon-briefcase logo-small"></span>
+                </a>
+                <h4>PRODUCTS</h4>
+            </div>
+
+            <div class="col-sm-6">
+                <a class="btn" data-toggle="modal" data-target="#guests">
+                    <span class="glyphicon glyphicon-user logo-small"></span>
+                </a>
+                <h4>OTHER GUESTS</h4>
+            </div>
+        </div>
+        <br><br>
+    </div>
+
+    <div class="modal fade" id="products" role="dialog">
+        <div class="modal-dialog">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4><span class="glyphicon glyphicon-briefcase"></span> Products</h4>
+                </div>
+                <div class="modal-body">
+
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-default pull-left" data-dismiss="modal">
+                        <span class="glyphicon glyphicon-remove"></span> Cancel
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="guests" role="dialog">
+        <div class="modal-dialog">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4>{{model.event.name}} Guests</h4>
+                </div>
+                <div class="modal-body">
+                    <li ng-repeat="guest in model.guests" class="list-group-item">
+                        <div class="row">
+                            <h4>{{guest}}</h4>
+                        </div>
+                    </li>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-default pull-left" data-dismiss="modal">
+                        <span class="glyphicon glyphicon-remove"></span> Close
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+<nav class="navbar navbar-default navbar-fixed-bottom">
+    <div class="container-fluid">
+        <div class="navbar-text pull-right">
+            <a href="#/host/{{model.hostID}}">
+                <span class="glyphicon glyphicon-user"></span>
+            </a>
+        </div>
+    </div>
+</nav>
+

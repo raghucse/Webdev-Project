@@ -20,7 +20,7 @@
                 controller: "RegisterController",
                 controllerAs: "model"
             })
-            .when("/host/:hid",{
+            .when("/host/:hid/event/profile",{
                 templateUrl: "views/user/templates/profile.view.client.html",
                 controller: "ProfileController",
                 controllerAs: "model"
@@ -30,14 +30,39 @@
                 controller: "EventListController",
                 controllerAs: "model"
             })
+            .when("/host/:hid/event/home",{
+                templateUrl: "views/event/templates/event-list.view.client.html",
+                controller: "EventListController",
+                controllerAs: "model"
+            })
             .when("/host/:hid/event/new",{
                 templateUrl: "views/event/templates/event-new.view.client.html",
                 controller: "EventNewController",
                 controllerAs: "model"
             })
+            .when("/host/:hid/event/invites",{
+                templateUrl: "views/event/templates/event-invites.view.client.html",
+                controller: "EventInviteController",
+                controllerAs: "model"
+            })
             .when("/host/:hid/event/:eid",{
                 templateUrl: "views/event/templates/event-edit.view.client.html",
                 controller: "EventEditController",
+                controllerAs: "model"
+            })
+            .when("/host/:hid/event/:eid/home",{
+                templateUrl: "views/event/templates/event-home.view.client.html",
+                controller: "EventHomeController",
+                controllerAs: "model"
+            })
+            .when("/host/:hid/event/:eid/guests",{
+                templateUrl: "views/event/templates/event-guests.view.client.html",
+                controller: "EventGuestController",
+                controllerAs: "model"
+            })
+            .when("/guest/:gid/event/:eid/",{
+                templateUrl: "views/event/templates/event-guest-home.view.client.html",
+                controller: "GuestController",
                 controllerAs: "model"
             })
             .when("/user/:uid/event/:wid/page",{

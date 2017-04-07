@@ -2,9 +2,12 @@
 module.exports = function (app, eventModel) {
     app.post("/api/user/:hostId/event", createEvent);
     app.get("/api/user/:hostId/event", findEventsForUser);
+    app.get("/api/guest/event/guests/:eventId", findAllGuestsForEvent);
+    app.get("/api/guest/event/products/:eventId", findAllProductsForEvent);
     app.get("/api/event/:eventId", findEventById);
     app.put("/api/event/:eventId", updateEvent);
     app.delete("/api/event/:eventId", deleteEvent);
+    app.put("/api/event/:eventId/guest/:guestId", addGuest);
     app.put("/api/event/:eventId/service/:serviceId", addService);
     app.put("/api/event/:eventId/product/:productId", addProduct);
     
@@ -24,6 +27,26 @@ module.exports = function (app, eventModel) {
         eventModel.findAllEventsForUser(hostId)
             .then(function (events) {
                 res.json(events);
+            }, function (err) {
+                res.sendStatus(500).send(err);
+            });
+    }
+
+    function findAllGuestsForEvent(req, res) {
+        var eventId = req.params.eventId;
+        eventModel.findAllGuestsForEvent(eventId)
+            .then(function (guests) {
+                res.json(guests);
+            }, function (err) {
+                res.sendStatus(500).send(err);
+            });
+    }
+
+    function findAllProductsForEvent(req, res) {
+        var eventId = req.params.eventId;
+        eventModel.findAllProductsForEvent(eventId)
+            .then(function (products) {
+                res.json(products);
             }, function (err) {
                 res.sendStatus(500).send(err);
             });
@@ -54,6 +77,17 @@ module.exports = function (app, eventModel) {
         var eventId = req.params.eventId;
         eventModel.deleteEvent(eventId)
             .then(function (status) {
+                res.sendStatus(200);
+            }, function (err) {
+                res.sendStatus(500).send(err);
+            });
+    }
+
+    function addGuest(req, res) {
+        var eventId = req.params.eventId;
+        var guestId = req.params.guestId;
+        eventModel.addGuest(eventId, guestId)
+            .then(function (event) {
                 res.sendStatus(200);
             }, function (err) {
                 res.sendStatus(500).send(err);

@@ -76,19 +76,33 @@
     </div>
 
     <div class="col-sm-8">
-        <label for="website-new-website-name">Event Name</label>
+        <label for="event-new-event-name">Event Name</label>
         <input ng-model="model.event.name"
                class="form-control"
-               id="website-new-website-name"
+               id="event-new-event-name"
                placeholder="Website Name" type="text"/>
 
         <div class="form-group">
-        <label for="website-new-website-new-description">Event Description</label>
+        <label for="event-new-event-description">Event Description</label>
         <textarea ng-model="model.event.description"
                   class="form-control"
                   placeholder="Description"
-                  id="website-new-website-new-description" rows="4"></textarea>
+                  id="event-new-event-description" rows="4"></textarea>
         </div>
+
+        <label for="event-new-event-location">Event Location</label>
+        <input class="form-control"
+               ng-model="model.event.location"
+               id="event-new-event-location"
+               placeholder="Boston, MA"
+               type="text"/>
+
+        <label for="event-new-event-time">Event Time</label>
+        <input class="form-control"
+               ng-model="model.event.time"
+               id="event-new-event-time"
+               placeholder="18:00 EST"
+               type="text"/>
 
         <a class="btn btn-danger btn-block" ng-click="model.createEvent(model.event)">
             Create Event

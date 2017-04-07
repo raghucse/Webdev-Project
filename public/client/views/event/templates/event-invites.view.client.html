@@ -1,0 +1,48 @@
+
+<nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="#/host/{{model.hostID}}/event/{{model.eventID}}/home">
+                Your Invitations
+            </a>
+        </div>
+        <div class="collapse navbar-collapse" id="myNavbar">
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="#/host/{{model.hostID}}/event/" >EVENTS HOME</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<div class="container-fluid">
+
+
+
+    <li ng-repeat="invite in model.invites" class="list-group-item">
+        <div class="row">
+            <div class="col-xs-6">
+                <a href="">
+                    {{invite.sender}}
+                </a>
+            </div>
+            <div class="col-xs-6">
+                <a href="#/guest/{{model.hostID}}/event/{{invite.event}}">
+                    {{invite.event}}
+                </a>
+            </div>
+        </div>
+    </li>
+
+
+
+</div>
+
+<nav class="navbar navbar-default navbar-fixed-bottom">
+    <div class="container-fluid">
+        <div class="navbar-text pull-right">
+            <a href="#/host/{{model.hostID}}">
+                <span class="glyphicon glyphicon-user"></span>
+            </a>
+        </div>
+    </div>
+</nav>
