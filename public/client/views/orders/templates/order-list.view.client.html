@@ -1,0 +1,38 @@
+<nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container-fluid">
+        <div class="navbar-text pull-left">
+            <a href="#/service/{{model.serviceId}}" class="navbar-link">
+                  <span class="glyphicon glyphicon-chevron-left">
+                  </span>
+            </a>
+        </div>
+        <a class="navbar-brand">
+            <label>Orders</label>
+        </a>
+    </div>
+</nav>
+
+
+<div class="container-fluid">
+    <ul class="list-group">
+        <div ng-repeat="order in model.orders">
+            <li class="list-group-item">
+                <a href="#/service/{{model.serviceId}}/order/{{order._id}}/view">
+                    {{order.name}}
+                </a>
+            </li>
+        </div>
+    </ul>
+</div>
+
+<div class="bottom-padding"></div>
+
+<nav class="navbar navbar-default navbar-fixed-bottom">
+    <div class="container-fluid">
+        <div class="navbar-text pull-right">
+            <a href="#/service/{{model.serviceId}}" class="navbar-link">
+                <span class="glyphicon glyphicon-service"></span>
+            </a>
+        </div>
+    </div>
+</nav>
