@@ -110,9 +110,28 @@
                 controller: "VendorProfileController",
                 controllerAs: "model"
             })
+            .when("/vendor/:vid/service", {
+                templateUrl: "views/service/templates/service-list.view.client.html",
+                controller: "ServiceListController",
+                controllerAs: "model"
+            })
+            .when("/vendor/:vid/service/:sid/view", {
+                templateUrl: "views/service/templates/service-view.client.html",
+                controller: "ServiceViewController",
+                controllerAs: "model"
+            })
+            .when("/vendor/:vid/service/new", {
+                templateUrl: "views/service/templates/service-new.view.client.html",
+                controller: "NewServiceController",
+                controllerAs: "model"
+            })
+            .when("/vendor/:vid/service/:sid", {
+                templateUrl: "views/service/templates/service-edit.view.client.html",
+                controller: "EditServiceController",
+                controllerAs: "model"
+            })
             .otherwise({
                 redirectTo: "/login"
             });
     }
-
 })();

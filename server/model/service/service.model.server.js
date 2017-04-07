@@ -4,17 +4,17 @@ module.exports = function (mongoose, q) {
     var ServiceModel = mongoose.model('ServiceModel', ServiceSchema);
 
     var api = {
-        createServiceForUser: createServiceForUser,
-        findAllServicesForUser: findAllServicesForUser,
+        createServiceForVendor: createServiceForVendor,
+        findAllServicesForVendor: findAllServicesForVendor,
         findServiceById: findServiceById,
         updateService: updateService,
         deleteService: deleteService,
     };
     return api;
 
-    function createServiceForUser(userId, service) {
+    function createServiceForVendor(vendorId, service) {
         var deferred = q.defer();
-        service._user = userId;
+        service._vendor = vendorId;
         ServiceModel.create(service, function (err, doc) {
             if(err){
                 deferred.reject(err);
@@ -27,10 +27,10 @@ module.exports = function (mongoose, q) {
         return deferred.promise;
     }
 
-    function findAllServicesForUser(userId) {
+    function findAllServicesForVendor(vendorId) {
         var deferred = q.defer();
 
-        ServiceModel.find({_user: userId}, function (err, services) {
+        ServiceModel.find({_vendor: vendorId}, function (err, services) {
             if(err){
                 deferred.reject(err);
             }
@@ -89,17 +89,17 @@ module.exports = function (mongoose, q) {
     }
 
     /*function updatePage(serviceId, pageId) {
-        var deferred = q.defer();
-        ServiceModel.findById(serviceId, function (err, service) {
-            if(err){
-                deferred.reject(err);
-            }
-            else {
-                service.pages.push(pageId);
-                service.save();
-                deferred.resolve();
-            }
-        })
-        return deferred.promise;
-    }*/
+     var deferred = q.defer();
+     ServiceModel.findById(serviceId, function (err, service) {
+     if(err){
+     deferred.reject(err);
+     }
+     else {
+     service.pages.push(pageId);
+     service.save();
+     deferred.resolve();
+     }
+     })
+     return deferred.promise;
+     }*/
 }
