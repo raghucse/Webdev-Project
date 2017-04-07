@@ -7,6 +7,7 @@
     app.controller("ServiceListController", ServiceListController);
     app.controller("NewServiceController", NewServiceController);
     app.controller("EditServiceController", EditServiceController);
+    app.controller("ServiceViewController", ServiceViewController);
 
     function ServiceListController($routeParams, ServiceService) {
         var vm = this;
@@ -17,6 +18,29 @@
                 .findAllServicesForVendor(vm.vendorId)
                 .then(function (services) {
                     vm.services = services.data;
+                });
+        }
+        init();
+    }
+
+    function ServiceViewController($routeParams, ServiceService) {
+        var vm = this;
+        vm.serviceId = $routeParams["sid"];
+        vm.vendorId = $routeParams["vid"];
+
+        console.log(vm.serviceId);
+        function init() {
+            ServiceService
+                .findServiceById(vm.serviceId)
+                .then(function (service) {
+                    console.log(vm.service);
+                    vm.service = service.data;
+                    if(vm.service.type == 'food' || vm.service.type == 'place'){
+                        vm.palceOrFood = true;
+                    }
+                    else {
+                        vm.palceOrFood = false;
+                    }
                 });
         }
         init();

@@ -1,0 +1,68 @@
+<nav class="navbar navbar-default navbar-fixed-top">
+    <div class="row container-fluid">
+        <div class="col-sm-4 hidden-xs">
+            <div class="navbar-text pull-left">
+                <a href="#/vendor/{{model.vendorId}}/service" class="navbar-link">
+                      <span class="glyphicon glyphicon-chevron-left">
+                      </span>
+                </a>
+            </div>
+            <a class="navbar-brand" href="#/vendor/{{model.vendorId}}/service">
+                <label>Services</label>
+            </a>
+        </div>
+
+        <div class="col-xs-12 visible-xs">
+            <div class="navbar-text pull-left">
+                <a href="#/vendor/{{model.vendorId}}/service" class="navbar-link">
+                      <span class="glyphicon glyphicon-chevron-left">
+                      </span>
+                </a>
+            </div>
+        </div>
+    </div>
+</nav>
+
+<div class="container-fluid">
+    <div class="container">
+        <h1 class=" text-center">{{model.service.name}}</h1>
+    </div>
+
+    <div class="jumbotron text-center container">
+        <p>{{model.service.description}}</p>
+    </div>
+
+    <div id="services" class="container-fluid text-center">
+
+        <br>
+        <div class="row slideanim">
+            <div class="col-sm-6">
+                <span class="glyphicon  glyphicon-user logo-small"></span>
+                <h4>{{model.service.capacity}}</h4>
+            </div>
+
+            <div class="col-sm-6">
+                <span class="glyphicon glyphicon-map-marker logo-small"></span>
+                <h4>{{model.service.city}}</h4>
+            </div>
+
+        </div>
+        <br><br>
+    </div>
+
+
+    <div class="container text-center">
+        <h2>Contact Informaiton</h2>
+        <p> {{model.service.address}} <p>
+    </div>
+</div>
+
+<nav class="navbar navbar-default navbar-fixed-bottom">
+    <div class="container-fluid">
+        <div class="navbar-text pull-right">
+            <a href="#/vendor/{{model.vendorId}}" class="navbar-link">
+                <span class="glyphicon glyphicon-vendor"></span>
+            </a>
+        </div>
+    </div>
+</nav>

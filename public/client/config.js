@@ -115,6 +115,11 @@
                 controller: "ServiceListController",
                 controllerAs: "model"
             })
+            .when("/vendor/:vid/service/:sid/view", {
+                templateUrl: "views/service/templates/service-view.client.html",
+                controller: "ServiceViewController",
+                controllerAs: "model"
+            })
             .when("/vendor/:vid/service/new", {
                 templateUrl: "views/service/templates/service-new.view.client.html",
                 controller: "NewServiceController",
