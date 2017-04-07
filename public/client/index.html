@@ -4,11 +4,24 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
+    <script src="https://code.jquery.com/jquery-3.1.1.js"
+            integrity="sha256-16cdPddA6VdVInumRGo6IbivbERE8p7CQR3HzTBuELA="
+            crossorigin="anonymous"></script>
+
+    <script src="https://code.jquery.com/ui/1.11.4/jquery-ui.js"
+            integrity="sha256-DI6NdAhhFRnO2k51mumYeDShet3I8AKCQf/tf7ARNhI="
+            crossorigin="anonymous"></script>
+
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet" type="text/css">
+    <link href='https://fonts.googleapis.com/css?family=Kaushan+Script' rel='stylesheet' type='text/css'>
     <link href="css/style.css" rel="stylesheet">
 
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular-route.min.js"></script>
+
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
     <script src="app.js"></script>
     <script src="config.js"></script>
@@ -21,6 +34,10 @@
     <script src="views/event/controllers/event-list.controller.client.js"></script>
     <script src="views/event/controllers/event-new.controller.client.js"></script>
     <script src="views/event/controllers/event-edit.controller.client.js"></script>
+    <script src="views/event/controllers/event-home.controller.client.js"></script>
+    <script src="views/event/controllers/event-guests.controller.client.js"></script>
+    <script src="views/event/controllers/event-guest-home.controller.client.js"></script>
+    <script src="views/event/controllers/event-invites.controller.client.js"></script>
     <script src="views/page/controllers/page.controller.client.js"></script>
     <script src="views/widget/controllers/widget.controller.client.js"></script>
     <script src="views/widget/controllers/widget-edit.controller.client.js"></script>
@@ -28,14 +45,51 @@
     <!-- services -->
     <script src="services/user.service.client.js"></script>
     <script src="services/vendor.service.client.js"></script>
-    <script src="services/website.service.client.js"></script>
     <script src="services/event.service.client.js"></script>
     <script src="services/page.service.client.js"></script>
     <script src="services/widget.service.client.js"></script>
+    <script src="services/invite.service.client.js"></script>
 
     <title>Assignment Home Page</title>
 </head>
-<body>
+<body id="myPage" data-spy="scroll" data-target=".navbar" data-offset="60">
     <div ng-view></div>
+
+    <script>
+        $(document).ready(function(){
+            // Add smooth scrolling to all links in navbar + footer link
+            $(".navbar a, footer a[href='#myPage']").on('click', function(event) {
+                // Make sure this.hash has a value before overriding default behavior
+                if (this.hash !== "") {
+                    // Prevent default anchor click behavior
+                    event.preventDefault();
+
+                    // Store hash
+                    var hash = this.hash;
+
+                    // Using jQuery's animate() method to add smooth page scroll
+                    // The optional number (900) specifies the number of milliseconds it takes to scroll to the specified area
+                    $('html, body').animate({
+                        scrollTop: $(hash).offset().top
+                    }, 900, function(){
+
+                        // Add hash (#) to URL when done scrolling (default click behavior)
+                        window.location.hash = hash;
+                    });
+                } // End if
+            });
+
+            $(window).scroll(function() {
+                $(".slideanim").each(function(){
+                    var pos = $(this).offset().top;
+
+                    var winTop = $(window).scrollTop();
+                    if (pos < winTop + 600) {
+                        $(this).addClass("slide");
+                    }
+                });
+            });
+        })
+    </script>
 </body>
 </html>

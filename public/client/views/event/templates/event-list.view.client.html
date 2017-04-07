@@ -21,19 +21,20 @@
 
 <div class="container-fluid">
 
+    <div class="btn-group" role="group">
+        <a href="#/host/{{model.hostID}}/event/home" class="btn btn-default">Events</a>
+        <a href="#/host/{{model.hostID}}/event/profile" class="btn btn-default">Profile</a>
+        <a href="#host/{{model.hostID}}/event/invites" class="btn btn-default">Invitations</a>
+    </div>
+
     <ul class="list-group">
         <li class="list-group-item">
             <div class="row">
                 <div class="col-xs-6">
                     Event Name
                 </div>
-                <div class="col-xs-3 hidden-xs">
-                    Last Modified
-                </div>
-                <div class="col-xs-2 hidden-xs">
-                    Host
-                </div>
-                <div class="col-sm-1 col-xs-6">
+
+                <div class="col-xs-6">
                     <a href="#/host/{{model.hostID}}/event/new" class="pull-right">
                         <span class="glyphicon glyphicon-plus"></span>
                     </a>
@@ -44,18 +45,12 @@
         <li ng-repeat="event in model.events" class="list-group-item">
             <div class="row">
                 <div class="col-xs-6">
-                    <a href="#/host/{{event.host}}/website/{{event._id}}/page">
+                    <a href="#/host/{{event.host}}/event/{{event._id}}/home">
                         {{event.name}}
                     </a>
                 </div>
-                <div class="col-xs-3 hidden-xs">
-                    {{event.created | date}}
-                </div>
-                <div class="col-xs-2 hidden-xs">
-                    {{event.host}}
-                </div>
-                <div class="col-sm-1 col-xs-6">
-                    <a href="#/host/{{event.host}}/website/{{event._id}}" class="pull-right">
+                <div class="col-xs-6">
+                    <a href="#/host/{{event.host}}/event/{{event._id}}" class="pull-right">
                         <span class="glyphicon glyphicon-cog"></span>
                     </a>
                 </div>

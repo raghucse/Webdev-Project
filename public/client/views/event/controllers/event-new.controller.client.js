@@ -24,10 +24,8 @@
             EventService
                 .createEventForUser(vm.hostID, event)
                 .success(function (newEvent) {
-                    UserService.addWebsite(vm.hostID, newEvent._id)
-                        .success(function () {
-                            $location.url("/host/" + vm.hostID + "/event");
-                        });
+                   $location.url("/host/" + vm.hostID + "/event");
+
                 });
         }
 

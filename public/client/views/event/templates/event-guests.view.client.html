@@ -1,0 +1,60 @@
+
+<nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="#/host/{{model.hostID}}/event/{{model.eventID}}/home">
+                {{model.event.name}} Guests
+            </a>
+        </div>
+        <div class="collapse navbar-collapse" id="myNavbar">
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="#/host/{{model.hostID}}/event/" >EVENTS HOME</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<div class="container-fluid">
+
+    <div>
+        <label for="event-guestname">Enter Guest Username</label>
+        <input class="form-control"
+               ng-model="model.username"
+               id="event-guestname"
+               value="18:00 EST"
+               type="text"/>
+
+
+        <a class="btn btn-danger btn-block" ng-click="model.findUser(model.username)">
+            Find User
+        </a>
+    </div>
+
+
+
+    <div ng-show="model.guestname">
+        <div class="col-xs-6">
+            {{model.guestname}}
+        </div>
+
+        <div class="col-xs-6">
+            <a class="btn btn-danger btn-block" ng-click="model.createInvite()">
+                <span class="glyphicon glyphicon-plus"></span>
+            </a>
+        </div>
+    </div>
+
+    <div ng-show="model.invitationsuccess">
+        {{model.invitationsuccess}}
+    </div>
+</div>
+
+<nav class="navbar navbar-default navbar-fixed-bottom">
+    <div class="container-fluid">
+        <div class="navbar-text pull-right">
+            <a href="#/host/{{model.hostID}}">
+                <span class="glyphicon glyphicon-user"></span>
+            </a>
+        </div>
+    </div>
+</nav>

@@ -5,15 +5,14 @@
 
     function profileController(UserService, $routeParams, $location) {
         var vm = this;
-        var userID = $routeParams['uid'];
-        var hostID = $routeParams['hid'];
+        vm.hostID = $routeParams['hid'];
 
         //event handlers
         vm.update = update;
         vm.logout = logout;
 
         function init() {
-            var promise = UserService.findUserById(userID);
+            var promise = UserService.findUserById(vm.hostID);
             promise.success(function (user) {
                vm.user = user;
             });
@@ -22,7 +21,7 @@
 
         function update(newUser) {
             UserService
-                .updateUser(userID, newUser)
+                .updateUser(vm.hostID, newUser)
                 .success(function (updatedUser) {
                     if(updatedUser == null){
                         vm.error = "Unable to Update User";
