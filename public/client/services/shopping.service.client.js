@@ -4,18 +4,34 @@
 (function() {
     angular
         .module("WebAppMaker")
-        .factory("ServiceService", ServiceService);
+        .factory("ShoppingService", ShoppingService);
 
-    function ServiceService($http) {
+    function ShoppingService($http) {
         var api = {
             "createService": createService,
             "findServiceById": findServiceById,
             "updateService": updateService,
             "deleteService": deleteService,
             "findAllServicesForVendor": findAllServicesForVendor,
-            "updatePage": updatePage
+            "updatePage": updatePage,
+            "searchItem": searchItem
         };
         return api;
+
+        function searchItem(query) {
+            var urlBase = "https://api.walmartlabs.com/v1/search?apiKey=cpdgmcduc6zz85n7zau6f5zz&query=API_QUERY";
+            var url = urlBase.replace("API_QUERY", query);
+            return $.ajax({
+                url: url,
+                dataType: 'jsonp',
+                type: "GET",
+                error: function (e) {
+                    console.dir(e);
+                }
+            }).then(function (resp) {
+                return resp;
+            });
+        }
 
         function createService(vendorId, service) {
             return $http.post("/api/vendor/"+vendorId+"/service", service);

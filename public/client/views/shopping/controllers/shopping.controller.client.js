@@ -22,30 +22,20 @@
         init();
     }
 
-    function SearchShoppingController($routeParams) {
+    function SearchShoppingController($routeParams, $http, ShoppingService, $route, $injector, $scope, $compile, $timeout) {
         var vm = this;
         vm.userId = $routeParams["uid"];
         vm.searchItems = searchItems;
-
         console.log(vm.userId);
         function init() {
         }
         init();
-        
+
         function searchItems() {
-            var urlBase = "https://api.walmartlabs.com/v1/search?apiKey=cpdgmcduc6zz85n7zau6f5zz&query=API_QUERY";
-            var url = urlBase.replace("API_QUERY", vm.searchQuery);
-
-            $.ajax({
-                url: url,
-                dataType: 'jsonp',
-                async: false,
-                cache: false,
-                success: function(data) {
-                    vm.items = data.items;
-                }
-            })
-
+            ShoppingService.searchItem(vm.searchQuery).then(function (data) {
+                vm.items = data.items;
+                $scope.$apply();
+            });
         }
     }
 
