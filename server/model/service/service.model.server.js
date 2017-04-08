@@ -37,7 +37,7 @@ module.exports = function (mongoose, q) {
             else {
                 deferred.resolve(services);
             }
-        })
+        });
 
         return deferred.promise;
     }

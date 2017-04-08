@@ -8,6 +8,7 @@ module.exports = function (mongoose, q) {
         "findAllEventsForUser": findAllEventsForUser,
         "findAllGuestsForEvent" : findAllGuestsForEvent,
         "findAllProductsForEvent" : findAllProductsForEvent,
+        "findAllServicesForEvent" : findAllServicesForEvent,
         "findEventById": findEventById,
         "updateEvent": updateEvent,
         "deleteEvent": deleteEvent,
@@ -66,6 +67,19 @@ module.exports = function (mongoose, q) {
             }
             else {
                 deferred.resolve(products);
+            }
+        });
+        return deferred.promise;
+    }
+
+    function findAllServicesForEvent(eventId) {
+        var deferred = q.defer();
+        EventModel.find({_id: eventId}, function (err, services) {
+            if(err){
+                deferred.reject(err);
+            }
+            else {
+                deferred.resolve(services);
             }
         });
         return deferred.promise;

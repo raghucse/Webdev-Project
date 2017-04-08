@@ -11,7 +11,7 @@ module.exports = function (mongoose, q) {
         updateVendor: updateVendor,
         deleteVendor: deleteVendor,
         updateService: updateService,
-        findVendorByFacebookId: findVendorByFacebookId,
+        findVendorByFacebookId: findVendorByFacebookId
     };
 
     return api;

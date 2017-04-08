@@ -1,6 +1,4 @@
-/**
- * Created by raghu on 2/8/2017.
- */
+
 (function() {
     var app = angular
         .module("WebAppMaker");
@@ -9,13 +7,13 @@
     app.controller("EditOrderController", EditOrderController);
     app.controller("OrderViewController", OrderViewController);
 
-    function OrderListController($routeParams, OrderOrder) {
+    function OrderListController($routeParams, OrderService) {
         var vm = this;
-        vm.serviceId = $routeParams["sid"];
+        vm.vendorId = $routeParams['vendorId'];
 
         function init() {
-            OrderOrder
-                .findAllOrdersForService(vm.serviceId)
+            OrderService
+                .findAllOrdersForVendor(vm.vendorId)
                 .then(function (orders) {
                     vm.orders = orders.data;
                 });

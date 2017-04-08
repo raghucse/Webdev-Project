@@ -60,6 +60,11 @@
                 controller: "EventGuestController",
                 controllerAs: "model"
             })
+            .when("/host/:hid/event/:eid/services", {
+                templateUrl: "views/service/templates/host/service-list.view.client.html",
+                controller: "HostServiceListController",
+                controllerAs: "model"
+            })
             .when("/guest/:gid/event/:eid/",{
                 templateUrl: "views/event/templates/event-guest-home.view.client.html",
                 controller: "GuestController",
@@ -128,6 +133,11 @@
             .when("/vendor/:vid/service/:sid", {
                 templateUrl: "views/service/templates/service-edit.view.client.html",
                 controller: "EditServiceController",
+                controllerAs: "model"
+            })
+            .when("/vendor/:vid/orders", {
+                templateUrl: "views/orders/templates/order-list.view.client.html",
+                controller: "OrderListController",
                 controllerAs: "model"
             })
             .otherwise({

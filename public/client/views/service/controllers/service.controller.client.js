@@ -1,6 +1,4 @@
-/**
- * Created by raghu on 2/8/2017.
- */
+
 (function() {
     var app = angular
         .module("WebAppMaker");
@@ -11,6 +9,7 @@
 
     function ServiceListController($routeParams, ServiceService) {
         var vm = this;
+
         vm.vendorId = $routeParams["vid"];
 
         function init() {
