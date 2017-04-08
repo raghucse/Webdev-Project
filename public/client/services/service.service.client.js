@@ -22,7 +22,6 @@
         }
 
         function findAllServicesForVendor(vendorId) {
-            console.log(vendorId);
             return $http.get("/api/vendor/"+vendorId+"/service");
         }
 

@@ -27,4 +27,5 @@ module.exports = function (app) {
     require("./services/service.service.server.js")(app, model.serviceModel);
     require("./services/vendor.service.server.js")(app, model.vendorModel);
     require("./services/invite.service.server")(app, model.inviteModel);
+    require("./services/order.service.server")(app, model.orderModel);
 };

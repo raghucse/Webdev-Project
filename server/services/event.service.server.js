@@ -4,6 +4,7 @@ module.exports = function (app, eventModel) {
     app.get("/api/user/:hostId/event", findEventsForUser);
     app.get("/api/guest/event/guests/:eventId", findAllGuestsForEvent);
     app.get("/api/guest/event/products/:eventId", findAllProductsForEvent);
+    app.get("/api/guest/event/services/:eventId", findAllServicesForEvent)
     app.get("/api/event/:eventId", findEventById);
     app.put("/api/event/:eventId", updateEvent);
     app.delete("/api/event/:eventId", deleteEvent);
@@ -47,6 +48,16 @@ module.exports = function (app, eventModel) {
         eventModel.findAllProductsForEvent(eventId)
             .then(function (products) {
                 res.json(products);
+            }, function (err) {
+                res.sendStatus(500).send(err);
+            });
+    }
+
+    function findAllServicesForEvent(req, res) {
+        var eventId = req.params.eventId;
+        eventModel.findAllServicesForEvent(eventId)
+            .then(function (services) {
+                res.json(services);
             }, function (err) {
                 res.sendStatus(500).send(err);
             });
