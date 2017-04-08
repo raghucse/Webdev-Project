@@ -51,7 +51,7 @@
                     </div>
                     <div class="col-xs-4">
                         <h4 class="product-name"><strong>{{item.name}}</strong></h4>
-                        <img  height="18    " width="80" src={{item.customerRatingImage}}>
+                        <img  ng-if="item.customerRatingImage" height="18  " width="80" src={{item.customerRatingImage}}>
                     </div>
                     <div class="col-xs-6">
                         <div class="col-xs-6 text-right">
