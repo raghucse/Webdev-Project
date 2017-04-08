@@ -5,6 +5,7 @@ module.exports = function (mongoose, q) {
 
     var api = {
         addItemForUser: addItemForUser,
+        findAllItemsForuser: findAllItemsForuser
     /*    findAllServicesForVendor: findAllServicesForVendor,
         findServiceById: findServiceById,
         updateService: updateService,
@@ -26,20 +27,19 @@ module.exports = function (mongoose, q) {
         return deferred.promise;
     }
 
-   /* function findAllServicesForVendor(vendorId) {
+   function findAllItemsForuser(userId) {
         var deferred = q.defer();
 
-        ServiceModel.find({_vendor: vendorId}, function (err, services) {
+        ShoppingModel.find({_user: userId}, function (err, items) {
             if(err){
                 deferred.reject(err);
             }
             else {
-                deferred.resolve(services);
+                deferred.resolve(items);
             }
         });
-
         return deferred.promise;
-    }
+    } /*
 
     function findServiceById(serviceId) {
         var deferred = q.defer();

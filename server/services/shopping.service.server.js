@@ -3,7 +3,9 @@
  */
 module.exports =  function(app, ShoppingModel) {
     app.post("/api/host/:userId/shopping/add", addItem);
-/*    app.get("/api/service/:serviceId", findServiceById);
+    app.get("/api/host/:userId/service", findAllItemsForuser);
+
+/*   app.get("/api/service/:serviceId", findServiceById);
     app.put("/api/service/:serviceId", updateService);
     app.delete("/api/service/:serviceId", deleteService);
     app.post("/api/vendor/:vendorId/service", createService);
@@ -24,18 +26,17 @@ module.exports =  function(app, ShoppingModel) {
 
     }
 
-    function findAllServicesForVendor(req, res) {
-        var vendorId = req.params.vendorId;
-        console.log(vendorId);
-        ServiceModel.findAllServicesForVendor(vendorId)
-            .then(function (services) {
-                res.json(services);
+    function findAllItemsForuser(req, res) {
+        var userId = req.params.userId;
+        ShoppingModel.findAllItemsForuser(userId)
+            .then(function (items) {
+                res.json(items);
             }, function (err) {
                 res.sendStatus(500).send(err);
             })
     }
 
-    function findServiceById(req, res) {
+  /*  function findServiceById(req, res) {
         var serviceId = req.params.serviceId;
         ServiceModel.findServiceById(serviceId)
             .then(function (service) {
@@ -78,6 +79,6 @@ module.exports =  function(app, ShoppingModel) {
             }, function (err) {
                 res.sendStatus(500).send(err);
             })
-    }
+    }*/
 }
 
