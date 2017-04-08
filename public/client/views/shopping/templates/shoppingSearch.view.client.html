@@ -62,12 +62,20 @@
                             <h4><strong>Shipping Rate: <span class="text-muted">{{item.standardShipRate}}$</span></strong></h4>
                         </div>
                         <div class="col-xs-4">
-                            <input type="text" class="form-control input-sm" value="1">
+                            <label for="Quantity">quantity</label>
+                            <input id="Quantity" type="text" class="form-control input-sm" value="1">
                         </div>
                         <div class="col-xs-2">
-                            <button type="button" class="btn btn-link btn-xs">
-                                <span class="glyphicon glyphicon-trash"> </span>
+                          <div ng-if="!item.added">
+                            <button type="button" ng-click="model.addItem(item)" class="btn btn-primary btn-md">
+                                Add
                             </button>
+                          </div>
+                            <div ng-if="item.added">
+                                <button type="button" ng-click="model.addItem(item)" class="btn btn-success btn-md">
+                                    Add More
+                                </button>
+                            </div>
                         </div>
                     </div>
                 </div>

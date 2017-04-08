@@ -26,6 +26,9 @@
         var vm = this;
         vm.userId = $routeParams["uid"];
         vm.searchItems = searchItems;
+        vm.addItem = addItem;
+
+
         console.log(vm.userId);
         function init() {
         }
@@ -36,6 +39,10 @@
                 vm.items = data.items;
                 $scope.$apply();
             });
+        }
+
+        function addItem(item) {
+            item.added = true;
         }
     }
 
@@ -76,6 +83,8 @@
                         })
                 });
         }
+
+
     }
 
     function EditServiceController($routeParams, ServiceService, $location) {
