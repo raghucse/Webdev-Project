@@ -130,6 +130,11 @@
                 controller: "EditServiceController",
                 controllerAs: "model"
             })
+            .when("/host/:uid/shopping/search", {
+                templateUrl: "views/shopping/templates/shoppingSearch.view.client.html",
+                controller: "SearchShoppingController",
+                controllerAs: "model"
+            })
             .otherwise({
                 redirectTo: "/login"
             });
