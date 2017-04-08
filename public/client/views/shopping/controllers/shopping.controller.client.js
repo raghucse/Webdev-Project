@@ -42,8 +42,10 @@
                 async: false,
                 cache: false,
                 success: function(data) {
+                    vm.items = data.items;
                 }
             })
+
         }
     }
 
