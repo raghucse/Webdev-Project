@@ -43,6 +43,12 @@
 
         function addItem(item) {
             item.added = true;
+            ShoppingService.addItem(vm.userId, item).then(function (data) {
+                item.added = true;
+                //$scope.$apply();
+            });
+
+
         }
     }
 
