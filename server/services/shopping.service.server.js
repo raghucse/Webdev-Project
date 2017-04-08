@@ -12,8 +12,8 @@ module.exports =  function(app, ShoppingModel) {
     function addItem(req, res) {
         var itemf = req.body;
         var userId = req.params.userId;
-
-        var iteminfo = {_user: userId, item: itemf };
+        var itemId = itemf.itemId;
+        var iteminfo = {_user: userId, item: itemf, itemId: itemId};
 
         ShoppingModel.addItemForUser(iteminfo)
             .then(function (service) {
