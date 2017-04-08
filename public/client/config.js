@@ -60,6 +60,16 @@
                 controller: "EventGuestController",
                 controllerAs: "model"
             })
+            .when("/host/:hid/event/:eid/services", {
+                templateUrl: "views/service/templates/host/service-list.view.client.html",
+                controller: "HostServiceListController",
+                controllerAs: "model"
+            })
+            .when("/host/:hid/event/:eid/services/:sid", {
+                templateUrl: "views/service/templates/host/service-order.view.client.html",
+                controller: "HostServiceOrderController",
+                controllerAs: "model"
+            })
             .when("/guest/:gid/event/:eid/",{
                 templateUrl: "views/event/templates/event-guest-home.view.client.html",
                 controller: "GuestController",
@@ -85,16 +95,7 @@
                 controller: "WidgetListController",
                 controllerAs: "model"
             })
-            .when("/user/:uid/event/:wid/page/:pid/widget/new",{
-                templateUrl: "views/widget/templates/widget-chooser.view.client.html",
-                controller: "NewWidgetController",
-                controllerAs: "model"
-            })
-            .when("/user/:uid/event/:wid/page/:pid/widget/:wgid",{
-                templateUrl: "views/widget/templates/widget-edit.view.client.html",
-                controller: "EditWidgetController",
-                controllerAs: "model"
-            })
+
             .when("/vendor/login",{
                 templateUrl: "views/user/templates/vendor.login.view.client.html",
                 controller: "VendorLoginController",
@@ -133,6 +134,11 @@
             .when("/host/:uid/shopping/search", {
                 templateUrl: "views/shopping/templates/shoppingSearch.view.client.html",
                 controller: "SearchShoppingController",
+                controllerAs: "model"
+             })
+            .when("/vendor/:vid/orders", {
+                templateUrl: "views/orders/templates/order-list.view.client.html",
+                controller: "OrderListController",
                 controllerAs: "model"
             })
             .otherwise({

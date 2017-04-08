@@ -4,17 +4,20 @@ module.exports = function (mongoose, q) {
     var OrderModel = mongoose.model('OrderModel', OrderSchema);
 
     var api = {
-        createOrderForService: createOrderForService,
+        createOrder: createOrder,
+        findAllOrdersForVendor: findAllOrdersForVendor,
         findAllOrdersForService: findAllOrdersForService,
         findOrderById: findOrderById,
         updateOrder: updateOrder,
-        deleteOrder: deleteOrder,
+        deleteOrder: deleteOrder
     };
     return api;
 
-    function createOrderForService(serviceId, order) {
+    function createOrder(serviceId, hostId, vendorId, order) {
         var deferred = q.defer();
-        order._service = serviceId;
+        order.service = serviceId;
+        order.vendor = vendorId;
+        order.user = hostId;
         OrderModel.create(order, function (err, doc) {
             if(err){
                 deferred.reject(err);
@@ -27,18 +30,31 @@ module.exports = function (mongoose, q) {
         return deferred.promise;
     }
 
-    function findAllOrdersForService(serviceId) {
+    function findAllOrdersForVendor(vendorId) {
         var deferred = q.defer();
 
-        OrderModel.find({_service: serviceId}, function (err, orders) {
+        OrderModel.find({vendor : vendorId}, function (err, orders) {
             if(err){
                 deferred.reject(err);
             }
             else {
                 deferred.resolve(orders);
             }
-        })
+        });
+        return deferred.promise;
+    }
 
+    function findAllOrdersForService(serviceId) {
+        var deferred = q.defer();
+
+        OrderModel.find({service: serviceId}, function (err, orders) {
+            if(err){
+                deferred.reject(err);
+            }
+            else {
+                deferred.resolve(orders);
+            }
+        });
         return deferred.promise;
     }
 
@@ -52,7 +68,7 @@ module.exports = function (mongoose, q) {
             else {
                 deferred.resolve(order);
             }
-        })
+        });
         return deferred.promise;
     }
 
@@ -68,7 +84,7 @@ module.exports = function (mongoose, q) {
                 else {
                     deferred.resolve(order);
                 }
-            })
+            });
         return deferred.promise;
 
     }
@@ -84,7 +100,9 @@ module.exports = function (mongoose, q) {
                     deferred.resolve();
                 });
             }
-        })
+        });
         return deferred.promise;
     }
-}
+
+
+};

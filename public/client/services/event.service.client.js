@@ -15,7 +15,8 @@
             "addService": addService,
             "addProduct": addProduct,
             "findAllGuestsForEvent" : findAllGuestsForEvent,
-            "findAllProductsForEvent" : findAllProductsForEvent
+            "findAllProductsForEvent" : findAllProductsForEvent,
+            "findAllServicesForEvent" : findAllServicesForEvent
         };
 
         return api;
@@ -60,6 +61,9 @@
             return $http.get("/api/guest/event/products/" + eventId );
         }
 
+        function findAllServicesForEvent(eventId) {
+            return $http.get("/api/guest/event/services/" + eventId);
+        }
     }
 
 })();

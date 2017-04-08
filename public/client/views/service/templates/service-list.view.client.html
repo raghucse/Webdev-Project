@@ -19,6 +19,21 @@
 
 
 <div class="container-fluid">
+
+    <ul class="list-group">
+        <div ng-repeat="order in model.orders">
+            <li class="list-group-item">
+                <a href="#/vendor/{{model.vendorId}}/service/{{order._id}}/view">
+                    {{order.user}}
+                </a>
+                <a href="#/vendor/{{model.vendorId}}/service/{{order._id}}" class="pull-right">
+                    <span class="glyphicon glyphicon-cog">
+              </span>
+                </a>
+            </li>
+        </div>
+    </ul>
+
     <ul class="list-group">
         <div ng-repeat="service in model.services">
             <li class="list-group-item">
@@ -26,7 +41,7 @@
                     {{service.name}}
                 </a>
                 <a href="#/vendor/{{model.vendorId}}/service/{{service._id}}" class="pull-right">
-              <span class="glyphicon glyphicon-cog">
+                    <span class="glyphicon glyphicon-cog">
               </span>
                 </a>
             </li>

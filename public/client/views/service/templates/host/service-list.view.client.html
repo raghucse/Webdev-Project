@@ -1,0 +1,87 @@
+<nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="#/host/{{model.hostID}}/event/{{model.eventID}}/home">
+                {{model.event.name}} Services
+            </a>
+        </div>
+        <div class="collapse navbar-collapse" id="myNavbar">
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="#/host/{{model.hostID}}/event/{{model.eventID}}/home">EVENT HOME</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+
+<div class="container-fluid">
+    <ul class="list-group">
+        <div ng-repeat="service in model.services">
+            <li class="list-group-item">
+                <a href="#/vendor/{{model.vendorId}}/service/{{service._id}}/view">
+                    {{service.name}}
+                </a>
+                <a href="#/vendor/{{model.vendorId}}/service/{{service._id}}" class="pull-right">
+              <span class="glyphicon glyphicon-cog">
+              </span>
+                </a>
+            </li>
+        </div>
+    </ul>
+</div>
+
+<div class="container-fluid">
+    <label for="event-vendor">Enter Vendor name</label>
+    <input class="form-control"
+           ng-model="model.vendor"
+           id="event-vendor"
+           type="text"/>
+
+    <label for="service-type">Select Service Type</label>
+    <select class="form-control" ng-model="model.service.type"
+            id="service-type">
+        <option value="flower">Flower Service</option>
+        <option value="food">Food Service</option>
+        <option value="place">Place Service</option>
+    </select>
+
+
+    <a class="btn btn-danger btn-block" ng-click="model.findService(model.vendor, model.service.type)">
+        Find Vendor
+    </a>
+
+
+    <ul class="list-group">
+        <div ng-repeat="vendor in model.vendors">
+            <li class="list-group-item">
+                <a href="#/vendor/{{model.vendorId}}/services">
+                    {{vendor.name}}
+                </a>
+                <ul class="list-group">
+                    <div ng-repeat="vendorservice in vendor.services track by $index">
+                        <li class="list-group-item">
+                            <a href="#/host/{{model.hostID}}/event/{{model.eventID}}/services/{{vendorservice._id}}">
+                                {{vendorservice.name}}
+                            </a>
+                        </li>
+                    </div>
+                </ul>
+            </li>
+        </div>
+    </ul>
+
+
+
+</div>
+
+<div class="bottom-padding"></div>
+
+<nav class="navbar navbar-default navbar-fixed-bottom">
+    <div class="container-fluid">
+        <div class="navbar-text pull-right">
+            <a href="#/vendor/{{model.vendorId}}" class="navbar-link">
+                <span class="glyphicon glyphicon-vendor"></span>
+            </a>
+        </div>
+    </div>
+</nav>

@@ -11,7 +11,8 @@ module.exports = function (mongoose) {
         city: String,
         address: String,
         capacity: String,
-        dateCreated: { type: Date, default: Date.now }
+        dateCreated: { type: Date, default: Date.now },
+        orders:[{type:mongoose.Schema.Types.ObjectId, ref: 'OrderModel'}]
     }, {collection: 'myPartyPlanDB.service'});
 
     ServiceSchema.pre('remove', function(next) {
