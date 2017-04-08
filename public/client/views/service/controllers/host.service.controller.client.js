@@ -3,11 +3,11 @@
     var app = angular
         .module("WebAppMaker");
     app.controller("HostServiceListController", HostServiceListController);
-    // app.controller("NewServiceController", NewServiceController);
+    app.controller("HostServiceOrderController", HostServiceOrderController);
     // app.controller("EditServiceController", EditServiceController);
     // app.controller("ServiceViewController", ServiceViewController);
 
-    function HostServiceListController($routeParams, EventService, ServiceService, VendorService, OrderService) {
+    function HostServiceListController($routeParams, EventService, ServiceService, VendorService) {
         var vm = this;
 
         function init() {
@@ -15,7 +15,7 @@
             vm.hostID = $routeParams["hid"];
 
             vm.findService = findService;
-            vm.createOrder = createOrder;
+
 
             // EventService
             //     .findAllServicesForEvent(vm.eventID)
@@ -60,35 +60,40 @@
                 });
         }
 
-        function createOrder() {
-            OrderService
-                .createOrder(serviceId, vm.hostID, vm.vendorID, order);
 
-        }
     }
 
-    // function ServiceViewController($routeParams, ServiceService) {
-    //     var vm = this;
-    //     vm.serviceId = $routeParams["sid"];
-    //     vm.vendorId = $routeParams["vid"];
-    //
-    //     console.log(vm.serviceId);
-    //     function init() {
-    //         ServiceService
-    //             .findServiceById(vm.serviceId)
-    //             .then(function (service) {
-    //                 console.log(vm.service);
-    //                 vm.service = service.data;
-    //                 if(vm.service.type == 'food' || vm.service.type == 'place'){
-    //                     vm.palceOrFood = true;
-    //                 }
-    //                 else {
-    //                     vm.palceOrFood = false;
-    //                 }
-    //             });
-    //     }
-    //     init();
-    // }
+    function HostServiceOrderController($routeParams, ServiceService, OrderService) {
+        var vm = this;
+        vm.hostId = $routeParams["hid"];
+
+        vm.serviceId = $routeParams["sid"];
+
+        vm.createOrder = createOrder;
+
+        function init() {
+            ServiceService
+                .findServiceById(vm.serviceId)
+                .then(function (service) {
+                    vm.service = service.data;
+                    vm.vendorId = vm.service._vendor;
+
+                });
+        }
+        init();
+
+        function createOrder(serviceId) {
+            var order ={};
+            OrderService
+                .createOrder(serviceId, vm.hostId, vm.vendorId, order)
+                .success(function (order) {
+                    vm.orderstatus = "Order Placed";
+                })
+
+        }
+
+
+    }
     //
     //
     // function NewServiceController($routeParams, ServiceService, $location, VendorService) {

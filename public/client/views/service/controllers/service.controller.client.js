@@ -7,12 +7,18 @@
     app.controller("EditServiceController", EditServiceController);
     app.controller("ServiceViewController", ServiceViewController);
 
-    function ServiceListController($routeParams, ServiceService) {
+    function ServiceListController($routeParams, ServiceService, OrderService) {
         var vm = this;
 
         vm.vendorId = $routeParams["vid"];
 
         function init() {
+            OrderService
+                .findAllOrdersForVendor(vm.vendorId)
+                .then(function (orders) {
+                    vm.orders = orders.data;
+                    console.log(vm.orders);
+                });
             ServiceService
                 .findAllServicesForVendor(vm.vendorId)
                 .then(function (services) {

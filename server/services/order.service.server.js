@@ -1,6 +1,6 @@
 
 module.exports =  function(app, OrderModel) {
-    app.post("/api/order/:serviceId/:vendorId/:hostId", createOrder);
+    app.post("/api/order/:serviceId/:hostId/:vendorId", createOrder);
     app.get("/api/order/:vendorId/order", findAllOrdersForVendor);
     app.get("/api/service/:serviceId/order", findAllOrdersForService);
     app.get("/api/order/:orderId", findOrderById);

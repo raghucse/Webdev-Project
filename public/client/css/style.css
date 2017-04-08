@@ -108,6 +108,11 @@ body {
     color: #f4511e;
     font-size: 50px;
 }
+
+.logo-smaller{
+    color: #f4511e;
+    font-size: 30px;
+}
 .logo {
     color: #f4511e;
     font-size: 200px;

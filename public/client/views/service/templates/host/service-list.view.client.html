@@ -60,10 +60,9 @@
                 <ul class="list-group">
                     <div ng-repeat="vendorservice in vendor.services track by $index">
                         <li class="list-group-item">
-                            {{vendorservice.name}}
-                            <button ng-click="model.createOrder()" class="pull-right">
-                                <span class="glyphicon glyphicon-plus"></span>
-                            </button>
+                            <a href="#/host/{{model.hostID}}/event/{{model.eventID}}/services/{{vendorservice._id}}">
+                                {{vendorservice.name}}
+                            </a>
                         </li>
                     </div>
                 </ul>

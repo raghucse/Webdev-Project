@@ -17,7 +17,7 @@ module.exports = function (mongoose, q) {
         var deferred = q.defer();
         order.service = serviceId;
         order.vendor = vendorId;
-        order.host = hostId;
+        order.user = hostId;
         OrderModel.create(order, function (err, doc) {
             if(err){
                 deferred.reject(err);
@@ -33,7 +33,7 @@ module.exports = function (mongoose, q) {
     function findAllOrdersForVendor(vendorId) {
         var deferred = q.defer();
 
-        OrderModel.find({vendor: vendorId}, function (err, orders) {
+        OrderModel.find({vendor : vendorId}, function (err, orders) {
             if(err){
                 deferred.reject(err);
             }
