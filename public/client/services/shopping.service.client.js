@@ -49,8 +49,8 @@
             return $http.get("/api/event/"+eventId+"/shopping");
         }
 
-        function findItemsByItemId(itemId) {
-            return $http.get("/api/shopping/"+itemId);
+        function findItemsByItemId(itemId, hostId) {
+            return $http.get("/api/host/"+hostId+"/shopping/"+itemId);
         }
 
         function updateItemQuantity(id, quantity) {
