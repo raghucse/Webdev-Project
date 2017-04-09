@@ -9,7 +9,7 @@
         <a class="navbar-brand" href="#/vendor/{{model.vendorId}}/service">
             <label>Services</label>
         </a>
-        <a class="navbar-brand pull-right" href="#/host/{{model.hostId}}/event/{{model.eventId}}/shopping/search">
+        <a class="navbar-brand pull-right" href="#/host/{{model.userId}}/shopping/search">
             <span class="glyphicon glyphicon-search pull-right "></span>
         </a>
 
@@ -37,12 +37,9 @@
                             <input id="Quantity" type="text" class="form-control input-sm" ng-model="iteminfo.item.quantity" value="1">
                         </div>
                         <div class="col-xs-2 rollovericons">
-                            <button type="button" ng-click="model.updateItem(item)" class="btn btn-primary btn-md">
-                                Update
+                            <button type="button" ng-click="model.getItem(item)" class="btn btn-primary btn-md">
+                                Get Item
                             </button>
-                            <a type="button" href={{iteminfo.item.productUrl}} target="_blank" class="btn btn-success btn-md">
-                                <span class="glyphicon glyphicon-shopping-cart" ></span>
-                            </a>
                         </div>
                     </div>
                 </div>

@@ -5,7 +5,8 @@ module.exports = function (mongoose, q) {
 
     var api = {
         addItemForUser: addItemForUser,
-        findAllItemsForuser: findAllItemsForuser
+   /*     findAllItemsForHost: findAllItemsForHost,*/
+        findAllItemsForEvent: findAllItemsForEvent
     /*    findAllServicesForVendor: findAllServicesForVendor,
         findServiceById: findServiceById,
         updateService: updateService,
@@ -27,10 +28,10 @@ module.exports = function (mongoose, q) {
         return deferred.promise;
     }
 
-   function findAllItemsForuser(userId) {
+   /*function findAllItemsForHost(hostId) {
         var deferred = q.defer();
 
-        ShoppingModel.find({_user: userId}, function (err, items) {
+        ShoppingModel.find({_host: hostId}, function (err, items) {
             if(err){
                 deferred.reject(err);
             }
@@ -39,7 +40,41 @@ module.exports = function (mongoose, q) {
             }
         });
         return deferred.promise;
-    } /*
+    } */
+
+    function findAllItemsForEvent(eventId) {
+        var deferred = q.defer();
+
+        ShoppingModel.find({_event: eventId}, function (err, items) {
+            if(err){
+                deferred.reject(err);
+            }
+            else {
+                deferred.resolve(items);
+            }
+        });
+        return deferred.promise;
+    }
+
+    function updateItem(itemId, service) {
+        var deferred = q.defer();
+
+        ServiceModel.update({_id:itemId},
+            {$set:service}
+            , function (err, service) {
+                if(err){
+                    deferred.reject(err);
+                }
+                else {
+                    deferred.resolve(service);
+                }
+            })
+        return deferred.promise;
+    }
+
+    /*
+
+
 
     function findServiceById(serviceId) {
         var deferred = q.defer();

@@ -7,7 +7,7 @@
                       </span>
                 </a>
             </div>
-            <a class="navbar-brand" href="#/vendor/{{model.vendorId}}/service">
+            <a class="navbar-brand" href="#/host/{{model.userId}}/service">
                 <label>Services</label>
             </a>
         </div>
@@ -66,11 +66,11 @@
                             <input id="Quantity" type="text" class="form-control input-sm" ng-model="item.quantity" value="1">
                         </div>
                         <div class="col-xs-2">
-                          <div ng-if="!item.added">
-                            <button type="button" ng-click="model.addItem(item)" class="btn btn-primary btn-md">
-                                Add
-                            </button>
-                          </div>
+                            <div ng-if="!item.added">
+                                <button type="button" ng-click="model.addItem(item)" class="btn btn-primary btn-md">
+                                    Add
+                                </button>
+                            </div>
                             <div ng-if="item.added">
                                 <button type="button" ng-click="model.addItem(item)" class="btn btn-success btn-md">
                                     Add More

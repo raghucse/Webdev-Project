@@ -2,20 +2,25 @@
  * Created by raghu on 2/8/2017.
  */
 module.exports =  function(app, ShoppingModel) {
-    app.post("/api/host/:userId/shopping/add", addItem);
-    app.get("/api/host/:userId/service", findAllItemsForuser);
+    app.post("/api/host/:hostId/event/:eventId/shopping/add", addItem);
+    /*app.get("/api/host/:hostId/shopping", findAllItemsForHost); */
+    app.get("/api/event/:eventId/shopping", findAllItemsForEvent);
 
-/*   app.get("/api/service/:serviceId", findServiceById);
-    app.put("/api/service/:serviceId", updateService);
-    app.delete("/api/service/:serviceId", deleteService);
-    app.post("/api/vendor/:vendorId/service", createService);
-    app.put("/api/service/:serviceId/page/:pageId", updatePage);*/
+
+    /*   app.get("/api/service/:serviceId", findServiceById);
+        app.put("/api/service/:serviceId", updateService);
+        app.delete("/api/service/:serviceId", deleteService);
+        app.post("/api/vendor/:vendorId/service", createService);
+        app.put("/api/service/:serviceId/page/:pageId", updatePage);*/
 
     function addItem(req, res) {
         var itemf = req.body;
-        var userId = req.params.userId;
+        var hostId = req.params.hostId;
+        var eventId = req.params.eventId;
+        var itemPrice = itemf.salePrice;
+        var quantity = itemf.quantity;
         var itemId = itemf.itemId;
-        var iteminfo = {_user: userId, item: itemf, itemId: itemId};
+        var iteminfo = {_host: hostId, item: itemf, itemId: itemId, _event: eventId, itemPrice: itemPrice, quantity: quantity};
 
         ShoppingModel.addItemForUser(iteminfo)
             .then(function (service) {
@@ -26,9 +31,19 @@ module.exports =  function(app, ShoppingModel) {
 
     }
 
-    function findAllItemsForuser(req, res) {
-        var userId = req.params.userId;
-        ShoppingModel.findAllItemsForuser(userId)
+  /*  function findAllItemsForHost(req, res) {
+        var hostId = req.params.hostId;
+        ShoppingModel.findAllItemsForHost(hostId)
+            .then(function (items) {
+                res.json(items);
+            }, function (err) {
+                res.sendStatus(500).send(err);
+            })
+    } */
+
+    function findAllItemsForEvent(req, res) {
+        var eventId = req.params.eventId;
+        ShoppingModel.findAllItemsForEvent(eventId)
             .then(function (items) {
                 res.json(items);
             }, function (err) {

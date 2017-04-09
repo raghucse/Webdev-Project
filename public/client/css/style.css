@@ -161,3 +161,7 @@ a:hover{text-decoration: none;}
 #custom-search-input .glyphicon-search{
     font-size: 23px;
 }
+
+.rollovericons a{
+    margin: 10px;
+}
