@@ -56,21 +56,16 @@
             </ul>
         </div>
         <div id="currOrders" class="tab-pane fade">
-            <h2>You have no current orders</h2>
-
-        </div>
-        <div id="newOrders" class="tab-pane fade">
             <ul class="list-group">
-                <div ng-repeat="order in model.orders">
+                <div ng-repeat="order in model.currOrders">
                     <li class="list-group-item">
                         <div class="row">
-                            <a href="#{{order._id}}" data-toggle="collapse" target="_self">
+                            <a href="#{{order._id}}1" data-toggle="collapse" target="_self">
                                 Order Id : {{order._id}}
                             </a>
-                            <div id="{{order._id}}" class="collapse">
+                            <div id="{{order._id}}1" class="collapse">
                                 <div class="panel panel-default">
-                                    <div class="panel-heading">Order Id : {{order._id}}</div>
-
+                                    <div class="panel-heading" ng-model="model.orderID">Order Id : {{order._id}}</div>
                                     <table class="table">
                                         <thead>
                                         <tr>
@@ -90,8 +85,46 @@
                                         </tbody>
                                     </table>
                                 </div>
-                                <button class="btn btn-success">Accept Order</button>
+                                <button class="btn btn-danger">Reject Order</button>
+                            </div>
 
+                        </div>
+                    </li>
+                </div>
+            </ul>
+
+        </div>
+        <div id="newOrders" class="tab-pane fade">
+            <ul class="list-group">
+                <div ng-repeat="order in model.orders">
+                    <li class="list-group-item">
+                        <div class="row">
+                            <a href="#{{order._id}}" data-toggle="collapse" target="_self">
+                                Order Id : {{order._id}}
+                            </a>
+                            <div id="{{order._id}}" class="collapse">
+                                <div class="panel panel-default">
+                                    <div class="panel-heading" ng-model="model.orderID">Order Id : {{order._id}}</div>
+                                    <table class="table">
+                                        <thead>
+                                        <tr>
+                                            <th>Host</th>
+                                            <th>Event Capacity</th>
+                                            <th>Event Date</th>
+                                            <th>Service</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <tr>
+                                            <td>{{order.user}}</td>
+                                            <td>{{order.capacity}}</td>
+                                            <td>{{order.date}}</td>
+                                            <td>{{order.service}}</td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <button class="btn btn-success" ng-click="model.acceptOrder(order)">Accept Order</button>
                                 <button class="btn btn-danger">Reject Order</button>
                             </div>
 

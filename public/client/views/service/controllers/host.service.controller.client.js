@@ -71,6 +71,7 @@
 
         vm.createOrder = createOrder;
 
+
         function init() {
             ServiceService
                 .findServiceById(vm.serviceId)
@@ -91,6 +92,9 @@
                 })
 
         }
+
+
+
 
 
     }
