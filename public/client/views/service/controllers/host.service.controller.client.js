@@ -105,8 +105,10 @@
         }
         init();
 
-        function createOrder(serviceId) {
+        function createOrder(serviceId, platesrequested) {
             var order ={};
+            order.platesrequested = platesrequested;
+            order.cost = platesrequested * vm.service.perPlateCost;
             OrderService
                 .createOrder(serviceId, vm.hostId, vm.vendorId, order)
                 .success(function (order) {

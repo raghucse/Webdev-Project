@@ -18,6 +18,7 @@ module.exports = function (mongoose, q) {
         order.service = serviceId;
         order.vendor = vendorId;
         order.user = hostId;
+
         OrderModel.create(order, function (err, doc) {
             if(err){
                 deferred.reject(err);

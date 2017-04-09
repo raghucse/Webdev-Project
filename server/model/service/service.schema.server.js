@@ -12,6 +12,7 @@ module.exports = function (mongoose) {
         address: String,
         capacity: String,
         dateCreated: { type: Date, default: Date.now },
+        perPlateCost: Number,
         orders:[{type:mongoose.Schema.Types.ObjectId, ref: 'OrderModel'}]
     }, {collection: 'myPartyPlanDB.service'});
 
