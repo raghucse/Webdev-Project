@@ -45,18 +45,30 @@
         }
     }
 
-    function ShoppingGuestListController($routeParams, ShoppingService) {
+    function ShoppingGuestListController($routeParams, ShoppingService, $scope) {
         var vm = this;
         vm.eventId = $routeParams["eid"];
         vm.guestId = $routeParams["gid"];
         vm.checkGuest = checkGuest;
         vm.claimItem = claimItem;
+        vm.unclaimItem = unclaimItem;
+        vm.claimedItems = [];
+        vm.unClaimedItems = [];
+        vm.items = [];
 
         function init() {
             ShoppingService
                 .findAllItemsForEvent(vm.eventId )
                 .then(function (services) {
                     vm.items = services.data;
+                    for(var i in vm.items){
+                        if(vm.items[i]._guest){
+                            vm.claimedItems.push(vm.items[i]);
+                        }
+                        else{
+                            vm.unClaimedItems.push(vm.items[i]);
+                        }
+                    }
                 });
         }
         init();
@@ -65,13 +77,38 @@
             ShoppingService
                 .claimItem(vm.guestId,item._id)
                 .then(function (item) {
-                     if(item._guest === vm.guestId) {
+                    item = item.data;
+                     if(item._guest == vm.guestId) {
+                         var index = vm.unClaimedItems.indexOf(item);
+                         vm.unClaimedItems.splice(index, 1);
+                         vm.claimedItems.push(item);
                          vm.claimSuccess = "Item claimed successfully";
                      }
-                     else
+                     else {
+                         console.log(item._guest);
                          vm.claimError = "Item could not be claimed";
+                     }
                 }, function (err) {
+                    console.log(err);
                     vm.claimError = "Item could not be claimed";
+                })
+        }
+
+        function unclaimItem(item) {
+            ShoppingService
+                .claimItem("unClaim",item._id)
+                .then(function (item) {
+                    item = item.data;
+                    console.log(item);
+                    if(!item._guest) {
+                        var index = vm.claimedItems.indexOf(item);
+                        vm.claimedItems.splice(index, 1);
+                        vm.unClaimedItems.push(item);
+                        vm.unClaimSuccess = "Item unclaimed successfully";
+                    }
+                }, function (err) {
+                    console.log(err);
+                    vm.unClaimError = "Item could not be unclaimed";
                 })
         }
 

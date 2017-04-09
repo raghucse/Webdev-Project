@@ -9,6 +9,7 @@ module.exports = function (mongoose, q) {
         updateItemQuantity: updateItemQuantity,
         deleteItem: deleteItem,
         claimItem: claimItem,
+        findItemById: findItemById,
    /*     findAllItemsForHost: findAllItemsForHost,*/
         findAllItemsForEvent: findAllItemsForEvent
     /*    findAllServicesForVendor: findAllServicesForVendor,
@@ -79,18 +80,36 @@ module.exports = function (mongoose, q) {
 
     function claimItem(id, guestId) {
         var deferred = q.defer();
-        ShoppingModel.update(
-            { _id : id },
-            {
-                _guest: guestId
-            }, function (err, item) {
-                if(err){
-                    deferred.reject(err);
-                }
-                else {
-                    deferred.resolve(item);
-                }
-            })
+        if(guestId == "unClaim")
+        {
+            ShoppingModel.update(
+                { _id : id },
+                {
+                    _guest: null
+                }, function (err, item) {
+                    if(err){
+                        deferred.reject(err);
+                    }
+                    else {
+                        deferred.resolve(item);
+                    }
+                })
+        }
+        else {
+            ShoppingModel.update(
+                { _id : id },
+                {
+                    _guest: guestId
+                }, function (err, item) {
+                    if(err){
+                        deferred.reject(err);
+                    }
+                    else {
+                        deferred.resolve(item);
+                    }
+                })
+        }
+
         return deferred.promise;
     }
 
@@ -117,6 +136,20 @@ module.exports = function (mongoose, q) {
                 item.remove(function (err) {
                     deferred.resolve();
                 });
+            }
+        })
+        return deferred.promise;
+    }
+
+    function findItemById(id) {
+        var deferred = q.defer();
+
+        ShoppingModel.findById(id, function (err, item) {
+            if(err){
+                deferred.reject(err);
+            }
+            else {
+                deferred.resolve(item);
             }
         })
         return deferred.promise;
