@@ -1,25 +1,18 @@
 <nav class="navbar navbar-default navbar-fixed-top">
     <div class="row container-fluid">
-        <div class="col-sm-4 hidden-xs">
-            <div class="navbar-text pull-left">
-                <a href="#/vendor/{{model.vendorId}}/service" class="navbar-link">
+        <div class="navbar-text pull-left">
+            <a href="#/vendor/{{model.vendorId}}/service" class="navbar-link">
                       <span class="glyphicon glyphicon-chevron-left">
                       </span>
-                </a>
-            </div>
-            <a class="navbar-brand" href="#/vendor/{{model.vendorId}}/service">
-                <label>Services</label>
             </a>
         </div>
+        <a class="navbar-brand" href="#/vendor/{{model.vendorId}}/service">
+            <label>Services</label>
+        </a>
+        <a class="navbar-brand pull-right" href="#/host/{{model.userId}}/shopping/search">
+            <span class="glyphicon glyphicon-search pull-right "></span>
+        </a>
 
-        <div class="col-xs-12 visible-xs">
-            <div class="navbar-text pull-left">
-                <a href="#/vendor/{{model.vendorId}}/service" class="navbar-link">
-                      <span class="glyphicon glyphicon-chevron-left">
-                      </span>
-                </a>
-            </div>
-        </div>
     </div>
 </nav>
 
