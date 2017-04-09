@@ -14,6 +14,7 @@
             "findItemsByItemId": findItemsByItemId,
             "updateItemQuantity": updateItemQuantity,
             "deleteItem": deleteItem,
+            "claimItem": claimItem,
   /*          "findServiceById": findServiceById,
             "updateService": updateService,
             "deleteService": deleteService,
@@ -62,6 +63,9 @@
             return $http.delete("/api/shopping/delete/"+id);
         }
 
+        function claimItem(guestId, id) {
+            return $http.put("/api/guest/"+guestId+"/shopping/"+id);
+        }
         /*
 
         function findServiceById(serviceId) {

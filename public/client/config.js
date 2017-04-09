@@ -141,7 +141,7 @@
                 controllerAs: "model"
             })
             .when("/guest/:gid/event/:eid/shopping", {
-                templateUrl: "views/shopping/templates/shoppingList.view.client.html",
+                templateUrl: "views/shopping/templates/shoppingGuestList.view.client.html",
                 controller: "ShoppingGuestListController",
                 controllerAs: "model"
             })

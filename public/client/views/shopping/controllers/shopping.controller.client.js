@@ -48,6 +48,9 @@
     function ShoppingGuestListController($routeParams, ShoppingService) {
         var vm = this;
         vm.eventId = $routeParams["eid"];
+        vm.guestId = $routeParams["gid"];
+        vm.checkGuest = checkGuest;
+        vm.claimItem = claimItem;
 
         function init() {
             ShoppingService
@@ -57,6 +60,28 @@
                 });
         }
         init();
+
+        function claimItem(item) {
+            ShoppingService
+                .claimItem(vm.guestId,item._id)
+                .then(function (item) {
+                     if(item._guest === vm.guestId) {
+                         vm.claimSuccess = "Item claimed successfully";
+                     }
+                     else
+                         vm.claimError = "Item could not be claimed";
+                }, function (err) {
+                    vm.claimError = "Item could not be claimed";
+                })
+        }
+
+        function checkGuest(guestId) {
+            if(guestId === vm.guestId) {
+                console.log("cheked");
+                return true;
+            }
+        }
+
     }
 
     function SearchShoppingController($routeParams, ShoppingService, $scope) {

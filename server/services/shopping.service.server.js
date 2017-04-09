@@ -8,6 +8,7 @@ module.exports =  function(app, ShoppingModel) {
     app.get("/api/host/:hostId/shopping/:itemId", findItemsByItemId);
     app.put("/api/shopping/:id/quantity/:quantity", updateItemQuantity);
     app.delete("/api/shopping/delete/:id", deleteItem);
+    app.put("/api/guest/:guestId/shopping/:id", claimItem);
 
 
     /*   app.get("/api/service/:serviceId", findServiceById);
@@ -61,6 +62,17 @@ module.exports =  function(app, ShoppingModel) {
         var id = req.params.id;
         var quantity = req.params.quantity;
         ShoppingModel.updateItemQuantity(id, quantity)
+            .then(function (item) {
+                res.json(item);
+            }, function (err) {
+                res.sendStatus(500).send(err);
+            })
+    }
+
+    function claimItem(req, res) {
+        var id = req.params.id;
+        var guestId = req.params.guestId;
+        ShoppingModel.claimItem(id, guestId)
             .then(function (item) {
                 res.json(item);
             }, function (err) {
