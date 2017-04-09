@@ -12,6 +12,7 @@
         var vm = this;
         vm.hostId = $routeParams["hid"];
         vm.eventId = $routeParams["eid"];
+        vm.updateItem = updateItem;
 
         function init() {
             ShoppingService
@@ -23,7 +24,12 @@
         init();
 
         function updateItem(item) {
-
+            ShoppingService.updateItemQuantity(item._id, item.quantity)
+                .then(function (item) {
+                    vm.addSucces = "Item updated successfully";
+                },function (err) {
+                    vm.addError = "Error while updating item";
+                })
         }
     }
 
