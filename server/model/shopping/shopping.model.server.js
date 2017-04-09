@@ -39,7 +39,27 @@ module.exports = function (mongoose, q) {
             }
         });
         return deferred.promise;
-    } /*
+    }
+
+    function updateItem(itemId, service) {
+        var deferred = q.defer();
+
+        ServiceModel.update({_id:itemId},
+            {$set:service}
+            , function (err, service) {
+                if(err){
+                    deferred.reject(err);
+                }
+                else {
+                    deferred.resolve(service);
+                }
+            })
+        return deferred.promise;
+    }
+
+    /*
+
+
 
     function findServiceById(serviceId) {
         var deferred = q.defer();

@@ -20,6 +20,10 @@
                 });
         }
         init();
+
+        function updateItem(item) {
+
+        }
     }
 
     function SearchShoppingController($routeParams, ShoppingService, $scope) {
