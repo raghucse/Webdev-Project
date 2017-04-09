@@ -7,7 +7,8 @@ module.exports = function (mongoose, q) {
         addItemForUser: addItemForUser,
         findItemsByItemId: findItemsByItemId,
         updateItemQuantity: updateItemQuantity,
-        deleteItem:deleteItem,
+        deleteItem: deleteItem,
+        claimItem: claimItem,
    /*     findAllItemsForHost: findAllItemsForHost,*/
         findAllItemsForEvent: findAllItemsForEvent
     /*    findAllServicesForVendor: findAllServicesForVendor,
@@ -65,6 +66,23 @@ module.exports = function (mongoose, q) {
             { _id : id },
             {
                 quantity: quantity
+            }, function (err, item) {
+                if(err){
+                    deferred.reject(err);
+                }
+                else {
+                    deferred.resolve(item);
+                }
+            })
+        return deferred.promise;
+    }
+
+    function claimItem(id, guestId) {
+        var deferred = q.defer();
+        ShoppingModel.update(
+            { _id : id },
+            {
+                _guest: guestId
             }, function (err, item) {
                 if(err){
                     deferred.reject(err);
