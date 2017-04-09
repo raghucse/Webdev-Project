@@ -7,6 +7,7 @@ module.exports =  function(app, ShoppingModel) {
     app.get("/api/event/:eventId/shopping", findAllItemsForEvent);
     app.get("/api/host/:hostId/shopping/:itemId", findItemsByItemId);
     app.put("/api/shopping/:id/quantity/:quantity", updateItemQuantity);
+    app.delete("/api/shopping/delete/:id", deleteItem);
 
 
     /*   app.get("/api/service/:serviceId", findServiceById);
@@ -65,6 +66,17 @@ module.exports =  function(app, ShoppingModel) {
             }, function (err) {
                 res.sendStatus(500).send(err);
             })
+    }
+
+    function deleteItem(req, res) {
+        var id = req.params.id;
+        ShoppingModel.deleteItem(id)
+            .then(function (status) {
+                res.sendStatus(200);
+            }, function (err) {
+                res.sendStatus(500).send(err);
+            })
+
     }
 
   /*  function findServiceById(req, res) {
