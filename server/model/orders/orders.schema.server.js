@@ -10,7 +10,8 @@ module.exports = function (mongoose) {
         accepted: Boolean,
         date: String,
         quote: String,
-        capacity: String,
+        cost: Number,
+        platesrequested : Number,
         dateCreated: { type: Date, default: Date.now }
     }, {collection: 'myPartyPlanDB.order'});
 

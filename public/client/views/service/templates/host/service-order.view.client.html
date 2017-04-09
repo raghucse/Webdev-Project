@@ -49,8 +49,22 @@
         <p> {{model.service.address}} <p>
     </div>
 
+    <div class="container text-center">
+        <h4>Per Plate Cost</h4>
+        <p> {{model.service.perPlateCost}} <p>
+    </div>
+
+    <div class="form-group text-center">
+        <label for="numberOfPlates" class="form-control-label">Total Plates</label>
+        <input ng-model="model.platesrequested"
+               id="numberOfPlates"
+               class="form-control"
+               type="text"
+               placeholder="Per Plate Cost">
+    </div>
+
     <div class="text-center">
-        <a class="btn btn-success" ng-click="model.createOrder(model.service._id)">
+        <a class="btn btn-success" ng-click="model.createOrder(model.service._id, model.platesrequested)">
             Place Order
         </a>
     </div>

@@ -61,11 +61,16 @@
                 .then(function (service) {
                     console.log(vm.service);
                     vm.service = service.data;
-                    if(vm.service.type == 'food' || vm.service.type == 'place'){
-                        vm.palceOrFood = true;
+                    if(vm.service.type == 'place'){
+                        vm.place = true;
+                        vm.food = false;
+                        vm.flower = false;
                     }
-                    else {
-                        vm.palceOrFood = false;
+                    else if(vm.service.type == 'food'){
+                        vm.food = true;
+                    }
+                    else if(vm.service.type == 'flower'){
+                        vm.flower = true;
                     }
                 });
         }
@@ -89,11 +94,20 @@
         init();
 
         function dropChange() {
-            if(vm.service.type == 'food' || vm.service.type == 'place'){
-                vm.palceOrFood = true;
+            if(vm.service.type == 'place'){
+                vm.place = true;
+                vm.food = false;
+                vm.flower = false;
             }
-            else {
-                vm.palceOrFood = false;
+            else if(vm.service.type == 'food'){
+                vm.place = false;
+                vm.food = true;
+                vm.flower = false;
+            }
+            else if(vm.service.type == 'flower'){
+                vm.place = false;
+                vm.food = false;
+                vm.flower = true;
             }
         }
 
