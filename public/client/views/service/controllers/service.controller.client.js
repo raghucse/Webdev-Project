@@ -31,7 +31,6 @@
                     }
                     vm.orders = myOrders;
                     vm.currOrders = myCurrOrders;
-                    console.log(vm.orders);
                 });
             ServiceService
                 .findAllServicesForVendor(vm.vendorId)

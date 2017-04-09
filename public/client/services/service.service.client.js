@@ -13,7 +13,7 @@
             "updateService": updateService,
             "deleteService": deleteService,
             "findAllServicesForVendor": findAllServicesForVendor,
-            "updatePage": updatePage
+            "updateOrder": updateOrder
         };
         return api;
 
@@ -37,8 +37,8 @@
             return $http.delete("/api/service/"+serviceId);
         }
 
-        function updatePage(serviceId, pageId) {
-            return $http.put("/api/service/"+serviceId+"/page/"+pageId);
+        function updateOrder(serviceId, orderId) {
+            return $http.put("/api/service/"+serviceId+"/order/"+orderId);
         }
     }
 

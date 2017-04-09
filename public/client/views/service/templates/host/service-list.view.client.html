@@ -15,62 +15,122 @@
 
 
 <div class="container-fluid">
-    <ul class="list-group">
-        <div ng-repeat="service in model.services">
-            <li class="list-group-item">
-                <a href="#/vendor/{{model.vendorId}}/service/{{service._id}}/view">
-                    {{service.name}}
-                </a>
-                <a href="#/vendor/{{model.vendorId}}/service/{{service._id}}" class="pull-right">
-              <span class="glyphicon glyphicon-cog">
-              </span>
-                </a>
-            </li>
-        </div>
+
+    <h3 class="text-center">Services</h3>
+    <ul class="nav nav-tabs">
+        <li class="active">
+            <a data-toggle="tab" href="#myservices" target="_self">
+                My Services
+            </a>
+        </li>
+        <li>
+            <a data-toggle="tab" href="#reqServices" target="_self">
+                Requested Services
+            </a>
+        </li>
+        <li>
+            <a data-toggle="tab" href="#newServices" target="_self">
+                Add Services
+            </a>
+        </li>
     </ul>
-</div>
 
-<div class="container-fluid">
-
-    
-    <label for="event-vendor">Enter Vendor name</label>
-    <input class="form-control"
-           ng-model="model.vendor"
-           id="event-vendor"
-           type="text"/>
-
-    <label for="service-type">Select Service Type</label>
-    <select class="form-control" ng-model="model.service.type"
-            id="service-type">
-        <option value="flower">Flower Service</option>
-        <option value="food">Food Service</option>
-        <option value="place">Place Service</option>
-    </select>
-
-
-    <a class="btn btn-danger btn-block" ng-click="model.findService(model.vendor, model.service.type)">
-        Find Vendor
-    </a>
-
-
-    <ul class="list-group">
-        <div ng-repeat="vendor in model.vendors">
-            <li class="list-group-item">
-                <a href="#/vendor/{{model.vendorId}}/services">
-                    {{vendor.name}}
-                </a>
-                <ul class="list-group">
-                    <div ng-repeat="vendorservice in vendor.services track by $index">
-                        <li class="list-group-item">
-                            <a href="#/host/{{model.hostID}}/event/{{model.eventID}}/services/{{vendorservice._id}}">
-                                {{vendorservice.name}}
+    <div class="tab-content">
+        <div id="myservices" class="tab-pane fade in active">
+            <ul class="list-group">
+                <div ng-repeat="service in model.services track by $index">
+                    <li class="list-group-item">
+                        <a href="#/vendor/{{model.vendorId}}/service/{{service._id}}/view">
+                            {{service}}
+                        </a>
+                        <a href="#/vendor/{{model.vendorId}}/service/{{service._id}}" class="pull-right">
+                            <span class="glyphicon glyphicon-cog">
+                            </span>
+                        </a>
+                    </li>
+                </div>
+            </ul>
+        </div>
+        <div id="reqServices" class="tab-pane fade">
+            <ul class="list-group">
+                <div ng-repeat="service in model.reqServices">
+                    <li class="list-group-item">
+                        <div class="row">
+                            <a href="#{{service._id}}1" data-toggle="collapse" target="_self">
+                                Order Id : {{service._id}}
                             </a>
-                        </li>
-                    </div>
-                </ul>
-            </li>
+                            <div id="{{service._id}}1" class="collapse">
+                                <div class="panel panel-default">
+                                    <div class="panel-heading" ng-model="model.orderID">Service Id : {{service._id}}</div>
+                                    <table class="table">
+                                        <thead>
+                                        <tr>
+                                            <th>Vendor</th>
+                                            <th>Event Capacity</th>
+                                            <th>Service Type</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <tr>
+                                            <td>{{service._vendor}}</td>
+                                            <td>{{service.capacity}}</td>
+                                            <td>{{service.type}}</td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <button class="btn btn-danger">Cancel Service</button>
+                            </div>
+
+                        </div>
+                    </li>
+                </div>
+            </ul>
+
         </div>
-    </ul>
+        <div id="newServices" class="tab-pane fade">
+            <label for="event-vendor">Enter Vendor name</label>
+            <input class="form-control"
+                   ng-model="model.vendor"
+                   id="event-vendor"
+                   type="text"/>
+
+            <label for="service-type">Select Service Type</label>
+            <select class="form-control" ng-model="model.service.type"
+                    id="service-type">
+                <option value="flower">Flower Service</option>
+                <option value="food">Food Service</option>
+                <option value="place">Place Service</option>
+            </select>
+
+
+            <a class="btn btn-danger btn-block" ng-click="model.findService(model.vendor, model.service.type)">
+                Find Vendor
+            </a>
+        </div>
+        <ul class="list-group">
+            <div ng-repeat="vendor in model.vendors">
+                <li class="list-group-item">
+                    <a href="#/vendor/{{model.vendorId}}/services">
+                        {{vendor.name}}
+                    </a>
+                    <ul class="list-group">
+                        <div ng-repeat="vendorservice in vendor.services track by $index">
+                            <li class="list-group-item">
+                                <a href="#/host/{{model.hostID}}/event/{{model.eventID}}/services/{{vendorservice._id}}">
+                                    {{vendorservice.name}}
+                                </a>
+                            </li>
+                        </div>
+                    </ul>
+                </li>
+            </div>
+        </ul>
+    </div>
+
+
+
+
 
 
 
