@@ -24,8 +24,13 @@
             </a>
         </li>
         <li>
-            <a data-toggle="tab" href="#reqServices" target="_self">
-                Requested Services
+            <a data-toggle="tab" href="#conOrders" target="_self">
+                Confirmed Orders
+            </a>
+        </li>
+        <li>
+            <a data-toggle="tab" href="#penOrders" target="_self">
+                Pending Orders
             </a>
         </li>
         <li>
@@ -51,15 +56,53 @@
                 </div>
             </ul>
         </div>
-        <div id="reqServices" class="tab-pane fade">
+        <div id="conOrders" class="tab-pane fade">
             <ul class="list-group">
-                <div ng-repeat="service in model.reqServices">
+                <div ng-repeat="service in model.conOrders">
                     <li class="list-group-item">
                         <div class="row">
                             <a href="#{{service._id}}1" data-toggle="collapse" target="_self">
                                 Order Id : {{service._id}}
                             </a>
                             <div id="{{service._id}}1" class="collapse">
+                                <div class="panel panel-default">
+                                    <div class="panel-heading" ng-model="model.orderID">Service Id : {{service._id}}</div>
+                                    <table class="table">
+                                        <thead>
+                                        <tr>
+                                            <th>Vendor</th>
+                                            <th>Event Capacity</th>
+                                            <th>Service Type</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <tr>
+                                            <td>{{service._vendor}}</td>
+                                            <td>{{service.capacity}}</td>
+                                            <td>{{service.type}}</td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <button class="btn btn-danger">Cancel Service</button>
+                            </div>
+
+                        </div>
+                    </li>
+                </div>
+            </ul>
+
+        </div>
+
+        <div id="penOrders" class="tab-pane fade">
+            <ul class="list-group">
+                <div ng-repeat="service in model.penOrders">
+                    <li class="list-group-item">
+                        <div class="row">
+                            <a href="#{{service._id}}2" data-toggle="collapse" target="_self">
+                                Order Id : {{service._id}}
+                            </a>
+                            <div id="{{service._id}}2" class="collapse">
                                 <div class="panel panel-default">
                                     <div class="panel-heading" ng-model="model.orderID">Service Id : {{service._id}}</div>
                                     <table class="table">

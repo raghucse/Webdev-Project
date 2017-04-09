@@ -36,19 +36,19 @@
                         OrderService
                             .findAllOrdersForService(serviceid)
                             .success(function (orders) {
-                                var myOrders = [];
-                                var myCurrOrders = [];
+                                var myPenOrders = [];
+                                var myConOrders = [];
                                 var orderlist = orders;
                                 for(var i = 0; i < orderlist.length ; i++){
                                     if(!orderlist[i].accepted){
-                                        myOrders.push(orderlist[i]);
+                                        myPenOrders.push(orderlist[i]);
                                     }
                                     else{
-                                        myCurrOrders.push(orderlist[i]);
+                                        myConOrders.push(orderlist[i]);
                                     }
                                 }
-                                vm.orders = myOrders;
-                                vm.reqServices = myCurrOrders;
+                                vm.penOrders = myPenOrders;
+                                vm.conOrders = myConOrders;
 
                             });
                     }
