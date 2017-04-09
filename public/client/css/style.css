@@ -165,3 +165,7 @@ a:hover{text-decoration: none;}
 .rollovericons a{
     margin: 10px;
 }
+
+.list-group-item {
+    border-width: 0px 0;
+}
