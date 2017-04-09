@@ -77,34 +77,45 @@
         init();
 
         function claimItem(item) {
-            ShoppingService
-                .claimItem(vm.guestId,item._id)
-                .then(function (item) {
-                    item = item.data;
-                     if(item._guest == vm.guestId) {
-                       /*  vm.claimedItems = [];
-                         vm.unClaimedItems = [];
-                         init();
-                         $scope.$apply();*/
 
-                         var index = 0;
-                         for(index = 0; index < vm.unClaimedItems.length ; index++ ){
-                             if(vm.unClaimedItems[index].itemId == item.itemId){
-                                 break;
-                             }
-                         }
-                         vm.unClaimedItems.splice(index, 1);
-                         vm.claimedItems.push(item);
-                         vm.claimSuccess = "Item claimed successfully";
-                     }
-                     else {
-                         console.log(item._guest);
-                         vm.claimError = "Item could not be claimed";
-                     }
-                }, function (err) {
-                    console.log(err);
-                    vm.claimError = "Item could not be claimed";
+            ShoppingService.findItemById(item._id)
+                .then(function (dItem) {
+                    dItem = dItem.data;
+                    if(!dItem._guest){
+                        ShoppingService
+                            .claimItem(vm.guestId,item._id)
+                            .then(function (item) {
+                                item = item.data;
+                                if(item._guest == vm.guestId) {
+                                    /*  vm.claimedItems = [];
+                                     vm.unClaimedItems = [];
+                                     init();
+                                     $scope.$apply();*/
+
+                                    var index = 0;
+                                    for(index = 0; index < vm.unClaimedItems.length ; index++ ){
+                                        if(vm.unClaimedItems[index].itemId == item.itemId){
+                                            break;
+                                        }
+                                    }
+                                    vm.unClaimedItems.splice(index, 1);
+                                    vm.claimedItems.push(item);
+                                    vm.claimSuccess = "Item claimed successfully";
+                                }
+                                else {
+                                    vm.claimError = "Item could not be claimed";
+                                }
+                            }, function (err) {
+                                vm.claimError = "Item could not be claimed";
+                            })
+                    }
+                    else {
+                        init();
+                        vm.claimErrorOther = "Item already claimed by other guest";
+                    }
                 })
+
+
         }
 
         function unclaimItem(item) {
@@ -149,7 +160,8 @@
             vm.unClaimSuccess = undefined;
             vm.unClaimError = undefined;
             vm.claimSuccess = undefined;
-            vm.claimError = undefined
+            vm.claimError = undefined;
+            vm.claimErrorOther = undefined;
         }
 
     }

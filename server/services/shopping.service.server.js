@@ -9,6 +9,9 @@ module.exports =  function(app, ShoppingModel) {
     app.put("/api/shopping/:id/quantity/:quantity", updateItemQuantity);
     app.delete("/api/shopping/delete/:id", deleteItem);
     app.put("/api/guest/:guestId/shopping/:id", claimItem);
+    app.get("/api/shopping/:id", findItemById);
+
+
 
 
     /*   app.get("/api/service/:serviceId", findServiceById);
@@ -34,8 +37,6 @@ module.exports =  function(app, ShoppingModel) {
             })
 
     }
-
-
 
     function findAllItemsForEvent(req, res) {
         var eventId = req.params.eventId;
@@ -96,49 +97,60 @@ module.exports =  function(app, ShoppingModel) {
 
     }
 
-  /*  function findServiceById(req, res) {
-        var serviceId = req.params.serviceId;
-        ServiceModel.findServiceById(serviceId)
-            .then(function (service) {
-                res.json(service);
+    function findItemById(req, res) {
+        var id = req.params.id;
+        ShoppingModel.findItemById(id)
+            .then(function (item) {
+                res.json(item);
             }, function (err) {
                 res.sendStatus(500).send(err);
             })
     }
 
-    function updateService(req, res) {
-        var serviceId = req.params.serviceId;
-        var service = req.body;
-        ServiceModel.updateService(serviceId, service)
-            .then(function (service) {
-                res.json(service);
-            }, function (err) {
-                res.sendStatus(500).send(err);
-            })
 
-    }
+    /*  function findItemById(req, res) {
+          var serviceId = req.params.serviceId;
+          ServiceModel.findServiceById(serviceId)
+              .then(function (service) {
+                  res.json(service);
+              }, function (err) {
+                  res.sendStatus(500).send(err);
+              })
+      }
 
-    function deleteService(req, res) {
-        var serviceId = req.params.serviceId;
-        ServiceModel.deleteService(serviceId)
-            .then(function (status) {
-                res.sendStatus(200);
-            }, function (err) {
-                res.sendStatus(500).send(err);
-            })
+      function updateService(req, res) {
+          var serviceId = req.params.serviceId;
+          var service = req.body;
+          ServiceModel.updateService(serviceId, service)
+              .then(function (service) {
+                  res.json(service);
+              }, function (err) {
+                  res.sendStatus(500).send(err);
+              })
 
-    }
+      }
 
-    function updatePage(req, res) {
-        var serviceId = req.params.serviceId;
-        var pageId = req.params.pageId;
+      function deleteService(req, res) {
+          var serviceId = req.params.serviceId;
+          ServiceModel.deleteService(serviceId)
+              .then(function (status) {
+                  res.sendStatus(200);
+              }, function (err) {
+                  res.sendStatus(500).send(err);
+              })
 
-        ServiceModel.updatePage(serviceId, pageId)
-            .then(function (service) {
-                res.send(200);
-            }, function (err) {
-                res.sendStatus(500).send(err);
-            })
-    }*/
+      }
+
+      function updatePage(req, res) {
+          var serviceId = req.params.serviceId;
+          var pageId = req.params.pageId;
+
+          ServiceModel.updatePage(serviceId, pageId)
+              .then(function (service) {
+                  res.send(200);
+              }, function (err) {
+                  res.sendStatus(500).send(err);
+              })
+      }*/
 }
 

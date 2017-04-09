@@ -9,10 +9,6 @@
         <a class="navbar-brand" href="#/vendor/{{model.vendorId}}/service">
             <label>Shopping List</label>
         </a>
-        <a class="navbar-brand pull-right" href="#/host/{{model.userId}}/shopping/search">
-            <span class="glyphicon glyphicon-search pull-right "></span>
-        </a>
-
     </div>
 </nav>
 
@@ -23,6 +19,11 @@
 <div ng-show="model.claimSuccess" class="alert alert-success">
     {{model.claimSuccess}}
 </div>
+
+<div ng-show="model.claimErrorOther" class="alert alert-danger">
+    {{model.claimErrorOther}}
+</div>
+
 
 <div ng-show="model.unClaimError" class="alert alert-danger">
     {{model.unClaimError}}
