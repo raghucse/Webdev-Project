@@ -93,14 +93,11 @@ module.exports = function (mongoose, q) {
 
     function findItemsByItemId(itemId, hostId) {
         var deferred = q.defer();
-        console.log(itemId);
-        console.log(hostId);
         ShoppingModel.find({$and: [{itemId: itemId}, {_host: hostId}]}, function (err, item) {
             if(err){
                 deferred.reject(err);
             }
             else {
-                console.log(item);
                 deferred.resolve(item[0]);
             }
         });
