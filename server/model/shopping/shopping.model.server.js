@@ -6,6 +6,7 @@ module.exports = function (mongoose, q) {
     var api = {
         addItemForUser: addItemForUser,
         findItemsByItemId: findItemsByItemId,
+        updateItemQuantity: updateItemQuantity,
    /*     findAllItemsForHost: findAllItemsForHost,*/
         findAllItemsForEvent: findAllItemsForEvent
     /*    findAllServicesForVendor: findAllServicesForVendor,
@@ -54,6 +55,23 @@ module.exports = function (mongoose, q) {
                 deferred.resolve(items);
             }
         });
+        return deferred.promise;
+    }
+
+    function updateItemQuantity(id, quantity) {
+        var deferred = q.defer();
+        ShoppingModel.update(
+            { _id : id },
+            {
+                quantity: quantity
+            }, function (err, item) {
+                if(err){
+                    deferred.reject(err);
+                }
+                else {
+                    deferred.resolve(item);
+                }
+            })
         return deferred.promise;
     }
 

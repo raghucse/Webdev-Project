@@ -12,6 +12,7 @@
     /*        "findAllItemsForHost": findAllItemsForHost,*/
             "findAllItemsForEvent": findAllItemsForEvent,
             "findItemsByItemId": findItemsByItemId,
+            "updateItemQuantity": updateItemQuantity,
   /*          "findServiceById": findServiceById,
             "updateService": updateService,
             "deleteService": deleteService,
@@ -50,6 +51,12 @@
 
         function findItemsByItemId(itemId) {
             return $http.get("/api/shopping/"+itemId);
+        }
+
+        function updateItemQuantity(id, quantity) {
+            console.log(id);
+            console.log(quantity);
+            return $http.put("/api/shopping/"+id+"/quantity/"+quantity);
         }
 
         /*
