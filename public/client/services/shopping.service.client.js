@@ -13,6 +13,7 @@
             "findAllItemsForEvent": findAllItemsForEvent,
             "findItemsByItemId": findItemsByItemId,
             "updateItemQuantity": updateItemQuantity,
+            "deleteItem": deleteItem,
   /*          "findServiceById": findServiceById,
             "updateService": updateService,
             "deleteService": deleteService,
@@ -55,6 +56,10 @@
 
         function updateItemQuantity(id, quantity) {
             return $http.put("/api/shopping/"+id+"/quantity/"+quantity);
+        }
+
+        function deleteItem(id) {
+            return $http.delete("/api/shopping/delete/"+id);
         }
 
         /*

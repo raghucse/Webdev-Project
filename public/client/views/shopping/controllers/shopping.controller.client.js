@@ -13,6 +13,7 @@
         vm.hostId = $routeParams["hid"];
         vm.eventId = $routeParams["eid"];
         vm.updateItem = updateItem;
+        vm.deleteItem = deleteItem;
 
         function init() {
             ShoppingService
@@ -29,6 +30,17 @@
                     vm.addSucces = "Item updated successfully";
                 },function (err) {
                     vm.addError = "Error while updating item";
+                })
+        }
+
+        function deleteItem(item) {
+            ShoppingService.deleteItem(item._id)
+                .then(function (status) {
+                    var index = vm.items.indexOf(item);
+                    vm.items.splice(index,1);
+                    vm.deleteSucces = "Item deleted from the list";
+                },function (err) {
+                    vm.deleteError = "Unable to delete item from list";
                 })
         }
     }

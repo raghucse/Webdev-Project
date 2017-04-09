@@ -24,6 +24,14 @@
     {{model.addSucces}}
 </div>
 
+<div ng-show="model.deleteError" class="alert alert-danger">
+    {{model.deleteError}}
+</div>
+
+<div ng-show="model.deleteSucces" class="alert alert-success">
+    {{model.deleteSucces}}
+</div>
+
 <div class="container-fluid borderless">
     <ul class="list-group borderless">
         <div ng-repeat="iteminfo in model.items">
@@ -51,6 +59,9 @@
                             <a type="button" href={{iteminfo.item.productUrl}} target="_blank" class="btn btn-success btn-md">
                                 <span class="glyphicon glyphicon-shopping-cart" ></span>
                             </a>
+                            <button type="button" ng-click="model.deleteItem(iteminfo)" class="btn btn-danger btn-md">
+                                Remove
+                            </button>
                         </div>
                     </div>
                 </div>
