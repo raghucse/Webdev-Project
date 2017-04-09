@@ -74,7 +74,12 @@ module.exports =  function(app, ShoppingModel) {
         var guestId = req.params.guestId;
         ShoppingModel.claimItem(id, guestId)
             .then(function (item) {
-                res.json(item);
+                ShoppingModel.findItemById(id)
+                    .then(function (item) {
+                        res.json(item);
+                    }, function (err) {
+                        res.sendStatus(500).send(err);
+                    })
             }, function (err) {
                 res.sendStatus(500).send(err);
             })
