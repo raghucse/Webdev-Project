@@ -11,6 +11,9 @@
             "addItem": addItem,
     /*        "findAllItemsForHost": findAllItemsForHost,*/
             "findAllItemsForEvent": findAllItemsForEvent,
+            "findItemsByItemId": findItemsByItemId,
+            "updateItemQuantity": updateItemQuantity,
+            "deleteItem": deleteItem,
   /*          "findServiceById": findServiceById,
             "updateService": updateService,
             "deleteService": deleteService,
@@ -45,6 +48,18 @@
 
         function findAllItemsForEvent(eventId) {
             return $http.get("/api/event/"+eventId+"/shopping");
+        }
+
+        function findItemsByItemId(itemId, hostId) {
+            return $http.get("/api/host/"+hostId+"/shopping/"+itemId);
+        }
+
+        function updateItemQuantity(id, quantity) {
+            return $http.put("/api/shopping/"+id+"/quantity/"+quantity);
+        }
+
+        function deleteItem(id) {
+            return $http.delete("/api/shopping/delete/"+id);
         }
 
         /*

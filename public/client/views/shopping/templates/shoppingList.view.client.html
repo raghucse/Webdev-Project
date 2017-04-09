@@ -16,6 +16,22 @@
     </div>
 </nav>
 
+<div ng-show="model.addError" class="alert alert-danger">
+    {{model.addError}}
+</div>
+
+<div ng-show="model.addSucces" class="alert alert-success">
+    {{model.addSucces}}
+</div>
+
+<div ng-show="model.deleteError" class="alert alert-danger">
+    {{model.deleteError}}
+</div>
+
+<div ng-show="model.deleteSucces" class="alert alert-success">
+    {{model.deleteSucces}}
+</div>
+
 <div class="container-fluid borderless">
     <ul class="list-group borderless">
         <div ng-repeat="iteminfo in model.items">
@@ -34,15 +50,18 @@
                         </div>
                         <div class="col-xs-4">
                             <label for="Quantity">quantity</label>
-                            <input id="Quantity" type="text" class="form-control input-sm" ng-model="iteminfo.item.quantity" value="1">
+                            <input id="Quantity" type="text" class="form-control input-sm" ng-model="iteminfo.quantity" value="1">
                         </div>
                         <div class="col-xs-2 rollovericons">
-                            <button type="button" ng-click="model.updateItem(item)" class="btn btn-primary btn-md">
+                            <button type="button" ng-click="model.updateItem(iteminfo)" class="btn btn-primary btn-md">
                                 Update
                             </button>
                             <a type="button" href={{iteminfo.item.productUrl}} target="_blank" class="btn btn-success btn-md">
                                 <span class="glyphicon glyphicon-shopping-cart" ></span>
                             </a>
+                            <button type="button" ng-click="model.deleteItem(iteminfo)" class="btn btn-danger btn-md">
+                                Remove
+                            </button>
                         </div>
                     </div>
                 </div>

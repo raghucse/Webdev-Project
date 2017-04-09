@@ -12,6 +12,8 @@
         var vm = this;
         vm.hostId = $routeParams["hid"];
         vm.eventId = $routeParams["eid"];
+        vm.updateItem = updateItem;
+        vm.deleteItem = deleteItem;
 
         function init() {
             ShoppingService
@@ -23,7 +25,23 @@
         init();
 
         function updateItem(item) {
+            ShoppingService.updateItemQuantity(item._id, item.quantity)
+                .then(function (item) {
+                    vm.addSucces = "Item updated successfully";
+                },function (err) {
+                    vm.addError = "Error while updating item";
+                })
+        }
 
+        function deleteItem(item) {
+            ShoppingService.deleteItem(item._id)
+                .then(function (status) {
+                    var index = vm.items.indexOf(item);
+                    vm.items.splice(index,1);
+                    vm.deleteSucces = "Item deleted from the list";
+                },function (err) {
+                    vm.deleteError = "Unable to delete item from list";
+                })
         }
     }
 
@@ -48,7 +66,6 @@
         vm.searchItems = searchItems;
         vm.addItem = addItem;
 
-        console.log(vm.hostId);
         function init() {
         }
         init();
@@ -62,10 +79,30 @@
 
         function addItem(item) {
             item.added = true;
-            ShoppingService.addItem(vm.hostId, item, vm.eventId).then(function (data) {
-                item.added = true;
-                //$scope.$apply();
-            });
+
+            ShoppingService.findItemsByItemId(item.itemId, vm.hostId)
+                .then(function (data) {
+                    var itemFromDb = data.data;
+                    if(itemFromDb){
+                        var newQuantity = itemFromDb.quantity + parseInt(item.quantity);
+                        ShoppingService.updateItemQuantity(itemFromDb._id, newQuantity)
+                            .then(function (item) {
+                                vm.addSucces = "Item added successfully";
+                            },function (err) {
+                                vm.addError = "Error while adding item";
+                            })
+                    }
+                    else
+                    {
+                        ShoppingService.addItem(vm.hostId, item, vm.eventId).then(function (data) {
+                            vm.addSucces = "Item added successfully";
+                        },function (err) {
+                            vm.addError = "Error while adding item";
+                        });
+                    }
+                });
+
+
 
 
         }
