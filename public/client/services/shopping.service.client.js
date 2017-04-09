@@ -9,7 +9,8 @@
     function ShoppingService($http) {
         var api = {
             "addItem": addItem,
-            "findAllItemsForuser": findAllItemsForuser,
+    /*        "findAllItemsForHost": findAllItemsForHost,*/
+            "findAllItemsForEvent": findAllItemsForEvent,
   /*          "findServiceById": findServiceById,
             "updateService": updateService,
             "deleteService": deleteService,
@@ -34,14 +35,19 @@
             });
         }
 
-        function addItem(userId, item) {
-            return $http.post("/api/host/"+userId+"/shopping/add", item);
+        function addItem(hostId, item, eventId) {
+            return $http.post("/api/host/"+hostId+"/event/"+eventId+"/shopping/add", item);
         }
 
-        function findAllItemsForuser(userId) {
-            console.log(userId);
-            return $http.get("/api/host/"+userId+"/service");
-        } /*
+     /*   function findAllItemsForHost(hostId) {
+            return $http.get("/api/host/"+hostId+"/shopping");
+        }*/
+
+        function findAllItemsForEvent(eventId) {
+            return $http.get("/api/event/"+eventId+"/shopping");
+        }
+
+        /*
 
         function findServiceById(serviceId) {
             return $http.get("/api/service/"+serviceId);
