@@ -66,14 +66,27 @@
 
             ShoppingService.findItemsByItemId(item.itemId)
                 .then(function (data) {
-                    var item = data.data;
-                    console.log(item);
+                    var itemFromDb = data.data;
+                    if(itemFromDb){
+                        var newQuantity = itemFromDb.quantity + parseInt(item.quantity);
+                        ShoppingService.updateItemQuantity(itemFromDb._id, newQuantity)
+                            .then(function (item) {
+                                vm.addSucces = "Item added successfully";
+                            },function (err) {
+                                vm.addError = "Error while adding item";
+                            })
+                    }
+                    else
+                    {
+                        ShoppingService.addItem(vm.hostId, item, vm.eventId).then(function (data) {
+                            vm.addSucces = "Item added successfully";
+                        },function (err) {
+                            vm.addError = "Error while adding item";
+                        });
+                    }
                 });
 
-            ShoppingService.addItem(vm.hostId, item, vm.eventId).then(function (data) {
-                item.added = true;
-                //$scope.$apply();
-            });
+
 
 
         }
