@@ -11,6 +11,7 @@
             "addItem": addItem,
     /*        "findAllItemsForHost": findAllItemsForHost,*/
             "findAllItemsForEvent": findAllItemsForEvent,
+            "findItemsByItemId": findItemsByItemId,
   /*          "findServiceById": findServiceById,
             "updateService": updateService,
             "deleteService": deleteService,
@@ -45,6 +46,10 @@
 
         function findAllItemsForEvent(eventId) {
             return $http.get("/api/event/"+eventId+"/shopping");
+        }
+
+        function findItemsByItemId(itemId) {
+            return $http.get("/api/shopping/"+itemId);
         }
 
         /*

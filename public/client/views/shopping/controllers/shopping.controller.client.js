@@ -62,6 +62,14 @@
 
         function addItem(item) {
             item.added = true;
+
+
+            ShoppingService.findItemsByItemId(item.itemId)
+                .then(function (data) {
+                    var item = data.data;
+                    console.log(item);
+                });
+
             ShoppingService.addItem(vm.hostId, item, vm.eventId).then(function (data) {
                 item.added = true;
                 //$scope.$apply();

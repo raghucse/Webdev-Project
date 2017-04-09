@@ -5,6 +5,7 @@ module.exports = function (mongoose, q) {
 
     var api = {
         addItemForUser: addItemForUser,
+        findItemsByItemId: findItemsByItemId,
    /*     findAllItemsForHost: findAllItemsForHost,*/
         findAllItemsForEvent: findAllItemsForEvent
     /*    findAllServicesForVendor: findAllServicesForVendor,
@@ -69,6 +70,20 @@ module.exports = function (mongoose, q) {
                     deferred.resolve(service);
                 }
             })
+        return deferred.promise;
+    }
+
+    function findItemsByItemId(itemId) {
+        var deferred = q.defer();
+
+        ShoppingModel.find({itemId: itemId}, function (err, item) {
+            if(err){
+                deferred.reject(err);
+            }
+            else {
+                deferred.resolve(item[0]);
+            }
+        });
         return deferred.promise;
     }
 
