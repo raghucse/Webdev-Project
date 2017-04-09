@@ -16,6 +16,14 @@
     </div>
 </nav>
 
+<div ng-show="model.claimError" class="alert alert-danger">
+    {{model.claimError}}
+</div>
+
+<div ng-show="model.claimSuccess" class="alert alert-success">
+    {{model.claimSuccess}}
+</div>
+
 <div class="container-fluid borderless">
     <ul class="list-group borderless">
         <div ng-repeat="iteminfo in model.items">
@@ -37,9 +45,20 @@
                             <input id="Quantity" type="text" class="form-control input-sm" ng-model="iteminfo.item.quantity" value="1">
                         </div>
                         <div class="col-xs-2 rollovericons">
-                            <button type="button" ng-click="model.getItem(item)" class="btn btn-primary btn-md">
-                                Get Item
+                            <button ng-if="!iteminfo._guest" type="button" ng-click="model.claimItem(iteminfo)" class="btn btn-primary btn-md">
+                                Claim Item
                             </button>
+
+                         <span ng-if="iteminfo._guest">
+                            <div ng-if="model.checkGuest(iteminfo._guest)">
+                                Item claimed by you
+                            </div>
+
+                            <div ng-if="!model.checkGuest(iteminfo._guest)">
+                                Item claimed by other guest
+                            </div>
+                         </span>
+
                         </div>
                     </div>
                 </div>
