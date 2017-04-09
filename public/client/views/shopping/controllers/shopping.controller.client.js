@@ -52,6 +52,7 @@
         vm.checkGuest = checkGuest;
         vm.claimItem = claimItem;
         vm.unclaimItem = unclaimItem;
+        vm.intializeMessages = intializeMessages;
         vm.claimedItems = [];
         vm.unClaimedItems = [];
         vm.items = [];
@@ -79,7 +80,13 @@
                 .then(function (item) {
                     item = item.data;
                      if(item._guest == vm.guestId) {
-                         var index = vm.unClaimedItems.indexOf(item);
+                         var index = 0;
+
+                         for(index = 0; index < vm.unClaimedItems.length ; index++ ){
+                             if(vm.unClaimedItems[index].itemId == item.itemId){
+                                 break;
+                             }
+                         }
                          vm.unClaimedItems.splice(index, 1);
                          vm.claimedItems.push(item);
                          vm.claimSuccess = "Item claimed successfully";
@@ -101,7 +108,14 @@
                     item = item.data;
                     console.log(item);
                     if(!item._guest) {
-                        var index = vm.claimedItems.indexOf(item);
+                        var index = 0;
+
+                        for(index = 0; index < vm.claimedItems.length ; index++ ){
+                            if(vm.claimedItems[index].itemId == item.itemId){
+                                break;
+                            }
+                        }
+
                         vm.claimedItems.splice(index, 1);
                         vm.unClaimedItems.push(item);
                         vm.unClaimSuccess = "Item unclaimed successfully";
@@ -117,6 +131,13 @@
                 console.log("cheked");
                 return true;
             }
+        }
+
+        function intializeMessages() {
+            vm.unClaimSuccess = undefined;
+            vm.unClaimError = undefined;
+            vm.claimSuccess = undefined;
+            vm.claimError = undefined
         }
 
     }
