@@ -20,33 +20,91 @@
 
 <div class="container-fluid">
 
-    <ul class="list-group">
-        <div ng-repeat="order in model.orders">
-            <li class="list-group-item">
-                <a href="#/vendor/{{model.vendorId}}/service/{{order._id}}/view">
-                    {{order.user}}
-                </a>
-                <a href="#/vendor/{{model.vendorId}}/service/{{order._id}}" class="pull-right">
-                    <span class="glyphicon glyphicon-cog">
-              </span>
-                </a>
-            </li>
-        </div>
+    <h3 class="text-center">Services</h3>
+    <ul class="nav nav-tabs">
+        <li class="active">
+            <a data-toggle="tab" href="#myservices" target="_self">
+                My Services
+            </a>
+        </li>
+        <li>
+            <a data-toggle="tab" href="#currOrders" target="_self">
+                Current Orders
+            </a>
+        </li>
+        <li>
+            <a data-toggle="tab" href="#newOrders" target="_self">
+                New Orders
+            </a>
+        </li>
     </ul>
 
-    <ul class="list-group">
-        <div ng-repeat="service in model.services">
-            <li class="list-group-item">
-                <a href="#/vendor/{{model.vendorId}}/service/{{service._id}}/view">
-                    {{service.name}}
-                </a>
-                <a href="#/vendor/{{model.vendorId}}/service/{{service._id}}" class="pull-right">
-                    <span class="glyphicon glyphicon-cog">
-              </span>
-                </a>
-            </li>
+    <div class="tab-content">
+        <div id="myservices" class="tab-pane fade in active">
+            <ul class="list-group">
+                <div ng-repeat="service in model.services">
+                    <li class="list-group-item">
+                        <a href="#/vendor/{{model.vendorId}}/service/{{service._id}}/view">
+                            {{service.name}}
+                        </a>
+                        <a href="#/vendor/{{model.vendorId}}/service/{{service._id}}" class="pull-right">
+                            <span class="glyphicon glyphicon-cog">
+                            </span>
+                        </a>
+                    </li>
+                </div>
+            </ul>
         </div>
-    </ul>
+        <div id="currOrders" class="tab-pane fade">
+            <h2>You have no current orders</h2>
+
+        </div>
+        <div id="newOrders" class="tab-pane fade">
+            <ul class="list-group">
+                <div ng-repeat="order in model.orders">
+                    <li class="list-group-item">
+                        <div class="row">
+                            <a href="#{{order._id}}" data-toggle="collapse" target="_self">
+                                Order Id : {{order._id}}
+                            </a>
+                            <div id="{{order._id}}" class="collapse">
+                                <div class="panel panel-default">
+                                    <div class="panel-heading">Order Id : {{order._id}}</div>
+
+                                    <table class="table">
+                                        <thead>
+                                        <tr>
+                                            <th>Host</th>
+                                            <th>Event Capacity</th>
+                                            <th>Event Date</th>
+                                            <th>Service</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <tr>
+                                            <td>{{order.user}}</td>
+                                            <td>{{order.capacity}}</td>
+                                            <td>{{order.date}}</td>
+                                            <td>{{order.service}}</td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <button class="btn btn-success">Accept Order</button>
+
+                                <button class="btn btn-danger">Reject Order</button>
+                            </div>
+
+                        </div>
+                    </li>
+                </div>
+            </ul>
+        </div>
+    </div>
+
+
+
+
 </div>
 
 <div class="bottom-padding"></div>

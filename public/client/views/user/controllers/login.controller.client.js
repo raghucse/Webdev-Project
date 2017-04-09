@@ -20,10 +20,10 @@
                 .login(user)
                 .then(function (response) {
                 if(response){
-                    user = response.data;
-                    if(user[0]){
-                        $rootScope.currentUser = user[0];
-                        $location.url("/host/" + user[0]._id + "/event");
+                    var user1 = response.data;
+                    if(user1[0]){
+                        $rootScope.currentUser = user1[0];
+                        $location.url("/host/" + user1[0]._id + "/event");
                     }
                     else{
                         vm.error = "User not found";

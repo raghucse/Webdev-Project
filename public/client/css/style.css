@@ -162,6 +162,9 @@ a:hover{text-decoration: none;}
     font-size: 23px;
 }
 
+.nav-tabs li a {
+    color: #777;
+}
 .rollovericons a{
     margin: 10px;
 }
