@@ -61,6 +61,8 @@
             ShoppingService
                 .findAllItemsForEvent(vm.eventId )
                 .then(function (services) {
+                    vm.claimedItems = [];
+                    vm.unClaimedItems = [];
                     vm.items = services.data;
                     for(var i in vm.items){
                         if(vm.items[i]._guest){
@@ -80,8 +82,12 @@
                 .then(function (item) {
                     item = item.data;
                      if(item._guest == vm.guestId) {
-                         var index = 0;
+                       /*  vm.claimedItems = [];
+                         vm.unClaimedItems = [];
+                         init();
+                         $scope.$apply();*/
 
+                         var index = 0;
                          for(index = 0; index < vm.unClaimedItems.length ; index++ ){
                              if(vm.unClaimedItems[index].itemId == item.itemId){
                                  break;
@@ -108,7 +114,11 @@
                     item = item.data;
                     console.log(item);
                     if(!item._guest) {
-                        var index = 0;
+                     /*   vm.claimedItems = [];
+                        vm.unClaimedItems = [];
+                        init();
+                        $scope.$apply();
+                        var index = 0;*/
 
                         for(index = 0; index < vm.claimedItems.length ; index++ ){
                             if(vm.claimedItems[index].itemId == item.itemId){
@@ -134,6 +144,8 @@
         }
 
         function intializeMessages() {
+
+            init();
             vm.unClaimSuccess = undefined;
             vm.unClaimError = undefined;
             vm.claimSuccess = undefined;
