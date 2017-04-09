@@ -28,4 +28,5 @@ module.exports = function (app) {
     require("./services/vendor.service.server.js")(app, model.vendorModel);
     require("./services/invite.service.server")(app, model.inviteModel);
     require("./services/order.service.server")(app, model.orderModel);
+    require("./services/shopping.service.server")(app, model.shoppingModel);
 };

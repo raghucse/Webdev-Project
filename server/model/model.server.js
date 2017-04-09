@@ -8,6 +8,7 @@ module.exports = function (mongoose) {
     var vendorModel = require('./vendor/vendor.model.server')(mongoose, q);
     var inviteModel = require('./invite/invite.model.server.js')(mongoose, q);
     var orderModel = require('./orders/orders.model.server')(mongoose, q);
+    var shoppingModel = require('./shopping/shopping.model.server')(mongoose, q);
 
     var model = {
         userModel: userModel,
@@ -16,7 +17,8 @@ module.exports = function (mongoose) {
         serviceModel : serviceModel,
         vendorModel : vendorModel,
         inviteModel : inviteModel,
-        orderModel : orderModel
+        orderModel : orderModel,
+        shoppingModel : shoppingModel
     };
 
     return model;

@@ -136,6 +136,11 @@
                 controller: "SearchShoppingController",
                 controllerAs: "model"
              })
+            .when("/host/:uid/shopping", {
+                templateUrl: "views/shopping/templates/shoppingList.view.client.html",
+                controller: "ShoppingListController",
+                controllerAs: "model"
+            })
             .when("/vendor/:vid/orders", {
                 templateUrl: "views/orders/templates/order-list.view.client.html",
                 controller: "OrderListController",

@@ -8,24 +8,27 @@
     app.controller("NewShoppingController", NewShoppingController);
     app.controller("SearchShoppingController", SearchShoppingController);
 
-    function ShoppingListController($routeParams, ServiceService) {
+    function ShoppingListController($routeParams, ShoppingService) {
         var vm = this;
-        vm.vendorId = $routeParams["vid"];
+        vm.userId = $routeParams["uid"];
 
         function init() {
-            ServiceService
-                .findAllServicesForVendor(vm.vendorId)
+            ShoppingService
+                .findAllItemsForuser(vm.userId )
                 .then(function (services) {
-                    vm.services = services.data;
+                    vm.items = services.data;
                 });
         }
         init();
     }
 
-    function SearchShoppingController($routeParams, $http, ShoppingService, $route, $injector, $scope, $compile, $timeout) {
+    function SearchShoppingController($routeParams, ShoppingService, $scope) {
         var vm = this;
         vm.userId = $routeParams["uid"];
         vm.searchItems = searchItems;
+        vm.addItem = addItem;
+
+
         console.log(vm.userId);
         function init() {
         }
@@ -36,6 +39,16 @@
                 vm.items = data.items;
                 $scope.$apply();
             });
+        }
+
+        function addItem(item) {
+            item.added = true;
+            ShoppingService.addItem(vm.userId, item).then(function (data) {
+                item.added = true;
+                //$scope.$apply();
+            });
+
+
         }
     }
 
@@ -76,6 +89,8 @@
                         })
                 });
         }
+
+
     }
 
     function EditServiceController($routeParams, ServiceService, $location) {

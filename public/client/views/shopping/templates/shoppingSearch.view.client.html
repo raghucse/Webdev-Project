@@ -23,27 +23,30 @@
     </div>
 </nav>
 
-<div class="container">
-    <div class="row">
-        <div class="col-md-6">
-            <h2>Search for shopping items</h2>
-            <div id="custom-search-input">
-                <div class="input-group col-md-12">
-                    <input type="text" ng-model="model.searchQuery" class="form-control input-lg" placeholder="Enter item here" />
-                    <span class="input-group-btn">
+<div class="text-center">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12 centered">
+                <h2>Search for shopping items</h2>
+                <div id="custom-search-input">
+                    <div class="input-group col-md-12">
+                        <input type="text" ng-model="model.searchQuery" class="form-control input-lg" placeholder="Enter item here" />
+                        <span class="input-group-btn">
                         <button ng-click="model.searchItems()" class="btn btn-info btn-lg" type="button">
                             <i class="glyphicon glyphicon-search"></i>
                         </button>
                     </span>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
 
+<p></p>
 
-<div class="container-fluid">
-    <ul class="list-group">
+<div class="container-fluid borderless">
+    <ul class="list-group borderless">
         <div ng-repeat="item in model.items">
             <li class="list-group-item">
                 <div class="row">
@@ -51,7 +54,7 @@
                     </div>
                     <div class="col-xs-4">
                         <h4 class="product-name"><strong>{{item.name}}</strong></h4>
-                        <img  height="18    " width="80" src={{item.customerRatingImage}}>
+                        <img  ng-if="item.customerRatingImage" height="18  " width="80" src={{item.customerRatingImage}}>
                     </div>
                     <div class="col-xs-6">
                         <div class="col-xs-6 text-right">
@@ -59,12 +62,20 @@
                             <h4><strong>Shipping Rate: <span class="text-muted">{{item.standardShipRate}}$</span></strong></h4>
                         </div>
                         <div class="col-xs-4">
-                            <input type="text" class="form-control input-sm" value="1">
+                            <label for="Quantity">quantity</label>
+                            <input id="Quantity" type="text" class="form-control input-sm" ng-model="item.quantity" value="1">
                         </div>
                         <div class="col-xs-2">
-                            <button type="button" class="btn btn-link btn-xs">
-                                <span class="glyphicon glyphicon-trash"> </span>
+                          <div ng-if="!item.added">
+                            <button type="button" ng-click="model.addItem(item)" class="btn btn-primary btn-md">
+                                Add
                             </button>
+                          </div>
+                            <div ng-if="item.added">
+                                <button type="button" ng-click="model.addItem(item)" class="btn btn-success btn-md">
+                                    Add More
+                                </button>
+                            </div>
                         </div>
                     </div>
                 </div>
