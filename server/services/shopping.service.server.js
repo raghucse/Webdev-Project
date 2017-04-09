@@ -58,9 +58,7 @@ module.exports =  function(app, ShoppingModel) {
 
     function updateItemQuantity(req, res) {
         var id = req.params.id;
-        console.log(id);
         var quantity = req.params.quantity;
-        console.log(quantity);
         ShoppingModel.updateItemQuantity(id, quantity)
             .then(function (item) {
                 res.json(item);

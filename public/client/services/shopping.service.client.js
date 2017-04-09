@@ -54,8 +54,6 @@
         }
 
         function updateItemQuantity(id, quantity) {
-            console.log(id);
-            console.log(quantity);
             return $http.put("/api/shopping/"+id+"/quantity/"+quantity);
         }
 
