@@ -5,6 +5,7 @@ module.exports =  function(app, ShoppingModel) {
     app.post("/api/host/:hostId/event/:eventId/shopping/add", addItem);
     /*app.get("/api/host/:hostId/shopping", findAllItemsForHost); */
     app.get("/api/event/:eventId/shopping", findAllItemsForEvent);
+    app.get("/api/shopping/:itemId", findItemsByItemId);
 
 
     /*   app.get("/api/service/:serviceId", findServiceById);
@@ -31,15 +32,7 @@ module.exports =  function(app, ShoppingModel) {
 
     }
 
-  /*  function findAllItemsForHost(req, res) {
-        var hostId = req.params.hostId;
-        ShoppingModel.findAllItemsForHost(hostId)
-            .then(function (items) {
-                res.json(items);
-            }, function (err) {
-                res.sendStatus(500).send(err);
-            })
-    } */
+
 
     function findAllItemsForEvent(req, res) {
         var eventId = req.params.eventId;
@@ -51,6 +44,15 @@ module.exports =  function(app, ShoppingModel) {
             })
     }
 
+    function findItemsByItemId(req, res) {
+        var itemId = req.params.itemId;
+        ShoppingModel.findItemsByItemId(itemId)
+            .then(function (item) {
+                res.json(item);
+            }, function (err) {
+                res.sendStatus(500).send(err);
+            })
+    }
   /*  function findServiceById(req, res) {
         var serviceId = req.params.serviceId;
         ServiceModel.findServiceById(serviceId)
