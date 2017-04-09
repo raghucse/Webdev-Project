@@ -11,7 +11,6 @@ module.exports = function (mongoose) {
         phone: String,
         address: String,
         services: [{type:mongoose.Schema.Types.ObjectId, ref: 'ServiceModel'}],
-        //websites: [{type:mongoose.Schema.Types.ObjectId, ref: 'WebsiteModel'}],
         dateCreated: { type: Date, default: Date.now }
     }, {collection: 'myPartyPlanDB.user'});
 

@@ -7,32 +7,54 @@
     // app.controller("EditServiceController", EditServiceController);
     // app.controller("ServiceViewController", ServiceViewController);
 
-    function HostServiceListController($routeParams, EventService, ServiceService, VendorService) {
+    function HostServiceListController($routeParams, EventService, ServiceService, VendorService, OrderService) {
         var vm = this;
+
+        vm.findService = findService;
+
 
         function init() {
             vm.eventID = $routeParams["eid"];
             vm.hostID = $routeParams["hid"];
 
-            vm.findService = findService;
 
+            EventService
+                .findAllServicesForEvent(vm.eventID)
+                .then(function (event) {
+                    var myevent = event.data;
+                    var serviceIDList = myevent[0].services;
+                    var serviceList = [];
+                    var reqServicesList = [];
 
-            // EventService
-            //     .findAllServicesForEvent(vm.eventID)
-            //     .then(function (event) {
-            //         var serviceIDList = event[0].services;
-            //         var serviceList = [];
-            //         //console.log(guestIDList);
-            //         for(var i = 0; i < serviceIDList.length ; i++){
-            //             var serviceid = serviceIDList[i];
-            //             ServiceService
-            //                 .findServiceById(serviceid)
-            //                 .success(function (service) {
-            //                     serviceList.push(service.name);
-            //                 })
-            //         }
-            //         vm.services = serviceList;
-            //     });
+                    for(var i = 0; i < serviceIDList.length ; i++){
+                        var serviceid = serviceIDList[i];
+                        ServiceService
+                            .findServiceById(serviceid)
+                            .success(function (service) {
+                                serviceList.push(service.name);
+                            });
+                        OrderService
+                            .findAllOrdersForService(serviceid)
+                            .success(function (orders) {
+                                var myPenOrders = [];
+                                var myConOrders = [];
+                                var orderlist = orders;
+                                for(var i = 0; i < orderlist.length ; i++){
+                                    if(!orderlist[i].accepted){
+                                        myPenOrders.push(orderlist[i]);
+                                    }
+                                    else{
+                                        myConOrders.push(orderlist[i]);
+                                    }
+                                }
+                                vm.penOrders = myPenOrders;
+                                vm.conOrders = myConOrders;
+
+                            });
+                    }
+                    vm.services = serviceList;
+
+                });
         }
         init();
 
@@ -63,13 +85,14 @@
 
     }
 
-    function HostServiceOrderController($routeParams, ServiceService, OrderService) {
+    function HostServiceOrderController($routeParams, ServiceService, OrderService, EventService) {
         var vm = this;
         vm.hostId = $routeParams["hid"];
-
+        vm.eventId = $routeParams["eid"];
         vm.serviceId = $routeParams["sid"];
 
         vm.createOrder = createOrder;
+
 
         function init() {
             ServiceService
@@ -87,10 +110,21 @@
             OrderService
                 .createOrder(serviceId, vm.hostId, vm.vendorId, order)
                 .success(function (order) {
-                    vm.orderstatus = "Order Placed";
+                    ServiceService
+                        .updateOrder(serviceId, order._id)
+                        .success(function (service) {
+                            EventService
+                                .addService(vm.eventId, serviceId)
+                                .success(function (response) {
+                                    vm.orderstatus = "Order Placed";
+                                });
+                        });
                 })
 
         }
+
+
+
 
 
     }

@@ -9,6 +9,7 @@ module.exports = function (mongoose, q) {
         findServiceById: findServiceById,
         updateService: updateService,
         deleteService: deleteService,
+        updateOrder : updateOrder
     };
     return api;
 
@@ -88,18 +89,17 @@ module.exports = function (mongoose, q) {
         return deferred.promise;
     }
 
-    /*function updatePage(serviceId, pageId) {
-     var deferred = q.defer();
-     ServiceModel.findById(serviceId, function (err, service) {
-     if(err){
-     deferred.reject(err);
+    function updateOrder(serviceId, orderId) {
+         var deferred = q.defer();
+         ServiceModel.findById(serviceId, function (err, service) {
+         if(err){
+            deferred.reject(err);
+         }
+         else {
+            service.orders.push(orderId);
+            service.save();
+            deferred.resolve();
+         }});
+         return deferred.promise;
      }
-     else {
-     service.pages.push(pageId);
-     service.save();
-     deferred.resolve();
-     }
-     })
-     return deferred.promise;
-     }*/
-}
+};

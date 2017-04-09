@@ -12,12 +12,25 @@
 
         vm.vendorId = $routeParams["vid"];
 
+        vm.acceptOrder = acceptOrder;
+
         function init() {
             OrderService
                 .findAllOrdersForVendor(vm.vendorId)
                 .then(function (orders) {
-                    vm.orders = orders.data;
-                    console.log(vm.orders);
+                    var myOrders = [];
+                    var myCurrOrders = [];
+                    var orderlist = orders.data;
+                    for(var i = 0; i < orderlist.length ; i++){
+                        if(!orderlist[i].accepted){
+                            myOrders.push(orderlist[i]);
+                        }
+                        else{
+                            myCurrOrders.push(orderlist[i]);
+                        }
+                    }
+                    vm.orders = myOrders;
+                    vm.currOrders = myCurrOrders;
                 });
             ServiceService
                 .findAllServicesForVendor(vm.vendorId)
@@ -26,6 +39,14 @@
                 });
         }
         init();
+
+        function acceptOrder(order) {
+            order.accepted = true;
+            OrderService
+                .updateOrder(order._id, order)
+                .success(function (order) {
+                })
+        }
     }
 
     function ServiceViewController($routeParams, ServiceService) {

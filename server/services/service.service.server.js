@@ -7,7 +7,7 @@ module.exports =  function(app, ServiceModel) {
     app.put("/api/service/:serviceId", updateService);
     app.delete("/api/service/:serviceId", deleteService);
     app.post("/api/vendor/:vendorId/service", createService);
-    app.put("/api/service/:serviceId/page/:pageId", updatePage);
+    app.put("/api/service/:serviceId/order/:orderId", updateOrder);
 
     function createService(req, res) {
         var newService = req.body;
@@ -66,11 +66,11 @@ module.exports =  function(app, ServiceModel) {
 
     }
 
-    function updatePage(req, res) {
+    function updateOrder(req, res) {
         var serviceId = req.params.serviceId;
-        var pageId = req.params.pageId;
+        var orderId = req.params.orderId;
 
-        ServiceModel.updatePage(serviceId, pageId)
+        ServiceModel.updateOrder(serviceId, orderId)
             .then(function (service) {
                 res.send(200);
             }, function (err) {

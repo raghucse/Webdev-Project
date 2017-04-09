@@ -75,26 +75,6 @@
                 controller: "GuestController",
                 controllerAs: "model"
             })
-            .when("/user/:uid/event/:wid/page",{
-                templateUrl: "views/page/templates/page-list.view.client.html",
-                controller: "PageListController",
-                controllerAs: "model"
-            })
-            .when("/user/:uid/event/:wid/page/new",{
-                templateUrl: "views/page/templates/page-new.view.client.html",
-                controller: "PageNewController",
-                controllerAs: "model"
-            })
-            .when("/user/:uid/event/:wid/page/:pid",{
-                templateUrl: "views/page/templates/page-edit.view.client.html",
-                controller: "PageEditController",
-                controllerAs: "model"
-            })
-            .when("/user/:uid/event/:wid/page/:pid/widget",{
-                templateUrl: "views/widget/templates/widget-list.view.client.html",
-                controller: "WidgetListController",
-                controllerAs: "model"
-            })
             .when("/vendor/login",{
                 templateUrl: "views/user/templates/vendor.login.view.client.html",
                 controller: "VendorLoginController",

@@ -45,6 +45,7 @@ module.exports = function (app, userModel) {
     }
 
     function localStrategy(username, password, done) {
+        console.log("server side login funtion called")
         userModel
             .findUserByUsername(username)
             .then(
