@@ -95,7 +95,6 @@
                 controller: "WidgetListController",
                 controllerAs: "model"
             })
-
             .when("/vendor/login",{
                 templateUrl: "views/user/templates/vendor.login.view.client.html",
                 controller: "VendorLoginController",
@@ -131,14 +130,19 @@
                 controller: "EditServiceController",
                 controllerAs: "model"
             })
-            .when("/host/:uid/shopping/search", {
+            .when("/host/:hid/event/:eid/shopping/search", {
                 templateUrl: "views/shopping/templates/shoppingSearch.view.client.html",
                 controller: "SearchShoppingController",
                 controllerAs: "model"
              })
-            .when("/host/:uid/shopping", {
+            .when("/host/:hid/event/:eid/shopping", {
                 templateUrl: "views/shopping/templates/shoppingList.view.client.html",
                 controller: "ShoppingListController",
+                controllerAs: "model"
+            })
+            .when("/guest/:gid/event/:eid/shopping", {
+                templateUrl: "views/shopping/templates/shoppingList.view.client.html",
+                controller: "ShoppingGuestListController",
                 controllerAs: "model"
             })
             .when("/vendor/:vid/orders", {
