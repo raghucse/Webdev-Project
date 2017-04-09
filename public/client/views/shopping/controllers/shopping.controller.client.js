@@ -87,11 +87,6 @@
                             .then(function (item) {
                                 item = item.data;
                                 if(item._guest == vm.guestId) {
-                                    /*  vm.claimedItems = [];
-                                     vm.unClaimedItems = [];
-                                     init();
-                                     $scope.$apply();*/
-
                                     var index = 0;
                                     for(index = 0; index < vm.unClaimedItems.length ; index++ ){
                                         if(vm.unClaimedItems[index].itemId == item.itemId){
@@ -125,12 +120,6 @@
                     item = item.data;
                     console.log(item);
                     if(!item._guest) {
-                     /*   vm.claimedItems = [];
-                        vm.unClaimedItems = [];
-                        init();
-                        $scope.$apply();
-                        var index = 0;*/
-
                         for(index = 0; index < vm.claimedItems.length ; index++ ){
                             if(vm.claimedItems[index].itemId == item.itemId){
                                 break;
@@ -208,9 +197,6 @@
                         });
                     }
                 });
-
-
-
 
         }
     }
