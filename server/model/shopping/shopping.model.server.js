@@ -91,14 +91,16 @@ module.exports = function (mongoose, q) {
         return deferred.promise;
     }
 
-    function findItemsByItemId(itemId) {
+    function findItemsByItemId(itemId, hostId) {
         var deferred = q.defer();
-
-        ShoppingModel.find({itemId: itemId}, function (err, item) {
+        console.log(itemId);
+        console.log(hostId);
+        ShoppingModel.find({$and: [{itemId: itemId}, {_host: hostId}]}, function (err, item) {
             if(err){
                 deferred.reject(err);
             }
             else {
+                console.log(item);
                 deferred.resolve(item[0]);
             }
         });

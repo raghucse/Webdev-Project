@@ -48,7 +48,6 @@
         vm.searchItems = searchItems;
         vm.addItem = addItem;
 
-        console.log(vm.hostId);
         function init() {
         }
         init();
@@ -63,8 +62,7 @@
         function addItem(item) {
             item.added = true;
 
-
-            ShoppingService.findItemsByItemId(item.itemId)
+            ShoppingService.findItemsByItemId(item.itemId, vm.hostId)
                 .then(function (data) {
                     var itemFromDb = data.data;
                     if(itemFromDb){

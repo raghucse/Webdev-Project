@@ -5,7 +5,7 @@ module.exports =  function(app, ShoppingModel) {
     app.post("/api/host/:hostId/event/:eventId/shopping/add", addItem);
     /*app.get("/api/host/:hostId/shopping", findAllItemsForHost); */
     app.get("/api/event/:eventId/shopping", findAllItemsForEvent);
-    app.get("/api/shopping/:itemId", findItemsByItemId);
+    app.get("/api/host/:hostId/shopping/:itemId", findItemsByItemId);
     app.put("/api/shopping/:id/quantity/:quantity", updateItemQuantity);
 
 
@@ -47,7 +47,8 @@ module.exports =  function(app, ShoppingModel) {
 
     function findItemsByItemId(req, res) {
         var itemId = req.params.itemId;
-        ShoppingModel.findItemsByItemId(itemId)
+        var hostId = req.params.hostId;
+        ShoppingModel.findItemsByItemId(itemId, hostId)
             .then(function (item) {
                 res.json(item);
             }, function (err) {
@@ -56,7 +57,6 @@ module.exports =  function(app, ShoppingModel) {
     }
 
     function updateItemQuantity(req, res) {
-        console.log("addSucces");
         var id = req.params.id;
         console.log(id);
         var quantity = req.params.quantity;
