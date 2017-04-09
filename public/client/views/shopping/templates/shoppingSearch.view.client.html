@@ -66,11 +66,11 @@
                             <input id="Quantity" type="text" class="form-control input-sm" ng-model="item.quantity" value="1">
                         </div>
                         <div class="col-xs-2">
-                          <div ng-if="!item.added">
-                            <button type="button" ng-click="model.addItem(item)" class="btn btn-primary btn-md">
-                                Add
-                            </button>
-                          </div>
+                            <div ng-if="!item.added">
+                                <button type="button" ng-click="model.addItem(item)" class="btn btn-primary btn-md">
+                                    Add
+                                </button>
+                            </div>
                             <div ng-if="item.added">
                                 <button type="button" ng-click="model.addItem(item)" class="btn btn-success btn-md">
                                     Add More
