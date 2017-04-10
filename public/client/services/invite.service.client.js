@@ -8,6 +8,7 @@
         var api = {
             "createInvite": createInvite,
             "findInvitesForUser": findInvitesForUser,
+            "findAllInvitesForHost" : findAllInvitesForHost,
             "updateInvite" : updateInvite,
             "deleteInvite": deleteInvite,
             "findInviteById" : findInviteById
@@ -21,6 +22,10 @@
 
         function findInvitesForUser(guestId) {
             return $http.get("/api/invite/" + guestId);
+        }
+
+        function findAllInvitesForHost(hostId) {
+            return $http.get("/api/invite/host/"+ hostId);
         }
 
         function findInviteById(inviteId) {

@@ -17,12 +17,47 @@
                 .findEventById(vm.eventID)
                 .success(function (event) {
                     vm.event = event;
+                    var myguests = [];
+                    var guestsList = event.guests;
+
+                    for(var i = 0; i < guestsList.length ; i++){
+                        vm.index = i;
+                        UserService
+                            .findUserById(guestsList[i])
+                            .success(function (user) {
+                                myguests.push(user.username);
+                            });
+                    }
+                    vm.guests = myguests;
                 });
 
             InviteService
-                .findInvitesForUser(vm.hostID)
+                .findAllInvitesForHost(vm.hostID)
                 .success(function (invites) {
-                    vm.invites = invites;
+                    var invitesList = invites;
+                    var acceptedGuests = [];
+                    var pennGuests = [];
+                    for(var i = 0; i < invitesList.length; i++){
+                        vm.indexi = i;
+                        if(invitesList[vm.indexi].replied && invitesList[vm.indexi].accepted){
+                            UserService
+                                .findUserById(invitesList[vm.indexi].receiver)
+                                .success(function (user) {
+                                    acceptedGuests.push(user.username);
+                                })
+                        }
+                        else if(!invitesList[vm.indexi].replied || !invitesList[vm.indexi].accepted){
+                            UserService
+                                .findUserById(invitesList[vm.indexi].receiver)
+                                .success(function (user) {
+                                    pennGuests.push(user.username);
+                                })
+                        }
+                    }
+
+                    vm.acceptedGuests = acceptedGuests;
+                    vm.pennGuests = pennGuests;
+                    console.log(pennGuests);
                 });
         }
         init();
