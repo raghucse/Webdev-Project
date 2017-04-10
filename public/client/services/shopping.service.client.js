@@ -68,8 +68,8 @@
             return $http.delete("/api/shopping/delete/"+id);
         }
 
-        function claimItem(guestId, id) {
-            return $http.put("/api/guest/"+guestId+"/shopping/"+id);
+        function claimItem(guestId, id, guest) {
+            return $http.put("/api/guest/"+guestId+"/shopping/"+id, guest);
         }
         /*
 

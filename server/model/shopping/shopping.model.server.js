@@ -78,14 +78,15 @@ module.exports = function (mongoose, q) {
         return deferred.promise;
     }
 
-    function claimItem(id, guestId) {
+    function claimItem(id, guestId, guest) {
         var deferred = q.defer();
         if(guestId == "unClaim")
         {
             ShoppingModel.update(
                 { _id : id },
                 {
-                    _guest: null
+                    _guest: null,
+                    guest: null
                 }, function (err, item) {
                     if(err){
                         deferred.reject(err);
@@ -99,7 +100,8 @@ module.exports = function (mongoose, q) {
             ShoppingModel.update(
                 { _id : id },
                 {
-                    _guest: guestId
+                    _guest: guestId,
+                    guest: guest
                 }, function (err, item) {
                     if(err){
                         deferred.reject(err);

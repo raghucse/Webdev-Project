@@ -32,44 +32,115 @@
     {{model.deleteSucces}}
 </div>
 
-<div class="container-fluid borderless">
-    <ul class="list-group borderless">
-        <div ng-repeat="iteminfo in model.items">
-            <li class="list-group-item">
-                <div class="row">
-                    <div class="col-xs-2"><img class="img-responsive" src={{iteminfo.item.mediumImage}}>
-                    </div>
-                    <div class="col-xs-4">
-                        <h4 class="product-name"><strong>{{iteminfo.item.name}}</strong></h4>
-                        <img  ng-if="iteminfo.item.customerRatingImage" height="18" width="80" src={{iteminfo.item.customerRatingImage}}>
-                    </div>
-                    <div class="col-xs-6">
-                        <div class="col-xs-6 text-right">
-                            <h4><strong>Price: <span class="text-muted">{{iteminfo.item.salePrice}}$</span></strong></h4>
-                            <h4><strong>Shipping Rate: <span class="text-muted">{{iteminfo.item.standardShipRate}}$</span></strong></h4>
-                        </div>
-                        <div class="col-xs-4">
-                            <label for="Quantity">quantity</label>
-                            <input id="Quantity" type="text" class="form-control input-sm" ng-model="iteminfo.quantity" value="1">
-                        </div>
-                        <div class="col-xs-2 rollovericons">
-                            <button type="button" ng-click="model.updateItem(iteminfo)" class="btn btn-primary btn-md">
-                                Update
-                            </button>
-                            <a type="button" href={{iteminfo.item.productUrl}} target="_blank" class="btn btn-success btn-md">
-                                <span class="glyphicon glyphicon-shopping-cart" ></span>
-                            </a>
-                            <button type="button" ng-click="model.deleteItem(iteminfo)" class="btn btn-danger btn-md">
-                                Remove
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </li>
-        </div>
+<div class="container-fluid">
+    <ul class="nav nav-tabs">
+        <li class="active">
+            <a data-toggle="tab" ng-click="model.intializeMessages()" href="#claimed" target="_self">
+                Claimed Items
+            </a>
+        </li>
+        <li>
+            <a data-toggle="tab" ng-click="model.intializeMessages()" href="#unClaimed" target="_self">
+                Unclaimed Items
+            </a>
+        </li>
     </ul>
 </div>
 
+
+<div class="tab-content">
+    <div id="unClaimed" class="tab-pane">
+        <div class="container-fluid borderless">
+            <ul class="list-group borderless">
+                <div ng-repeat="iteminfo in model.unClaimedItems">
+                    <li class="list-group-item">
+                        <div class="row">
+                            <div class="col-xs-2"><img class="img-responsive" src={{iteminfo.item.mediumImage}}>
+                            </div>
+                            <div class="col-xs-4">
+                                <h4 class="product-name"><strong>{{iteminfo.item.name}}</strong></h4>
+                                <img  ng-if="iteminfo.item.customerRatingImage" height="18" width="80" src={{iteminfo.item.customerRatingImage}}>
+                            </div>
+                            <div class="col-xs-6">
+                                <div class="col-xs-6 text-right">
+                                    <h4><strong>Price: <span class="text-muted">{{iteminfo.item.salePrice}}$</span></strong></h4>
+                                    <h4><strong>Shipping Rate: <span class="text-muted">{{iteminfo.item.standardShipRate}}$</span></strong></h4>
+                                        <button type="button" ng-click="model.claimItem(iteminfo)" class="btn btn-primary btn-md">
+                                            Claim Item Yourself
+                                        </button>
+                                </div>
+                                <div class="col-xs-4">
+                                    <label for="Quantity">quantity</label>
+                                    <input id="Quantity" type="text" class="form-control input-sm" ng-model="iteminfo.quantity" value="1">
+                                </div>
+                                <div class="col-xs-2 rollovericons">
+                                    <button type="button" ng-click="model.updateItem(iteminfo)" class="btn btn-primary btn-md">
+                                        Update
+                                    </button>
+                                    <a type="button" href={{iteminfo.item.productUrl}} target="_blank" class="btn btn-success btn-md">
+                                        <span class="glyphicon glyphicon-shopping-cart" ></span>
+                                    </a>
+                                    <button type="button" ng-click="model.deleteItem(iteminfo)" class="btn btn-danger btn-md">
+                                        Remove
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                </div>
+            </ul>
+        </div>
+
+    </div>
+    <div id="claimed" class="tab-pane fade in active">
+        <div class="container-fluid borderless">
+            <ul class="list-group borderless">
+                <div ng-repeat="iteminfo in model.claimedItems">
+                    <li class="list-group-item">
+                        <div class="row">
+                            <div class="col-xs-2"><img class="img-responsive" src={{iteminfo.item.mediumImage}}>
+                            </div>
+                            <div class="col-xs-4">
+                                <h4 class="product-name"><strong>{{iteminfo.item.name}}</strong></h4>
+                                <img  ng-if="iteminfo.item.customerRatingImage" height="18" width="80" src={{iteminfo.item.customerRatingImage}}>
+                            </div>
+                            <div class="col-xs-6">
+                                <div class="col-xs-6 text-right">
+                                    <h4><strong>Price: <span class="text-muted">{{iteminfo.item.salePrice}}$</span></strong></h4>
+                                    <h4><strong>Shipping Rate: <span class="text-muted">{{iteminfo.item.standardShipRate}}$</span></strong></h4>
+                                    <h4>Claimed By: {{iteminfo.name}}</h4>
+                                    <div ng-if="model.checkGuest(iteminfo._guest)">
+                                        <div class=" rollovericons">
+                                            <button type="button" ng-click="model.unclaimItem(iteminfo)" class="btn btn-danger btn-md">
+                                                Unlcaim
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-xs-4">
+                                    <label for="claimedQuantity">quantity</label>
+                                    <input id="claimedQuantity" type="text" class="form-control input-sm" ng-model="iteminfo.quantity" value="1">
+                                </div>
+                                <div class="col-xs-2 rollovericons">
+                                    <button type="button" ng-click="model.updateItem(iteminfo)" class="btn btn-primary btn-md">
+                                        Update
+                                    </button>
+                                    <a type="button" href={{iteminfo.item.productUrl}} target="_blank" class="btn btn-success btn-md">
+                                        <span class="glyphicon glyphicon-shopping-cart" ></span>
+                                    </a>
+                                    <button type="button" ng-click="model.deleteItem(iteminfo)" class="btn btn-danger btn-md">
+                                        Remove
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                </div>
+            </ul>
+        </div>
+
+    </div>
+</div>
 
 <nav class="navbar navbar-default navbar-fixed-bottom">
     <div class="container-fluid">
