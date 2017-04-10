@@ -176,3 +176,25 @@ a:hover{text-decoration: none;}
 form{
     padding-bottom: 5px;
 }
+
+#profile{
+    height : 300px;
+}
+
+#leftPanel{
+    background-color:#0079ac;
+    color:#fff;
+    text-align: center;
+    min-height:400px;
+}
+
+#rightPanel{
+    min-height:400px;
+}
+
+.colorgraph {
+    height: 5px;
+    border-top: 0;
+    background: #c4e17f;
+    border-radius: 5px;
+}
