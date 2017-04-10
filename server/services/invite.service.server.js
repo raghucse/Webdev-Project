@@ -2,6 +2,8 @@
 module.exports = function (app, inviteModel) {
     app.post("/api/invite/:hostId/:guestId/:eventId", createInvite);
     app.get("/api/invite/:guestId", findInvitesForUser);
+    app.get("/api/invite/invitation/:inviteId", findInviteById);
+    app.put("/api/invite/invitation/:inviteId", updateInvite);
     app.delete("/api/invite/:eventId", deleteInvite);
 
     function createInvite(req, res) {
@@ -21,6 +23,27 @@ module.exports = function (app, inviteModel) {
         inviteModel.findAllInvitesForUser(guestID)
             .then(function (invitations) {
                 res.json(invitations);
+            }, function (err) {
+                res.sendStatus(500).send(err);
+            });
+    }
+
+    function findInviteById(req, res) {
+        var inviteID = req.params.inviteId;
+        inviteModel.findInviteById(inviteID)
+            .then(function (invitation) {
+                res.json(invitation);
+            }, function (err) {
+                res.sendStatus(500).send(err);
+            });
+    }
+
+    function updateInvite(req, res) {
+        var inviteId = req.params.inviteId;
+        var newInvite = req.body;
+        inviteModel.updateInvite(inviteId, newInvite)
+            .then(function (invite) {
+                res.json(invite);
             }, function (err) {
                 res.sendStatus(500).send(err);
             });

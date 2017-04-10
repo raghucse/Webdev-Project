@@ -6,6 +6,8 @@ module.exports = function (mongoose, q) {
     var api = {
         "createInvite" : createInvite,
         "findAllInvitesForUser": findAllInvitesForUser,
+        "findInviteById" : findInviteById,
+        "updateInvite" : updateInvite,
         "deleteInvite": deleteInvite
     };
 
@@ -17,6 +19,8 @@ module.exports = function (mongoose, q) {
         invite.sender = hostId;
         invite.receiver = guestID;
         invite.event = eventID;
+        invite.replied = false;
+        invite.accepted = false;
         InviteModel.create(invite, function (err, doc) {
             if(err){
                 deferred.reject(err);
@@ -41,7 +45,32 @@ module.exports = function (mongoose, q) {
         return deferred.promise;
     }
 
+    function findInviteById(inviteId) {
+        var deferred = q.defer();
+        InviteModel.find({_id: inviteId}, function (err, events) {
+            if(err){
+                deferred.reject(err);
+            }
+            else {
+                deferred.resolve(events);
+            }
+        });
+        return deferred.promise;
+    }
 
+    function updateInvite(inviteId, invite) {
+        var deferred = q.defer();
+        InviteModel.update({ _id:inviteId }, invite
+            , function (err, updatedInvite) {
+                if(err){
+                    deferred.reject(err);
+                }
+                else {
+                    deferred.resolve(updatedInvite);
+                }
+            });
+        return deferred.promise;
+    }
 
     function deleteInvite(eventId) {
         var deferred = q.defer();

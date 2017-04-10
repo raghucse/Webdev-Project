@@ -77,8 +77,6 @@
                         vendors.push(vendorname);
                         }
                         vm.vendors = vendors;
-
-
                 });
         }
 

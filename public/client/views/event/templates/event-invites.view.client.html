@@ -17,21 +17,25 @@
 <div class="container-fluid">
 
 
-
-    <li ng-repeat="invite in model.invites" class="list-group-item">
-        <div class="row">
-            <div class="col-xs-6">
-                <a href="">
-                    {{invite.sender}}
-                </a>
-            </div>
-            <div class="col-xs-6">
-                <a href="#/guest/{{model.hostID}}/event/{{invite.event}}">
-                    {{invite.event}}
-                </a>
-            </div>
+    <ul class="list-group-item">
+        <div ng-repeat="invite in model.invites">
+            <li class="list-group-item">
+                <div class="row">
+                    <p>{{invite.sender}} invited you to his
+                        <a href="#/guest/{{model.hostID}}/event/{{invite.eventID}}">
+                            {{invite.eventname}}
+                        </a>
+                    </p>
+                    <button class="btn btn-success" ng-click="model.acceptInvitation(invite)">
+                        Accept Invitation
+                    </button>
+                    <button class="btn btn-danger" ng-click="model.cancelInvitation(invite)">
+                        Cancel Invitation
+                    </button>
+                </div>
+            </li>
         </div>
-    </li>
+    </ul>
 
 
 
