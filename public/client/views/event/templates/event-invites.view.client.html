@@ -18,7 +18,7 @@
 
 
     <ul class="list-group-item">
-        <div ng-repeat="invite in model.invites">
+        <div ng-repeat="invite in model.invites track by $index">
             <li class="list-group-item">
                 <div class="row">
                     <p>{{invite.sender}} invited you to his

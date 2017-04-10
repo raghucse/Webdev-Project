@@ -20,15 +20,15 @@
         return api;
 
         function login(user) {
-            return $http.post("/api/login", user);
+            return $http.post("/api/user/login/user", user);
         }
 
         function logout(user) {
-            return $http.post("/api/logout");
+            return $http.post("/api/user/logout");
         }
 
         function register(user) {
-            return $http.post("/api/register", user);
+            return $http.post("/api/user/register", user);
         }
 
         function createUser(user) {

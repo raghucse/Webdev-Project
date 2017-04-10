@@ -19,21 +19,19 @@
                 if (user.password === user.password2) {
                     UserService
                         .findUserByUsername(user.username)
-                        .success(function (user) {
+                        .then(function (user) {
+                            user = user.data;
                             vm.error = "Username already taken";
-                        })
-                        .error(function () {
+                        }, function(err) {
                             UserService
                                 .register(user)
-                                .then(function (response) {
-                                    var user = response.data;
-                                    $rootScope.currentUser = user;
-                                    $location.url("/host/" + user._id);
-                                })
-                                .error(function () {
+                                .then(function (user) {
+                                    user = user.data;
+                                    $location.url("/host/" + user._id + "/event");
+                                },function (err) {
                                     vm.error = "User Registration Failed";
                                 })
-                        });
+                    })
                 }
                 else {
                     vm.passworderror = "Password and Verify password must match"
