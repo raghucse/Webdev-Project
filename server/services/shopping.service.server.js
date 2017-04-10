@@ -73,7 +73,8 @@ module.exports =  function(app, ShoppingModel) {
     function claimItem(req, res) {
         var id = req.params.id;
         var guestId = req.params.guestId;
-        ShoppingModel.claimItem(id, guestId)
+        var guest = req.body;
+        ShoppingModel.claimItem(id, guestId, guest)
             .then(function (item) {
                 ShoppingModel.findItemById(id)
                     .then(function (item) {
