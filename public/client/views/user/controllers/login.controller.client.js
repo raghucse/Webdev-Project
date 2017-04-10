@@ -14,8 +14,6 @@
         init();
 
         function login(user) {
-            console.log("Function called");
-            console.log(user);
             UserService
                 .login(user)
                 .then(function (response) {
@@ -30,7 +28,9 @@
                     }
                 }
 
-            });
+            }, function (err) {
+                    vm.error = "User not found";
+                });
         }
     }
 

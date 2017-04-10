@@ -1,6 +1,4 @@
-/**
- * Created by raghu on 2/8/2017.
- */
+
 module.exports = function(app, vendorModel) {
 
     var passport      = require('passport');
@@ -86,6 +84,7 @@ module.exports = function(app, vendorModel) {
 
 
     function localStrategy(username, password, done) {
+        console.log("vendor Login called")
         console.log(username);
         vendorModel.findVendorByVendorname(username)
             .then(

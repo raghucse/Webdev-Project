@@ -6,7 +6,7 @@
 
     function guestController($routeParams, InviteService, EventService, UserService) {
         var vm = this;
-        vm.hostID = $routeParams['gid'];
+        vm.guestID = $routeParams['gid'];
         vm.eventID = $routeParams['eid'];
 
 

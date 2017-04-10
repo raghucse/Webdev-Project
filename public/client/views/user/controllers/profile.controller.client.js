@@ -3,7 +3,7 @@
         .module("WebAppMaker")
         .controller("ProfileController", profileController);
 
-    function profileController(UserService, $routeParams, $location) {
+    function profileController(UserService, $routeParams, $location, $rootScope) {
         var vm = this;
         vm.hostID = $routeParams['hid'];
 

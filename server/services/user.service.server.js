@@ -11,16 +11,16 @@ module.exports = function (app, userModel) {
     };
 
     var passport = require('passport');
-    var auth = authorized;
     var LocalStrategy = require('passport-local').Strategy;
     var FacebookStrategy = require('passport-facebook').Strategy;
+    var auth = authorized;
 
-    passport.use(new LocalStrategy(localStrategy));
+    passport.use('user',new LocalStrategy(localStrategy));
     passport.use(new FacebookStrategy(facebookConfig, facebookStrategy));
 
-    app.post('/api/login', passport.authenticate('local'), login);
-    app.post('/api/logout', logout);
-    app.post('/api/register', register);
+    app.post('/api/user/login/user', passport.authenticate('user','local'), login);
+    app.post('/api/user/logout', logout);
+    app.post('/api/user/register', register);
     app.get("/api/user", findUser);
     app.get("/api/user/:userID", findUserByID);
     app.put("/api/user/:userID", updateUser);
@@ -45,7 +45,6 @@ module.exports = function (app, userModel) {
     }
 
     function localStrategy(username, password, done) {
-        console.log("server side login funtion called")
         userModel
             .findUserByUsername(username)
             .then(
