@@ -15,6 +15,7 @@
             "updateItemQuantity": updateItemQuantity,
             "deleteItem": deleteItem,
             "claimItem": claimItem,
+            "findItemById": findItemById,
   /*          "findServiceById": findServiceById,
             "updateService": updateService,
             "deleteService": deleteService,
@@ -49,6 +50,10 @@
 
         function findAllItemsForEvent(eventId) {
             return $http.get("/api/event/"+eventId+"/shopping");
+        }
+
+        function findItemById(id) {
+            return $http.get("/api/shopping/"+id);
         }
 
         function findItemsByItemId(itemId, hostId) {
