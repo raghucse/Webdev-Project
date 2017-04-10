@@ -66,8 +66,12 @@
         function deleteItem(item) {
             ShoppingService.deleteItem(item._id)
                 .then(function (status) {
-                    var index = vm.items.indexOf(item);
-                    vm.items.splice(index, 1);
+                    var index = vm.claimedItems.indexOf(item);
+                    vm.claimedItems.splice(index, 1);
+
+                    var index2 = vm.unClaimedItems.indexOf(item);
+                    vm.unClaimedItems.splice(index2, 1);
+
                     vm.deleteSucces = "Item deleted from the list";
                 }, function (err) {
                     vm.deleteError = "Unable to delete item from list";
