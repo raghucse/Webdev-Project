@@ -13,5 +13,16 @@ module.exports = function (mongoose) {
         itemPrice: Number
     }, {collection: 'myPartyPlanDB.shopping'});
 
+    ShoppingSchema.pre('remove', function(next) {
+
+        this.model('EventModel').update(
+            {_id: this._event},
+            {$pull: {products: this._id}},
+            {multi: true},
+            next
+        );
+
+    });
+
     return ShoppingSchema;
 }
