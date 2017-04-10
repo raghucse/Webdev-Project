@@ -34,25 +34,29 @@
             InviteService
                 .findAllInvitesForHost(vm.hostID)
                 .success(function (invites) {
-                    var invitesList = invites;
+                    console.log(invites.length);
                     var acceptedGuests = [];
                     var pennGuests = [];
-                    for(var i = 0; i < invitesList.length; i++){
-                        vm.indexi = i;
-                        if(invitesList[vm.indexi].replied && invitesList[vm.indexi].accepted){
+                    for(var i = 0; i < invites.length; i++){
+                        (function(i) {
+                        if(invites[i].replied && invites[i].accepted){
                             UserService
-                                .findUserById(invitesList[vm.indexi].receiver)
-                                .success(function (user) {
+                                .findUserById(invites[i].receiver)
+                                .then(function (user) {
+
+                                    user = user.data;
                                     acceptedGuests.push(user.username);
                                 })
                         }
-                        else if(!invitesList[vm.indexi].replied || !invitesList[vm.indexi].accepted){
+                        else if(!invites[i].replied || !invites[i].accepted){
                             UserService
-                                .findUserById(invitesList[vm.indexi].receiver)
-                                .success(function (user) {
+                                .findUserById(invites[i].receiver)
+                                .then(function (user) {
+                                    user = user.data;
                                     pennGuests.push(user.username);
                                 })
                         }
+                        })(i);
                     }
 
                     vm.acceptedGuests = acceptedGuests;

@@ -4,7 +4,7 @@
         .module("WebAppMaker")
         .controller("EventInviteController", EventInviteController);
 
-    function EventInviteController($routeParams, InviteService, EventService, UserService) {
+    function EventInviteController($routeParams, InviteService, EventService, UserService,$scope) {
         var vm = this;
         vm.hostID = $routeParams['hid'];
 
@@ -14,41 +14,39 @@
             InviteService
                 .findInvitesForUser(vm.hostID)
                 .success(function (invites) {
-                    var myinvites = [];
-                    var invitesList = invites;
+                    for(var i = 0; i < invites.length ; i++){
+                        (function(i) {
+                            UserService
+                                .findUserById(invites[i].sender)
+                                .then(function (user) {
+                                    user = user.data;
+                                    invites[i].sender = user.username;
+                                });
 
-                    for(var i = 0; i < invitesList.length ; i++){
-                        vm.index = i;
-                        UserService
-                            .findUserById(invitesList[i].sender)
-                            .success(function (user) {
-                                var invitation = {};
-                                invitation["sender"] = user.username;
-                                invitation["eventID"] = invitesList[vm.index].event;
-                                invitation["inviteID"] = invitesList[vm.index]._id;
-                                EventService
-                                    .findEventById(invitesList[vm.index].event)
-                                    .success(function (event) {
-                                        invitation["eventname"] = event.name;
-                                    });
+                            EventService
+                                .findEventById(invites[i].event)
+                                .then(function (event) {
+                                    event = event.data;
+                                    invites[i].eventname =  event.name;
+                                });
+                        })(i);
 
-                                myinvites.push(invitation);
-                            });
                     }
-                    vm.invites = myinvites;
+                    vm.invites = invites;
                 });
         }
         init();
 
         function acceptInvitation(invite) {
+            console.log(invite);
             InviteService
-                .findInviteById(invite.inviteID)
+                .findInviteById(invite._id)
                 .success(function (invitaton) {
                     var myinvitation = invitaton[0];
                     myinvitation.replied = true;
                     myinvitation.accepted = true;
                     InviteService
-                        .updateInvite(invite.inviteID, myinvitation)
+                        .updateInvite(invite._id, myinvitation)
                         .success(function (updatedInvitation) {
                             console.log("invitation accepted");
                         })
