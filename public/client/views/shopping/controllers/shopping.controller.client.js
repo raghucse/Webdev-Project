@@ -265,7 +265,7 @@
 
     }
 
-    function SearchShoppingController($routeParams, ShoppingService, $scope) {
+    function SearchShoppingController($routeParams, ShoppingService, $scope, EventService) {
         var vm = this;
         vm.hostId = $routeParams["hid"];
         vm.eventId = $routeParams["eid"];
@@ -300,8 +300,12 @@
                     }
                     else
                     {
-                        ShoppingService.addItem(vm.hostId, item, vm.eventId).then(function (data) {
-                            vm.addSucces = "Item added successfully";
+                        ShoppingService.addItem(vm.hostId, item, vm.eventId).then(function (item) {
+                            item = item.data;
+                            EventService.addProduct(vm.eventId, item._id)
+                                .then(function (status) {
+                                    vm.addSucces = "Item added successfully";
+                                })
                         },function (err) {
                             vm.addError = "Error while adding item";
                         });
