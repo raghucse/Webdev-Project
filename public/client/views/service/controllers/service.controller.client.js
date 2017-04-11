@@ -13,6 +13,7 @@
         vm.vendorId = $routeParams["vid"];
 
         vm.acceptOrder = acceptOrder;
+        vm.cancelOrder = cancelOrder;
         vm.update =  update;
         vm.deleteVendor = deleteVendor;
         vm.logout = logout;
@@ -30,10 +31,10 @@
                     var myCurrOrders = [];
                     var orderlist = orders.data;
                     for(var i = 0; i < orderlist.length ; i++){
-                        if(!orderlist[i].accepted){
+                        if(!orderlist[i].accepted && !orderlist[i].cancelled){
                             myOrders.push(orderlist[i]);
                         }
-                        else{
+                        else if(!orderlist[i].cancelled){
                             myCurrOrders.push(orderlist[i]);
                         }
                     }
@@ -53,6 +54,16 @@
             OrderService
                 .updateOrder(order._id, order)
                 .success(function (order) {
+                    init();
+                })
+        }
+
+        function cancelOrder(order) {
+            order.cancelled = true;
+            OrderService
+                .updateOrder(order._id, order)
+                .success(function (order) {
+                    init();
                 })
         }
 
