@@ -4,12 +4,12 @@ module.exports = function (app, eventModel) {
     app.get("/api/user/:hostId/event", findEventsForUser);
     app.get("/api/guest/event/guests/:eventId", findAllGuestsForEvent);
     app.get("/api/guest/event/products/:eventId", findAllProductsForEvent);
-    app.get("/api/guest/event/services/:eventId", findAllServicesForEvent)
+    app.get("/api/guest/event/orders/:eventId", findAllOrdersForEvent);
     app.get("/api/event/:eventId", findEventById);
     app.put("/api/event/:eventId", updateEvent);
     app.delete("/api/event/:eventId", deleteEvent);
     app.put("/api/event/:eventId/guest/:guestId", addGuest);
-    app.put("/api/event/:eventId/service/:serviceId", addService);
+    app.put("/api/event/:eventId/order/:orderId", addOrder);
     app.put("/api/event/:eventId/product/:productId", addProduct);
     
     function createEvent(req, res) {
@@ -53,11 +53,11 @@ module.exports = function (app, eventModel) {
             });
     }
 
-    function findAllServicesForEvent(req, res) {
+    function findAllOrdersForEvent(req, res) {
         var eventId = req.params.eventId;
-        eventModel.findAllServicesForEvent(eventId)
-            .then(function (services) {
-                res.json(services);
+        eventModel.findAllOrdersForEvent(eventId)
+            .then(function (orders) {
+                res.json(orders);
             }, function (err) {
                 res.sendStatus(500).send(err);
             });
@@ -105,10 +105,10 @@ module.exports = function (app, eventModel) {
             });
     }
     
-    function addService(req, res) {
+    function addOrder(req, res) {
         var eventId = req.params.eventId;
-        var serviceId = req.params.serviceId;
-        eventModel.addService(eventId, serviceId)
+        var orderId = req.params.orderId;
+        eventModel.addOrder(eventId, orderId)
             .then(function (event) {
                 res.sendStatus(200);
             }, function (err) {

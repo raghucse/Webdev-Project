@@ -16,6 +16,13 @@
             promise.success(function (user) {
                vm.user = user;
             });
+
+            UserService
+                .findAllUsers()
+                .success(function (users) {
+                    vm.allusers = users;
+                    console.log(vm.allusers);
+                })
         }
         init();
 

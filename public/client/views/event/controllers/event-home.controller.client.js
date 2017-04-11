@@ -31,7 +31,7 @@
                         vm.totalproducts = event.products.length;
                     }
 
-                    if(!event.services.length){
+                    if(!event.orders.length){
                         vm.totalservices = 0;
                     }
                     else {

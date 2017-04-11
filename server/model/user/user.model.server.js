@@ -22,7 +22,8 @@ module.exports = function (mongoose, q) {
         "updateUser" : updateUser,
         "deleteUser" : deleteUser,
         "addWebsite" : addWebsite,
-        "findUserByFacebookId" : findUserByFacebookId
+        "findUserByFacebookId" : findUserByFacebookId,
+        "findAllUsers" : findAllUsers
     };
     return api;
 
@@ -62,6 +63,20 @@ module.exports = function (mongoose, q) {
             }
             else {
                 deferred.resolve(user);
+            }
+        });
+        return deferred.promise;
+    }
+
+    function findAllUsers() {
+        var deferred = q.defer();
+
+        UserModel.find({},function (err, users) {
+            if(err){
+                deferred.reject(err);
+            }
+            else {
+                deferred.resolve(users);
             }
         });
         return deferred.promise;
