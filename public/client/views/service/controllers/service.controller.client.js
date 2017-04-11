@@ -7,7 +7,7 @@
     app.controller("EditServiceController", EditServiceController);
     app.controller("ServiceViewController", ServiceViewController);
 
-    function ServiceListController($routeParams, ServiceService, OrderService, VendorService) {
+    function ServiceListController($routeParams, ServiceService, OrderService, VendorService, UserService) {
         var vm = this;
 
         vm.vendorId = $routeParams["vid"];
@@ -29,17 +29,32 @@
                 .then(function (orders) {
                     var myOrders = [];
                     var myCurrOrders = [];
-                    var orderlist = orders.data;
-                    for(var i = 0; i < orderlist.length ; i++){
-                        if(!orderlist[i].accepted && !orderlist[i].cancelled){
-                            myOrders.push(orderlist[i]);
-                        }
-                        else if(!orderlist[i].cancelled){
-                            myCurrOrders.push(orderlist[i]);
-                        }
+                    vm.orderlist = orders.data;
+                    for(var i = 0; i < vm.orderlist.length ; i++){
+                        (function (i) {
+                            UserService
+                                .findUserById(vm.orderlist[i].user)
+                                .then(function (user) {
+                                    user = user.data;
+                                    vm.orderlist[i].user = user.username;
+                                });
+                            ServiceService
+                                .findServiceById(vm.orderlist[i].service)
+                                .then(function (service) {
+                                   service = service.data;
+                                   vm.orderlist[i].service = service.name;
+                                });
+                            if(!vm.orderlist[i].accepted && !vm.orderlist[i].cancelled){
+                                myOrders.push(vm.orderlist[i]);
+                            }
+                            else if(!vm.orderlist[i].cancelled){
+                                myCurrOrders.push(vm.orderlist[i]);
+                            }
+                        })(i);
                     }
                     vm.orders = myOrders;
                     vm.currOrders = myCurrOrders;
+                    console.log(vm.orders);
                 });
             ServiceService
                 .findAllServicesForVendor(vm.vendorId)
@@ -59,9 +74,11 @@
         }
 
         function cancelOrder(order) {
-            order.cancelled = true;
+            var newOrder = {};
+            newOrder._id = order._id;
+            newOrder.cancelled = true;
             OrderService
-                .updateOrder(order._id, order)
+                .updateOrder(order._id, newOrder)
                 .success(function (order) {
                     init();
                 })
@@ -111,7 +128,6 @@
             ServiceService
                 .findServiceById(vm.serviceId)
                 .then(function (service) {
-                    console.log(vm.service);
                     vm.service = service.data;
                     if(vm.service.type == 'place'){
                         vm.place = true;

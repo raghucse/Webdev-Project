@@ -62,7 +62,7 @@
         </div>
         <div id="currOrders" class="tab-pane fade">
             <ul class="list-group">
-                <div ng-repeat="order in model.currOrders">
+                <div ng-repeat="order in model.currOrders track by $index">
                     <li class="list-group-item">
                         <div class="row">
                             <a href="#{{order._id}}1" data-toggle="collapse" target="_self">
@@ -101,7 +101,7 @@
         </div>
         <div id="newOrders" class="tab-pane fade">
             <ul class="list-group">
-                <div ng-repeat="order in model.orders">
+                <div ng-repeat="order in model.orders track by $index">
                     <li class="list-group-item">
                         <div class="row">
                             <a href="#{{order._id}}" data-toggle="collapse" target="_self">
@@ -132,9 +132,8 @@
                                     </table>
                                 </div>
                                 <button class="btn btn-success" ng-click="model.acceptOrder(order)">Accept Order</button>
-                                <button class="btn btn-danger" ng-click="model.cancelOrder(order)">Reject Order</button>
+                                <button class="btn btn-danger" ng-click="model.cancelOrder(order)">Cancel Order</button>
                             </div>
-
                         </div>
                     </li>
                 </div>
@@ -247,7 +246,7 @@
 
 
 </div>
-
+</div>
 <div class="bottom-padding"></div>
 
 <nav class="navbar navbar-default navbar-fixed-bottom">
