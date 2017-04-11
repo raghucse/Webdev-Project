@@ -14,7 +14,7 @@
 </nav>
 
 
-<div class="container-fluid">
+<div class="container">
 
     <h3 class="text-center">Services</h3>
     <ul class="nav nav-tabs">
@@ -136,24 +136,24 @@
 
         </div>
         <div id="newServices" class="tab-pane fade">
-            <label for="event-vendor">Enter Vendor name</label>
-            <input class="form-control"
-                   ng-model="model.vendor"
-                   id="event-vendor"
-                   type="text"/>
+            <br>
 
-            <label for="service-type">Select Service Type</label>
-            <select class="form-control" ng-model="model.service.type"
-                    id="service-type">
-                <option value="flower">Flower Service</option>
-                <option value="food">Food Service</option>
-                <option value="place">Place Service</option>
-            </select>
+            <div class="container">
+            <div class="input-group">
+                <input class="form-control"
+                       ng-model="model.vendor"
+                       id="event-vendor"
+                       placeholder="Enter Vendor name"
+                       type="text"/>
+                <span class="input-group-btn">
+                <button class="btn btn-danger" ng-click="model.findService(model.vendor)">
+                    <i class="glyphicon glyphicon-search"></i>
+                </button>
+                </span>
+            </div>
+            </div>
 
 
-            <a class="btn btn-danger btn-block" ng-click="model.findService(model.vendor, model.service.type)">
-                Find Vendor
-            </a>
         </div>
         <ul class="list-group">
             <div ng-repeat="vendor in model.vendors">
