@@ -32,7 +32,7 @@ body {
 }
 
 .navbar-nav li a:hover, .navbar-nav li.active a {
-    color: #f4511e !important;
+    color: white !important;
     background-color: #fff !important;
 }
 .navbar-default .navbar-toggle {

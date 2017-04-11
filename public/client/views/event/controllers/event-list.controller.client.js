@@ -12,6 +12,7 @@
         vm.updateUser = updateUser;
         vm.logout = logout;
         vm.acceptInvitation = acceptInvitation;
+        vm.deleteUser = deleteUser;
 
         function init() {
             InviteService
@@ -94,6 +95,22 @@
                         })
                 })
         }
+
+        function deleteUser(user) {
+            var ans = confirm("Are you sure that you want to UnRegister?")
+            if(ans){
+                UserService
+                    .deleteUser(user._id)
+                    .success(function () {
+                        $location.url("/login");
+                    })
+                    .error(function () {
+                        vm.error = "Unable to UnRegister User";
+                    })
+            }
+
+        }
+
 
     }
 })();

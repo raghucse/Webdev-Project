@@ -37,12 +37,14 @@
                                     ServiceService
                                         .findServiceById(serviceid)
                                         .success(function (service) {
+
                                             serviceList.push(service.name);
                                         });
                                 });
                         })(i);
                     }
                     vm.services = serviceList;
+                    console.log(vm.penOrders);
                 });
         }
         init();
