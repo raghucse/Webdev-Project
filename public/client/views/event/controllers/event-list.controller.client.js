@@ -4,7 +4,7 @@
         .module("WebAppMaker")
         .controller("EventListController", EventListController);
 
-    function EventListController($routeParams, EventService, UserService, InviteService) {
+    function EventListController($routeParams, EventService, UserService, InviteService, $rootScope, $location) {
         var vm = this;
         vm.hostID = $routeParams['hid'];
 
@@ -90,7 +90,7 @@
                     InviteService
                         .updateInvite(invite._id, myinvitation)
                         .success(function (updatedInvitation) {
-                            console.log("invitation accepted");
+                            init();
                         })
                 })
         }
