@@ -24,6 +24,14 @@ module.exports = function (mongoose) {
             next
         );
 
+        this.model('OrderModel')
+            .find({service: this._id }, function (err, orders) {
+                orders.forEach(function(order){
+                    order.remove(function(err){
+                    });
+                })
+            });
+
     });
 
     return ServiceSchema;

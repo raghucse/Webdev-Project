@@ -23,6 +23,14 @@ module.exports = function (mongoose) {
                 })
             });
 
+        this.model('InviteModel')
+            .find({event: this._id }, function (err, invites) {
+                invites.forEach(function(invite){
+                    invite.remove(function(err){
+                    });
+                })
+            });
+
         this.model('OrderModel')
             .find({user: this.host }, function (err, orders) {
                 orders.forEach(function(order){
