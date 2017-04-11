@@ -65,9 +65,11 @@
         init();
 
         function acceptOrder(order) {
-            order.accepted = true;
+            var newOrder = {};
+            newOrder._id = order._id;
+            newOrder.accepted = true;
             OrderService
-                .updateOrder(order._id, order)
+                .updateOrder(order._id, newOrder)
                 .success(function (order) {
                     init();
                 })
