@@ -23,6 +23,7 @@ module.exports = function (app, userModel) {
     app.post('/api/user/register', register);
     app.get("/api/user", findUser);
     app.get("/api/user/:userID", findUserByID);
+    app.get("/api/admin/allusers", findAllUsers);
     app.put("/api/user/:userID", updateUser);
     app.post("/api/user", createUser);
     app.delete("/api/user/:userID", deleteUser);
@@ -174,6 +175,7 @@ module.exports = function (app, userModel) {
     function createUser(req, res) {
         var newUser = req.body;
         newUser.password = bcrypt.hashSync(newUser.password);
+        newUser.type = "USER";
         userModel.createUser(newUser)
             .then(function (user) {
                 res.json(user);
@@ -199,6 +201,21 @@ module.exports = function (app, userModel) {
             .then(function (user) {
                 if(user.length != 0){
                     res.json(user);
+                }
+                else{
+                    res.sendStatus(500).send('err');
+                }
+            }, function (err) {
+                res.sendStatus(500).send('err');
+
+            });
+    }
+
+    function findAllUsers(req, res) {
+        userModel.findAllUsers()
+            .then(function (users) {
+                if(users.length != 0){
+                    res.json(users);
                 }
                 else{
                     res.sendStatus(500).send('err');

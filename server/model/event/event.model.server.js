@@ -8,12 +8,12 @@ module.exports = function (mongoose, q) {
         "findAllEventsForUser": findAllEventsForUser,
         "findAllGuestsForEvent" : findAllGuestsForEvent,
         "findAllProductsForEvent" : findAllProductsForEvent,
-        "findAllServicesForEvent" : findAllServicesForEvent,
+        "findAllOrdersForEvent" : findAllOrdersForEvent,
         "findEventById": findEventById,
         "updateEvent": updateEvent,
         "deleteEvent": deleteEvent,
         "addGuest": addGuest,
-        "addService": addService,
+        "addOrder": addOrder,
         "addProduct": addProduct 
     };
 
@@ -72,14 +72,14 @@ module.exports = function (mongoose, q) {
         return deferred.promise;
     }
 
-    function findAllServicesForEvent(eventId) {
+    function findAllOrdersForEvent(eventId) {
         var deferred = q.defer();
-        EventModel.find({_id: eventId}, function (err, services) {
+        EventModel.find({_id: eventId}, function (err, orders) {
             if(err){
                 deferred.reject(err);
             }
             else {
-                deferred.resolve(services);
+                deferred.resolve(orders);
             }
         });
         return deferred.promise;
@@ -141,14 +141,14 @@ module.exports = function (mongoose, q) {
         return deferred.promise;
     }
     
-    function addService(eventId, serviceId) {
+    function addOrder(eventId, orderId) {
         var deferred = q.defer();
         EventModel.findById(eventId, function (err, event) {
             if(err){
                 deferred.reject(err);
             }
             else {
-                event.services.push(serviceId);
+                event.orders.push(orderId);
                 event.save();
                 deferred.resolve();
             }

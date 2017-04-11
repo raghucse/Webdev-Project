@@ -7,7 +7,7 @@ module.exports = function (mongoose) {
         location: String,
         date: String,
         time: String,
-        services: [{type:mongoose.Schema.Types.ObjectId, ref: 'ServiceModel'}],
+        orders: [{type:mongoose.Schema.Types.ObjectId, ref: 'OrderModel'}],
         products: [{type:mongoose.Schema.Types.ObjectId, ref: 'ShoppingModel'}],
         guests : [{type:mongoose.Schema.Types.ObjectId, ref: 'UserModel'}],
         dateCreated: { type: Date, default: Date.now }

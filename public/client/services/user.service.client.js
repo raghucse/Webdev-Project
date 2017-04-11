@@ -14,6 +14,7 @@
             "deleteUser" : deleteUser,
             "addWebsite" : addWebsite,
             "login" : login,
+            "findAllUsers" : findAllUsers,
             "logout" : logout,
             "register" : register
         };
@@ -57,6 +58,10 @@
 
         function addWebsite(userId, websiteId) {
             return $http.put("/api/user/"+userId+"/website/"+websiteId);
+        }
+
+        function findAllUsers() {
+            return $http.get("/api/admin/allusers");
         }
     }
 
