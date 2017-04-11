@@ -7,7 +7,7 @@
     app.controller("EditServiceController", EditServiceController);
     app.controller("ServiceViewController", ServiceViewController);
 
-    function ServiceListController($routeParams, ServiceService, OrderService, VendorService, UserService) {
+    function ServiceListController($routeParams, ServiceService, OrderService, VendorService, UserService, $location) {
         var vm = this;
 
         vm.vendorId = $routeParams["vid"];
@@ -85,6 +85,7 @@
         }
 
         function update() {
+            vm.vendor.cityname = angular.lowercase(vm.vendor.cityname);
             var vendorSaved = vm.vendor;
             VendorService
                 .updateVendor(vm.vendorId, vm.vendor)
@@ -123,7 +124,7 @@
         vm.serviceId = $routeParams["sid"];
         vm.vendorId = $routeParams["vid"];
 
-        console.log(vm.serviceId);
+
         function init() {
             ServiceService
                 .findServiceById(vm.serviceId)

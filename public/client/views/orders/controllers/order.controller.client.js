@@ -26,7 +26,7 @@
         vm.orderId = $routeParams["sid"];
         vm.serviceId = $routeParams["vid"];
 
-        console.log(vm.orderId);
+
         function init() {
             OrderOrder
                 .findOrderById(vm.orderId)

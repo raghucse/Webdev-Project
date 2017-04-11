@@ -12,6 +12,7 @@
 
         vm.findService = findService;
         vm.cancelOrder = cancelOrder;
+        vm.findServiceByCity = findServiceByCity;
 
         function init() {
             EventService
@@ -59,7 +60,7 @@
         }
         init();
 
-        function findService(vendor, servicetype) {
+        function findService(vendor) {
             VendorService
                 .findVendorByVendorname(vendor)
                 .success(function (vendor) {
@@ -80,6 +81,35 @@
                         vm.vendors = vendors;
                 });
         }
+
+        function findServiceByCity(cityname) {
+
+            cityname = angular.lowercase(cityname);
+            VendorService
+                .findVendorByCity(cityname)
+                .success(function (vendors) {
+                    var vendorList = vendors;
+                    var vendorsByCity = [];
+                    for(var i = 0; i < vendorList.length ; i++){
+
+                        (function (i) {
+                            var vendor = {
+                            };
+                            vendor["name"] = vendorList[i].vendorname;
+                            ServiceService
+                                .findAllServicesForVendor(vendorList[i]._id)
+                                .success(function (services) {
+                                    vendor["services"] = services;
+                                });
+                            vendorsByCity.push(vendor);
+                        })(i);
+
+                    }
+                    vm.vendors = vendorsByCity;
+                    console.log(vendorsByCity);
+                })
+        }
+
 
         function cancelOrder(order) {
             var newOrder = {};
@@ -120,6 +150,7 @@
             var order ={};
             order.platesrequested = platesrequested;
             order.cost = platesrequested * vm.service.perPlateCost;
+            order.cancelled = false;
             OrderService
                 .createOrder(serviceId, vm.hostId, vm.vendorId, order)
                 .success(function (order) {

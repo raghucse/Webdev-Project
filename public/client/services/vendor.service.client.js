@@ -11,6 +11,7 @@
             "createVendor": createVendor,
             "findVendorById": findVendorById,
             "findVendorByVendorname": findVendorByVendorname,
+            "findVendorByCity" : findVendorByCity,
             "login": login,
             "logout":logout,
             "findVendorByCredentials": findVendorByCredentials,
@@ -43,6 +44,10 @@
 
         function findVendorByVendorname(vendorname) {
             return $http.get("/api/vendor?vendorname="+vendorname);
+        }
+
+        function findVendorByCity(cityname) {
+            return $http.get("/api/vendor/city/name?=" + cityname);
         }
 
         function findVendorByCredentials(vendorname, password) {

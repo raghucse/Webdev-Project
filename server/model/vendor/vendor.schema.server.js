@@ -11,6 +11,7 @@ module.exports = function (mongoose) {
         lastName: String,
         email: String,
         phone: String,
+        cityname: String,
         services: [{type:mongoose.Schema.Types.ObjectId, ref: 'ServiceModel'}],
         dateCreated: { type: Date, default: Date.now },
         facebook: {
