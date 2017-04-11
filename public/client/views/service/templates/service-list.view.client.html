@@ -37,6 +37,11 @@
                 New Orders
             </a>
         </li>
+        <li>
+            <a data-toggle="tab" href="#vendorProfile" target="_self">
+                My Profile
+            </a>
+        </li>
     </ul>
 
     <div class="tab-content">
@@ -135,6 +140,107 @@
                 </div>
             </ul>
         </div>
+
+        <div id="vendorProfile" class="tab-pane fade">
+
+            <div ng-show="model.error" class="alert alert-danger">
+                {{model.error}}
+            </div>
+
+            <div ng-show="model.message" class="alert alert-success">
+                {{model.message}}
+            </div>
+            <br>
+            <br>
+            <div id="profile">
+                <div class="row">
+                    <div class="col-md-4 well" id="leftPanel">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div>
+                                    <img src="http://lorempixel.com/200/200/abstract/1/"
+                                         alt="Texto Alternativo"
+                                         class="img-circle img-thumbnail">
+                                    <h2>{{model.vendor.vendorname}}</h2>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-8 well" id="rightPanel">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <h2>Edit your profile.<small>It's always easy</small></h2>
+                                <hr class="colorgraph">
+                                <div class="row">
+                                    <div class="col-xs-12 col-sm-6 col-md-6">
+                                        <div class="form-group">
+                                            <input class="form-control input-lg"
+                                                   ng-model="model.vendor.firstName"
+                                                   placeholder="First Name"
+                                                   type="text"/>
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-12 col-sm-6 col-md-6">
+                                        <div class="form-group">
+                                            <input class="form-control input-lg"
+                                                   ng-model="model.vendor.lastName"
+                                                   placeholder="Last Name"
+                                                   type="text"/></div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <input class="form-control input-lg"
+                                           ng-model="model.vendor.email"
+                                           placeholder="email"
+                                           id="profile-mail"
+                                           type="email"/>
+                                </div>
+                                <div class="row">
+                                    <div class="col-xs-12 col-sm-6 col-md-6">
+                                        <div class="form-group">
+                                            <input type="password"
+                                                   ng-model="model.password"
+                                                   class="form-control input-lg"
+                                                   placeholder="Password"/>
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-12 col-sm-6 col-md-6">
+                                        <div class="form-group">
+                                            <input type="password"
+                                                   name="password_confirmation"
+                                                   id="password_confirmation"
+                                                   class="form-control input-lg"
+                                                   placeholder="Confirm Password"/>
+                                        </div>
+                                    </div>
+                                </div>
+                                <hr class="colorgraph">
+                                <div class="row">
+                                    <div class="col-xs-12 col-md-4">
+                                        <a ng-click="model.logout()"
+                                           class="btn btn-danger btn-block btn-lg">
+                                            logout
+                                        </a>
+
+                                    </div>
+                                    <div class="col-xs-12 col-md-4">
+                                        <a ng-click="model.update(model.vendor)"
+                                           class="btn btn-success btn-block btn-lg">
+                                            Save
+                                        </a>
+                                    </div>
+                                    <div class="col-xs-12 col-md-4">
+                                        <a ng-click="model.deleteVendor(model.vendor)"
+                                           class="btn btn-danger btn-block btn-lg">
+                                            Delete Account
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
     </div>
 
 

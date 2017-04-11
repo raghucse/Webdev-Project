@@ -7,14 +7,22 @@
     app.controller("EditServiceController", EditServiceController);
     app.controller("ServiceViewController", ServiceViewController);
 
-    function ServiceListController($routeParams, ServiceService, OrderService) {
+    function ServiceListController($routeParams, ServiceService, OrderService, VendorService) {
         var vm = this;
 
         vm.vendorId = $routeParams["vid"];
 
         vm.acceptOrder = acceptOrder;
+        vm.update =  update;
+        vm.deleteVendor = deleteVendor;
+        vm.logout = logout;
 
         function init() {
+            var promise = VendorService.findVendorById(vm.vendorId);
+            promise.then(function(vendor){
+                vm.vendor = vendor.data;
+            });
+
             OrderService
                 .findAllOrdersForVendor(vm.vendorId)
                 .then(function (orders) {
@@ -46,6 +54,39 @@
                 .updateOrder(order._id, order)
                 .success(function (order) {
                 })
+        }
+
+        function update() {
+            var vendorSaved = vm.vendor;
+            VendorService
+                .updateVendor(vm.vendorId, vm.vendor)
+                .then(function (vendor) {
+                    vm.message = "Vendor successfully updated";
+                    vm.vendor = vendorSaved;
+                }, function (vendor) {
+                    vm.error = "Unable to update vendor";
+                });
+        }
+
+        function logout() {
+            VendorService
+                .logout()
+                .then(function (status) {
+                    $location.url("/login");
+                })
+        }
+
+        function deleteVendor(vendor) {
+            var cfrm = confirm("Are you sure that you want to delete?")
+            if(cfrm){
+                VendorService
+                    .deleteVendor(vendor._id)
+                    .then(function () {
+                        $location.url("/login");
+                    },function () {
+                        vm.error = "Unable to UnRegister Vendor";
+                    });
+            }
         }
     }
 
