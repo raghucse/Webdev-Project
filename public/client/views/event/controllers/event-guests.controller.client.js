@@ -19,7 +19,7 @@
                     vm.event = event;
                     var myguests = [];
                     var guestsList = event.guests;
-
+                    vm.allGuests = event.guests;
                     for(var i = 0; i < guestsList.length ; i++){
                         vm.index = i;
                         UserService
@@ -29,12 +29,13 @@
                             });
                     }
                     vm.guests = myguests;
+
                 });
 
             InviteService
                 .findAllInvitesForHost(vm.hostID)
                 .success(function (invites) {
-                    console.log(invites.length);
+
                     var acceptedGuests = [];
                     var pennGuests = [];
                     for(var i = 0; i < invites.length; i++){
@@ -43,7 +44,6 @@
                             UserService
                                 .findUserById(invites[i].receiver)
                                 .then(function (user) {
-
                                     user = user.data;
                                     acceptedGuests.push(user.username);
                                 })
@@ -77,15 +77,31 @@
         }
 
         function createInvite() {
-            InviteService
-                .createInvite(vm.hostID, vm.guestID, vm.eventID)
-                .success(function (invite) {
-                EventService
-                    .addGuest(vm.eventID, vm.guestID)
-                    .success(function (invitation) {
-                        vm.invitationsuccess = "Invitation Sent";
+            for(var g in vm.allGuests){
+                if(vm.allGuests[g] == vm.guestID){
+                    var guestPresent = true;
+                }
+                if(vm.guestID == vm.hostID){
+                    var selfInvite = true;
+                }
+            }
+            if(!guestPresent && !selfInvite){
+                InviteService
+                    .createInvite(vm.hostID, vm.guestID, vm.eventID)
+                    .success(function (invite) {
+                        EventService
+                            .addGuest(vm.eventID, vm.guestID)
+                            .success(function (invitation) {
+                                vm.invitationstatus = "Invitation Sent";
+                            });
                     });
-                });
+            }else if(guestPresent && !selfInvite){
+                vm.invitationstatus = "Invitation Already Sent to this user"
+            }else if(!guestPresent && selfInvite){
+                vm.invitationstatus = "You cannot send Invitation to yourself"
+            }
+
+
         }
 
 

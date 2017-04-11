@@ -1,19 +1,14 @@
 
 <nav class="navbar navbar-default navbar-fixed-top">
     <div class="container-fluid">
-        <div class="navbar-text pull-left">
-            <a href="#/host/{{model.hostID}}">
-                <span class="glyphicon glyphicon-chevron-left"></span>
-            </a>
-        </div>
         <div class="navbar-text pull-right">
             <a href="#/host/{{model.hostID}}/event/new">
-                <span class="glyphicon glyphicon-plus"></span>
+                PLAN NEW EVENT
             </a>
         </div>
         <div class="navbar-header">
             <a class="navbar-brand" href="">
-                Events
+                Events Home
             </a>
         </div>
     </div>
@@ -21,44 +16,178 @@
 
 <div class="container-fluid">
 
-    <div class="btn-group" role="group">
-        <a href="#/host/{{model.hostID}}/event/home" class="btn btn-default">Events</a>
-        <a href="#/host/{{model.hostID}}/event/profile" class="btn btn-default">Profile</a>
-        <a href="#host/{{model.hostID}}/event/invites" class="btn btn-default">Invitations</a>
-    </div>
-
-    <ul class="list-group">
-        <li class="list-group-item">
-            <div class="row">
-                <div class="col-xs-6">
-                    Event Name
-                </div>
-
-                <div class="col-xs-6">
-                    <a href="#/host/{{model.hostID}}/event/new" class="pull-right">
-                        <span class="glyphicon glyphicon-plus"></span>
-                    </a>
-                </div>
-            </div>
+    <ul class="nav nav-tabs">
+        <li class="active">
+            <a data-toggle="tab" href="#myevents" target="_self">
+                My Events
+            </a>
         </li>
-
-        <li ng-repeat="event in model.events" class="list-group-item">
-            <div class="row">
-                <div class="col-xs-6">
-                    <a href="#/host/{{event.host}}/event/{{event._id}}/home">
-                        {{event.name}}
-                    </a>
-                </div>
-                <div class="col-xs-6">
-                    <a href="#/host/{{event.host}}/event/{{event._id}}" class="pull-right">
-                        <span class="glyphicon glyphicon-cog"></span>
-                    </a>
-                </div>
-            </div>
+        <li>
+            <a data-toggle="tab" href="#myprofile" target="_self">
+                My Profile
+            </a>
+        </li>
+        <li>
+            <a data-toggle="tab" href="#myinvitations" target="_self">
+                My Invitations
+            </a>
         </li>
     </ul>
 
 
+    <div class="tab-content">
+        <div id="myevents" class="tab-pane fade in active">
+            <ul class="list-group">
+                <li class="list-group-item">
+                    <div class="row">
+                        <div class="col-xs-6">
+                            Event Name
+                        </div>
+
+                        <div class="col-xs-6">
+                            <a href="#/host/{{model.hostID}}/event/new" class="pull-right">
+                                <span class="glyphicon glyphicon-plus"></span>
+                            </a>
+                        </div>
+                    </div>
+                </li>
+
+                <li ng-repeat="event in model.events" class="list-group-item">
+                    <div class="row">
+                        <div class="col-xs-6">
+                            <a href="#/host/{{event.host}}/event/{{event._id}}/home">
+                                {{event.name}}
+                            </a>
+                        </div>
+                        <div class="col-xs-6">
+                            <a href="#/host/{{event.host}}/event/{{event._id}}" class="pull-right">
+                                <span class="glyphicon glyphicon-cog"></span>
+                            </a>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+        <div id="myprofile" class="tab-pane fade">
+
+            <div ng-show="model.error" class="alert alert-danger">
+                {{model.error}}
+            </div>
+
+            <div ng-show="model.message" class="alert alert-success">
+                {{model.message}}
+            </div>
+            <br>
+            <br>
+            <div id="profile">
+            <div class="row">
+                <div class="col-md-4 well" id="leftPanel">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div>
+                                <img src="http://lorempixel.com/200/200/abstract/1/"
+                                     alt="Texto Alternativo"
+                                     class="img-circle img-thumbnail">
+                                <h2>{{model.user.username}}</h2>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-8 well" id="rightPanel">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <h2>Edit your profile.<small>It's always easy</small></h2>
+                            <hr class="colorgraph">
+                            <div class="row">
+                                <div class="col-xs-12 col-sm-6 col-md-6">
+                                    <div class="form-group">
+                                        <input class="form-control input-lg"
+                                               ng-model="model.user.firstName"
+                                               id="profile-fname"
+                                               placeholder="First Name"
+                                               type="text"/>
+                                    </div>
+                                </div>
+                                <div class="col-xs-12 col-sm-6 col-md-6">
+                                    <div class="form-group">
+                                        <input class="form-control input-lg"
+                                               ng-model="model.user.lastName"
+                                               id="profile-lname"
+                                               placeholder="Last Name"
+                                               type="text"/></div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <input class="form-control input-lg"
+                                               ng-model="model.user.email"
+                                               placeholder="email"
+                                               id="profile-mail"
+                                               type="email"/>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-xs-12 col-sm-6 col-md-6">
+                                            <div class="form-group">
+                                                <input type="password"
+                                                       ng-model="model.password"
+                                                       class="form-control input-lg"
+                                                       placeholder="Password"/>
+                                            </div>
+                                        </div>
+                                        <div class="col-xs-12 col-sm-6 col-md-6">
+                                            <div class="form-group">
+                                                <input type="password"
+                                                       name="password_confirmation"
+                                                       id="password_confirmation"
+                                                       class="form-control input-lg"
+                                                       placeholder="Confirm Password"/>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <hr class="colorgraph">
+                                    <div class="row">
+                                        <div class="col-xs-12 col-md-6">
+                                            <a ng-click="model.logout()"
+                                               class="btn btn-danger btn-block btn-lg">
+                                                logout
+                                            </a>
+
+                                        </div>
+                                        <div class="col-xs-12 col-md-6">
+                                            <a ng-click="model.updateUser(model.user)"
+                                               class="btn btn-success btn-block btn-lg">
+                                                Save
+                                            </a>
+                                        </div>
+                                    </div>
+                            </div>
+                        </div>
+                    </div>
+            </div>
+        </div>
+        </div>
+
+        <div id="myinvitations" class="tab-pane fade">
+            <ul class="list-group-item">
+                <div ng-repeat="invite in model.invites track by $index">
+                    <li class="list-group-item">
+                        <div class="row">
+                            <p>{{invite.sender}} invited you to his
+                                <a href="#/guest/{{model.hostID}}/event/{{invite.event}}">
+                                    {{invite.eventname}}
+                                </a>
+                            </p>
+                            <button class="btn btn-success" ng-click="model.acceptInvitation(invite)">
+                                Accept Invitation
+                            </button>
+                            <button class="btn btn-danger" ng-click="model.cancelInvitation(invite)">
+                                Cancel Invitation
+                            </button>
+                        </div>
+                    </li>
+                </div>
+            </ul>
+        </div>
+    </div>
 </div>
 
 <nav class="navbar navbar-default navbar-fixed-bottom">

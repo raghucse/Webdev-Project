@@ -32,7 +32,13 @@
                         })(i);
 
                     }
-                    vm.invites = invites;
+                    var unrepliedInvites = [];
+                    for(var j =0 ; j < invites.length; j++){
+                        if(!invites[j].replied){
+                            unrepliedInvites.push(invites[j]);
+                        }
+                    }
+                    vm.invites = unrepliedInvites;
                 });
         }
         init();

@@ -23,7 +23,7 @@
             return $http.post("/api/user/login/user", user);
         }
 
-        function logout(user) {
+        function logout() {
             return $http.post("/api/user/logout");
         }
 
