@@ -35,7 +35,7 @@
                         vm.totalservices = 0;
                     }
                     else {
-                        vm.totalservices = event.services.length;
+                        vm.totalservices = event.orders.length;
                     }
                 });
             EventService

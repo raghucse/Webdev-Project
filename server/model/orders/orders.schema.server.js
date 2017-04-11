@@ -8,6 +8,7 @@ module.exports = function (mongoose) {
         user: {type: mongoose.Schema.Types.ObjectId, ref: 'UserModel'},
         service: {type: mongoose.Schema.Types.ObjectId, ref: 'ServiceModel'},
         accepted: Boolean,
+        cancelled: Boolean,
         date: String,
         quote: String,
         cost: Number,
