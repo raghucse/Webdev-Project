@@ -47,7 +47,7 @@
         }
 
         function findVendorByCity(cityname) {
-            return $http.get("/api/vendor/city/name?=" + cityname);
+            return $http.get("/api/vendor/city/name?name=" + cityname);
         }
 
         function findVendorByCredentials(vendorname, password) {

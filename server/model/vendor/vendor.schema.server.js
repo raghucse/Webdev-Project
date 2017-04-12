@@ -2,9 +2,8 @@ module.exports = function (mongoose) {
 
     var q = require('q');
 
-    var types = ['USER', 'VENDOR'];
+
     var VendorSchema = mongoose.Schema({
-        type: {type: String, enum: types},
         vendorname: String,
         password: String,
         firstName: String,

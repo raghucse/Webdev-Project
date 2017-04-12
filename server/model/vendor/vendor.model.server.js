@@ -101,12 +101,8 @@ module.exports = function (mongoose, q) {
     function updateVendor(vendorId, vendor) {
         var deferred = q.defer();
         VendorModel.update(
-            { _id : vendorId },
-            {
-                firstName: vendor.firstName,
-                lastName: vendor.lastName,
-                email: vendor.email
-            }, function (err, vendor) {
+            { _id : vendorId }, vendor
+            , function (err, vendor) {
                 if(err){
                     deferred.reject(err);
                 }

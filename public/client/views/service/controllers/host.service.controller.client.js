@@ -57,15 +57,16 @@
                         })(i);
                     }
                     vm.services = serviceList;
-                    console.log(vm.penOrders);
                 });
         }
         init();
 
         function findService(vendor) {
+            vm.vendors= undefined;
             VendorService
                 .findVendorByVendorname(vendor)
                 .success(function (vendor) {
+
                     var vendorList = vendor;
                     var vendors = [];
                     for(var i = 0; i < vendorList.length ; i++){
@@ -85,29 +86,33 @@
         }
 
         function findServiceByCity(cityname) {
+            vm.vendors = undefined;
             if(cityname != ""){
                 cityname = angular.lowercase(cityname);
+
+                vm.vendors = undefined;
                 VendorService
                     .findVendorByCity(cityname)
                     .success(function (vendors) {
-                        var vendorList = vendors;
-                        var vendorsByCity = [];
-                        for(var i = 0; i < vendorList.length ; i++){
-
-                            (function (i) {
-                                var vendor = {
-                                };
-                                vendor["name"] = vendorList[i].vendorname;
-                                ServiceService
-                                    .findAllServicesForVendor(vendorList[i]._id)
-                                    .success(function (services) {
-                                        vendor["services"] = services;
-                                    });
-                                vendorsByCity.push(vendor);
-                            })(i);
-
+                        if(vendors){
+                            var vendorList = vendors;
+                            var vendorsByCity = [];
+                            for(var i = 0; i < vendorList.length ; i++){
+                                (function (i){
+                                    var vendor = {
+                                    };
+                                    vendor["name"] = vendorList[i].vendorname;
+                                    ServiceService
+                                        .findAllServicesForVendor(vendorList[i]._id)
+                                        .success(function (services) {
+                                            vendor["services"] = services;
+                                        });
+                                    vendorsByCity.push(vendor);
+                                })(i);
+                            }
+                            vm.vendors = vendorsByCity;
                         }
-                        vm.vendors = vendorsByCity;
+
                     })
             }
         }

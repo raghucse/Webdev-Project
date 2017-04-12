@@ -22,6 +22,7 @@
             var promise = VendorService.findVendorById(vm.vendorId);
             promise.then(function(vendor){
                 vm.vendor = vendor.data;
+                console.log(vm.vendor);
             });
 
             OrderService
@@ -88,12 +89,11 @@
 
         function update() {
             vm.vendor.cityname = angular.lowercase(vm.vendor.cityname);
-            var vendorSaved = vm.vendor;
+            console.log(vm.vendor);
             VendorService
                 .updateVendor(vm.vendorId, vm.vendor)
                 .then(function (vendor) {
                     vm.message = "Vendor successfully updated";
-                    vm.vendor = vendorSaved;
                 }, function (vendor) {
                     vm.error = "Unable to update vendor";
                 });
