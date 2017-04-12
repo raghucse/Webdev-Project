@@ -120,16 +120,11 @@
             </div>
 
             <label for="event-date">Event Data</label>
-            <div class="input-group date" data-provide="datepicker">
                 <input id="event-date"
                        name="date"
                        type="text"
                        class="form-control"
                        ng-model="model.event.date" required/>
-                <div class="input-group-addon">
-                    <span class="glyphicon glyphicon-th"></span>
-                </div>
-            </div>
 
             <div class="error" ng-show="newevent.date.$invalid && newevent.$submitted">
                 <li>Event Date is required</li>

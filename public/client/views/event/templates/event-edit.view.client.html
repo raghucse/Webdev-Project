@@ -99,16 +99,13 @@
             </div>
 
             <label for="edit-event-date">Event Data</label>
-            <div class="input-group date" data-provide="datepicker">
-                <input id="edit-event-date"
+            <input id="edit-event-date"
                        name="editDate"
                        type="text"
                        class="form-control"
                        ng-model="model.event.date" required/>
-                <div class="input-group-addon">
-                    <span class="glyphicon glyphicon-th"></span>
-                </div>
-            </div>
+
+
 
             <div class="error" ng-show="editevent.editDate.$invalid && editevent.$submitted">
                 <li>Event needs to have a Date</li>
