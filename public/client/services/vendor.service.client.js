@@ -32,7 +32,7 @@
         }
 
         function register(vendor) {
-            return $http.post("/api/register", vendor);
+            return $http.post("/api/vendor/register", vendor);
         }
 
         function createVendor(newVendor) {

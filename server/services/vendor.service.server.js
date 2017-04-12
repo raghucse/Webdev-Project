@@ -12,16 +12,16 @@ module.exports = function(app, vendorModel) {
     };
     var bcrypt = require("bcrypt-nodejs");
 
-    passport.use(new LocalStrategy(localStrategy));
+    passport.use('vendor', new LocalStrategy(localStrategy));
     passport.use(new FacebookStrategy(facebookConfig, facebookStrategy));
 
     var auth = authorized;
 
-    app.post('/vendor/login', passport.authenticate('local'), login);
+    app.post('/vendor/login', passport.authenticate('vendor','local'), login);
     app.get ('/auth/facebook', passport.authenticate('facebook', { scope : 'email' }));
     app.post('/api/logout',logout);
-    app.get('/api/loggedin',loggedin);
-    app.post ('/api/register', register);
+    app.get('/api/vendor/loggedin',loggedin);
+    app.post ('/api/vendor/register', register);
     app.get("/api/vendor", findVendor);
     app.get("/api/vendor/:vendorId", findVendorById);
     app.get("/api/vendor/city/name", findVendorByCity);
@@ -88,10 +88,10 @@ module.exports = function(app, vendorModel) {
     function localStrategy(username, password, done) {
         vendorModel.findVendorByVendorname(username)
             .then(
-                function(vendor) {
-                    console.log(vendor[0]);
-                    if(vendor[0] && bcrypt.compareSync(password, vendor[0].password)) {
-                        return done(null, vendor);
+                function(user) {
+                    if(user[0] && bcrypt.compareSync(password, user[0].password)) {
+                        console.log(user[0]);
+                        return done(null, user);
                     } else {
                         return done(null, false);
                     }
@@ -102,55 +102,22 @@ module.exports = function(app, vendorModel) {
             );
     }
 
-    passport.serializeUser(serializeVendor);
-    passport.deserializeUser(deserializeVendor);
-
-    function serializeVendor(vendor, done) {
-        done(null, vendor);
-    }
-
-    function deserializeVendor(vendor, done) {
-        if(vendor[0]){
-            vendorModel
-                .findVendorById(vendor[0]._id)
-                .then(
-                    function(vendor){
-                        done(null, vendor);
-                    },
-                    function(err){
-                        done(err, null);
-                    }
-                );
-        }
-        else
-        {
-            vendorModel
-                .findVendorById(vendor._id)
-                .then(
-                    function(vendor){
-                        done(null, vendor);
-                    },
-                    function(err){
-                        done(err, null);
-                    }
-                );
-        }
-
-    }
-
     function register (req, res) {
         var vendor = req.body;
         vendor.password = bcrypt.hashSync(vendor.password);
+        console.log("Register1"+vendor);
         vendorModel
             .createVendor(vendor)
             .then(
-                function(vendor){
-                    if(vendor){
-                        req.login(vendor, function(err) {
+                function(user){
+                    console.log("Register1"+user);
+                    if(user){
+                        req.login(user, function(err) {
                             if(err) {
                                 res.status(400).send(err);
                             } else {
-                                res.json(vendor);
+                                console.log("Register2"+user);
+                                res.json(user);
                             }
                         });
                     }

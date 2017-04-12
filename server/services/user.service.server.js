@@ -1,5 +1,5 @@
 
-module.exports = function (app, userModel) {
+module.exports = function (app, userModel, vendorModel) {
 
     var bcrypt = require("bcrypt-nodejs");
 
@@ -30,6 +30,7 @@ module.exports = function (app, userModel) {
     app.put("/api/user/:userId/website/:websiteId", addWebsite);
     app.get('/api/loggedin', loggedin);
     app.get('/auth/facebook', passport.authenticate('facebook', { scope : 'email' }));
+
     app.get('/auth/facebook/callback',
         passport.authenticate('facebook', {
             failureRedirect: '/'
@@ -40,26 +41,9 @@ module.exports = function (app, userModel) {
     function authorized (req, res, next) {
         if (!req.isAuthenticated()) {
             res.send(401);
-        }else {
+        } else {
             next();
         }
-    }
-
-    function localStrategy(username, password, done) {
-        userModel
-            .findUserByUsername(username)
-            .then(
-                function(user) {
-                    if(user[0] && bcrypt.compareSync(password, user[0].password)) {
-                        return done(null, user);
-                    } else {
-                        return done(null, false);
-                    }
-                },
-                function(err) {
-                    if (err) { return done(err); }
-                }
-            );
     }
 
     function facebookStrategy(token, refreshToken, profile, done) {
@@ -100,39 +84,87 @@ module.exports = function (app, userModel) {
             );
     }
 
+
+    function localStrategy(username, password, done) {
+        userModel.findUserByUsername(username)
+            .then(
+                function(user) {
+                    if(user[0] && bcrypt.compareSync(password, user[0].password)) {
+                        return done(null, user);
+                    } else {
+                        return done(null, false);
+                    }
+                },
+                function(err) {
+                    if (err) { return done(err); }
+                }
+            );
+    }
+
     passport.serializeUser(serializeUser);
     passport.deserializeUser(deserializeUser);
 
     function serializeUser(user, done) {
+        console.log("user serialise"+user);
         done(null, user);
     }
 
     function deserializeUser(user, done) {
+
         if(user[0]){
-            userModel
-                .findUserById(user[0]._id)
-                .then(
-                    function(user){
-                        done(null, user);
-                    },
-                    function(err){
-                        done(err, null);
-                    }
-                );
+            if(user[0].vendorname) {
+                vendorModel
+                    .findVendorById(user[0]._id)
+                    .then(
+                        function (user) {
+                            done(null, user);
+                        },
+                        function (err) {
+                            done(err, null);
+                        }
+                    );
+            }
+            else{
+                userModel
+                    .findUserById(user[0]._id)
+                    .then(
+                        function (user) {
+                            done(null, user);
+                        },
+                        function (err) {
+                            done(err, null);
+                        }
+                    );
+            }
         }
         else
         {
-            userModel
-                .findUserById(user._id)
-                .then(
-                    function(user){
-                        done(null, user);
-                    },
-                    function(err){
-                        done(err, null);
-                    }
-                );
+            if(user.vendorname) {
+                vendorModel
+                    .findVendorById(user._id)
+                    .then(
+                        function (user) {
+                            done(null, user);
+                        },
+                        function (err) {
+                            done(err, null);
+                        }
+                    );
+            }
+            else {
+                userModel
+                    .findUserById(user._id)
+                    .then(
+                        function (user) {
+                            done(null, user);
+                        },
+                        function (err) {
+                            done(err, null);
+                        }
+                    );
+            }
         }
+
     }
 
     function login(req, res) {
@@ -163,6 +195,17 @@ module.exports = function (app, userModel) {
             });
     }
 
+
+
+    function login(req, res) {
+        var user = req.user;
+        res.json(user);
+    }
+
+    function logout(req, res) {
+        req.logOut();
+        res.send(200);
+    }
 
     function loggedin(req, res) {
         res.send(req.isAuthenticated() ? req.user : '0');
