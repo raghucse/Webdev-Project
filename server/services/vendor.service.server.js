@@ -28,6 +28,7 @@ module.exports = function(app, vendorModel) {
     app.delete("/api/vendor/:vendorId",deleteVendor);
     app.post("/api/vendor",createVendor);
     app.put("/api/vendor/:vendorId/service/:serviceId", updateService);
+    app.get("/api/vendor", findAllVendors);
 
     app.get('/auth/facebook/callback',
         passport.authenticate('facebook', {
@@ -250,6 +251,15 @@ module.exports = function(app, vendorModel) {
         vendorModel.updateService(vendorId, serviceId)
             .then(function (vendor) {
                 res.send(200);
+            }, function (err) {
+                res.sendStatus(500).send(err);
+            })
+    }
+
+    function findAllVendors(req, res) {
+        vendorModel.findAllVendors()
+            .then(function (vendors) {
+                res.json(vendors);
             }, function (err) {
                 res.sendStatus(500).send(err);
             })
