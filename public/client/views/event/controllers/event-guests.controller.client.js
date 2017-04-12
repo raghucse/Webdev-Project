@@ -61,10 +61,6 @@
 
                     vm.acceptedGuests = acceptedGuests;
                     vm.pennGuests = pennGuests;
-                    <<<<<<< HEAD
-
-                    =======
-                    >>>>>>> origin/master
                 });
         }
         init();

@@ -185,19 +185,8 @@
 
         function createService() {
 
-            ServiceService
-                .createService(vm.vendorId, vm.service)
-                .then(function (service) {
-                    vm.service = service.data;
-                    VendorService.updateService(vm.vendorId, vm.service._id)
-                        .then(function (status) {
-                            $location.url("/vendor/"+vm.vendorId+"/service");
-                        })
-                });
-          
-            vm.service.city = angular.lowercase(vm.service.city);
             if(vm.service && vm.service.type && vm.service.name && vm.service.city){
-
+                vm.service.city = angular.lowercase(vm.service.city);
                 if(vm.service.type === "food" && vm.service.perPlateCost){
 
                     ServiceService
