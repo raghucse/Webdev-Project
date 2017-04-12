@@ -81,7 +81,6 @@
         }
 
         function acceptInvitation(invite) {
-            console.log(invite);
             InviteService
                 .findInviteById(invite._id)
                 .success(function (invitaton) {

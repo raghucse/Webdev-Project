@@ -44,7 +44,6 @@
         init();
 
         function acceptInvitation(invite) {
-            console.log(invite);
             InviteService
                 .findInviteById(invite._id)
                 .success(function (invitaton) {
@@ -54,7 +53,6 @@
                     InviteService
                         .updateInvite(invite._id, myinvitation)
                         .success(function (updatedInvitation) {
-                            console.log("invitation accepted");
                         })
 
 
