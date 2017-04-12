@@ -13,6 +13,7 @@
         vm.logout = logout;
         vm.acceptInvitation = acceptInvitation;
         vm.deleteUser = deleteUser;
+        vm.cancelInvitation = cancelInvitation;
 
         function init() {
             InviteService
@@ -37,12 +38,17 @@
 
                     }
                     var unrepliedInvites = [];
+                    var upcomingEvents =[];
                     for(var j =0 ; j < invites.length; j++){
                         if(!invites[j].replied){
                             unrepliedInvites.push(invites[j]);
                         }
+                        if(invites[j].accepted){
+                            upcomingEvents.push(invites[j]);
+                        }
                     }
                     vm.invites = unrepliedInvites;
+                    vm.upcomingEvents = upcomingEvents;
                 });
 
             EventService
@@ -87,6 +93,21 @@
                     var myinvitation = invitaton[0];
                     myinvitation.replied = true;
                     myinvitation.accepted = true;
+                    InviteService
+                        .updateInvite(invite._id, myinvitation)
+                        .success(function (updatedInvitation) {
+                            init();
+                        })
+                })
+        }
+
+        function cancelInvitation(invite) {
+            InviteService
+                .findInviteById(invite._id)
+                .success(function (invitaton) {
+                    var myinvitation = invitaton[0];
+                    myinvitation.replied = true;
+                    myinvitation.accepted = false;
                     InviteService
                         .updateInvite(invite._id, myinvitation)
                         .success(function (updatedInvitation) {

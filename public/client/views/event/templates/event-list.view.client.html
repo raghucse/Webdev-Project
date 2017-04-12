@@ -23,6 +23,11 @@
             </a>
         </li>
         <li>
+            <a data-toggle="tab" href="#eventsAttending" target="_self">
+                Events Attending
+            </a>
+        </li>
+        <li>
             <a data-toggle="tab" href="#myprofile" target="_self">
                 My Profile
             </a>
@@ -68,6 +73,25 @@
                 </li>
             </ul>
         </div>
+
+        <div id="eventsAttending" class="tab-pane fade">
+            <ul class="list-group">
+                <li ng-repeat="event in model.upcomingEvents" class="list-group-item">
+                    <div class="row">
+                        <div class="col-xs-6">
+                            Event Name
+                        </div>
+
+                        <div class="col-xs-6">
+                            <a href="#/guest/{{model.hostID}}/event/{{event.event}}">
+                                {{event.eventname}}
+                            </a>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+
         <div id="myprofile" class="tab-pane fade">
 
             <div ng-show="model.error" class="alert alert-danger">
