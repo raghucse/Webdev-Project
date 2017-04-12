@@ -1,9 +1,8 @@
-/**
- * Created by raghu on 2/8/2017.
- */
+
 module.exports =  function(app, ServiceModel) {
     app.get("/api/vendor/:vendorId/service", findAllServicesForVendor);
     app.get("/api/service/:serviceId", findServiceById);
+    app.get("/api/service/city/name", findAllServicesInCity);
     app.put("/api/service/:serviceId", updateService);
     app.delete("/api/service/:serviceId", deleteService);
     app.post("/api/vendor/:vendorId/service", createService);
@@ -37,6 +36,17 @@ module.exports =  function(app, ServiceModel) {
         ServiceModel.findServiceById(serviceId)
             .then(function (service) {
                 res.json(service);
+            }, function (err) {
+                res.sendStatus(500).send(err);
+            })
+    }
+
+    function findAllServicesInCity(req, res) {
+        var cityname = req.query.name;
+
+        ServiceModel.findAllServicesInCity(cityname)
+            .then(function (services) {
+                res.json(services);
             }, function (err) {
                 res.sendStatus(500).send(err);
             })

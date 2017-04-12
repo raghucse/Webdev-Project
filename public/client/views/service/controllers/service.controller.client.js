@@ -136,9 +136,13 @@
                     }
                     else if(vm.service.type == 'food'){
                         vm.food = true;
+                        vm.place = false;
+                        vm.flower = false;
                     }
                     else if(vm.service.type == 'flower'){
                         vm.flower = true;
+                        vm.food = false;
+                        vm.place = false;
                     }
                 });
         }
@@ -180,6 +184,7 @@
         }
 
         function createService() {
+
             ServiceService
                 .createService(vm.vendorId, vm.service)
                 .then(function (service) {
@@ -189,6 +194,37 @@
                             $location.url("/vendor/"+vm.vendorId+"/service");
                         })
                 });
+          
+            vm.service.city = angular.lowercase(vm.service.city);
+            if(vm.service && vm.service.type && vm.service.name && vm.service.city){
+
+                if(vm.service.type === "food" && vm.service.perPlateCost){
+
+                    ServiceService
+                        .createService(vm.vendorId, vm.service)
+                        .then(function (service) {
+                            vm.service = service.data;
+                            VendorService.updateService(vm.vendorId, vm.service._id)
+                                .then(function (status) {
+                                    $location.url("/vendor/"+vm.vendorId+"/service");
+                                })
+                        });
+                }
+
+                if(vm.service.type === "place" && vm.service.capacity){
+
+                    ServiceService
+                        .createService(vm.vendorId, vm.service)
+                        .then(function (service) {
+                            vm.service = service.data;
+                            VendorService.updateService(vm.vendorId, vm.service._id)
+                                .then(function (status) {
+                                    $location.url("/vendor/"+vm.vendorId+"/service");
+                                })
+                        });
+                }
+            }
+
         }
     }
 
@@ -210,11 +246,20 @@
                 .findServiceById(vm.serviceId)
                 .then(function (service) {
                             vm.service = service.data;
-                    if(vm.service.type == 'food' || vm.service.type == 'place'){
-                        vm.palceOrFood = true;
+                    if(vm.service.type == 'place'){
+                        vm.place = true;
+                        vm.food = false;
+                        vm.flower = false;
                     }
-                    else {
-                        vm.palceOrFood = false;
+                    else if(vm.service.type == 'food'){
+                        vm.food = true;
+                        vm.place = false;
+                        vm.flower = false;
+                    }
+                    else if(vm.service.type == 'flower'){
+                        vm.flower = true;
+                        vm.food = false;
+                        vm.place = false;
                     }
                 });
         }
@@ -229,12 +274,28 @@
         }
 
         function updateService() {
-            ServiceService
-                .updateService(vm.serviceId, vm.service)
-                .then(function (service) {
-                    vm.service = service.data;
-                    $location.url("/vendor/"+vm.vendorId+"/service");
-                });
+            vm.service.city = angular.lowercase(vm.service.city);
+            if(vm.service && vm.service.type && vm.service.name && vm.service.city) {
+
+                if (vm.service.type === "food" && vm.service.perPlateCost) {
+                    ServiceService
+                        .updateService(vm.serviceId, vm.service)
+                        .then(function (service) {
+                            vm.service = service.data;
+                            $location.url("/vendor/"+vm.vendorId+"/service");
+                        });
+                }
+
+                if(vm.service.type === "place" && vm.service.capacity){
+                    ServiceService
+                        .updateService(vm.serviceId, vm.service)
+                        .then(function (service) {
+                            vm.service = service.data;
+                            $location.url("/vendor/"+vm.vendorId+"/service");
+                        });
+                }
+            }
+
         }
     }
 
