@@ -1,20 +1,23 @@
 <nav class="navbar navbar-default navbar-fixed-top">
-    <div class="row container-fluid">
+    <div class="container-fluid">
         <div class="navbar-text pull-left">
             <a href="#/vendor/{{model.vendorId}}/service" class="navbar-link">
                       <span class="glyphicon glyphicon-chevron-left">
                       </span>
             </a>
         </div>
+
         <a class="navbar-brand" href="#/vendor/{{model.vendorId}}/service">
             <label>Services</label>
         </a>
-        <a class="navbar-brand pull-right" href="#/host/{{model.hostId}}/event/{{model.eventId}}/shopping/search">
-            <span class="glyphicon glyphicon-search pull-right "></span>
+
+        <a class="marginbutton btn btn-success pull-right" href="#/host/{{model.hostId}}/event/{{model.eventId}}/shopping/search">
+            Add Products
         </a>
 
     </div>
 </nav>
+
 
 <div ng-show="model.addError" class="alert alert-danger">
     {{model.addError}}
@@ -57,11 +60,11 @@
                         <div class="row">
                             <div class="col-xs-2"><img class="img-responsive" src={{iteminfo.item.mediumImage}}>
                             </div>
-                            <div class="col-xs-4">
+                            <div class="col-xs-2">
                                 <h4 class="product-name"><strong>{{iteminfo.item.name}}</strong></h4>
                                 <img  ng-if="iteminfo.item.customerRatingImage" height="18" width="80" src={{iteminfo.item.customerRatingImage}}>
                             </div>
-                            <div class="col-xs-6">
+                            <div class="col-xs-8">
                                 <div class="col-xs-6 text-right">
                                     <h4><strong>Price: <span class="text-muted">{{iteminfo.item.salePrice}}$</span></strong></h4>
                                     <h4><strong>Shipping Rate: <span class="text-muted">{{iteminfo.item.standardShipRate}}$</span></strong></h4>
@@ -69,11 +72,11 @@
                                             Claim Item Yourself
                                         </button>
                                 </div>
-                                <div class="col-xs-4">
+                                <div class="col-xs-3">
                                     <label for="Quantity">quantity</label>
                                     <input id="Quantity" type="text" class="form-control input-sm" ng-model="iteminfo.quantity" value="1">
                                 </div>
-                                <div class="col-xs-2 rollovericons">
+                                <div class="col-xs-3 rollovericons container">
                                     <button type="button" ng-click="model.updateItem(iteminfo)" class="btn btn-primary btn-md">
                                         Update
                                     </button>
@@ -100,11 +103,11 @@
                         <div class="row">
                             <div class="col-xs-2"><img class="img-responsive" src={{iteminfo.item.mediumImage}}>
                             </div>
-                            <div class="col-xs-4">
+                            <div class="col-xs-2">
                                 <h4 class="product-name"><strong>{{iteminfo.item.name}}</strong></h4>
                                 <img  ng-if="iteminfo.item.customerRatingImage" height="18" width="80" src={{iteminfo.item.customerRatingImage}}>
                             </div>
-                            <div class="col-xs-6">
+                            <div class="col-xs-8">
                                 <div class="col-xs-6 text-right">
                                     <h4><strong>Price: <span class="text-muted">{{iteminfo.item.salePrice}}$</span></strong></h4>
                                     <h4><strong>Shipping Rate: <span class="text-muted">{{iteminfo.item.standardShipRate}}$</span></strong></h4>
@@ -117,11 +120,11 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-xs-4">
+                                <div class="col-xs-3">
                                     <label for="claimedQuantity">quantity</label>
                                     <input id="claimedQuantity" type="text" class="form-control input-sm" ng-model="iteminfo.quantity" value="1">
                                 </div>
-                                <div class="col-xs-2 rollovericons">
+                                <div class="col-xs-3 rollovericons">
                                     <button type="button" ng-click="model.updateItem(iteminfo)" class="btn btn-primary btn-md">
                                         Update
                                     </button>
