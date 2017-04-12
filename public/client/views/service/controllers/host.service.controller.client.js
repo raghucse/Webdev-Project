@@ -155,7 +155,7 @@
 
 
         function init() {
-            $('#timepicker1').timepicker();
+            $('#timepicker3').timepicker();
 
             ServiceService
                 .findServiceById(vm.serviceId)

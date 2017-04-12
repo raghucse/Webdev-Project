@@ -34,15 +34,7 @@
             <div class="modal-body">
                 <h1>Login</h1>
 
-                <div ng-show="loginform.$invalid && loginform.$submitted" class="alert alert-danger">
-                      Please fix below errors
-                        <ul>
-                            <li ng-show="loginform.username.$invalid && loginform.$submitted">Username is required</li>
-                            <li ng-show="loginform.password.$invalid && loginform.$submitted">Password is required</li>
-                        </ul>
-                    </div>
-
-                    <form name="loginform" novalidate>
+                <form name="loginform" novalidate>
                         <input class="form-control"
                                name="username"
                                ng-model="user.username"
@@ -150,7 +142,9 @@
                             <li>Please enter password again</li>
                         </div>
 
-                        <button type="submit" class="btn btn-primary btn-block" ng-click="model.register(model.user)">
+                        <button type="submit" class="btn btn-primary btn-block"
+                                ng-click="model.register(model.user)"
+                                data-dismiss="modal">
                             Register
                         </button>
                     </form>

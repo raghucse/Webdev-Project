@@ -254,6 +254,7 @@
         vm.updateService = updateService;
 
         function init() {
+
             ServiceService
                 .findAllServicesForVendor(vm.vendorId)
                 .then(function (services) {
