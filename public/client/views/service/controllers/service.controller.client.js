@@ -187,7 +187,8 @@
 
             if(vm.service && vm.service.type && vm.service.name && vm.service.city){
                 vm.service.city = angular.lowercase(vm.service.city);
-                if(vm.service.type === "food" && vm.service.perPlateCost){
+
+                if(vm.service.type == "food" && vm.service.perPlateCost){
 
                     ServiceService
                         .createService(vm.vendorId, vm.service)
@@ -200,7 +201,7 @@
                         });
                 }
 
-                if(vm.service.type === "place" && vm.service.capacity){
+                if(vm.service.type == "place" && vm.service.capacity){
 
                     ServiceService
                         .createService(vm.vendorId, vm.service)
@@ -213,7 +214,7 @@
                         });
                 }
 
-                if(vm.service.type === "flower"){
+                if(vm.service.type == "flower"){
                     ServiceService
                         .createService(vm.vendorId, vm.service)
                         .then(function (service) {

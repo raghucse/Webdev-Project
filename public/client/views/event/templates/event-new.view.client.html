@@ -95,8 +95,19 @@
                           placeholder="Description"
                           id="event-new-event-description" rows="2"></textarea>
 
+            <label for="event-new-event-address">Event Address</label>
+            <input class="form-control"
+                   name="address"
+                   ng-model="model.event.address"
+                   id="event-new-event-address"
+                   placeholder="114 Wait Street, APT 2R"
+                   type="text" required/>
 
-            <label for="event-new-event-location">Event Location</label>
+            <div class="error" ng-show="newevent.address.$invalid && newevent.$submitted">
+                <li>Event Address is required</li>
+            </div>
+
+            <label for="event-new-event-location">Event City</label>
             <input class="form-control"
                    name="location"
                    ng-model="model.event.location"
@@ -105,7 +116,7 @@
                    type="text" required/>
 
             <div class="error" ng-show="newevent.location.$invalid && newevent.$submitted">
-                <li>Event Location is required</li>
+                <li>Event City is required</li>
             </div>
 
             <label for="event-date">Event Data</label>
