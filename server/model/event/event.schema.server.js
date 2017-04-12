@@ -5,6 +5,7 @@ module.exports = function (mongoose) {
         name: String,
         description : String,
         location: String,
+        address : String,
         date: String,
         time: String,
         orders: [{type:mongoose.Schema.Types.ObjectId, ref: 'OrderModel'}],

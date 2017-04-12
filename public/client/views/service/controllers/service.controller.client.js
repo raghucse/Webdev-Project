@@ -212,6 +212,18 @@
                                 })
                         });
                 }
+
+                if(vm.service.type === "flower"){
+                    ServiceService
+                        .createService(vm.vendorId, vm.service)
+                        .then(function (service) {
+                            vm.service = service.data;
+                            VendorService.updateService(vm.vendorId, vm.service._id)
+                                .then(function (status) {
+                                    $location.url("/vendor/"+vm.vendorId+"/service");
+                                })
+                        });
+                }
             }
 
         }
