@@ -6,6 +6,7 @@ module.exports = function (mongoose, q) {
     var api = {
         createServiceForVendor: createServiceForVendor,
         findAllServicesForVendor: findAllServicesForVendor,
+        findAllServicesInCity: findAllServicesInCity,
         findServiceById: findServiceById,
         updateService: updateService,
         deleteService: deleteService,
@@ -43,6 +44,19 @@ module.exports = function (mongoose, q) {
         return deferred.promise;
     }
 
+    function findAllServicesInCity(cityname) {
+        var deferred = q.defer();
+        ServiceModel.find({city: cityname}, function (err, services) {
+            if(err){
+                deferred.reject(err);
+            }
+            else {
+                deferred.resolve(services);
+            }
+        });
+        return deferred.promise;
+    }
+
     function findServiceById(serviceId) {
         var deferred = q.defer();
 
@@ -53,7 +67,7 @@ module.exports = function (mongoose, q) {
             else {
                 deferred.resolve(service);
             }
-        })
+        });
         return deferred.promise;
     }
 

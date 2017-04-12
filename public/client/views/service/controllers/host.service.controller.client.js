@@ -63,6 +63,7 @@
 
         function findService(vendor) {
             vm.vendors= undefined;
+            vm.services = undefined;
             VendorService
                 .findVendorByVendorname(vendor)
                 .success(function (vendor) {
@@ -86,34 +87,19 @@
         }
 
         function findServiceByCity(cityname) {
-            vm.vendors = undefined;
+            vm.vendor = undefined;
+            vm.services = undefined;
             if(cityname != ""){
                 cityname = angular.lowercase(cityname);
 
-                vm.vendors = undefined;
-                VendorService
-                    .findVendorByCity(cityname)
-                    .success(function (vendors) {
-                        if(vendors){
-                            var vendorList = vendors;
-                            var vendorsByCity = [];
-                            for(var i = 0; i < vendorList.length ; i++){
-                                (function (i){
-                                    var vendor = {
-                                    };
-                                    vendor["name"] = vendorList[i].vendorname;
-                                    ServiceService
-                                        .findAllServicesForVendor(vendorList[i]._id)
-                                        .success(function (services) {
-                                            vendor["services"] = services;
-                                        });
-                                    vendorsByCity.push(vendor);
-                                })(i);
+                ServiceService
+                    .findAllServicesInCity(cityname)
+                    .success(function (services) {
+                        if(services){
+                            vm.services = services;
+                            console.log(services);
                             }
-                            vm.vendors = vendorsByCity;
-                        }
-
-                    })
+                    });
             }
         }
 
