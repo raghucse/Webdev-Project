@@ -61,7 +61,6 @@
 
                     vm.acceptedGuests = acceptedGuests;
                     vm.pennGuests = pennGuests;
-                    console.log(pennGuests);
                 });
         }
         init();
@@ -72,7 +71,6 @@
                 .success(function (user) {
                     vm.guestname = user[0].username;
                     vm.guestID = user[0]._id;
-                    console.log(vm.guestID);
                 })
         }
 

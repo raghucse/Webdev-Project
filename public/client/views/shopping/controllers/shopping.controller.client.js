@@ -138,7 +138,6 @@
                         vm.unClaimSuccess = "Item unclaimed successfully";
                     }
                 }, function (err) {
-                    console.log(err);
                     vm.unClaimError = "Item could not be unclaimed";
                 })
         }
@@ -228,7 +227,6 @@
                 .claimItem("unClaim",item._id, null)
                 .then(function (item) {
                     item = item.data;
-                    console.log(item);
                     if(!item._guest) {
                         for(index = 0; index < vm.claimedItems.length ; index++ ){
                             if(vm.claimedItems[index].itemId == item.itemId){
@@ -241,14 +239,12 @@
                         vm.unClaimSuccess = "Item unclaimed successfully";
                     }
                 }, function (err) {
-                    console.log(err);
                     vm.unClaimError = "Item could not be unclaimed";
                 })
         }
 
         function checkGuest(guestId) {
             if(guestId === vm.guestId) {
-                console.log("cheked");
                 return true;
             }
         }

@@ -15,13 +15,12 @@ module.exports = function (app) {
 
     mongoose.connect(connectionString, function (err, db) {
         if(err){
-            console.log(err);
         }
     });
 
     var model = require('./model/model.server')(mongoose);
 
-    require("./services/user.service.server.js")(app, model.userModel);
+    require("./services/user.service.server.js")(app, model.userModel, model.vendorModel);
     require("./services/event.service.server.js")(app, model.eventModel);
     require("./services/product.service.server.js")(app, model.productModel);
     require("./services/service.service.server.js")(app, model.serviceModel);

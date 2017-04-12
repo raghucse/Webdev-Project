@@ -21,7 +21,6 @@
                 .findAllUsers()
                 .success(function (users) {
                     vm.allusers = users;
-                    console.log(vm.allusers);
                 })
         }
         init();
