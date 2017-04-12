@@ -1,46 +1,35 @@
 <nav class="navbar navbar-default navbar-fixed-top">
-    <div class="row container-fluid">
-        <div class="col-sm-4 hidden-xs">
-            <div class="navbar-text pull-left">
-                <a href="#/host/{{model.hostId}}/event/{{model.eventId}}/shopping" class="navbar-link">
-                      <span class="glyphicon glyphicon-chevron-left">
-                      </span>
-                </a>
-            </div>
-            <a class="navbar-brand" href="#/host/{{model.userId}}/service">
-                <label>Admin</label>
+    <div class=" container-fluid">
+        <a class="navbar-brand" href="">
+            <label>Admin</label>
+        </a>
+        <div class="navbar-text pull-right">
+            <a href="" ng-click="model.logout()" class="btn btn-success">
+                Logout
             </a>
         </div>
-
-        <div class="col-xs-12 visible-xs">
-            <div class="navbar-text pull-left">
-                <a href="#/host/{{model.hostId}}/event/{{model.eventId}}/shopping" class="navbar-link">
-                      <span class="glyphicon glyphicon-chevron-left">
-                      </span>
-                </a>
-            </div>
-        </div>
-    </div>
 </nav>
 
-<div ng-show="model.userNfound" class="alert alert-danger">
-    {{model.userNfound}}
-</div>
+<div class="container">
+    <div ng-show="model.userNfound" class="alert alert-danger">
+        {{model.userNfound}}
+    </div>
 
-<div ng-show="model.vendorNfound" class="alert alert-danger">
-    {{model.vendorNfound}}
-</div>
+    <div ng-show="model.vendorNfound" class="alert alert-danger">
+        {{model.vendorNfound}}
+    </div>
 
-<div ng-show="urlForm.searchField.$invalid && model.noQuery" class="alert alert-danger">
-    {{model.noQuery}}
-</div>
+    <div ng-show="urlForm.searchField.$invalid && model.noQuery" class="alert alert-danger">
+        {{model.noQuery}}
+    </div>
 
-<div ng-show="model.deleteError" class="alert alert-danger">
-    {{model.deleteError}}
-</div>
+    <div ng-show="model.deleteError" class="alert alert-danger">
+        {{model.deleteError}}
+    </div>
 
-<div ng-show="model.deleteSuccess" class="alert alert-success">
-    {{model.deleteSuccess}}
+    <div ng-show="model.deleteSuccess" class="alert alert-success">
+        {{model.deleteSuccess}}
+    </div>
 </div>
 
 <div class="text-center">
@@ -50,7 +39,7 @@
                 <h2>Search for shopping items</h2>
                 <div id="custom-search-input">
                     <form name="urlForm" novalidate>
-                    <div class="input-group col-md-12">
+                        <div class="input-group col-md-12">
                             <input name="searchField" type="text"
                                    ng-model="model.userName" class="input-lg form-control" placeholder="Enter email-id here" required/>
                             <span class="input-group-btn">
@@ -58,7 +47,7 @@
                                 <i class="glyphicon glyphicon-search"></i>
                             </button>
                     </span>
-                    </div>
+                        </div>
                     </form>
                 </div>
             </div>

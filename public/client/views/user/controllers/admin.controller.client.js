@@ -17,6 +17,7 @@
         vm.dropChange = dropChange;
         vm.search = search;
         vm.deleteUser = deleteUser;
+        vm.logout = logout;
 
         function init() {
         }
@@ -124,6 +125,15 @@
         function dropChange() {
             vm.noType = undefined;
         }
+
+            function logout() {
+                UserService
+                    .logout()
+                    .then(function(response) {
+                        $location.url("/");
+                    });
+            }
+
     }
 
 })();
