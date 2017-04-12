@@ -31,7 +31,6 @@
             OrderOrder
                 .findOrderById(vm.orderId)
                 .then(function (order) {
-                    console.log(vm.order);
                     vm.order = order.data;
                     if(vm.order.type == 'food' || vm.order.type == 'place'){
                         vm.palceOrFood = true;
@@ -70,7 +69,6 @@
         }
 
         function createOrder() {
-            console.log(vm.order);
             OrderOrder
                 .createOrder(vm.serviceId, vm.order)
                 .then(function (order) {

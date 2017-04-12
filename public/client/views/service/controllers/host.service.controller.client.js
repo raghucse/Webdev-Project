@@ -125,7 +125,6 @@
             OrderService
                 .updateOrder(order._id, newOrder)
                 .success(function (response) {
-                    console.log("Order Cancelled");
                     init();
                 })
         }
@@ -155,7 +154,6 @@
         init();
 
         function createOrder(serviceId, platesrequested) {
-            console.log(vm.time);
             var order ={};
             order.platesrequested = platesrequested;
             order.cost = platesrequested * vm.service.perPlateCost;

@@ -15,7 +15,6 @@ module.exports = function (app) {
 
     mongoose.connect(connectionString, function (err, db) {
         if(err){
-            console.log(err);
         }
     });
 

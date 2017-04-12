@@ -90,7 +90,6 @@ module.exports = function(app, vendorModel) {
             .then(
                 function(user) {
                     if(user[0] && bcrypt.compareSync(password, user[0].password)) {
-                        console.log(user[0]);
                         return done(null, user);
                     } else {
                         return done(null, false);
@@ -105,18 +104,15 @@ module.exports = function(app, vendorModel) {
     function register (req, res) {
         var vendor = req.body;
         vendor.password = bcrypt.hashSync(vendor.password);
-        console.log("Register1"+vendor);
         vendorModel
             .createVendor(vendor)
             .then(
                 function(user){
-                    console.log("Register1"+user);
                     if(user){
                         req.login(user, function(err) {
                             if(err) {
                                 res.status(400).send(err);
                             } else {
-                                console.log("Register2"+user);
                                 res.json(user);
                             }
                         });

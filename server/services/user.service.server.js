@@ -105,7 +105,6 @@ module.exports = function (app, userModel, vendorModel) {
     passport.deserializeUser(deserializeUser);
 
     function serializeUser(user, done) {
-        console.log("user serialise"+user);
         done(null, user);
     }
 

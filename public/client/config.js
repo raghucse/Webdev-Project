@@ -167,7 +167,6 @@
     var checkUserLoggedin = function($q, $timeout, $http, $location, $rootScope) {
         var deferred = $q.defer();
         $http.get('/api/loggedin').then(function(user) {
-            console.log("Checking user")
             $rootScope.errorMessage = null;
             user = user.data;
             if (user !== '0') {
@@ -183,8 +182,6 @@
     var checkVendorLoggedin = function($q, $timeout, $http, $location, $rootScope) {
         var deferred = $q.defer();
         $http.get('/api/vendor/loggedin').then(function(vendor) {
-            console.log(vendor);
-            console.log("Checking Vendor")
             $rootScope.errorMessage = null;
             vendor = vendor.data;
             if (vendor !== '0') {

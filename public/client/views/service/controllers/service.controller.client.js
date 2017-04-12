@@ -22,7 +22,6 @@
             var promise = VendorService.findVendorById(vm.vendorId);
             promise.then(function(vendor){
                 vm.vendor = vendor.data;
-                console.log(vm.vendor);
             });
 
             OrderService
@@ -55,7 +54,6 @@
                     }
                     vm.orders = myOrders;
                     vm.currOrders = myCurrOrders;
-                    console.log(vm.orders);
                 });
             ServiceService
                 .findAllServicesForVendor(vm.vendorId)
@@ -89,7 +87,6 @@
 
         function update() {
             vm.vendor.cityname = angular.lowercase(vm.vendor.cityname);
-            console.log(vm.vendor);
             VendorService
                 .updateVendor(vm.vendorId, vm.vendor)
                 .then(function (vendor) {
@@ -183,7 +180,6 @@
         }
 
         function createService() {
-            console.log(vm.service);
             ServiceService
                 .createService(vm.vendorId, vm.service)
                 .then(function (service) {

@@ -24,7 +24,6 @@ module.exports =  function(app, ServiceModel) {
 
     function findAllServicesForVendor(req, res) {
         var vendorId = req.params.vendorId;
-        console.log(vendorId);
         ServiceModel.findAllServicesForVendor(vendorId)
             .then(function (services) {
                 res.json(services);
