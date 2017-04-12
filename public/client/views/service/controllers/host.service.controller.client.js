@@ -118,7 +118,7 @@
 
     }
 
-    function HostServiceOrderController($routeParams, ServiceService, OrderService, EventService) {
+    function HostServiceOrderController($routeParams, ServiceService, OrderService, EventService, $location) {
         var vm = this;
         vm.hostId = $routeParams["hid"];
         vm.eventId = $routeParams["eid"];
@@ -154,6 +154,7 @@
                                 .addOrder(vm.eventId, order._id)
                                 .success(function (response) {
                                     vm.orderstatus = "Order Placed";
+                                    $location.url("/host/" + vm.hostId + "/event/" + vm.eventId + "/services");
                                 });
                         });
                 })
