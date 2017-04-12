@@ -69,9 +69,15 @@
             <ul class="list-group">
                 <div ng-repeat="guest in model.pennGuests track by $index">
                     <li class="list-group-item">
-                        <a href="">
-                            {{guest}}
-                        </a>
+                        <div class="row">
+                            <a href="">
+                                {{guest.username}}
+                            </a>
+
+                            <button class="btn btn-danger" ng-click="model.cancelInvitation(guest)">
+                                Cancel Invitation
+                            </button>
+                        </div>
                     </li>
                 </div>
             </ul>

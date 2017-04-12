@@ -24,11 +24,14 @@
                     var guestList = [];
                     for(var i = 0; i < guestIDList.length ; i++){
                         var guestid = guestIDList[i];
-                        UserService
-                            .findUserById(guestid)
-                            .success(function (user) {
-                                guestList.push(user.username);
-                            })
+                        if(vm.guestID != guestid){
+                            UserService
+                                .findUserById(guestid)
+                                .success(function (user) {
+                                    guestList.push(user.username);
+                                })
+                        }
+
                     }
                     vm.guests = guestList;
                 });

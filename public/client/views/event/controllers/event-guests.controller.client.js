@@ -12,6 +12,7 @@
         vm.findUser = findUser;
         vm.createInvite = createInvite;
         vm.refreshData = refreshData;
+        vm.cancelInvitation = cancelInvitation;
 
         function init() {
             EventService
@@ -36,7 +37,6 @@
             InviteService
                 .findAllInvitesForHost(vm.hostID)
                 .success(function (invites) {
-
                     var acceptedGuests = [];
                     var pennGuests = [];
                     for(var i = 0; i < invites.length; i++){
@@ -49,12 +49,13 @@
                                         acceptedGuests.push(user.username);
                                     })
                             }
-                            else if(!invites[i].replied || !invites[i].accepted){
+                            else if(!invites[i].replied){
                                 UserService
                                     .findUserById(invites[i].receiver)
                                     .then(function (user) {
                                         user = user.data;
-                                        pennGuests.push(user.username);
+                                        invites[i].username = user.username;
+                                        pennGuests.push(invites[i]);
                                     })
                             }
                         })(i);
@@ -109,7 +110,20 @@
             init();
         }
 
-
+        function cancelInvitation(invite) {
+            InviteService
+                .findInviteById(invite._id)
+                .success(function (invitaton) {
+                    var myinvitation = invitaton[0];
+                    myinvitation.replied = true;
+                    myinvitation.accepted = false;
+                    InviteService
+                        .updateInvite(invite._id, myinvitation)
+                        .success(function (updatedInvitation) {
+                            init();
+                        })
+                })
+        }
 
     }
 })();
