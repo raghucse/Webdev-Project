@@ -24,6 +24,7 @@ module.exports = function(app, vendorModel) {
     app.post ('/api/register', register);
     app.get("/api/vendor", findVendor);
     app.get("/api/vendor/:vendorId", findVendorById);
+    app.get("/api/vendor/city/name", findVendorByCity);
     app.put("/api/vendor/:vendorId", updateVendor);
     app.delete("/api/vendor/:vendorId",deleteVendor);
     app.post("/api/vendor",createVendor);
@@ -207,6 +208,16 @@ module.exports = function(app, vendorModel) {
         vendorModel.findVendorByVendorname(vendorname)
             .then(function (vendor) {
                 res.json(vendor);
+            }, function (err) {
+                res.sendStatus(500).send(err);
+            })
+    }
+
+    function findVendorByCity(req, res) {
+        var cityname = req.query.name;
+        vendorModel.findVendorByCity(cityname)
+            .then(function (vendors) {
+                res.json(vendors);
             }, function (err) {
                 res.sendStatus(500).send(err);
             })

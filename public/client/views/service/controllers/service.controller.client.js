@@ -7,7 +7,7 @@
     app.controller("EditServiceController", EditServiceController);
     app.controller("ServiceViewController", ServiceViewController);
 
-    function ServiceListController($routeParams, ServiceService, OrderService, VendorService, UserService) {
+    function ServiceListController($routeParams, ServiceService, OrderService, VendorService, UserService, $location) {
         var vm = this;
 
         vm.vendorId = $routeParams["vid"];
@@ -22,6 +22,7 @@
             var promise = VendorService.findVendorById(vm.vendorId);
             promise.then(function(vendor){
                 vm.vendor = vendor.data;
+                console.log(vm.vendor);
             });
 
             OrderService
@@ -65,9 +66,11 @@
         init();
 
         function acceptOrder(order) {
-            order.accepted = true;
+            var newOrder = {};
+            newOrder._id = order._id;
+            newOrder.accepted = true;
             OrderService
-                .updateOrder(order._id, order)
+                .updateOrder(order._id, newOrder)
                 .success(function (order) {
                     init();
                 })
@@ -85,12 +88,12 @@
         }
 
         function update() {
-            var vendorSaved = vm.vendor;
+            vm.vendor.cityname = angular.lowercase(vm.vendor.cityname);
+            console.log(vm.vendor);
             VendorService
                 .updateVendor(vm.vendorId, vm.vendor)
                 .then(function (vendor) {
                     vm.message = "Vendor successfully updated";
-                    vm.vendor = vendorSaved;
                 }, function (vendor) {
                     vm.error = "Unable to update vendor";
                 });
@@ -123,7 +126,7 @@
         vm.serviceId = $routeParams["sid"];
         vm.vendorId = $routeParams["vid"];
 
-        console.log(vm.serviceId);
+
         function init() {
             ServiceService
                 .findServiceById(vm.serviceId)

@@ -13,6 +13,9 @@
         vm.deleteEvent = deleteEvent;
 
         function init() {
+            $('#edit-event-time').timepicker();
+            $('#edit-event-date').datepicker();
+
             EventService
                 .findEventById(vm.eventID)
                 .success(function (event) {
@@ -26,12 +29,15 @@
         }
         init();
 
-        function editEvent(newEvent) {
-            EventService
-                .updateEvent(vm.eventID, newEvent)
-                .success(function () {
-                    $location.url("/host/" + vm.hostID + "/event/");
-                })
+        function editEvent(event) {
+            if(event && event.name && event.location && event.time && event.date){
+                EventService
+                    .updateEvent(vm.eventID, event)
+                    .success(function () {
+                        $location.url("/host/" + vm.hostID + "/event/");
+                    })
+            }
+
         }
 
         function deleteEvent(){

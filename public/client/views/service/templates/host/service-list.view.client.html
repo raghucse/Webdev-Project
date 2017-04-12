@@ -138,20 +138,36 @@
         <div id="newServices" class="tab-pane fade">
             <br>
 
-            <div class="container">
-            <div class="input-group">
-                <input class="form-control"
-                       ng-model="model.vendor"
-                       id="event-vendor"
-                       placeholder="Enter Vendor name"
-                       type="text"/>
-                <span class="input-group-btn">
-                <button class="btn btn-danger" ng-click="model.findService(model.vendor)">
-                    <i class="glyphicon glyphicon-search"></i>
-                </button>
-                </span>
-            </div>
-            </div>
+            <div class="row">
+                <div class="col-xs-12 col-md-6">
+                    <div class="input-group">
+                        <input class="form-control"
+                               ng-model="model.vendor"
+                               id="event-vendor"
+                               placeholder="Enter Vendor name"
+                               type="text"/>
+                        <span class="input-group-btn">
+                            <button class="btn btn-danger" ng-click="model.findService(model.vendor)">
+                                <i class="glyphicon glyphicon-search"></i>
+                            </button>
+                        </span>
+                    </div>
+                </div>
+
+                <div class="col-xs-12 col-md-6">
+                    <div class="input-group">
+                        <input class="form-control"
+                               ng-model="model.location"
+                               id="event-location"
+                               placeholder="Enter City Name"
+                               type="text"/>
+                        <span class="input-group-btn">
+                            <button class="btn btn-danger" ng-click="model.findServiceByCity(model.location)">
+                                <i class="glyphicon glyphicon-search"></i>
+                            </button>
+                        </span>
+                    </div>
+                </div>
 
 
         </div>

@@ -2,15 +2,15 @@ module.exports = function (mongoose) {
 
     var q = require('q');
 
-    var types = ['USER', 'VENDOR'];
+
     var VendorSchema = mongoose.Schema({
-        type: {type: String, enum: types},
         vendorname: String,
         password: String,
         firstName: String,
         lastName: String,
         email: String,
         phone: String,
+        cityname: String,
         services: [{type:mongoose.Schema.Types.ObjectId, ref: 'ServiceModel'}],
         dateCreated: { type: Date, default: Date.now },
         facebook: {

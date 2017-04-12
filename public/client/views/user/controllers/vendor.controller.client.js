@@ -25,10 +25,9 @@
         }
         init();
 
-        function update() {
-            var vendorSaved = vm.vendor;
+        function update(vendor) {
             VendorService
-                .updateVendor(vm.vendorId, vm.vendor)
+                .updateVendor(vm.vendorId, vendor)
                 .then(function (vendor) {
                     vm.message = "Vendor successfully updated";
                     vm.vendor = vendorSaved;
@@ -94,7 +93,6 @@
         init();
 
         function register() {
-            vm.vendor.type = "VENDOR";
             VendorService
                 .findVendorByVendorname(vm.vendor.vendorname)
                 .then(function (vendor) {

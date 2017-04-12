@@ -20,11 +20,6 @@
                     <span class="glyphicon glyphicon-chevron-left"></span>
                 </a>
            </div>
-            <div class="navbar-text pull-right" ng-click="model.editEvent(model.event)">
-                <a href="">
-                    <span class="glyphicon glyphicon-ok"></span>
-                </a>
-            </div>
             <div class="navbar-header">
                 <a class="navbar-brand" href="">
                     Edit Event
@@ -34,7 +29,7 @@
     </div>
 </nav>
 
-<div class="container-fluid">
+<div class="container">
 
 
     <div class="col-sm-4 pull-left hidden-xs">
@@ -69,53 +64,90 @@
     </div>
 
     <div class="col-sm-8">
+        <form name="editevent" novalidate>
+            <label for="event-edit-event-name">Event Name</label>
+            <input class="form-control"
+                   name="editevent"
+                   ng-model="model.event.name"
+                   id="event-edit-event-name"
+                   value="Address Book App"
+                   type="text" required/>
 
-        <label for="event-edit-event-name">Event Name</label>
-        <input class="form-control"
-               ng-model="model.event.name"
-               id="event-edit-event-name"
-               value="Address Book App"
-               type="text"/>
+            <div class="error" ng-show="editevent.editevent.$invalid && editevent.$submitted">
+                <li>Event Name cannot be Blank</li>
+            </div>
 
-        <div class="form-group">
-        <label for="event-edit-event-description">Event Description</label>
-        <textarea class="form-control"
-                  ng-model="model.event.description"
-                  value="Description"
-                  id="event-edit-event-description"
-                  rows="4"></textarea>
-        </div>
-
-        <label for="event-edit-event-location">Event Location</label>
-        <input class="form-control"
-               ng-model="model.event.location"
-               id="event-edit-event-location"
-               value="Boston, MA"
-               type="text"/>
-
-        <label for="event-edit-event-time">Event Time</label>
-        <input class="form-control"
-               ng-model="model.event.time"
-               id="event-edit-event-time"
-               value="18:00 EST"
-               type="text"/>
+            <label for="event-edit-event-description">Event Description</label>
+            <textarea class="form-control"
+                      name="editDescription"
+                      ng-model="model.event.description"
+                      value="Description"
+                      id="event-edit-event-description"
+                      rows="2"></textarea>
 
 
-        <a class="btn btn-danger btn-block" ng-click="model.deleteEvent()">
-            Delete
-        </a>
+            <label for="event-edit-event-location">Event Location</label>
+            <input class="form-control"
+                   name="editLocation"
+                   ng-model="model.event.location"
+                   id="event-edit-event-location"
+                   value="Boston, MA"
+                   type="text" required/>
 
+            <div class="error" ng-show="editevent.editLocation.$invalid && editevent.$submitted">
+                <li>Event Location cannot be Blank</li>
+            </div>
+
+            <label for="edit-event-date">Event Data</label>
+            <div class="input-group date" data-provide="datepicker">
+                <input id="edit-event-date"
+                       name="editDate"
+                       type="text"
+                       class="form-control"
+                       ng-model="model.event.date" required/>
+                <div class="input-group-addon">
+                    <span class="glyphicon glyphicon-th"></span>
+                </div>
+            </div>
+
+            <div class="error" ng-show="editevent.editDate.$invalid && editevent.$submitted">
+                <li>Event needs to have a Date</li>
+            </div>
+
+            <label for="edit-event-time">Event Time</label>
+            <div class="input-group bootstrap-timepicker timepicker">
+                <input ng-model="model.event.time"
+                       name="editTime"
+                       id="edit-event-time"
+                       type="text"
+                       class="form-control input-small" required/>
+                <span class="input-group-addon">
+                        <i class="glyphicon glyphicon-time"></i>
+                </span>
+            </div>
+
+            <div class="error" ng-show="editevent.editTime.$invalid && editevent.$submitted">
+                <li>Event needs to have a Time</li>
+            </div>
+
+            <br>
+
+            <div class="row">
+                <div class="col-xs-12 col-md-6">
+                    <button type="submit" class="btn btn-success btn-block" ng-click="model.editEvent(model.event)">
+                        Save
+                    </button>
+                </div>
+                <div class="col-xs-12 col-md-6">
+                    <a class="btn btn-danger btn-block" ng-click="model.deleteEvent()">
+                        Delete
+                    </a>
+                </div>
+            </div>
+
+        </form>
     </div>
 
 </div>
 
-<nav class="navbar navbar-default navbar-fixed-bottom">
-    <div class="container-fluid">
-        <div class="navbar-text pull-right">
-            <a href="#/host/{{model.hostID}}/event/">
-                <span class="glyphicon glyphicon-user"></span>
-            </a>
-        </div>
-    </div>
-</nav>
 

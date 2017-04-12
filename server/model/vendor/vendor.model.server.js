@@ -7,6 +7,7 @@ module.exports = function (mongoose, q) {
         createVendor: createVendor,
         findVendorById: findVendorById,
         findVendorByVendorname: findVendorByVendorname,
+        findVendorByCity: findVendorByCity,
         findVendorByCreadentials: findVendorByCreadentials,
         updateVendor: updateVendor,
         deleteVendor: deleteVendor,
@@ -67,7 +68,20 @@ module.exports = function (mongoose, q) {
             else {
                 deferred.resolve(vendor);
             }
-        })
+        });
+        return deferred.promise;
+    }
+
+    function findVendorByCity(cityname) {
+        var deferred = q.defer();
+        VendorModel.find({cityname: cityname}, function (err, vendors) {
+            if(err){
+                deferred.reject(err);
+            }
+            else {
+                deferred.resolve(vendors);
+            }
+        });
         return deferred.promise;
     }
 
@@ -88,12 +102,8 @@ module.exports = function (mongoose, q) {
     function updateVendor(vendorId, vendor) {
         var deferred = q.defer();
         VendorModel.update(
-            { _id : vendorId },
-            {
-                firstName: vendor.firstName,
-                lastName: vendor.lastName,
-                email: vendor.email
-            }, function (err, vendor) {
+            { _id : vendorId }, vendor
+            , function (err, vendor) {
                 if(err){
                     deferred.reject(err);
                 }

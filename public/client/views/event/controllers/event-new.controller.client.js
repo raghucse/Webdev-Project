@@ -12,6 +12,9 @@
 
 
         function init() {
+            $('#event-time').timepicker();
+            $('#event-date').datepicker();
+
             EventService
                 .findAllEventsForUser(vm.hostID)
                 .success(function (events) {
@@ -21,12 +24,15 @@
         init();
 
         function createEvent(event) {
-            EventService
-                .createEventForUser(vm.hostID, event)
-                .success(function (newEvent) {
-                   $location.url("/host/" + vm.hostID + "/event");
+            if(event && event.name && event.location && event.time && event.date){
+                EventService
+                    .createEventForUser(vm.hostID, event)
+                    .success(function (newEvent) {
+                        $location.url("/host/" + vm.hostID + "/event");
 
-                });
+                    });
+            }
+
         }
 
     }
