@@ -207,3 +207,8 @@ form{
     color:  red;
     margin: 10px;
 }
+
+.btn{
+    white-space:normal !important;
+    word-wrap:break-word;
+}
