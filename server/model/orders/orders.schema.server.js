@@ -10,6 +10,7 @@ module.exports = function (mongoose) {
         accepted: Boolean,
         cancelled: Boolean,
         date: String,
+        time: String,
         quote: String,
         cost: Number,
         platesrequested : Number,

@@ -198,3 +198,8 @@ form{
     background: #c4e17f;
     border-radius: 5px;
 }
+
+.error{
+    color:  red;
+    margin: 10px;
+}

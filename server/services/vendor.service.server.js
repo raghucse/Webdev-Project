@@ -213,7 +213,6 @@ module.exports = function(app, vendorModel) {
     }
 
     function findVendorByCity(req, res) {
-        console.log("Vendor By City called");
         var cityname = req.query.name;
         vendorModel.findVendorByCity(cityname)
             .then(function (vendors) {

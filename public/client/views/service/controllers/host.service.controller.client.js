@@ -15,6 +15,8 @@
         vm.findServiceByCity = findServiceByCity;
 
         function init() {
+            vm.vendor = "";
+            vm.location= "";
             EventService
                 .findAllOrdersForEvent(vm.eventID)
                 .then(function (event) {
@@ -83,31 +85,31 @@
         }
 
         function findServiceByCity(cityname) {
+            if(cityname != ""){
+                cityname = angular.lowercase(cityname);
+                VendorService
+                    .findVendorByCity(cityname)
+                    .success(function (vendors) {
+                        var vendorList = vendors;
+                        var vendorsByCity = [];
+                        for(var i = 0; i < vendorList.length ; i++){
 
-            cityname = angular.lowercase(cityname);
-            VendorService
-                .findVendorByCity(cityname)
-                .success(function (vendors) {
-                    var vendorList = vendors;
-                    var vendorsByCity = [];
-                    for(var i = 0; i < vendorList.length ; i++){
+                            (function (i) {
+                                var vendor = {
+                                };
+                                vendor["name"] = vendorList[i].vendorname;
+                                ServiceService
+                                    .findAllServicesForVendor(vendorList[i]._id)
+                                    .success(function (services) {
+                                        vendor["services"] = services;
+                                    });
+                                vendorsByCity.push(vendor);
+                            })(i);
 
-                        (function (i) {
-                            var vendor = {
-                            };
-                            vendor["name"] = vendorList[i].vendorname;
-                            ServiceService
-                                .findAllServicesForVendor(vendorList[i]._id)
-                                .success(function (services) {
-                                    vendor["services"] = services;
-                                });
-                            vendorsByCity.push(vendor);
-                        })(i);
-
-                    }
-                    vm.vendors = vendorsByCity;
-                    console.log(vendorsByCity);
-                })
+                        }
+                        vm.vendors = vendorsByCity;
+                    })
+            }
         }
 
 
@@ -136,17 +138,19 @@
 
 
         function init() {
+            $('#timepicker1').timepicker();
+
             ServiceService
                 .findServiceById(vm.serviceId)
                 .then(function (service) {
                     vm.service = service.data;
                     vm.vendorId = vm.service._vendor;
-
                 });
         }
         init();
 
         function createOrder(serviceId, platesrequested) {
+            console.log(vm.time);
             var order ={};
             order.platesrequested = platesrequested;
             order.cost = platesrequested * vm.service.perPlateCost;

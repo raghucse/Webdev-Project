@@ -39,7 +39,7 @@
     </div>
 </nav>
 
-<div class="container-fluid">
+<div class="container">
 
 
     <div class="col-sm-4 pull-left hidden-xs">
@@ -76,38 +76,75 @@
     </div>
 
     <div class="col-sm-8">
-        <label for="event-new-event-name">Event Name</label>
-        <input ng-model="model.event.name"
-               class="form-control"
-               id="event-new-event-name"
-               placeholder="Event Name" type="text"/>
+        <form name="newevent" novalidate>
+            <label for="event-new-event-name">Event Name</label>
+            <input ng-model="model.event.name"
+                   class="form-control"
+                   name="name"
+                   id="event-new-event-name"
+                   placeholder="Event Name" type="text" required/>
 
-        <div class="form-group">
-        <label for="event-new-event-description">Event Description</label>
-        <textarea ng-model="model.event.description"
-                  class="form-control"
-                  placeholder="Description"
-                  id="event-new-event-description" rows="4"></textarea>
-        </div>
+            <div class="error" ng-show="newevent.name.$invalid && newevent.$submitted">
+                   <li>Event Name is required</li>
+            </div>
 
-        <label for="event-new-event-location">Event Location</label>
-        <input class="form-control"
-               ng-model="model.event.location"
-               id="event-new-event-location"
-               placeholder="Boston, MA"
-               type="text"/>
 
-        <label for="event-new-event-time">Event Time</label>
-        <input class="form-control"
-               ng-model="model.event.time"
-               id="event-new-event-time"
-               placeholder="18:00 EST"
-               type="text"/>
+            <label for="event-new-event-description">Event Description</label>
+            <textarea ng-model="model.event.description"
+                          class="form-control"
+                          placeholder="Description"
+                          id="event-new-event-description" rows="2"></textarea>
 
-        <a class="btn btn-danger btn-block" ng-click="model.createEvent(model.event)">
-            Create Event
-        </a>
 
+            <label for="event-new-event-location">Event Location</label>
+            <input class="form-control"
+                   name="location"
+                   ng-model="model.event.location"
+                   id="event-new-event-location"
+                   placeholder="Boston"
+                   type="text" required/>
+
+            <div class="error" ng-show="newevent.location.$invalid && newevent.$submitted">
+                <li>Event Location is required</li>
+            </div>
+
+            <label for="event-date">Event Data</label>
+            <div class="input-group date" data-provide="datepicker">
+                <input id="event-date"
+                       name="date"
+                       type="text"
+                       class="form-control"
+                       ng-model="model.event.date" required/>
+                <div class="input-group-addon">
+                    <span class="glyphicon glyphicon-th"></span>
+                </div>
+            </div>
+
+            <div class="error" ng-show="newevent.date.$invalid && newevent.$submitted">
+                <li>Event Date is required</li>
+            </div>
+
+            <label for="event-time">Event Time</label>
+            <div class="input-group bootstrap-timepicker timepicker">
+                <input ng-model="model.event.time"
+                       name="time"
+                       id="event-time"
+                       type="text"
+                       class="form-control input-small" required/>
+                <span class="input-group-addon">
+                        <i class="glyphicon glyphicon-time"></i>
+                </span>
+            </div>
+
+
+            <div class="error" ng-show="newevent.time.$invalid && newevent.$submitted">
+                <li>Event Time is required</li>
+            </div>
+
+            <button type="submit" class="btn btn-primary btn-block" ng-click="model.createEvent(model.event)">
+                    Create Event
+            </button>
+        </form>
     </div>
 
 </div>
