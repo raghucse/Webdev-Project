@@ -40,12 +40,12 @@
             VendorService
                 .logout()
                 .then(function (status) {
-                    $location.url("/login");
+                    $location.url("/vendor/login");
                 })
         }
 
         function deleteVendor(vendor) {
-            var cfrm = confirm("Are you sure that you want to delete?")
+            var cfrm = confirm("Are you sure that you want to delete?");
             if(cfrm){
                 VendorService
                     .deleteVendor(vendor._id)
@@ -73,7 +73,7 @@
             promise.then(function(vendor){
                 vendor = vendor.data;
                 if(vendor[0]) {
-                    $location.url("/vendor/"+vendor[0]._id);
+                    $location.url("/vendor/"+vendor[0]._id + "/service");
                 } else {
                     vm.error = "Vendor not found";
                 }

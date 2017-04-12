@@ -189,6 +189,18 @@
                 </li>
             </div>
         </ul>
+
+            <ul class="list-group">
+                <div ng-repeat="service in model.services track by $index">
+                    <li class="list-group-item">
+                        <a href="#/host/{{model.hostID}}/event/{{model.eventID}}/services/{{service._id}}">
+                                        {{service.name}}
+                        </a>
+                    </li>
+                </div>
+            </ul>
+
+
     </div>
 
 

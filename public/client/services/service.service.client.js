@@ -13,6 +13,7 @@
             "updateService": updateService,
             "deleteService": deleteService,
             "findAllServicesForVendor": findAllServicesForVendor,
+            "findAllServicesInCity" : findAllServicesInCity,
             "updateOrder": updateOrder
         };
         return api;
@@ -23,6 +24,10 @@
 
         function findAllServicesForVendor(vendorId) {
             return $http.get("/api/vendor/"+vendorId+"/service");
+        }
+
+        function findAllServicesInCity(city) {
+            return $http.get("/api/service/city/name?name=" + city);
         }
 
         function findServiceById(serviceId) {
