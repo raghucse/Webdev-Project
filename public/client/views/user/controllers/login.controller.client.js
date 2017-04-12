@@ -21,7 +21,10 @@
                     var user1 = response.data;
                     if(user1[0]){
                         $rootScope.currentUser = user1[0];
-                        $location.url("/host/" + user1[0]._id + "/event");
+                        if(!user1[0].type)
+                            $location.url("/host/" + user1[0]._id + "/event");
+                        else
+                            $location.url("/admin/" + user1[0]._id);
                     }
                     else{
                         vm.error = "User not found";

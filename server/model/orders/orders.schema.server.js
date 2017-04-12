@@ -17,5 +17,14 @@ module.exports = function (mongoose) {
         dateCreated: { type: Date, default: Date.now }
     }, {collection: 'myPartyPlanDB.order'});
 
+    OrderSchema.pre('remove', function(next) {
+        this.model('ServiceModel').update(
+            {_id: this.service},
+            {$pull: {orders: this._id}},
+            {multi: true},
+            next
+        );
+    });
+
     return OrderSchema;
 };

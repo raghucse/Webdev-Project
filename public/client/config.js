@@ -130,6 +130,11 @@
                 controller: "OrderListController",
                 controllerAs: "model"
             })
+            .when("/admin/:aid", {
+                templateUrl: "views/user/templates/adminHome.view.client.html",
+                controller: "AdminHomeController",
+                controllerAs: "model"
+            })
             .otherwise({
                 redirectTo: "/login"
             });

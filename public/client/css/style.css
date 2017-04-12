@@ -169,6 +169,10 @@ a:hover{text-decoration: none;}
     margin: 10px;
 }
 
+.marginbutton{
+    margin: 10px;
+}
+
 .list-group-item {
      border-width: 0px 0;
  }

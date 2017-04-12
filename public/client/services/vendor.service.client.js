@@ -18,7 +18,8 @@
             "updateVendor": updateVendor,
             "deleteVendor": deleteVendor,
             "register": register,
-            "updateService":updateService
+            "updateService":updateService,
+            "findAllVendors":findAllVendors
         };
         return api;
 
@@ -64,6 +65,10 @@
 
         function updateService(vendorId, serviceId) {
             return $http.put("/api/vendor/"+vendorId+"/service/"+serviceId);
+        }
+
+        function findAllVendors() {
+            return $http.get("/api/vendor/");
         }
 
     }

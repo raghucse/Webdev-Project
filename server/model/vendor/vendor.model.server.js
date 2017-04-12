@@ -12,7 +12,8 @@ module.exports = function (mongoose, q) {
         updateVendor: updateVendor,
         deleteVendor: deleteVendor,
         updateService: updateService,
-        findVendorByFacebookId: findVendorByFacebookId
+        findVendorByFacebookId: findVendorByFacebookId,
+        findAllVendors: findAllVendors
     };
 
     return api;
@@ -140,6 +141,20 @@ module.exports = function (mongoose, q) {
                 deferred.resolve();
             }
         })
+        return deferred.promise;
+    }
+
+    function findAllVendors() {
+        var deferred = q.defer();
+
+        VendorModel.find({},function (err, vendors) {
+            if(err){
+                deferred.reject(err);
+            }
+            else {
+                deferred.resolve(vendors);
+            }
+        });
         return deferred.promise;
     }
 

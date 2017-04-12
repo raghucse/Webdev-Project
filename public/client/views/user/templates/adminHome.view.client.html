@@ -1,0 +1,105 @@
+<nav class="navbar navbar-default navbar-fixed-top">
+    <div class="row container-fluid">
+        <div class="col-sm-4 hidden-xs">
+            <div class="navbar-text pull-left">
+                <a href="#/host/{{model.hostId}}/event/{{model.eventId}}/shopping" class="navbar-link">
+                      <span class="glyphicon glyphicon-chevron-left">
+                      </span>
+                </a>
+            </div>
+            <a class="navbar-brand" href="#/host/{{model.userId}}/service">
+                <label>Admin</label>
+            </a>
+        </div>
+
+        <div class="col-xs-12 visible-xs">
+            <div class="navbar-text pull-left">
+                <a href="#/host/{{model.hostId}}/event/{{model.eventId}}/shopping" class="navbar-link">
+                      <span class="glyphicon glyphicon-chevron-left">
+                      </span>
+                </a>
+            </div>
+        </div>
+    </div>
+</nav>
+
+<div ng-show="model.userNfound" class="alert alert-danger">
+    {{model.userNfound}}
+</div>
+
+<div ng-show="model.vendorNfound" class="alert alert-danger">
+    {{model.vendorNfound}}
+</div>
+
+<div ng-show="urlForm.searchField.$invalid && model.noQuery" class="alert alert-danger">
+    {{model.noQuery}}
+</div>
+
+<div ng-show="model.deleteError" class="alert alert-danger">
+    {{model.deleteError}}
+</div>
+
+<div ng-show="model.deleteSuccess" class="alert alert-success">
+    {{model.deleteSuccess}}
+</div>
+
+<div class="text-center">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12 centered">
+                <h2>Search for shopping items</h2>
+                <div id="custom-search-input">
+                    <form name="urlForm" novalidate>
+                    <div class="input-group col-md-12">
+                            <input name="searchField" type="text"
+                                   ng-model="model.userName" class="input-lg form-control" placeholder="Enter email-id here" required/>
+                            <span class="input-group-btn">
+                            <button ng-click="model.search()" class="btn btn-info btn-lg" type="button">
+                                <i class="glyphicon glyphicon-search"></i>
+                            </button>
+                    </span>
+                    </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="container-fluid">
+    <label for="user-type" class="form-control-label">Account Type</label>
+    <select class="form-group marginbutton" ng-model="model.userType"
+            ng-change="model.dropChange()"
+            id="user-type"
+            value="user" required novalidate>
+        <option value="vendor">Vendor</option>
+        <option value="user" selected>User</option>
+    </select>
+
+    <div ng-show="model.noType" class="alert alert-danger">
+        {{model.noType}}
+    </div>
+
+    <div ng-if="model.user">
+        <div class="row">
+            <div class="col-sm-6">
+                {{model.user.name}}
+            </div>
+            <div class="col-sm-6">
+                <a class="btn btn-danger pull-right" ng-click="model.deleteUser()">Delete</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<nav class="navbar navbar-default navbar-fixed-bottom">
+    <div class="container-fluid">
+        <div class="navbar-text pull-right">
+            <a href="#/vendor/{{model.vendorId}}" class="navbar-link">
+                <span class="glyphicon glyphicon-vendor"></span>
+            </a>
+        </div>
+    </div>
+</nav>
