@@ -19,22 +19,22 @@
     <h3 class="text-center">Services</h3>
     <ul class="nav nav-tabs">
         <li class="active">
-            <a data-toggle="tab" href="#myservices" target="_self">
+            <a data-toggle="tab" ng-click="model.refreshData()" href="#myservices" target="_self">
                 My Services
             </a>
         </li>
         <li>
-            <a data-toggle="tab" href="#conOrders" target="_self">
+            <a data-toggle="tab" ng-click="model.refreshData()" href="#conOrders" target="_self">
                 Confirmed Orders
             </a>
         </li>
         <li>
-            <a data-toggle="tab" href="#penOrders" target="_self">
+            <a data-toggle="tab" ng-click="model.refreshData()" href="#penOrders" target="_self">
                 Pending Orders
             </a>
         </li>
         <li>
-            <a data-toggle="tab" href="#newServices" target="_self">
+            <a data-toggle="tab" ng-click="model.refreshData()" href="#newServices" target="_self">
                 Add Services
             </a>
         </li>
@@ -175,13 +175,13 @@
             <div ng-repeat="vendor in model.vendors">
                 <li class="list-group-item">
                     <a href="#/vendor/{{model.vendorId}}/services">
-                        {{vendor.name}}
+                        Vendor Name : {{vendor.name}}
                     </a>
                     <ul class="list-group">
                         <div ng-repeat="vendorservice in vendor.services track by $index">
                             <li class="list-group-item">
                                 <a href="#/host/{{model.hostID}}/event/{{model.eventID}}/services/{{vendorservice._id}}">
-                                    {{vendorservice.name}}
+                                   Service Name : {{vendorservice.name}}
                                 </a>
                             </li>
                         </div>
@@ -194,21 +194,13 @@
                 <div ng-repeat="service in model.services track by $index">
                     <li class="list-group-item">
                         <a href="#/host/{{model.hostID}}/event/{{model.eventID}}/services/{{service._id}}">
-                                        {{service.name}}
+                                    Service Name :    {{service.name}}
                         </a>
                     </li>
                 </div>
             </ul>
-
-
+        </div>
     </div>
-
-
-
-
-
-
-
 </div>
 
 <div class="bottom-padding"></div>

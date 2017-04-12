@@ -14,6 +14,7 @@
         vm.acceptInvitation = acceptInvitation;
         vm.deleteUser = deleteUser;
         vm.cancelInvitation = cancelInvitation;
+        vm.refreshData  = refreshData;
 
         function init() {
             InviteService
@@ -64,6 +65,9 @@
         }
         init();
 
+        function refreshData() {
+            init();
+        }
 
         function updateUser(newUser) {
             UserService

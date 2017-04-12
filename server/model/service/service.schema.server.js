@@ -10,7 +10,7 @@ module.exports = function (mongoose) {
         description: String,
         city: String,
         address: String,
-        capacity: String,
+        capacity: Number,
         dateCreated: { type: Date, default: Date.now },
         perPlateCost: Number,
         orders:[{type:mongoose.Schema.Types.ObjectId, ref: 'OrderModel'}]

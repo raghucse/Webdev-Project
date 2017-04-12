@@ -95,41 +95,57 @@
                 </textarea>
             </div>
 
-            <div class="form-group" ng-show="model.place">
+            <div class="form-group" ng-show="model.place || model.food">
                 <label for="capacity" class="form-control-label">Maximum Capacity</label>
                 <input ng-model="model.service.capacity"
                        id="capacity"
                        name="locationCapacity"
                        class="form-control"
-                       type="text"
+                       type="number"
+                       min="1"
                        placeholder="Max Capacity" required>
             </div>
 
-            <div class="error" ng-show="model.place && newservice.locationCapacity.$invalid && newservice.$submitted">
-                <li>Please enter the max capacity of the Venue</li>
+            <div class="error" ng-show="(model.place || model.food )&& newservice.locationCapacity.$invalid && newservice.$submitted">
+                <li>Please enter the Valid Max Capacity</li>
+            </div>
+
+            <div class="error" ng-show="model.capacityErr">
+                <li>{{model.capacityErr}}</li>
             </div>
 
             <div class="form-group">
                 <label for="address" class="form-control-label">Location Address</label>
-                <input ng-model="model.service.address"
-                       id="address"
-                       class="form-control"
-                       type="text"
-                       placeholder="Location Address">
+                <textarea ng-model="model.service.address"
+                          id="address"
+                          name="address"
+                          class="form-control"
+                          rows="4"
+                          placeholder="Location Address" required>
+                </textarea>
+            </div>
+
+            <div class="error" ng-show="(model.place || model.food) && newservice.address.$invalid && newservice.$submitted">
+                <li>Please enter Address</li>
             </div>
 
             <div class="form-group" ng-show="model.food">
-                <label for="perplatecost" class="form-control-label">Per Plate Cost</label>
+                <label for="perplatecost" class="form-control-label">Per Plate Cost in USD</label>
                 <input ng-model="model.service.perPlateCost"
                        id="perplatecost"
                        class="form-control"
                        name="plateCost"
-                       type="text"
+                       type="number"
+                       min="0"
                        placeholder="Per Plate Cost" required>
             </div>
 
             <div class="error" ng-show="model.food && newservice.plateCost.$invalid && newservice.$submitted">
                 <li>Please enter cost of each Plate</li>
+            </div>
+
+            <div class="error" ng-show="model.plateCostErr">
+                <li>{{model.plateCostErr}}</li>
             </div>
 
             <div class="form-group">

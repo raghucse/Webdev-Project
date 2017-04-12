@@ -90,7 +90,7 @@
                 </textarea>
             </div>
 
-            <div class="form-group" ng-show="model.place">
+            <div class="form-group" ng-show="model.place || model.food">
                 <label for="capacity" class="form-control-label">
                     Maximum Capacity
                 </label>
@@ -98,39 +98,47 @@
                        id="capacity"
                        name="editMaxCapacity"
                        class="form-control"
-                       type="text"
+                       type="number"
+                       min="1"
                        placeholder="Max Capacity" required>
             </div>
 
-            <div class="error" ng-show="model.place && editService.editMaxCapacity.$invalid && editService.$submitted">
-                <li>Max Capacity cannot be empty</li>
+            <div class="error" ng-show="(model.place || model.food) && editService.editMaxCapacity.$invalid && editService.$submitted">
+                <li>Invalid Max Capacity Value</li>
             </div>
 
             <div class="form-group" ng-show="model.food">
                 <label for="plateCost" class="form-control-label">
-                    Per Plate Cost
+                    Per Plate Cost in USD
                 </label>
                 <input ng-model="model.service.perPlateCost"
                        id="plateCost"
                        class="form-control"
                        name="editPlateCost"
-                       type="text"
+                       type="number"
+                       min="1"
                        placeholder="Per Plate Cost" required>
             </div>
 
             <div class="error" ng-show="model.food && editService.editPlateCost.$invalid && editService.$submitted">
-                <li>Per Plate Cost cannot be empty</li>
+                <li>Invalid Per Plate Cost Value</li>
             </div>
 
             <div class="form-group">
                 <label for="address" class="form-control-label">
                     Location Address
                 </label>
-                <input ng-model="model.service.address"
+                <textarea ng-model="model.service.address"
                        id="address"
+                       name="editAddress"
                        class="form-control"
-                       type="text"
-                       placeholder="Location Address">
+                       rows="3"
+                       placeholder="Location Address" required>
+                </textarea>
+            </div>
+
+            <div class="error" ng-show="model.place && editService.editAddress.$invalid && editService.$submitted">
+                <li>Address cannot be empty</li>
             </div>
 
             <div class="form-group">
@@ -142,7 +150,7 @@
                        name="editServiceCity"
                        class="form-control"
                        type="text"
-                       placeholder="City"required>
+                       placeholder="City" required>
             </div>
 
             <div class="error" ng-show="editService.editServiceCity.$invalid && editService.$submitted">

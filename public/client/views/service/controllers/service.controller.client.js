@@ -105,7 +105,7 @@
         }
 
         function deleteVendor(vendor) {
-            var cfrm = confirm("Are you sure that you want to delete?")
+            var cfrm = confirm("Are you sure that you want to delete?");
             if(cfrm){
                 VendorService
                     .deleteVendor(vendor._id)
@@ -188,30 +188,46 @@
             if(vm.service && vm.service.type && vm.service.name && vm.service.city){
                 vm.service.city = angular.lowercase(vm.service.city);
 
-                if(vm.service.type == "food" && vm.service.perPlateCost){
+                if(vm.service.type == "food" && vm.service.perPlateCost && vm.service.capacity){
 
-                    ServiceService
-                        .createService(vm.vendorId, vm.service)
-                        .then(function (service) {
-                            vm.service = service.data;
-                            VendorService.updateService(vm.vendorId, vm.service._id)
-                                .then(function (status) {
-                                    $location.url("/vendor/"+vm.vendorId+"/service");
-                                })
-                        });
+                    if(angular.isNumber(vm.service.perPlateCost) && vm.service.perPlateCost > 0
+                        && angular.isNumber(vm.service.capacity) && vm.service.capacity > 0){
+                        console.log("register service for food");
+                        ServiceService
+                            .createService(vm.vendorId, vm.service)
+                            .then(function (service) {
+                                vm.service = service.data;
+                                VendorService.updateService(vm.vendorId, vm.service._id)
+                                    .then(function (status) {
+                                        $location.url("/vendor/"+vm.vendorId+"/service");
+                                    })
+                            });
+                    }
+                    else if((!angular.isNumber(vm.service.perPlateCost) || vm.service.perPlateCost <= 0)
+                        && angular.isNumber(vm.service.capacity)){
+                        vm.plateCostErr = "Per Plate Cost must be a numeric value greater than 0";
+                    } else if((!angular.isNumber(vm.service.capacity) || vm.service.capacity <= 0)
+                        && angular.isNumber(vm.service.perPlateCost)){
+                        vm.capacityErr = "Max Capacity must be a numeric value greater than 0";
+                    }
                 }
 
-                if(vm.service.type == "place" && vm.service.capacity){
+                if(vm.service.type == "place" && vm.service.capacity && vm.service.address){
+                    if(angular.isNumber(vm.service.capacity) && vm.service.capacity > 0){
+                        ServiceService
+                            .createService(vm.vendorId, vm.service)
+                            .then(function (service) {
+                                vm.service = service.data;
+                                VendorService.updateService(vm.vendorId, vm.service._id)
+                                    .then(function (status) {
+                                        $location.url("/vendor/"+vm.vendorId+"/service");
+                                    })
+                            });
+                    }else
+                    {
+                        vm.capacityErr = "Max Capacity must be a numeric value greater than 0";
+                    }
 
-                    ServiceService
-                        .createService(vm.vendorId, vm.service)
-                        .then(function (service) {
-                            vm.service = service.data;
-                            VendorService.updateService(vm.vendorId, vm.service._id)
-                                .then(function (status) {
-                                    $location.url("/vendor/"+vm.vendorId+"/service");
-                                })
-                        });
                 }
 
                 if(vm.service.type == "flower"){
@@ -279,7 +295,7 @@
             vm.service.city = angular.lowercase(vm.service.city);
             if(vm.service && vm.service.type && vm.service.name && vm.service.city) {
 
-                if (vm.service.type === "food" && vm.service.perPlateCost) {
+                if (vm.service.type === "food" && vm.service.perPlateCost && vm.service.capacity) {
                     ServiceService
                         .updateService(vm.serviceId, vm.service)
                         .then(function (service) {
@@ -288,7 +304,7 @@
                         });
                 }
 
-                if(vm.service.type === "place" && vm.service.capacity){
+                if(vm.service.type === "place" && vm.service.capacity && vm.service.address){
                     ServiceService
                         .updateService(vm.serviceId, vm.service)
                         .then(function (service) {

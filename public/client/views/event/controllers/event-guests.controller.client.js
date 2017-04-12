@@ -11,6 +11,7 @@
 
         vm.findUser = findUser;
         vm.createInvite = createInvite;
+        vm.refreshData = refreshData;
 
         function init() {
             EventService
@@ -64,6 +65,10 @@
                 });
         }
         init();
+
+        function refreshData() {
+            init();
+        }
 
         function findUser(username) {
             UserService

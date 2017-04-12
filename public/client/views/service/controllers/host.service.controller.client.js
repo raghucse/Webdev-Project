@@ -13,6 +13,7 @@
         vm.findService = findService;
         vm.cancelOrder = cancelOrder;
         vm.findServiceByCity = findServiceByCity;
+        vm.refreshData = refreshData;
 
         function init() {
             vm.vendor = "";
@@ -84,6 +85,10 @@
                         }
                         vm.vendors = vendors;
                 });
+        }
+
+        function refreshData() {
+            init();
         }
 
         function findServiceByCity(cityname) {
