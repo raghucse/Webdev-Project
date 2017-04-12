@@ -84,8 +84,6 @@ module.exports = function(app, vendorModel) {
 
 
     function localStrategy(username, password, done) {
-        console.log("vendor Login called")
-        console.log(username);
         vendorModel.findVendorByVendorname(username)
             .then(
                 function(vendor) {

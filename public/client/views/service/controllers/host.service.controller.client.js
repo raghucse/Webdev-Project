@@ -11,6 +11,7 @@
         vm.hostID = $routeParams["hid"];
 
         vm.findService = findService;
+        vm.cancelOrder = cancelOrder;
 
         function init() {
             EventService
@@ -28,18 +29,27 @@
                                 .findOrderById(orderIDList[i])
                                 .success(function (order) {
                                     var serviceid = order.service;
-                                    if(!order.accepted){
-                                        vm.penOrders.push(order);
-                                    }
-                                    else{
-                                        vm.conOrders.push(order);
-                                    }
+                                    VendorService
+                                        .findVendorById(order.vendor)
+                                        .success(function (vendor) {
+                                            order.vendor = vendor.vendorname;
+                                        });
                                     ServiceService
                                         .findServiceById(serviceid)
                                         .success(function (service) {
-
-                                            serviceList.push(service.name);
+                                            if(!order.cancelled)
+                                            {
+                                                serviceList.push(service.name);
+                                            }
+                                            order.type = service.type;
                                         });
+                                    if(!order.accepted && !order.cancelled){
+
+                                        vm.penOrders.push(order);
+                                    }
+                                    else if(!order.cancelled){
+                                        vm.conOrders.push(order);
+                                    }
                                 });
                         })(i);
                     }
@@ -69,6 +79,18 @@
                         }
                         vm.vendors = vendors;
                 });
+        }
+
+        function cancelOrder(order) {
+            var newOrder = {};
+            newOrder._id = order._id;
+            newOrder.cancelled = true;
+            OrderService
+                .updateOrder(order._id, newOrder)
+                .success(function (response) {
+                    console.log("Order Cancelled");
+                    init();
+                })
         }
 
 
