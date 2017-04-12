@@ -136,10 +136,29 @@
 
         </div>
         <div id="newServices" class="tab-pane fade">
-            <br>
-
-            <div class="row">
-                <div class="col-xs-12 col-md-6">
+            <div class="text-center">
+                <h4> Search Services By</h4>
+            </div>
+            <ul class="nav nav-tabs">
+                <li class="active">
+                    <a data-toggle="tab" href="#serviceByVendor" target="_self">
+                        Vendor
+                    </a>
+                </li>
+                <li>
+                    <a data-toggle="tab"  href="#serviceInCity" target="_self">
+                        City
+                    </a>
+                </li>
+                <li>
+                    <a data-toggle="tab" href="#serviceByType" target="_self">
+                        Service Type
+                    </a>
+                </li>
+            </ul>
+            <div class="tab-content">
+                <div id="serviceByVendor" class="tab-pane fade in active">
+                    <label for="event-vendor" class="form-control-label">Vendor Name</label>
                     <div class="input-group">
                         <input class="form-control"
                                ng-model="model.vendor"
@@ -147,58 +166,110 @@
                                placeholder="Enter Vendor name"
                                type="text"/>
                         <span class="input-group-btn">
-                            <button class="btn btn-danger" ng-click="model.findService(model.vendor)">
-                                <i class="glyphicon glyphicon-search"></i>
-                            </button>
-                        </span>
+                                <button class="btn btn-danger" ng-click="model.findService(model.vendor)">
+                                    <i class="glyphicon glyphicon-search"></i>
+                                </button>
+                            </span>
                     </div>
+                    <ul class="list-group">
+                        <div ng-repeat="vendor in model.vendors">
+                            <li class="list-group-item">
+                                <a href="#/vendor/{{model.vendorId}}/services">
+                                    Vendor Name : {{vendor.name}}
+                                </a>
+                                <ul class="list-group">
+                                    <div ng-repeat="vendorservice in vendor.services track by $index">
+                                        <li class="list-group-item">
+                                            <a href="#/host/{{model.hostID}}/event/{{model.eventID}}/services/{{vendorservice._id}}">
+                                                Service Name : {{vendorservice.name}}
+                                            </a>
+                                        </li>
+                                    </div>
+                                </ul>
+                            </li>
+                        </div>
+                    </ul>
                 </div>
 
-                <div class="col-xs-12 col-md-6">
+                <div id="serviceInCity" class="tab-pane fade">
+                    <label for="event-location" class="form-control-label">City Name</label>
                     <div class="input-group">
+
                         <input class="form-control"
                                ng-model="model.location"
                                id="event-location"
                                placeholder="Enter City Name"
                                type="text"/>
                         <span class="input-group-btn">
-                            <button class="btn btn-danger" ng-click="model.findServiceByCity(model.location)">
-                                <i class="glyphicon glyphicon-search"></i>
-                            </button>
+                                <button class="btn btn-danger" ng-click="model.findServiceByCity(model.location)">
+                                    <i class="glyphicon glyphicon-search"></i>
+                                </button>
                         </span>
                     </div>
-                </div>
 
-
-        </div>
-        <ul class="list-group">
-            <div ng-repeat="vendor in model.vendors">
-                <li class="list-group-item">
-                    <a href="#/vendor/{{model.vendorId}}/services">
-                        Vendor Name : {{vendor.name}}
-                    </a>
                     <ul class="list-group">
-                        <div ng-repeat="vendorservice in vendor.services track by $index">
+                        <div ng-repeat="service in model.services track by $index">
                             <li class="list-group-item">
-                                <a href="#/host/{{model.hostID}}/event/{{model.eventID}}/services/{{vendorservice._id}}">
-                                   Service Name : {{vendorservice.name}}
+                                <a href="#/host/{{model.hostID}}/event/{{model.eventID}}/services/{{service._id}}">
+                                    Service Name :    {{service.name}}
                                 </a>
                             </li>
                         </div>
                     </ul>
-                </li>
-            </div>
-        </ul>
 
-            <ul class="list-group">
-                <div ng-repeat="service in model.services track by $index">
-                    <li class="list-group-item">
-                        <a href="#/host/{{model.hostID}}/event/{{model.eventID}}/services/{{service._id}}">
-                                    Service Name :    {{service.name}}
-                        </a>
-                    </li>
                 </div>
-            </ul>
+
+                <div id="serviceByType" class="tab-pane fade">
+                    <form name="searchService" novalidate>
+
+                        <div class="row">
+                            <div class="col-xs-12 col-md-6">
+                                <label for="serviceType" class="form-control-label">Select Service Type</label>
+                                <select class="form-control"
+                                        ng-model="model.service.type"
+                                        name="serviceType"
+                                        id="serviceType" required>
+                                    <option value="flower">Flower Service</option>
+                                    <option value="food">Food Service</option>
+                                    <option value="place">Place Service</option>
+                                </select>
+
+                                <div class="error" ng-show="searchService.serviceType.$invalid && searchService.$submitted">
+                                    <li>Please select Service Type</li>
+                                </div>
+                            </div>
+
+                            <div class="col-xs-12 col-md-6">
+                                <label for="city" class="form-control-label">City Name</label>
+                                <input class="form-control"
+                                       ng-model="model.city"
+                                       id="city"
+                                       name="City"
+                                       placeholder="Enter City"
+                                       type="text" required/>
+
+                                <div class="error" ng-show="searchService.City.$invalid && searchService.$submitted">
+                                    <li>Please Enter City Name</li>
+                                </div>
+                            </div>
+
+                            <button type="submit" ng-click="model.searchServiceByType(model.service.type, model.city)" class="btn btn-block btn-primary">
+                                Search Services By Service-Type in a City
+                            </button>
+                        </div>
+                    </form>
+
+                    <ul class="list-group">
+                        <div ng-repeat="service in model.servicesByType track by $index">
+                            <li class="list-group-item">
+                                <a href="#/host/{{model.hostID}}/event/{{model.eventID}}/services/{{service._id}}">
+                                    Service Name :    {{service.name}}
+                                </a>
+                            </li>
+                        </div>
+                    </ul>
+                </div>
+            </div>
         </div>
     </div>
 </div>

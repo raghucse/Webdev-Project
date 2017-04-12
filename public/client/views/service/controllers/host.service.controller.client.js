@@ -14,6 +14,7 @@
         vm.cancelOrder = cancelOrder;
         vm.findServiceByCity = findServiceByCity;
         vm.refreshData = refreshData;
+        vm.searchServiceByType = searchServiceByType;
 
         function init() {
             vm.vendor = "";
@@ -102,8 +103,29 @@
                     .success(function (services) {
                         if(services){
                             vm.services = services;
-                            console.log(services);
                             }
+                    });
+            }
+        }
+
+        function searchServiceByType(serviceType, serviceCity) {
+            vm.servicesByType = undefined;
+
+            if(serviceType != "" && serviceCity != ""){
+                serviceCity = angular.lowercase(serviceCity);
+
+                ServiceService
+                    .findAllServicesInCity(serviceCity)
+                    .success(function (services) {
+                        if(services){
+                            var serviceList = []
+                            for(var i = 0; i < services.length ; i++){
+                                if(services[i].type == serviceType){
+                                    serviceList.push(services[i]);
+                                }
+                            }
+                            vm.servicesByType = serviceList;
+                        }
                     });
             }
         }
