@@ -195,16 +195,16 @@ module.exports = function (app, userModel, vendorModel) {
     }
 
 
-
-    function login(req, res) {
-        var user = req.user;
-        res.json(user);
-    }
-
-    function logout(req, res) {
-        req.logOut();
-        res.send(200);
-    }
+    //
+    // function login(req, res) {
+    //     var user = req.user;
+    //     res.json(user);
+    // }
+    //
+    // function logout(req, res) {
+    //     req.logOut();
+    //     res.send(200);
+    // }
 
     function loggedin(req, res) {
         res.send(req.isAuthenticated() ? req.user : '0');
