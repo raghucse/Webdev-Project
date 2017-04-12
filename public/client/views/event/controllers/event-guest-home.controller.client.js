@@ -22,7 +22,6 @@
                 .success(function (guests) {
                     var guestIDList = guests[0].guests;
                     var guestList = [];
-                    console.log(guestIDList);
                     for(var i = 0; i < guestIDList.length ; i++){
                         var guestid = guestIDList[i];
                         UserService

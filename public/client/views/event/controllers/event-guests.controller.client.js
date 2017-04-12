@@ -61,7 +61,7 @@
 
                     vm.acceptedGuests = acceptedGuests;
                     vm.pennGuests = pennGuests;
-                    console.log(pennGuests);
+
                 });
         }
         init();
@@ -72,17 +72,19 @@
                 .success(function (user) {
                     vm.guestname = user[0].username;
                     vm.guestID = user[0]._id;
-                    console.log(vm.guestID);
                 })
         }
 
         function createInvite() {
-            for(var g in vm.allGuests){
-                if(vm.allGuests[g] == vm.guestID){
-                    var guestPresent = true;
+            var guestPresent = false;
+            var selfInvite = false;
+
+            for(var i = 0; i < vm.allGuests.length ; i++){
+                if(vm.allGuests[i] == vm.guestID){
+                    guestPresent = true;
                 }
                 if(vm.guestID == vm.hostID){
-                    var selfInvite = true;
+                    selfInvite = true;
                 }
             }
             if(!guestPresent && !selfInvite){
@@ -100,8 +102,7 @@
             }else if(!guestPresent && selfInvite){
                 vm.invitationstatus = "You cannot send Invitation to yourself"
             }
-
-
+            init();
         }
 
 

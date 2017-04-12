@@ -13,7 +13,7 @@ body {
 
 .navbar {
     margin-bottom: 0;
-    background-color: #f4511e;
+    background-color: #ff8f66;
     z-index: 9999;
     border: 0;
     font-size: 12px !important;
@@ -33,7 +33,7 @@ body {
 
 .navbar-nav li a:hover, .navbar-nav li.active a {
     color: white !important;
-    background-color: #fff !important;
+    background-color: #ea6c59 !important;
 }
 .navbar-default .navbar-toggle {
     border-color: transparent;
@@ -41,21 +41,21 @@ body {
 }
 
 .jumbotron {
-    background-color: #f4511e;
+    background-color: #ff8f66;
     color: #fff;
     padding: 100px 25px;
     font-family: Montserrat, sans-serif;
 }
 
 .jumbotron2 {
-    color: #f4511e;
+    color: #ff8f66;
     padding: 60px 20px;
     font-family: Montserrat, sans-serif;
     font-size: larger;
 }
 
 .panel {
-    border: 1px solid #f4511e;
+    border: 1px solid #ff8f66;
     border-radius:0 !important;
     transition: box-shadow 0.5s;
 }
@@ -63,13 +63,13 @@ body {
     box-shadow: 5px 0px 40px rgba(0,0,0, .2);
 }
 .panel-footer .btn:hover {
-    border: 1px solid #f4511e;
+    border: 1px solid #ff8f66;
     background-color: #fff !important;
-    color: #f4511e;
+    color: #ff8f66;
 }
 .panel-heading {
     color: #fff !important;
-    background-color: #f4511e !important;
+    background-color: #ff8f66 !important;
     padding: 25px;
     border-bottom: 1px solid transparent;
     border-top-left-radius: 0px;
@@ -89,7 +89,7 @@ body {
 }
 .panel-footer .btn {
     margin: 15px 0;
-    background-color: #f4511e;
+    background-color: #ff8f66;
     color: #fff;
 }
 
@@ -105,16 +105,16 @@ body {
 }
 
 .logo-small {
-    color: #f4511e;
+    color: #ff8f66;
     font-size: 50px;
 }
 
 .logo-smaller{
-    color: #f4511e;
+    color: #ff8f66;
     font-size: 30px;
 }
 .logo {
-    color: #f4511e;
+    color: #ff8f66;
     font-size: 200px;
 }
 
