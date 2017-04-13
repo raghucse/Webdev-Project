@@ -174,6 +174,7 @@
         $http.get('/api/loggedin').then(function(user) {
             $rootScope.errorMessage = null;
             user = user.data;
+            console.log(user);
             if (user !== '0') {
                 deferred.resolve();
             } else {
