@@ -5,20 +5,20 @@ module.exports = function(app, vendorModel) {
     var LocalStrategy = require('passport-local').Strategy;
     var FacebookStrategy = require('passport-facebook').Strategy;
     var facebookConfig = {
-        clientID     : process.env.FACEBOOK_CLIENT_ID_VENDOR,
-        clientSecret : process.env.FACEBOOK_CLIENT_SECRET_VENDOR,
-        callbackURL  : process.env.FACEBOOK_CALLBACK_URL_VENDOR,
+        clientID     : process.env.FACEBOOK_CLIENT_ID,
+        clientSecret : process.env.FACEBOOK_CLIENT_SECRET,
+        callbackURL  : '/auth/vendor/facebook/callback',
         profileFields: ['id', 'displayName', 'name', 'email']
     };
     var bcrypt = require("bcrypt-nodejs");
 
     passport.use('vendor', new LocalStrategy(localStrategy));
-    passport.use(new FacebookStrategy(facebookConfig, facebookStrategy));
+    passport.use('facebookVendor',new FacebookStrategy(facebookConfig, facebookStrategy));
 
     var auth = authorized;
 
     app.post('/vendor/login', passport.authenticate('vendor','local'), login);
-    app.get ('/auth/facebook', passport.authenticate('facebook', { scope : 'email' }));
+    app.get ('/auth/facebook', passport.authenticate('facebookVendor', { scope : 'email' }));
     app.post('/api/logout',logout);
     app.get('/api/vendor/loggedin',loggedin);
     app.post ('/api/vendor/register', register);
@@ -32,8 +32,8 @@ module.exports = function(app, vendorModel) {
     app.get("/api/vendor", findAllVendors);
 
     app.get('/auth/vendor/facebook/callback',
-        passport.authenticate('facebook', {
-            failureRedirect: '/client/#/home'
+        passport.authenticate('facebookVendor', {
+            failureRedirect: '/'
         }), function (req, res) {
             res.redirect('/client/#/vendor/' + req.vendor._id +'/service');
         });
