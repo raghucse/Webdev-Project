@@ -5,7 +5,6 @@
 
     function homeController(UserService, $location, $rootScope, VendorService) {
         var vm = this;
-
         //event handlers
         vm.login = login;
         vm.register = register;
@@ -13,6 +12,8 @@
         vm.vendorregister = vendorregister;
 
         function init() {
+            $('#userlogin').validator();
+            $('#vendorlogin').validator();
         }
         init();
 
