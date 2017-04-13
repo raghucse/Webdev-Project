@@ -1,15 +1,18 @@
 
 <nav class="navbar navbar-default navbar-fixed-top">
     <div class="container">
-        <div class="navbar-text pull-right">
-            <a href="#/host/{{model.hostID}}/event/new">
-                PLAN NEW EVENT
-            </a>
-        </div>
         <div class="navbar-header">
-            <a class="navbar-brand" href="">
-                PlanIT
-            </a>
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <div class="navbar-brand">PlanIT</div>
+        </div>
+        <div class="collapse navbar-collapse" id="myNavbar">
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="#/host/{{model.hostID}}/event/new">PLAN NEW EVENT</a></li>
+            </ul>
         </div>
     </div>
 </nav>
@@ -148,27 +151,8 @@
                                                id="profile-mail"
                                                type="email"/>
                                     </div>
-                                    <!--<div class="row">-->
-                                        <!--<div class="col-xs-12 col-sm-6 col-md-6">-->
-                                            <!--<div class="form-group">-->
-                                                <!--<input type="password"-->
-                                                       <!--ng-model="model.password"-->
-                                                       <!--class="form-control input-lg"-->
-                                                       <!--placeholder="Password"/>-->
-                                            <!--</div>-->
-                                        <!--</div>-->
-                                        <!--<div class="col-xs-12 col-sm-6 col-md-6">-->
-                                            <!--<div class="form-group">-->
-                                                <!--<input type="password"-->
-                                                       <!--name="password_confirmation"-->
-                                                       <!--id="password_confirmation"-->
-                                                       <!--class="form-control input-lg"-->
-                                                       <!--placeholder="Confirm Password"/>-->
-                                            <!--</div>-->
-                                        <!--</div>-->
-                                    <!--</div>-->
                                     <hr class="colorgraph">
-                                    <div class="row">
+                                    <div class="row form-group">
                                         <div class="col-xs-12 col-md-4">
                                             <a ng-click="model.logout()"
                                                class="btn btn-danger btn-block btn-lg">

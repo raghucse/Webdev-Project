@@ -1,6 +1,6 @@
 
 <nav class="navbar navbar-default navbar-fixed-top">
-    <div class="row container-fluid">
+    <div class="container row">
         <div class="col-sm-4 hidden-xs">
             <div class="navbar-text pull-left">
                 <a href="#/host/{{model.hostID}}/event">
@@ -9,25 +9,14 @@
             </div>
             <div class="navbar-header">
                 <a class="navbar-brand">
-                    Events
+                    EVENTS
                 </a>
             </div>
-            <div class="navbar-text pull-right">
-                <a href="">
-                    <span class="glyphicon glyphicon-plus"></span>
-                </a>
-            </div>
-
         </div>
         <div class="col-sm-8">
             <div class="navbar-text pull-left visible-xs">
                 <a href="#/host/{{model.hostID}}/event">
                     <span class="glyphicon glyphicon-chevron-left"></span>
-                </a>
-            </div>
-            <div class="navbar-text pull-right">
-                <a ng-click="model.createEvent(model.event)" href="">
-                    <span class="glyphicon glyphicon-ok"></span>
                 </a>
             </div>
             <div class="navbar-header">
@@ -40,8 +29,6 @@
 </nav>
 
 <div class="container">
-
-
     <div class="col-sm-4 pull-left hidden-xs">
         <ul class="list-group">
             <li class="list-group-item">
