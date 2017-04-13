@@ -238,15 +238,15 @@
 
                 <h1>Login</h1>
 
-                <div ng-show="model.error" class="alert alert-danger">
-                    {{model.error}}
+                <div ng-show="model.Verror" class="alert alert-danger">
+                    {{model.Verror}}
                 </div>
 
                 <div ng-show="model.message" class="alert alert-info">
                     {{model.message}}
                 </div>
 
-                <form name="vendorlogin" data-toggle="validator">
+                <form name="vendorlogin" ng-submit="model.vendorlogin(model.vendor)" data-toggle="validator">
                     <div class="form-group">
                         <input  ng-model="model.vendor.vendorname"
                                 type="email"
@@ -263,8 +263,7 @@
                                 required/>
                         <div class="help-block with-errors"></div>
                     </div>
-                    <button type="submit"  class="btn btn-primary btn-block"
-                       ng-click="model.vendorlogin(model.vendor)">Login</button>
+                    <button type="submit"  class="btn btn-primary btn-block">Login</button>
                 </form>
                 <a class="btn btn-danger btn-block" data-dismiss="modal">
                     Cancel
