@@ -17,6 +17,7 @@
             $('#userlogin').validator();
             $('#vendorlogin').validator();
             $('#registerform').validator();
+            $('#registerformV').validator();
             vm.user= undefined;
             vm.vendor = undefined;
             vm.error = undefined;
@@ -99,27 +100,32 @@
 
 
         function vendorregister() {
+
+        if (vm.vendor.password === vm.vendor.password2V) {
             VendorService
                 .findVendorByVendorname(vm.vendor.vendorname)
                 .then(function (vendor) {
                     vendor = vendor.data;
-                    if(vendor[0]) {
+                    if (vendor[0]) {
                         vm.error = "sorry that vendorname is taken";
                     }
-                    else
-                    {
+                    else {
                         VendorService
                             .register(vm.vendor)
-                            .then(function(vendor){
+                            .then(function (vendor) {
                                 vendor = vendor.data;
                                 $location.url('/vendor/' + vendor._id);
                             }, function (err) {
                                 vm.error = 'sorry could not register';
                             })
                     }
-                },function(err){
+                }, function (err) {
                     vm.error = 'sorry could not register';
                 })
+        }
+        else {
+            vm.passworderrorV = "Password and Verify password must match"
+        }
         }
     }
 
