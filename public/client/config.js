@@ -13,21 +13,6 @@
                 controller: "HomeController",
                 controllerAs: "model"
             })
-            .when("/login",{
-                templateUrl: "views/user/templates/login.view.client.html",
-                controller: "LoginController",
-                controllerAs: "model",
-            })
-            .when("/",{
-                templateUrl: "views/user/templates/login.view.client.html",
-                controller: "LoginController",
-                controllerAs: "model",
-            })
-            .when("/register",{
-                templateUrl: "views/user/templates/register.view.client.html",
-                controller: "RegisterController",
-                controllerAs: "model"
-            })
             .when("/host/:hid/event/profile",{
                 templateUrl: "views/user/templates/profile.view.client.html",
                 controller: "ProfileController",
@@ -93,22 +78,6 @@
                 controller: "GuestController",
                 controllerAs: "model",
                 resolve: { loggedin: checkUserLoggedin }
-            })
-            .when("/vendor/login",{
-                templateUrl: "views/user/templates/vendor.login.view.client.html",
-                controller: "VendorLoginController",
-                controllerAs: "model"
-            })
-            .when("/vendor/register",{
-                templateUrl: "views/user/templates/vendor.register.view.client.html",
-                controller: "VendorRegisterController",
-                controllerAs: "model"
-            })
-            .when("/vendor/:vid",{
-                templateUrl: "views/user/templates/vendor.profile.view.client.html",
-                controller: "VendorProfileController",
-                controllerAs: "model",
-                resolve: { loggedin: checkVendorLoggedin }
             })
             .when("/vendor/:vid/service", {
                 templateUrl: "views/service/templates/service-list.view.client.html",
@@ -179,7 +148,7 @@
                 deferred.resolve();
             } else {
                 deferred.reject();
-                $location.url('/');
+                $location.url('/home');
             }
         });
         return deferred.promise;
@@ -194,7 +163,7 @@
                 deferred.resolve();
             } else {
                 deferred.reject();
-                $location.url('/vendor/login');
+                $location.url('/home');
             }
         });
         return deferred.promise;
