@@ -29,13 +29,13 @@ module.exports = function (app, userModel, vendorModel) {
     app.delete("/api/user/:userID", deleteUser);
     app.put("/api/user/:userId/website/:websiteId", addWebsite);
     app.get('/api/loggedin', loggedin);
-    app.get('/auth/facebook', passport.authenticate('facebook', { scope : 'email' }));
+    app.get('/auth/facebook', passport.authenticate('facebookUser', { scope : 'email' }));
 
     app.get('/auth/facebook/callback',
-        passport.authenticate('facebook', {
+        passport.authenticate('facebookUser', {
             failureRedirect: '/'
         }), function (req, res) {
-            res.redirect('/client/#/user/' + req.user._id + '/event/');
+            res.redirect('/client/#/user/' + req.user._id + '/event');
         });
 
     function authorized (req, res, next) {
