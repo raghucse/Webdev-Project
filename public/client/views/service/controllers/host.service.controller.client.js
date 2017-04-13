@@ -204,10 +204,25 @@
             OrderService
                 .updateOrder(order._id, newOrder)
                 .success(function (response) {
-                    init();
+                    EventService
+                        .findEventById(vm.eventID)
+                        .success(function (myevent) {
+                           var orders = myevent.orders;
+                            for(var p in orders){
+                                if(orders[p] == order._id){
+                                    orders.splice(p, 1);
+                                }
+                            }
+                            myevent.orders = orders;
+                            EventService
+                                .updateEvent(vm.eventID, myevent)
+                                .success(function (response) {
+                                    init();
+                                })
+
+                        });
                 })
         }
-
 
     }
 
