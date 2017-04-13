@@ -33,7 +33,7 @@ module.exports = function (app, userModel, vendorModel) {
 
     app.get('/auth/facebook/callback',
         passport.authenticate('facebook', {
-            failureRedirect: '/'
+            failureRedirect: '/client/#/home'
         }), function (req, res) {
             res.redirect('/client/#/user/' + req.user._id + '/event');
         });

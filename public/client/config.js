@@ -165,7 +165,7 @@
                 resolve: { loggedin: checkUserLoggedin }
             })
             .otherwise({
-                redirectTo: "/login"
+                redirectTo: "/home"
             });
     }
 

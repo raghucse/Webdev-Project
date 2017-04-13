@@ -5,9 +5,9 @@ module.exports = function(app, vendorModel) {
     var LocalStrategy = require('passport-local').Strategy;
     var FacebookStrategy = require('passport-facebook').Strategy;
     var facebookConfig = {
-        clientID     : process.env.FACEBOOK_CLIENT_ID,
-        clientSecret : process.env.FACEBOOK_CLIENT_SECRET,
-        callbackURL  : process.env.FACEBOOK_CALLBACK_URL,
+        clientID     : process.env.FACEBOOK_CLIENT_ID_VENDOR,
+        clientSecret : process.env.FACEBOOK_CLIENT_SECRET_VENDOR,
+        callbackURL  : process.env.FACEBOOK_CALLBACK_URL_VENDOR,
         profileFields: ['id', 'displayName', 'name', 'email']
     };
     var bcrypt = require("bcrypt-nodejs");
@@ -31,9 +31,9 @@ module.exports = function(app, vendorModel) {
     app.put("/api/vendor/:vendorId/service/:serviceId", updateService);
     app.get("/api/vendor", findAllVendors);
 
-    app.get('/auth/facebook/callback',
+    app.get('/auth/vendor/facebook/callback',
         passport.authenticate('facebook', {
-            failureRedirect: '/'
+            failureRedirect: '/client/#/home'
         }), function (req, res) {
             res.redirect('/client/#/vendor/' + req.vendor._id +'/service');
         });
