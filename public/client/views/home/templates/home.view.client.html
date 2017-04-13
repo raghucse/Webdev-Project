@@ -1,3 +1,6 @@
+<video id="bgvid" autoplay>
+    <source src="../video/Background.mp4" type="video/mp4" /><source>
+</video>
 <nav class="navbar navbar-default navbar-fixed-top">
     <div class="container-fluid">
 
@@ -22,6 +25,11 @@
     </div>
 </nav>
 
+
+
+
+
+
 <div class="modal fade" id="login" role="dialog" data-backdrop="false">
     <div class="modal-dialog">
 
@@ -34,7 +42,9 @@
             <div class="modal-body">
 
                 <div class="row">
-                    <div class="col-sm-6">
+                    <div class="col-xs-2 center-block">
+                    </div>
+                    <div class="col-xs-6 center-block">
                         <a href=""
                            data-toggle="modal"
                            data-target="#userlogin"
@@ -45,7 +55,7 @@
                                 <h4>User</h4>
                         </a>
                     </div>
-                    <div class="col-sm-6">
+                    <div class="col-xs-4 center-block">
                             <a href=""
                                data-toggle="modal"
                                data-target="#vendorlogin"
@@ -56,11 +66,13 @@
                                 <h4>Vendor</h4>
                             </a>
                     </div>
+                    <div class="col-sm-4 center-block">
+                    </div>
                 </div>
 
             </div>
             <div class="modal-footer">
-                <button type="submit" class="btn btn-default pull-left" data-dismiss="modal">
+                <button type="submit" class="btn btn-default center-block" data-dismiss="modal">
                     <span class="glyphicon glyphicon-remove"></span> Close
                 </button>
             </div>
@@ -238,15 +250,15 @@
 
                 <h1>Login</h1>
 
-                <div ng-show="model.error" class="alert alert-danger">
-                    {{model.error}}
+                <div ng-show="model.Verror" class="alert alert-danger">
+                    {{model.Verror}}
                 </div>
 
                 <div ng-show="model.message" class="alert alert-info">
                     {{model.message}}
                 </div>
 
-                <form name="vendorlogin" data-toggle="validator">
+                <form name="vendorlogin" ng-submit="model.vendorlogin(model.vendor)" data-toggle="validator">
                     <div class="form-group">
                         <input  ng-model="model.vendor.vendorname"
                                 type="email"
@@ -263,8 +275,7 @@
                                 required/>
                         <div class="help-block with-errors"></div>
                     </div>
-                    <button type="submit"  class="btn btn-primary btn-block"
-                       ng-click="model.vendorlogin(model.vendor)">Login</button>
+                    <button type="submit"  class="btn btn-primary btn-block">Login</button>
                 </form>
                 <a class="btn btn-danger btn-block" data-dismiss="modal">
                     Cancel
