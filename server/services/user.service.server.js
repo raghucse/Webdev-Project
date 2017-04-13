@@ -237,16 +237,10 @@ module.exports = function (app, userModel, vendorModel) {
         var username = req.query.username;
         userModel.findUserByUsername(username)
             .then(function (user) {
-                if(user.length != 0){
-                    res.json(user);
-                }
-                else{
-                    res.sendStatus(500).send('err');
-                }
+                res.json(user);
             }, function (err) {
-                res.sendStatus(500).send('err');
-
-            });
+                res.sendStatus(500).send(err);
+            })
     }
 
     function findAllUsers(req, res) {

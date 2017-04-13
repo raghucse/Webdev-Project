@@ -146,53 +146,73 @@
                 <h2>PlanIT</h2>
             </div>
             <div class="modal-body">
-
-
-                    <h1>Register</h1>
+                    <h3>Register</h3>
                     <div ng-show="model.error" class="alert alert-danger">
                         {{model.error}}
                     </div>
                     <div ng-show="model.passworderror" class="alert alert-danger">
                         {{model.passworderror}}
                     </div>
-                    <div ng-show="registerform.$invalid && registerform.$submitted" class="alert alert-danger">
-                        Please fix below errors
-                        <ul>
-                            <li ng-show="registerform.username.$invalid && registerform.$submitted">Username is required</li>
-                            <li ng-show="registerform.password.$invalid && registerform.$submitted">Password is required</li>
-                            <li ng-show="registerform.password2.$invalid && registerform.$submitted">Verify Password is required</li>
-                        </ul>
-                    </div>
-                    <form name="registerform" novalidate>
-                        <input class="form-control"
-                               name="username"
-                               ng-model="model.user.username"
-                               placeholder="username" required/>
-                        <div class="error" ng-show="registerform.username.$invalid && registerform.$submitted">
-                            <li>Username is required</li>
+
+                    <form id="registerform" ng-submit="model.register(model.user)" data-toggle="validator">
+
+                        <div class="form-group">
+                            <label for="inputEmailR" class="control-label">Email</label>
+                            <input type="email"
+                                   ng-model="model.user.username"
+                                   class="form-control"
+                                   id="inputEmailR"
+                                   placeholder="User email"
+                                   data-error="Please enter Email in proper format" required>
+                            <div class="help-block with-errors"></div>
                         </div>
 
-                        <input class="form-control"
-                               placeholder="password"
-                               name="password"
-                               ng-model="model.user.password"
-                               type="password" required/>
-                        <div class="error" ng-show="registerform.password.$invalid && registerform.$submitted">
-                            <li>Password is required</li>
+                        <div class="form-group">
+                            <label for="firstNameRU" class="control-label">First Name</label>
+                            <input type="text"
+                                   ng-model="model.user.firstName"
+                                   class="form-control"
+                                   id="firstNameRU"
+                                   placeholder="First Name"
+                                   data-error="First name required" required>
+                            <div class="help-block with-errors"></div>
                         </div>
 
-                        <input class="form-control"
-                               name="password2"
-                               placeholder="verify password"
-                               ng-model="model.user.password2"
-                               type="password" required/>
-                        <div class="error" ng-show="registerform.password2.$invalid && registerform.$submitted">
-                            <li>Please enter password again</li>
+                        <div class="form-group">
+                            <label for="lastNameRU" class="control-label">Last Name</label>
+                            <input type="text"
+                                   ng-model="model.user.lastName"
+                                   class="form-control"
+                                   id="lastNameRU"
+                                   placeholder="Last Name"
+                                   data-error="Last name required" required>
+                            <div class="help-block with-errors"></div>
                         </div>
 
-                        <button type="submit" class="btn btn-primary btn-block"
-                                ng-click="model.register(model.user)"
-                                data-dismiss="modal">
+
+                        <div class="form-group">
+                            <label for="passwordR" class="control-label">Password</label>
+                            <input class="form-control"
+                                   name="password"
+                                   id="passwordR"
+                                   ng-model="model.user.password"
+                                   placeholder="password"
+                                   type="password" data-error="Password is required" required/>
+                            <div class="help-block with-errors"></div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="passwordR2" class="control-label">Verify Password</label>
+                            <input class="form-control"
+                                   name="password"
+                                   id="passwordR2"
+                                   ng-model="model.user.password2"
+                                   placeholder="Confirm password"
+                                   type="password" data-error="Please re-enter the Password is required" required/>
+                            <div class="help-block with-errors"></div>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary btn-block">
                             Register
                         </button>
                     </form>
@@ -200,7 +220,6 @@
                     <a class="btn btn-danger btn-block" data-dismiss="modal">
                         Cancel
                     </a>
-
             </div>
         </div>
     </div>
@@ -280,26 +299,71 @@
                 <h2>PlanIT</h2>
             </div>
             <div class="modal-body">
+                <h3>Register</h3>
+                <div ng-show="model.passworderrorV" class="alert alert-danger">
+                    {{model.passworderrorV}}
+                </div>
+                <form id="registerformV" ng-submit="model.register()" data-toggle="validator">
 
+                    <div class="form-group">
+                        <label for="inputEmailRV" class="control-label">Email</label>
+                        <input type="email"
+                               ng-model="model.vendor.vendorname"
+                               class="form-control"
+                               id="inputEmailRV"
+                               placeholder="Vendor email"
+                               data-error="Please enter Email in proper format" required>
+                        <div class="help-block with-errors"></div>
+                    </div>
 
-                <h1>Register</h1>
+                    <div class="form-group">
+                        <label for="firstNameRV" class="control-label">First Name</label>
+                        <input type="text"
+                               ng-model="model.vendor.firstName"
+                               class="form-control"
+                               id="firstNameRV"
+                               placeholder="First Name"
+                               data-error="First name required" required>
+                        <div class="help-block with-errors"></div>
+                    </div>
 
-                <input class="form-control"
-                       ng-model="model.vendor.vendorname"
-                       placeholder="vendorname"/>
+                    <div class="form-group">
+                        <label for="lastNameRV" class="control-label">Last Name</label>
+                        <input type="text"
+                               ng-model="model.vendor.lastName"
+                               class="form-control"
+                               id="lastNameRV"
+                               placeholder="Last Name"
+                               data-error="Last name required" required>
+                        <div class="help-block with-errors"></div>
+                    </div>
 
-                <input class="form-control"
-                       placeholder="password"
-                       ng-model="model.vendor.password"
-                       type="password"/>
+                    <div class="form-group">
+                        <label for="passwordRV" class="control-label">Password</label>
+                        <input class="form-control"
+                               name="password"
+                               id="passwordRV"
+                               ng-model="model.vendor.password"
+                               placeholder="password"
+                               type="password" data-error="Password is required" required/>
+                        <div class="help-block with-errors"></div>
+                    </div>
 
-                <input class="form-control"
-                       placeholder="verify password"
-                       type="password"/>
+                    <div class="form-group">
+                        <label for="passwordR2V" class="control-label">Verify Password</label>
+                        <input class="form-control"
+                               name="password"
+                               id="passwordR2V"
+                               ng-model="model.vendor.password2V"
+                               placeholder="Confirm password"
+                               type="password" data-error="Please re-enter the Password is required" required/>
+                        <div class="help-block with-errors"></div>
+                    </div>
 
-                <a class="btn btn-primary btn-block" ng-click="model.vendorregister(model.vendor)">
+                <button type="submit" class="btn btn-primary btn-block" ng-click="model.vendorregister(model.vendor)">
                     Register
-                </a>
+                </button>
+                </form>
 
                 <a class="btn btn-danger btn-block" data-dismiss="modal">
                     Cancel
