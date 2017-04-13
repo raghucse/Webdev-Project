@@ -10,13 +10,29 @@
         vm.eventID = $routeParams["eid"];
         vm.hostID = $routeParams["hid"];
 
+
         vm.findService = findService;
         vm.cancelOrder = cancelOrder;
         vm.findServiceByCity = findServiceByCity;
         vm.refreshData = refreshData;
         vm.searchServiceByType = searchServiceByType;
+        vm.setServiceId = setServiceId;
+        vm.createOrder = createOrder;
 
         function init() {
+            $('#timepicker3').timepicker();
+            $(document).ready(function(){
+                var date_input=$('input[name="deliveryDate"]'); //our date input has the name "date"
+                var container=$('.bootstrap-iso form').length>0 ? $('.bootstrap-iso form').parent() : "body";
+                var options={
+                    format: 'mm/dd/yyyy',
+                    container: container,
+                    todayHighlight: true,
+                    autoclose: true
+                };
+                date_input.datepicker(options);
+            });
+
             vm.vendor = "";
             vm.location= "";
             EventService
@@ -90,6 +106,46 @@
 
         function refreshData() {
             init();
+        }
+
+        function setServiceId(serviceID) {
+            vm.modalServiceID = serviceID;
+
+            ServiceService
+                .findServiceById(vm.modalServiceID)
+                .then(function (service) {
+                    vm.modalService = service.data;
+
+                });
+
+        }
+
+        function createOrder(serviceId, platesrequested, deliveryDate, deliveryTime) {
+            console.log("function called");
+            if(platesrequested && deliveryDate && deliveryTime){
+                var order ={};
+                order.platesrequested = platesrequested;
+                order.cost = platesrequested * vm.service.perPlateCost;
+                order.date = deliveryDate;
+                order.time = deliveryTime;
+                order.cancelled = false;
+                OrderService
+                    .createOrder(serviceId, vm.hostId, vm.vendorId, order)
+                    .success(function (order) {
+                        ServiceService
+                            .updateOrder(serviceId, order._id)
+                            .success(function (service) {
+                                EventService
+                                    .addOrder(vm.eventId, order._id)
+                                    .success(function (response) {
+                                        vm.orderstatus = "Order Placed";
+                                        $location.url("/host/" + vm.hostId + "/event/" + vm.eventId + "/services");
+                                    });
+                            });
+                    })
+
+            }
+
         }
 
         function findServiceByCity(cityname) {

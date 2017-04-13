@@ -3,12 +3,14 @@
         .module("WebAppMaker")
         .controller("HomeController", homeController);
 
-    function homeController(UserService, $location, $rootScope) {
+    function homeController(UserService, $location, $rootScope, VendorService) {
         var vm = this;
 
         //event handlers
         vm.login = login;
         vm.register = register;
+        vm.vendorlogin = vendorlogin;
+        vm.vendorregister = vendorregister;
 
         function init() {
         }
@@ -60,6 +62,46 @@
                     vm.passworderror = "Password and Verify password must match"
                 }
             }
+        }
+
+
+        function vendorlogin(vendor) {
+            var promise = VendorService
+                .login(vendor.vendorname, vendor.password);
+            promise.then(function(vendor){
+                vendor = vendor.data;
+                if(vendor[0]) {
+                    $location.url("/vendor/"+vendor[0]._id + "/service");
+                } else {
+                    vm.error = "Vendor not found";
+                }
+            });
+        }
+
+
+
+        function vendorregister() {
+            VendorService
+                .findVendorByVendorname(vm.vendor.vendorname)
+                .then(function (vendor) {
+                    vendor = vendor.data;
+                    if(vendor[0]) {
+                        vm.error = "sorry that vendorname is taken";
+                    }
+                    else
+                    {
+                        VendorService
+                            .register(vm.vendor)
+                            .then(function(vendor){
+                                vendor = vendor.data;
+                                $location.url('/vendor/' + vendor._id);
+                            }, function (err) {
+                                vm.error = 'sorry could not register';
+                            })
+                    }
+                },function(err){
+                    vm.error = 'sorry could not register';
+                })
         }
     }
 

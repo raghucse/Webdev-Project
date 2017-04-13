@@ -22,7 +22,6 @@
     </div>
 </nav>
 
-
 <div class="modal fade" id="login" role="dialog" data-backdrop="false">
     <div class="modal-dialog">
 
@@ -30,6 +29,53 @@
         <div class="modal-content">
             <div class="modal-header-login">
                 <h2>PlanIT</h2>
+
+            </div>
+            <div class="modal-body">
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <a href=""
+                           data-toggle="modal"
+                           data-target="#userlogin"
+                           data-dismiss="modal"
+                           target="_self">
+                                <span class="glyphicon glyphicon-user logo-small"></span>
+                                <h4>User</h4>
+                        </a>
+                    </div>
+                    <div class="col-md-6">
+                        <div>
+                            <a href=""
+                               data-toggle="modal"
+                               data-target="#vendorlogin"
+                               data-dismiss="modal"
+                               target="_self">
+                                <span class="glyphicon glyphicon-asterisk logo-small"></span>
+                                <h4>Vendor</h4>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="modal-footer">
+                <button type="submit" class="btn btn-default pull-left" data-dismiss="modal">
+                    <span class="glyphicon glyphicon-remove"></span> Close
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="userlogin" role="dialog" data-backdrop="false">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header-login">
+                <h2>PlanIT</h2>
+
             </div>
             <div class="modal-body">
                 <h1>Login</h1>
@@ -67,14 +113,11 @@
                     <div ng-show="model.error" class="alert alert-danger">
                         {{model.error}}
                     </div>
-
-
-
             </div>
             <div class="modal-footer">
                 <a class="btn btn-success btn-block" href=""
                    data-toggle="modal"
-                   data-target="#register"
+                   data-target="#userregister"
                    data-dismiss="modal"
                    target="_self">
                     Register
@@ -89,7 +132,7 @@
     </div>
 </div>
 
-<div class="modal fade" id="register" role="dialog" data-backdrop="false">
+<div class="modal fade" id="userregister" role="dialog" data-backdrop="false">
     <div class="modal-dialog">
 
         <!-- Modal content-->
@@ -154,11 +197,101 @@
                     </a>
 
             </div>
-            <div class="modal-footer">
+        </div>
+    </div>
+</div>
 
+<div class="modal fade" id="vendorlogin" role="dialog" data-backdrop="false">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header-login">
+                <h2>PlanIT</h2>
+            </div>
+            <div class="modal-body">
+
+
+                <h1>Login</h1>
+
+                <div ng-show="model.error" class="alert alert-danger">
+                    {{model.error}}
+                </div>
+
+                <div ng-show="model.message" class="alert alert-info">
+                    {{model.message}}
+                </div>
+
+
+                <input  ng-model="vendor.vendorname"
+                        type="text"
+                        class="form-control"
+                        placeholder="vendorname"/>
+                <input  ng-model="vendor.password"
+                        type="password"
+                        class="form-control"
+                        placeholder="password"/>
+                <a class="btn btn-primary btn-block"
+                   ng-click="model.vendorlogin(vendor)">Login</a>
+
+                <a class="btn btn-danger btn-block" data-dismiss="modal">
+                    Cancel
+                </a>
+            </div>
+            <div class="modal-footer">
+                <a class="btn btn-success btn-block" href=""
+                   data-toggle="modal"
+                   data-target="#vendorregister"
+                   data-dismiss="modal"
+                   target="_self">
+                    Register
+                </a>
+
+                <a href="/auth/facebook" class="btn btn-primary btn-block">
+                    <span class="fa fa-facebook"></span>
+                    Facebook
+                </a>
+            </div>
+
+    </div>
+</div>
+</div>
+
+<div class="modal fade" id="vendorregister" role="dialog" data-backdrop="false">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header-login">
+                <h2>PlanIT</h2>
+            </div>
+            <div class="modal-body">
+
+
+                <h1>Register</h1>
+
+                <input class="form-control"
+                       ng-model="model.vendor.vendorname"
+                       placeholder="vendorname"/>
+
+                <input class="form-control"
+                       placeholder="password"
+                       ng-model="model.vendor.password"
+                       type="password"/>
+
+                <input class="form-control"
+                       placeholder="verify password"
+                       type="password"/>
+
+                <a class="btn btn-primary btn-block" ng-click="model.vendorregister(model.vendor)">
+                    Register
+                </a>
+
+                <a class="btn btn-danger btn-block" data-dismiss="modal">
+                    Cancel
+                </a>
             </div>
         </div>
-
     </div>
 </div>
 

@@ -180,7 +180,12 @@
                                 <ul class="list-group">
                                     <div ng-repeat="vendorservice in vendor.services track by $index">
                                         <li class="list-group-item">
-                                            <a href="#/host/{{model.hostID}}/event/{{model.eventID}}/services/{{vendorservice._id}}">
+                                            <a href=""
+                                               data-toggle="modal"
+                                               data-target="#orderService"
+                                               data-dismiss="modal"
+                                               target="_self"
+                                               ng-click="model.setServiceId(vendorservice._id)">
                                                 Service Name : {{vendorservice.name}}
                                             </a>
                                         </li>
@@ -210,7 +215,12 @@
                     <ul class="list-group">
                         <div ng-repeat="service in model.services track by $index">
                             <li class="list-group-item">
-                                <a href="#/host/{{model.hostID}}/event/{{model.eventID}}/services/{{service._id}}">
+                                <a href=""
+                                   data-toggle="modal"
+                                   data-target="#orderService"
+                                   data-dismiss="modal"
+                                   target="_self"
+                                   ng-click="model.setServiceId(service._id)">
                                     Service Name :    {{service.name}}
                                 </a>
                             </li>
@@ -262,7 +272,12 @@
                     <ul class="list-group">
                         <div ng-repeat="service in model.servicesByType track by $index">
                             <li class="list-group-item">
-                                <a href="#/host/{{model.hostID}}/event/{{model.eventID}}/services/{{service._id}}">
+                                <a href=""
+                                   data-toggle="modal"
+                                   data-target="#orderService"
+                                   data-dismiss="modal"
+                                   target="_self"
+                                   ng-click="model.setServiceId(service._id)">
                                     Service Name :    {{service.name}}
                                 </a>
                             </li>
@@ -272,16 +287,119 @@
             </div>
         </div>
     </div>
+
+    <div class="modal fade" id="orderService" role="dialog" data-backdrop="false">
+        <div class="modal-dialog">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header-login">
+                    <h2>Order Service</h2>
+
+                </div>
+                <div class="modal-body">
+                    <form class="form-horizontal">
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label">Service Name</label>
+                            <div class="col-sm-8">
+                                <p class="form-control-static">{{model.modalService.name}}</p>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label">Service Description</label>
+                            <div class="col-sm-8">
+                                <p class="form-control-static">{{model.modalService.description}}</p>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label">Service Capacity</label>
+                            <div class="col-sm-8">
+                                <p class="form-control-static">{{model.modalService.capacity}}</p>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label">Service City</label>
+                            <div class="col-sm-8">
+                                <p class="form-control-static">{{model.modalService.city}}</p>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label">Service Address</label>
+                            <div class="col-sm-8">
+                                <p class="form-control-static">{{model.modalService.address}}</p>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label">Per Plate Cost</label>
+                            <div class="col-sm-8">
+                                <p class="form-control-static">{{model.modalService.perPlateCost}}</p>
+                            </div>
+                        </div>
+                    </form>
+
+                    <form name="orderform" novalidate>
+                        <div class="form-group">
+                            <label for="numberOfPlates" class="form-control-label">Total Plates</label>
+                            <input ng-model="model.platesrequested"
+                                   id="numberOfPlates"
+                                   name="numberOfPlates"
+                                   class="form-control"
+                                   type="number"
+                                   min="1"
+                                   placeholder="Number of Plates" required/>
+                        </div>
+
+                        <div class="error" ng-show="orderform.numberOfPlates.$invalid && orderform.$submitted">
+                            <li>Please Enter Number to Plates that needs to be Ordered</li>
+                        </div>
+
+                        <div class="input-group bootstrap-timepicker timepicker">
+                            <input ng-model="model.deliveryTime"
+                                   id="timepicker3"
+                                   name="deliveryTime"
+                                   type="text"
+                                   placeholder="Delivery Time"
+                                   value="5:15 PM"
+                                   class="form-control input-small" required/>
+                            <span class="input-group-addon"><i class="glyphicon glyphicon-time"></i></span>
+                        </div>
+
+                        <div class="error" ng-show="orderform.deliveryTime.$invalid && orderform.$submitted">
+                            <li>Please Enter Delivery Time</li>
+                        </div>
+
+                        <label for="event-date">Event Data</label>
+                        <input id="event-date"
+                               name="deliveryDate"
+                               type="text"
+                               class="form-control"
+                               ng-model="model.deliveryDate" required/>
+
+                        <div class="error" ng-show="orderform.deliveryDate.$invalid && orderform.$submitted">
+                            <li>Please Enter Delivery Date</li>
+                        </div>
+
+                        <div ng-show="model.orderstatus">
+                            {{model.orderstatus}}
+                        </div>
+
+
+                        <button type="submit" class="btn btn-success btn-block"
+                           ng-click="model.createOrder(model.modalService._id, model.platesrequested, model.deliveryDate, model.deliveryTime)">
+                            Place Order
+                        </button>
+
+                    </form>
+                </div>
+
+                <a href="" class="btn btn-primary btn-block" data-dismiss="modal">
+                        Cancel
+                </a>
+            </div>
+        </div>
+    </div>
+
+
 </div>
 
 <div class="bottom-padding"></div>
-
-<nav class="navbar navbar-default navbar-fixed-bottom">
-    <div class="container-fluid">
-        <div class="navbar-text pull-right">
-            <a href="#/vendor/{{model.vendorId}}" class="navbar-link">
-                <span class="glyphicon glyphicon-vendor"></span>
-            </a>
-        </div>
-    </div>
-</nav>
