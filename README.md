@@ -1,3 +1,3 @@
 # web-dev-project
 
-1. Creating a e-commerce website for shoes
+1. Creating a event management system
