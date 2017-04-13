@@ -12,6 +12,7 @@
         vm.vendorlogin = vendorlogin;
         vm.vendorregister = vendorregister;
         vm.refreshData = refreshData;
+        vm.closeallmodals = closeallmodals;
 
         function init() {
             $('#userlogin').validator();
@@ -25,6 +26,14 @@
 
         function refreshData() {
             init();
+        }
+
+        function closeallmodals() {
+            $('#userlogin').modal('hide');
+            $('#vendorlogin').modal('hide');
+            $('#userregister').modal('hide');
+            $('#vendorregister').modal('hide');
+
         }
 
         function login(user) {
