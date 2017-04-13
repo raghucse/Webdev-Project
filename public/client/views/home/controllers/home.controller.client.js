@@ -16,6 +16,7 @@
         function init() {
             $('#userlogin').validator();
             $('#vendorlogin').validator();
+            $('#registerform').validator();
             vm.user= undefined;
             vm.vendor = undefined;
             vm.error = undefined;
@@ -54,19 +55,25 @@
             if (user && user.username && user.password && user.password2) {
                 if (user.password === user.password2) {
                     UserService
-                        .findUserByUsername(user.username)
+                        .findUserByUsername(vm.user.username)
                         .then(function (user) {
                             user = user.data;
-                            vm.error = "Username already taken";
-                        }, function(err) {
-                            UserService
-                                .register(user)
-                                .then(function (user) {
-                                    user = user.data;
-                                    $location.url("/host/" + user._id + "/event");
-                                },function (err) {
-                                    vm.error = "User Registration Failed";
-                                })
+                            if (user[0]) {
+                                vm.error = "sorry that username is taken";
+                            }
+                            else {
+                                UserService
+                                    .register(vm.user)
+                                    .then(function (user) {
+                                        user = user.data;
+                                        $location.url('/host/' + user._id+'/event');
+                                    }, function (err) {
+                                        vm.error = 'sorry could not register';
+                                    })
+                            }
+                        }, function (err) {
+                            console.log(err);
+                            vm.error = 'sorry could not register';
                         })
                 }
                 else {

@@ -100,7 +100,7 @@
             VendorService
                 .logout()
                 .then(function (status) {
-                    $location.url("/login");
+                    $location.url("/home");
                 })
         }
 
