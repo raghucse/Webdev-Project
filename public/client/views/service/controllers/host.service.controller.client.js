@@ -5,7 +5,7 @@
     app.controller("HostServiceListController", HostServiceListController);
     app.controller("HostServiceOrderController", HostServiceOrderController);
 
-    function HostServiceListController($routeParams, EventService, ServiceService, VendorService, OrderService) {
+    function HostServiceListController($routeParams, EventService, ServiceService, VendorService, OrderService, $location) {
         var vm = this;
         vm.eventID = $routeParams["eid"];
         vm.hostID = $routeParams["hid"];
@@ -115,34 +115,44 @@
                 .findServiceById(vm.modalServiceID)
                 .then(function (service) {
                     vm.modalService = service.data;
+                    if(vm.modalService.type == "food"){
+                        vm.modalServicefood = true;
+                    }
+                    else{
+                        vm.modalServicefood = false;
+                    }
 
                 });
 
         }
 
         function createOrder(serviceId, platesrequested, deliveryDate, deliveryTime) {
-            console.log("function called");
-            if(platesrequested && deliveryDate && deliveryTime){
+
+            if(deliveryDate && deliveryTime){
                 var order ={};
-                order.platesrequested = platesrequested;
-                order.cost = platesrequested * vm.service.perPlateCost;
-                order.date = deliveryDate;
-                order.time = deliveryTime;
-                order.cancelled = false;
-                OrderService
-                    .createOrder(serviceId, vm.hostId, vm.vendorId, order)
-                    .success(function (order) {
-                        ServiceService
-                            .updateOrder(serviceId, order._id)
-                            .success(function (service) {
-                                EventService
-                                    .addOrder(vm.eventId, order._id)
-                                    .success(function (response) {
-                                        vm.orderstatus = "Order Placed";
-                                        $location.url("/host/" + vm.hostId + "/event/" + vm.eventId + "/services");
-                                    });
-                            });
-                    })
+                if(vm.modalService.type == "food" && platesrequested){
+                    order.platesrequested = platesrequested;
+                    order.cost = platesrequested * vm.modalService.perPlateCost;
+                }
+
+                    order.date = deliveryDate;
+                    order.time = deliveryTime;
+                    order.cancelled = false;
+                    OrderService
+                        .createOrder(serviceId, vm.hostID, vm.modalService._vendor, order)
+                        .success(function (order) {
+                            ServiceService
+                                .updateOrder(serviceId, order._id)
+                                .success(function (service) {
+                                    EventService
+                                        .addOrder(vm.eventID, order._id)
+                                        .success(function (response) {
+                                            vm.orderstatus = "Order Placed";
+                                            $location.url("/host/" + vm.hostID + "/event/" + vm.eventID + "/services");
+                                            $('#orderService').modal('hide');
+                                        });
+                                });
+                        });
 
             }
 
