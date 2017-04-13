@@ -118,6 +118,10 @@ body {
     font-size: 200px;
 }
 
+.modal-footer{
+    max-height: 100px;
+}
+
 .modal-header, .close {
     background-color: #333;
     color: #fff !important;
@@ -125,10 +129,14 @@ body {
     font-size: 30px;
 }
 .modal-header, .modal-body {
+    max-height: 400px;
+    overflow-y: scroll;
     padding: 40px 50px;
 }
 
 .modal-header-login{
+    max-height: 400px;
+    overflow-y: scroll;
     background-color: #333;
     color: #fff !important;
     text-align: center;
