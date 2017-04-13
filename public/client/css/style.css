@@ -13,7 +13,7 @@ body {
 
 .navbar {
     margin-bottom: 0;
-    background-color: #ff8f66;
+    background-color: #3f3f3f;
     z-index: 9999;
     border: 0;
     font-size: 12px !important;
@@ -27,7 +27,7 @@ body {
 }
 
 .navbar-brand {
-    color: #fed136;
+    color: #fed136 !important;;
     font-family: "Kaushan Script", "Helvetica Neue", Helvetica, Arial, cursive;
 }
 
@@ -128,7 +128,8 @@ body {
     text-align: center;
     font-size: 30px;
 }
-.modal-header, .modal-body {
+
+.modal-body {
     max-height: 400px;
     overflow-y: scroll;
     padding: 40px 50px;
@@ -139,10 +140,15 @@ body {
     margin-right: auto;
 }
 
+.brand{
+    text-align: center;
+    font-size: 150px;
+    color: #fed136;
+    font-family: "Kaushan Script", "Helvetica Neue", Helvetica, Arial, cursive;
+}
 
 .modal-header-login{
     max-height: 400px;
-    overflow-y: scroll;
     background-color: #333;
     color: #fff !important;
     text-align: center;
