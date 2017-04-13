@@ -133,6 +133,12 @@ body {
     overflow-y: scroll;
     padding: 40px 50px;
 }
+.center-block {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
 
 .modal-header-login{
     max-height: 400px;
