@@ -329,7 +329,7 @@
                                 <p class="form-control-static">{{model.modalService.address}}</p>
                             </div>
                         </div>
-                        <div class="form-group">
+                        <div class="form-group" ng-show="model.modalServicefood">
                             <label class="col-sm-4 control-label">Per Plate Cost</label>
                             <div class="col-sm-8">
                                 <p class="form-control-static">{{model.modalService.perPlateCost}}</p>
@@ -338,7 +338,7 @@
                     </form>
 
                     <form name="orderform" novalidate>
-                        <div class="form-group">
+                        <div class="form-group" ng-show="model.modalServicefood">
                             <label for="numberOfPlates" class="form-control-label">Total Plates</label>
                             <input ng-model="model.platesrequested"
                                    id="numberOfPlates"
@@ -349,7 +349,7 @@
                                    placeholder="Number of Plates" required/>
                         </div>
 
-                        <div class="error" ng-show="orderform.numberOfPlates.$invalid && orderform.$submitted">
+                        <div class="error" ng-show="model.modalServicefood && orderform.numberOfPlates.$invalid && orderform.$submitted">
                             <li>Please Enter Number to Plates that needs to be Ordered</li>
                         </div>
 
@@ -388,6 +388,7 @@
                            ng-click="model.createOrder(model.modalService._id, model.platesrequested, model.deliveryDate, model.deliveryTime)">
                             Place Order
                         </button>
+
 
                     </form>
                 </div>
