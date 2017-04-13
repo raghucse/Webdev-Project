@@ -29,12 +29,13 @@ module.exports = function (app, userModel, vendorModel) {
     app.delete("/api/user/:userID", deleteUser);
     app.put("/api/user/:userId/website/:websiteId", addWebsite);
     app.get('/api/loggedin', loggedin);
-    app.get('/auth/facebook', passport.authenticate('facebookUser', { scope : 'email' }));
+    app.get('/auth/user/facebook', passport.authenticate('facebookUser', { scope : 'email' }));
 
     app.get('/auth/user/facebook/callback',
         passport.authenticate('facebookUser', {
             failureRedirect: '/'
         }), function (req, res) {
+        if(req.user)
             res.redirect('/client/#/host/'+ req.user._id +'/event');
         });
 
@@ -51,17 +52,14 @@ module.exports = function (app, userModel, vendorModel) {
             .findUserByFacebookId(profile.id)
             .then(
                 function(user) {
+                    console.log(user);
                     if(user) {
-
                         return done(null, user);
                     } else {
-                        var email = profile.emails[0].value;
-                        var emailParts = email.split("@");
                         var newFacebookUser = {
-                            username:  emailParts[0],
+                            username:  profile.emails[0].value,
                             firstName: profile.name.givenName,
                             lastName:  profile.name.familyName,
-                            email:    email,
                             facebook: {
                                 id:    profile.id,
                                 token: token

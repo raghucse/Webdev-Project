@@ -7,7 +7,7 @@ module.exports = function(app, vendorModel) {
     var facebookConfig = {
         clientID     : process.env.FACEBOOK_CLIENT_ID,
         clientSecret : process.env.FACEBOOK_CLIENT_SECRET,
-        callbackURL  : '/auth/vendor/facebook/callback',
+        callbackURL  : "/auth/vendor/facebook/callback",
         profileFields: ['id', 'displayName', 'name', 'email']
     };
     var bcrypt = require("bcrypt-nodejs");
@@ -18,7 +18,7 @@ module.exports = function(app, vendorModel) {
     var auth = authorized;
 
     app.post('/vendor/login', passport.authenticate('vendor','local'), login);
-    app.get ('/auth/facebook', passport.authenticate('facebookVendor', { scope : 'email' }));
+    app.get ('/auth/vendor/facebook', passport.authenticate('facebookVendor', { scope : 'email' }));
     app.post('/api/logout',logout);
     app.get('/api/vendor/loggedin',loggedin);
     app.post ('/api/vendor/register', register);
@@ -35,7 +35,8 @@ module.exports = function(app, vendorModel) {
         passport.authenticate('facebookVendor', {
             failureRedirect: '/'
         }), function (req, res) {
-            res.redirect('/client/#/vendor/' + req.vendor._id +'/service');
+            console.log(req);
+            res.redirect('/client/#/vendor/' + req.user._id +'/service');
         });
 
     function authorized (req, res, next) {
@@ -52,16 +53,12 @@ module.exports = function(app, vendorModel) {
             .then(
                 function(vendor) {
                     if(vendor) {
-
                         return done(null, vendor);
                     } else {
-                        var email = profile.emails[0].value;
-                        var emailParts = email.split("@");
                         var newFacebookVendor = {
-                            vendorname:  emailParts[0],
+                            vendorname:  profile.emails[0].value,
                             firstName: profile.name.givenName,
                             lastName:  profile.name.familyName,
-                            email:    email,
                             facebook: {
                                 id:    profile.id,
                                 token: token

@@ -10,7 +10,11 @@ module.exports = function (mongoose) {
         email: String,
         phone: String,
         address: String,
-        dateCreated: { type: Date, default: Date.now }
+        dateCreated: { type: Date, default: Date.now },
+        facebook: {
+            id:    String,
+            token: String
+        }
     }, {collection: 'myPartyPlanDB.user'});
 
     UserSchema.pre('remove', function(next) {
