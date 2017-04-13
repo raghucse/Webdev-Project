@@ -6,7 +6,7 @@ module.exports = function (app, userModel, vendorModel) {
     var facebookConfig = {
         clientID     : process.env.FACEBOOK_CLIENT_ID,
         clientSecret : process.env.FACEBOOK_CLIENT_SECRET,
-        callbackURL  : process.env.FACEBOOK_CALLBACK_URL,
+        callbackURL  : "/auth/user/facebook/callback",
         profileFields: ['id', 'displayName', 'name', 'email']
     };
 
@@ -16,7 +16,7 @@ module.exports = function (app, userModel, vendorModel) {
     var auth = authorized;
 
     passport.use('user',new LocalStrategy(localStrategy));
-    passport.use(new FacebookStrategy(facebookConfig, facebookStrategy));
+    passport.use('facebookUser',new FacebookStrategy(facebookConfig, facebookStrategy));
 
     app.post('/api/user/login/user', passport.authenticate('user','local'), login);
     app.post('/api/user/logout', logout);
@@ -29,13 +29,13 @@ module.exports = function (app, userModel, vendorModel) {
     app.delete("/api/user/:userID", deleteUser);
     app.put("/api/user/:userId/website/:websiteId", addWebsite);
     app.get('/api/loggedin', loggedin);
-    app.get('/auth/facebook', passport.authenticate('facebook', { scope : 'email' }));
+    app.get('/auth/facebook', passport.authenticate('facebookUser', { scope : 'email' }));
 
-    app.get('/auth/facebook/callback',
-        passport.authenticate('facebook', {
+    app.get('/auth/user/facebook/callback',
+        passport.authenticate('facebookUser', {
             failureRedirect: '/'
         }), function (req, res) {
-            res.redirect('/assignment/#/user/' + req.user._id);
+            res.redirect('/client/#/host/'+ req.user._id +'/event');
         });
 
     function authorized (req, res, next) {
