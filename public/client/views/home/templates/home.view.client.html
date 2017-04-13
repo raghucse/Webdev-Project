@@ -80,7 +80,7 @@
             <div class="modal-body">
                 <h1>Login</h1>
 
-                <form name="loginform" data-toggle="validator">
+                <form name="loginform" ng-submit="model.login(user)" data-toggle="validator">
 
                     <div class="form-group">
                         <label for="inputEmail" class="control-label">Email</label>
@@ -104,7 +104,7 @@
                         <div class="help-block with-errors"></div>
                     </div>
 
-                        <button type="submit" ng-disabled="isDisabled" ng-click="model.login(user)" class="btn btn-primary btn-block">
+                        <button type="submit" class="btn btn-primary btn-block">
                             Login
                         </button>
 
