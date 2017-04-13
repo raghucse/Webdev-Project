@@ -15,6 +15,7 @@
         vm.cancelInvitation = cancelInvitation;
 
         function init() {
+            vm.guests = undefined;
             EventService
                 .findEventById(vm.eventID)
                 .success(function (event) {
@@ -110,6 +111,28 @@
             init();
         }
 
+        // OrderService
+        //     .updateOrder(order._id, newOrder)
+        //     .success(function (response) {
+        //         EventService
+        //             .findEventById(vm.eventID)
+        //             .success(function (myevent) {
+        //                 var orders = myevent.orders;
+        //                 for(var p in orders){
+        //                     if(orders[p] == order._id){
+        //                         orders.splice(p, 1);
+        //                     }
+        //                 }
+        //                 myevent.orders = orders;
+        //                 EventService
+        //                     .updateEvent(vm.eventID, myevent)
+        //                     .success(function (response) {
+        //                         init();
+        //                     })
+        //
+        //             });
+        //     })
+
         function cancelInvitation(invite) {
             InviteService
                 .findInviteById(invite._id)
@@ -120,7 +143,22 @@
                     InviteService
                         .updateInvite(invite._id, myinvitation)
                         .success(function (updatedInvitation) {
-                            init();
+                            EventService
+                                .findEventById(vm.eventID)
+                                .success(function (myevent) {
+                                    var myguests = myevent.guests;
+                                            for(var p in myguests){
+                                                if(myguests[p] == invitaton[0].receiver){
+                                                    myguests.splice(p, 1);
+                                                }
+                                            }
+                                            myevent.guests = myguests;
+                                            EventService
+                                                .updateEvent(vm.eventID, myevent)
+                                                .success(function (response) {
+                                                    init();
+                                                })
+                                        });
                         })
                 })
         }
