@@ -1,15 +1,33 @@
 <nav class="navbar navbar-default navbar-fixed-top">
-    <div class=" container-fluid">
-        <a class="navbar-brand" href="">
-            <label>Admin</label>
-        </a>
-        <div class="navbar-text pull-right">
-            <a href="" ng-click="model.logout()" class="btn btn-success">
-                Logout
-            </a>
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <div class="navbar-brand">PlanIT ADMIN</div>
+        </div>
+        <div class="collapse navbar-collapse" id="myNavbar">
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="" ng-click="model.logout()">LOGOUT</a></li>
+            </ul>
         </div>
     </div>
 </nav>
+
+<!--<nav class="navbar navbar-default navbar-fixed-top">-->
+<!--<div class=" container-fluid">-->
+<!--<a class="navbar-brand" href="">-->
+<!--<label>Admin</label>-->
+<!--</a>-->
+<!--<div class="navbar-text pull-right">-->
+<!--<a href="" ng-click="model.logout()" class="btn btn-success">-->
+<!--Logout-->
+<!--</a>-->
+<!--</div>-->
+<!--</div>-->
+<!--</nav>-->
 
 <div class="container">
     <div ng-show="model.userNfound" class="alert alert-danger">
@@ -34,7 +52,7 @@
 </div>
 
 <div class="text-center">
-    <div class="container-fluid">
+    <div class="container">
         <div class="row">
             <div class="col-md-12 centered">
                 <h2>Search for Users</h2>
@@ -58,7 +76,7 @@
 
 
 
-<div class="container-fluid">
+<div class="container">
     <label for="user-type" class="form-control-label">Account Type</label>
     <select class="form-group marginbutton" ng-model="model.userType"
             ng-change="model.dropChange()"
@@ -75,21 +93,62 @@
     <div ng-if="model.user">
         <div class="row">
             <div class="col-sm-6">
-                {{model.user.name}}
+                <a href=""
+                   data-toggle="modal"
+                   data-target="#showUser"
+                   data-dismiss="modal"
+                   target="_self">
+                    <h4>{{model.user.name}}</h4>
+                </a>
             </div>
             <div class="col-sm-6">
                 <a class="btn btn-danger pull-right" ng-click="model.deleteUser()">Delete</a>
             </div>
         </div>
     </div>
-</div>
 
-<nav class="navbar navbar-default navbar-fixed-bottom">
-    <div class="container-fluid">
-        <div class="navbar-text pull-right">
-            <a href="#/vendor/{{model.vendorId}}" class="navbar-link">
-                <span class="glyphicon glyphicon-vendor"></span>
-            </a>
+    <div class="modal fade" id="showUser" role="dialog" data-backdrop="false">
+        <div class="modal-dialog">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header-login">
+                    <h2>User Details</h2>
+
+                </div>
+                <div class="modal-body">
+                    <form class="form-horizontal">
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label">Username</label>
+                            <div class="col-sm-8">
+                                <p class="form-control-static" ng-show="model.vendor">{{model.user.vendorname}}</p>
+                                <p class="form-control-static">{{model.user.username}}</p>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label">User First Name</label>
+                            <div class="col-sm-8">
+                                <p class="form-control-static">{{model.user.firstName}}</p>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label">User Last Name</label>
+                            <div class="col-sm-8">
+                                <p class="form-control-static">{{model.user.lastName}}</p>
+                            </div>
+                        </div>
+
+
+                    </form>
+                </div>
+
+                <a href="" class="btn btn-primary btn-block" data-dismiss="modal">
+                    Close
+                </a>
+            </div>
         </div>
     </div>
-</nav>
+
+
+</div>
+

@@ -59,20 +59,20 @@
         function findVendorByUserName() {
             vm.vendorNfound = undefined;
 
-                VendorService.findVendorByVendorname(vm.userName)
-                    .then(function (vendor) {
-                        vm.user = vendor.data[0];
-                        if(vm.user){
-                            vm.vendor = true;
-                            vm.user.name = vm.user.firstName +" "+ vm.user.lastName;
-                            vm.vendorNfound = "User not found";
-                        }else {
-                            vm.vendorNfound = "User not found";
-                        }
+            VendorService.findVendorByVendorname(vm.userName)
+                .then(function (vendor) {
+                    vm.user = vendor.data[0];
+                    if(vm.user){
+                        vm.vendor = true;
+                        vm.user.name = vm.user.lastName +" ,"+ vm.user.firstName;
 
-                    }, function (err) {
+                    }else {
                         vm.vendorNfound = "User not found";
-                    })
+                    }
+
+                }, function (err) {
+                    vm.vendorNfound = "User not found";
+                })
         }
 
 
@@ -81,13 +81,14 @@
             UserService.findUserByUsername(vm.userName)
                 .then(function (user) {
                     vm.user = user.data[0];
+                    console.log(user.data[0]);
                     if(!user.data[0]){
                         vm.userNfound = "User not found";
                     }
                     else
                     {
                         vm.vendor = false;
-                        vm.user.name = vm.user.firstName +" "+ vm.user.lastName;
+                        vm.user.name = vm.user.lastName +" ,"+ vm.user.firstName;
                     }
                 },  function (err) {
                     vm.userNfound = "User not found";
@@ -128,13 +129,13 @@
             vm.noType = undefined;
         }
 
-            function logout() {
-                UserService
-                    .logout()
-                    .then(function(response) {
-                        $location.url("/");
-                    });
-            }
+        function logout() {
+            UserService
+                .logout()
+                .then(function(response) {
+                    $location.url("/home");
+                });
+        }
 
     }
 
