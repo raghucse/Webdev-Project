@@ -50,7 +50,7 @@
                 <div ng-repeat="service in model.services">
                     <li class="list-group-item">
                         <a href="#/vendor/{{model.vendorId}}/service/{{service._id}}/view">
-                            <h4>{{service.name}}</h4>
+                            {{service.name}}
                         </a>
                         <a href="#/vendor/{{model.vendorId}}/service/{{service._id}}" class="pull-right">
                             <span class="glyphicon glyphicon-cog">
@@ -65,7 +65,7 @@
                 <div ng-repeat="order in model.currOrders track by $index">
                     <li class="list-group-item">
                         <div class="row">
-                            < href="#{{order._id}}1" data-toggle="collapse" target="_self">
+                            <a href="#{{order._id}}1" data-toggle="collapse" target="_self">
                             <h4>Order Id : {{order._id}}</h4>
                             </a>
                             <div id="{{order._id}}1" class="collapse">

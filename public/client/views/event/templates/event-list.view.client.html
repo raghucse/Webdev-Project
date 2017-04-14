@@ -64,7 +64,7 @@
                     <div class="row">
                         <div class="col-xs-6">
                             <a href="#/host/{{event.host}}/event/{{event._id}}/home">
-                                <h4>{{event.name}}</h4>
+                                {{event.name}}
                             </a>
                         </div>
                         <div class="col-xs-6">
@@ -213,8 +213,7 @@
                 <div ng-repeat="invite in model.invites track by $index">
                     <li class="list-group-item">
                         <div class="row">
-                            <h4>
-                            <p>{{invite.sender}} invited you to
+                            <h4><p>{{invite.sender}} invited you to
                                 <a href="#/guest/{{model.hostID}}/event/{{invite.event}}">
                                     {{invite.eventname}}
                                 </a>

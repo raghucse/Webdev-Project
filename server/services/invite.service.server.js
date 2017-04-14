@@ -4,6 +4,7 @@ module.exports = function (app, inviteModel) {
     app.get("/api/invite/:guestId", findInvitesForUser);
     app.get("/api/invite/host/:hostId", findAllInvitesForHost);
     app.get("/api/invite/invitation/:inviteId", findInviteById);
+    app.get("/api/invite/invitation/:eventId/:hostId/:guestId", findInvite);
     app.put("/api/invite/invitation/:inviteId", updateInvite);
     app.delete("/api/invite/:eventId", deleteInvite);
 
@@ -42,6 +43,18 @@ module.exports = function (app, inviteModel) {
     function findInviteById(req, res) {
         var inviteID = req.params.inviteId;
         inviteModel.findInviteById(inviteID)
+            .then(function (invitation) {
+                res.json(invitation);
+            }, function (err) {
+                res.sendStatus(500).send(err);
+            });
+    }
+
+    function findInvite(req, res) {
+        var eventID = req.params.eventId;
+        var hostID = req.params.hostId;
+        var guestID = req.params.guestId;
+        inviteModel.findInvite(eventID, hostID, guestID)
             .then(function (invitation) {
                 res.json(invitation);
             }, function (err) {

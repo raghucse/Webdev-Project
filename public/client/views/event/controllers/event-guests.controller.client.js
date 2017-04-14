@@ -87,6 +87,7 @@
         }
 
         function createInvite() {
+            var inviteSent = false;
             var guestPresent = false;
             var selfInvite = false;
 
@@ -98,6 +99,8 @@
                     selfInvite = true;
                 }
             }
+
+
             if(!guestPresent && !selfInvite){
                 InviteService
                     .createInvite(vm.hostID, vm.guestID, vm.eventID)
@@ -116,28 +119,7 @@
             init();
         }
 
-        // OrderService
-        //     .updateOrder(order._id, newOrder)
-        //     .success(function (response) {
-        //         EventService
-        //             .findEventById(vm.eventID)
-        //             .success(function (myevent) {
-        //                 var orders = myevent.orders;
-        //                 for(var p in orders){
-        //                     if(orders[p] == order._id){
-        //                         orders.splice(p, 1);
-        //                     }
-        //                 }
-        //                 myevent.orders = orders;
-        //                 EventService
-        //                     .updateEvent(vm.eventID, myevent)
-        //                     .success(function (response) {
-        //                         init();
-        //                     })
-        //
-        //             });
-        //     })
-
+        
         function cancelInvitation(invite) {
             InviteService
                 .findInviteById(invite._id)
