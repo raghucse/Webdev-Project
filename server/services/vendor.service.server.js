@@ -35,7 +35,6 @@ module.exports = function(app, vendorModel) {
         passport.authenticate('facebookVendor', {
             failureRedirect: '/client/#/home'
         }), function (req, res) {
-            console.log(req);
             res.redirect('/client/#/vendor/' + req.user._id +'/service');
         });
 

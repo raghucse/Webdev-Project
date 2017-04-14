@@ -192,7 +192,6 @@
 
                     if(angular.isNumber(vm.service.perPlateCost) && vm.service.perPlateCost > 0
                         && angular.isNumber(vm.service.capacity) && vm.service.capacity > 0){
-                        console.log("register service for food");
                         ServiceService
                             .createService(vm.vendorId, vm.service)
                             .then(function (service) {

@@ -82,7 +82,6 @@
                                     })
                             }
                         }, function (err) {
-                            console.log(err);
                             vm.error = 'sorry could not register';
                         })
                 }

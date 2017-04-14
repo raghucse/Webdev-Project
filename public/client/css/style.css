@@ -256,3 +256,21 @@ video#bgvid{
     background-size: cover;
     transition: 1s opacity;
 }
+
+#profileEmail{
+    display:block;
+    width:350px;
+    word-wrap:break-word;
+}
+
+#profilelgEmail{
+    display:block;
+    width:700px;
+    word-wrap:break-word;
+}
+
+#profilemdEmail{
+    display:block;
+    width:300px;
+    word-wrap:break-word;
+}
