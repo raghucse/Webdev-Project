@@ -18,19 +18,19 @@
 
     <h3 class="text-center">{{model.event.name}} Guests</h3>
     <ul class="nav nav-tabs">
-        <li class="active">
-            <a data-toggle="tab" ng-click="model.refreshData()" href="#myGuests" target="_self">
-                Guests
-            </a>
-        </li>
-        <li>
+        <li  class="active">
             <a data-toggle="tab" ng-click="model.refreshData()" href="#conGuests" target="_self">
-                Confirmed Guests
+                Attending
             </a>
         </li>
         <li>
             <a data-toggle="tab" ng-click="model.refreshData()" href="#penGuests" target="_self">
-                Pending Guests
+                Pending
+            </a>
+        </li>
+        <li >
+            <a data-toggle="tab" ng-click="model.refreshData()" href="#ntGuests" target="_self">
+                Not Attending
             </a>
         </li>
         <li>
@@ -41,9 +41,9 @@
     </ul>
 
     <div class="tab-content">
-        <div id="myGuests" class="tab-pane fade in active">
+        <div id="ntGuests" class="tab-pane fade in active">
             <ul class="list-group">
-                <div ng-repeat="guest in model.guests track by $index">
+                <div ng-repeat="guest in model.notComingguests track by $index">
                     <li class="list-group-item">
                         <a href=""
                            data-toggle="modal"
@@ -53,7 +53,6 @@
                            ng-click="model.showGuestDetails(guest)">
                             <h4>{{guest.username}}</h4>
                         </a>
-
                     </li>
                 </div>
             </ul>
@@ -121,7 +120,7 @@
                                 <h4>{{guest.username}}</h4>
                             </a>
 
-                            <button class="btn btn-danger" ng-click="model.cancelInvitation(guest)">
+                            <button class="btn btn-danger" ng-click="model.deleteInvite(guest._id)">
                                 Cancel Invitation
                             </button>
                         </div>

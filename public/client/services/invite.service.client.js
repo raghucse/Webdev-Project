@@ -13,9 +13,14 @@
             "deleteInvite": deleteInvite,
             "findInviteById" : findInviteById,
             "findInvite" : findInvite,
+            "findNotAttendingGuests" :findNotAttendingGuests
         };
 
         return api;
+
+        function findNotAttendingGuests(hostId, eventId) {
+            return $http.get("/api/invite/notComing/" + hostId + "/" + eventId)
+        }
 
         function createInvite(hostId, guestId, eventId) {
             return $http.post("/api/invite/" + hostId + "/" + guestId + "/" + eventId);
@@ -41,8 +46,8 @@
             return $http.put("/api/invite/invitation/" + inviteId, invite);
         }
 
-        function deleteInvite(eventID) {
-            return $http.delete("/api/invite/" + eventId);
+        function deleteInvite(guestId) {
+            return $http.delete("/api/invite/delete/" + guestId);
         }
 
     }

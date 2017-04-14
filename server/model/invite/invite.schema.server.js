@@ -8,5 +8,14 @@ module.exports = function (mongoose) {
         accepted : Boolean
     }, {collection: 'myPartyPlanDB.invite'});
 
+    InviteSchema.pre('remove', function(next) {
+        this.model('EventModel').update(
+            {_id: this.event},
+            {$pull: {guests: this.receiver}},
+            {multi: true},
+            next
+        );
+    });
+
     return InviteSchema;
 };

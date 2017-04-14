@@ -10,10 +10,24 @@ module.exports = function (mongoose, q) {
         "findInviteById" : findInviteById,
         "findInvite" : findInvite,
         "updateInvite" : updateInvite,
-        "deleteInvite": deleteInvite
+        "deleteInvite": deleteInvite,
+        "findNotAttendingGuests": findNotAttendingGuests
     };
 
     return api;
+
+    function findNotAttendingGuests(eventId, hostId) {
+        var deferred = q.defer();
+        InviteModel.find({event : eventId, sender : hostId, accepted: false}, function (err, invite) {
+            if(err){
+                deferred.reject(err);
+            }
+            else {
+                deferred.resolve(invite);
+            }
+        });
+        return deferred.promise;
+    }
 
     function createInvite(hostId, guestID, eventID) {
         var deferred = q.defer();
@@ -101,15 +115,15 @@ module.exports = function (mongoose, q) {
         return deferred.promise;
     }
 
-    function deleteInvite(eventId) {
+    function deleteInvite(guestId) {
         var deferred = q.defer();
-        InviteModel.remove({event: eventId}, function (err, event) {
+        InviteModel.findByIdAndRemove({_id: guestId}, function (err, invite) {
             if(err){
                 deferred.reject(err);
             }
             else {
-                event.remove();
-                deferred.resolve(event);
+                invite.remove();
+                deferred.resolve(invite);
             }
         });
         return deferred.promise;

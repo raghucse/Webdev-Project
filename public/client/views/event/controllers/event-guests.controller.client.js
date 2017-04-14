@@ -4,7 +4,7 @@
         .module("WebAppMaker")
         .controller("EventGuestController", EventGuestController);
 
-    function EventGuestController($routeParams, InviteService, EventService, UserService) {
+    function EventGuestController($routeParams, InviteService, EventService, UserService, $scope) {
         var vm = this;
         vm.hostID = $routeParams['hid'];
         vm.eventID = $routeParams['eid'];
@@ -14,12 +14,16 @@
         vm.refreshData = refreshData;
         vm.cancelInvitation = cancelInvitation;
         vm.showGuestDetails = showGuestDetails;
+        vm.deleteInvite = deleteInvite;
 
         function init() {
             vm.guests = undefined;
+            vm.notComingguests = undefined;
+
             EventService
                 .findEventById(vm.eventID)
-                .success(function (event) {
+                .then(function (event) {
+                    event = event.data;
                     vm.event = event;
                     var myguests = [];
                     var guestsList = event.guests;
@@ -33,14 +37,15 @@
                             });
                     }
                     vm.guests = myguests;
-
                 });
+
 
             InviteService
                 .findAllInvitesForHost(vm.hostID)
                 .success(function (invites) {
                     var acceptedGuests = [];
                     var pennGuests = [];
+                    var rejectedGuest = [];
                     for(var i = 0; i < invites.length; i++){
                         (function(i) {
                             if(invites[i].replied && invites[i].accepted){
@@ -49,6 +54,14 @@
                                     .then(function (user) {
                                         user = user.data;
                                         acceptedGuests.push(user.username);
+                                    })
+                            }
+                            else if(invites[i].replied && !invites[i].accepted){
+                                UserService
+                                    .findUserById(invites[i].receiver)
+                                    .then(function (user) {
+                                        user = user.data;
+                                        rejectedGuest.push(user)
                                     })
                             }
                             else if(!invites[i].replied){
@@ -65,7 +78,10 @@
 
                     vm.acceptedGuests = acceptedGuests;
                     vm.pennGuests = pennGuests;
+                    vm.notComingguests = rejectedGuest;
                 });
+
+
         }
         init();
 
@@ -94,33 +110,37 @@
         }
 
         function createInvite() {
+            vm.invitationstatus = undefined;
             var inviteSent = false;
-            var guestPresent = false;
             var selfInvite = false;
 
-            for(var i = 0; i < vm.allGuests.length ; i++){
-                if(vm.allGuests[i] == vm.guestID){
-                    guestPresent = true;
-                }
-                if(vm.guestID == vm.hostID){
-                    selfInvite = true;
-                }
+            if(vm.guestID == vm.hostID){
+                selfInvite = true;
             }
 
 
-            if(!guestPresent && !selfInvite){
-                InviteService
-                    .createInvite(vm.hostID, vm.guestID, vm.eventID)
-                    .success(function (invite) {
-                        EventService
-                            .addGuest(vm.eventID, vm.guestID)
-                            .success(function (invitation) {
-                                vm.invitationstatus = "Invitation Sent";
-                            });
-                    });
-            }else if(guestPresent && !selfInvite){
-                vm.invitationstatus = "Invitation Already Sent to this user"
-            }else if(!guestPresent && selfInvite){
+            if(!selfInvite){
+                InviteService.findInvite(vm.eventID, vm.hostID, vm.guestID)
+                    .then(function(invite){
+                        console.log(invite.data[0]);
+                       var invite = invite.data[0];
+                        if(invite){
+                            vm.invitationstatus = "Invitation Already Sent to this user"
+                        }
+                        else {
+                            console.log(invite);
+                            InviteService
+                                .createInvite(vm.hostID, vm.guestID, vm.eventID)
+                                .success(function (invite) {
+                                    EventService
+                                        .addGuest(vm.eventID, vm.guestID)
+                                        .success(function (invitation) {
+                                            vm.invitationstatus = "Invitation Sent";
+                                        });
+                                });
+                        }
+                })
+            }else if(selfInvite){
                 vm.invitationstatus = "You cannot send Invitation to yourself"
             }
             init();
@@ -154,6 +174,15 @@
                                                 })
                                         });
                         })
+                })
+        }
+
+        function deleteInvite(guest) {
+            console.log(guest);
+            InviteService.deleteInvite(guest)
+                .then(function () {
+                    vm.inviteDelted = "Invite Deleted"
+                    init();
                 })
         }
 
