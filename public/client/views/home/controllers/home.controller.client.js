@@ -12,7 +12,8 @@
         vm.vendorlogin = vendorlogin;
         vm.vendorregister = vendorregister;
         vm.refreshData = refreshData;
-        vm.closeallmodals = closeallmodals;
+        vm.closeallmodalsLogin = closeallmodalsLogin;
+        vm.closeallmodalsAbout = closeallmodalsAbout;
 
         function init() {
             $('#userlogin').validator();
@@ -30,12 +31,20 @@
             init();
         }
 
-        function closeallmodals() {
+        function closeallmodalsLogin() {
+            $('#about').modal('hide');
             $('#userlogin').modal('hide');
             $('#vendorlogin').modal('hide');
             $('#userregister').modal('hide');
             $('#vendorregister').modal('hide');
+        }
 
+        function closeallmodalsAbout() {
+            $('#login').modal('hide');
+            $('#userlogin').modal('hide');
+            $('#vendorlogin').modal('hide');
+            $('#userregister').modal('hide');
+            $('#vendorregister').modal('hide');
         }
 
         function login(user) {

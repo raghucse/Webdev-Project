@@ -15,10 +15,24 @@
 
         <div class="collapse navbar-collapse" id="myNavbar">
             <ul class="nav navbar-nav navbar-right">
-                <!--<li><a href="#how-it-works" target="_self">HOW IT WORKS</a></li>-->
-                <!--<li><a href="#our-promise" target="_self">OUR PROMISE</a></li>-->
-                <!--<li><a href="">TOUR</a></li>-->
-                <li><a href="" ng-click="model.closeallmodals()" data-toggle="modal" data-target="#login" target="_self" data-dismiss="modal">SIGN IN | SIGN UP</a></li>
+                <li>
+                    <a href=""
+                       ng-click="model.closeallmodalsAbout()"
+                       data-toggle="modal"
+                       data-target="#about"
+                       target="_self"
+                       data-dismiss="modal">ABOUT
+                    </a>
+                </li>
+                <li>
+                    <a href=""
+                       ng-click="model.closeallmodalsLogin()"
+                       data-toggle="modal"
+                       data-target="#login"
+                       target="_self"
+                       data-dismiss="modal">SIGN IN | SIGN UP
+                    </a>
+                </li>
             </ul>
         </div>
     </div>
@@ -28,6 +42,35 @@
 
 
 <div class="brand text-center">PlanIT</div>
+
+<div class="modal fade" id="about" role="dialog" data-backdrop="false">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header-login">
+                <h2>PlanIT</h2>
+
+            </div>
+            <div class="modal-body">
+
+                All you event planning needs in one place.
+                PlanIT helps you in planning an event.
+                <li>You can find Vendors for food, venue and flowers based on your city and order services.</li>
+                <li>You can send invitations to your guests.</li>
+                <li>You can delegate Event products to your guests and more</li>
+
+
+
+            </div>
+            <div class="modal-footer">
+                <button type="submit" class="btn btn-default center-block" data-dismiss="modal">
+                    <span class="glyphicon glyphicon-remove"></span> Close
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
 
 <div class="modal fade" id="login" role="dialog" data-backdrop="false">
     <div class="modal-dialog">
