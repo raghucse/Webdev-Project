@@ -58,7 +58,7 @@
 
         function findVendorByUserName() {
             vm.vendorNfound = undefined;
-
+            vm.userNfound = undefined
             VendorService.findVendorByVendorname(vm.userName)
                 .then(function (vendor) {
                     vm.user = vendor.data[0];
@@ -77,6 +77,7 @@
 
 
         function findUserByUserName() {
+            vm.vendorNfound = undefined;
             vm.userNfound = undefined;
             UserService.findUserByUsername(vm.userName)
                 .then(function (user) {
