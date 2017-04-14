@@ -46,7 +46,7 @@
                         var user1 = response.data;
                         if(user1[0]){
                             $rootScope.currentUser = user1[0];
-                            if(!user1[0].type)
+                            if(user1[0].type == "USER")
                                 $location.url("/host/" + user1[0]._id + "/event");
                             else
                                 $location.url("/admin/" + user1[0]._id);
