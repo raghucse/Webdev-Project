@@ -8,6 +8,7 @@ module.exports = function (mongoose, q) {
         "findAllInvitesForUser": findAllInvitesForUser,
         "findAllInvitesForHost" : findAllInvitesForHost,
         "findInviteById" : findInviteById,
+        "findInvite" : findInvite,
         "updateInvite" : updateInvite,
         "deleteInvite": deleteInvite
     };
@@ -70,6 +71,20 @@ module.exports = function (mongoose, q) {
             }
         });
         return deferred.promise;
+    }
+
+    function findInvite(eventId, hostId, guestId) {
+        var deferred = q.defer();
+        InviteModel.find({event : eventId, sender : hostId, receiver : guestId}, function (err, invite) {
+            if(err){
+                deferred.reject(err);
+            }
+            else {
+                deferred.resolve(invite);
+            }
+        });
+        return deferred.promise;
+
     }
 
     function updateInvite(inviteId, invite) {

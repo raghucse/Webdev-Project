@@ -11,13 +11,18 @@
             "findAllInvitesForHost" : findAllInvitesForHost,
             "updateInvite" : updateInvite,
             "deleteInvite": deleteInvite,
-            "findInviteById" : findInviteById
+            "findInviteById" : findInviteById,
+            "findInvite" : findInvite,
         };
 
         return api;
 
         function createInvite(hostId, guestId, eventId) {
             return $http.post("/api/invite/" + hostId + "/" + guestId + "/" + eventId);
+        }
+
+        function findInvite(eventId, hostId, guestId) {
+            return $http.get("/api/invite/invitation/" + eventId + "/" + hostId + "/" + guestId);
         }
 
         function findInvitesForUser(guestId) {
