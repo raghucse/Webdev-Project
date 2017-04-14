@@ -11,6 +11,9 @@
         </div>
         <div class="collapse navbar-collapse" id="myNavbar">
             <ul class="nav navbar-nav navbar-right">
+                <li><a href="" ng-click="model.logout()">LOGOUT</a></li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
                 <li><a href="#/host/{{model.hostID}}/event/new">PLAN NEW EVENT</a></li>
             </ul>
         </div>
@@ -171,13 +174,6 @@
                                                placeholder="Last Name"
                                                type="text"/></div>
                                         </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <input class="form-control input-lg"
-                                               ng-model="model.user.email"
-                                               placeholder="email"
-                                               id="profile-mail"
-                                               type="email"/>
                                     </div>
                                     <hr class="colorgraph">
                                     <div class="row form-group">

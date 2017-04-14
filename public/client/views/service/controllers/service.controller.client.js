@@ -123,10 +123,12 @@
         }
     }
 
-    function ServiceViewController($routeParams, ServiceService) {
+    function ServiceViewController($routeParams, ServiceService, UserService, $rootScope, $location) {
         var vm = this;
         vm.serviceId = $routeParams["sid"];
         vm.vendorId = $routeParams["vid"];
+
+        vm.logout = logout;
 
 
         function init() {
@@ -152,6 +154,15 @@
                 });
         }
         init();
+
+        function logout() {
+            UserService
+                .logout()
+                .then(function(response) {
+                    $rootScope.currentUser = null;
+                    $location.url("/home");
+                });
+        }
     }
 
 

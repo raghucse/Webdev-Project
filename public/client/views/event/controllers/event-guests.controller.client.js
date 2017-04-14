@@ -4,7 +4,7 @@
         .module("WebAppMaker")
         .controller("EventGuestController", EventGuestController);
 
-    function EventGuestController($routeParams, InviteService, EventService, UserService, $scope) {
+    function EventGuestController($routeParams, InviteService, EventService, UserService, $rootScope, $location) {
         var vm = this;
         vm.hostID = $routeParams['hid'];
         vm.eventID = $routeParams['eid'];
@@ -14,6 +14,7 @@
         vm.refreshData = refreshData;
         vm.cancelInvitation = cancelInvitation;
         vm.showGuestDetails = showGuestDetails;
+        vm.logout = logout;
         vm.deleteInvite = deleteInvite;
 
         function init() {
@@ -94,6 +95,15 @@
 
         function showGuestDetails(guest) {
             vm.guestDetails = guest;
+        }
+
+        function logout() {
+            UserService
+                .logout()
+                .then(function(response) {
+                    $rootScope.currentUser = null;
+                    $location.url("/home");
+                });
         }
 
         function findUser(username) {

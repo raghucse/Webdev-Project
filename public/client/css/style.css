@@ -117,6 +117,17 @@ html, body {
     color: #ff8f66;
     font-size: 30px;
 }
+
+.back-button{
+    color: white ;
+    font-size: 15px;
+
+}
+
+.glyphicon-chevron-left{
+    color: white;
+    font-size: 15px;
+}
 .logo {
     color: #ff8f66;
     font-size: 200px;
@@ -222,11 +233,11 @@ form{
     background-color:#0079ac;
     color:#fff;
     text-align: center;
-    min-height:415px;
+    min-height:315px;
 }
 
 #rightPanel{
-    min-height:415px;
+    min-height:315px;
 }
 
 .colorgraph {
