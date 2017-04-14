@@ -1,14 +1,34 @@
+<!--<nav class="navbar navbar-default navbar-fixed-top">-->
+    <!--<div class="row container-fluid">-->
+        <!--<div class="navbar-text pull-left">-->
+            <!--<a href="#/guest/{{model.guestId}}/event/{{model.eventId}}" class="navbar-link">-->
+                      <!--<span class="glyphicon glyphicon-chevron-left">-->
+                      <!--</span>-->
+            <!--</a>-->
+        <!--</div>-->
+        <!--<a class="navbar-brand" href="">-->
+            <!--<label>Products</label>-->
+        <!--</a>-->
+    <!--</div>-->
+<!--</nav>-->
+
+
 <nav class="navbar navbar-default navbar-fixed-top">
-    <div class="row container-fluid">
-        <div class="navbar-text pull-left">
-            <a href="#/guest/{{model.guestId}}/event/{{model.eventId}}" class="navbar-link">
-                      <span class="glyphicon glyphicon-chevron-left">
-                      </span>
-            </a>
+    <div class="container">
+
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <div class="navbar-brand">EVENT PRODUCTS</div>
         </div>
-        <a class="navbar-brand" href="">
-            <label>Products</label>
-        </a>
+        <div class="collapse navbar-collapse" id="myNavbar">
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="#/guest/{{model.guestId}}/event/{{model.eventId}}">EVENT HOME</a></li>
+            </ul>
+        </div>
     </div>
 </nav>
 
@@ -33,7 +53,7 @@
     {{model.unClaimSuccess}}
 </div>
 
-<div class="container-fluid">
+<div class="container">
     <ul class="nav nav-tabs">
         <li class="active">
             <a data-toggle="tab" ng-click="model.intializeMessages()" href="#claimed" target="_self">
@@ -145,13 +165,3 @@
     </div>
 </div>
 
-
-<nav class="navbar navbar-default navbar-fixed-bottom">
-    <div class="container-fluid">
-        <div class="navbar-text pull-right">
-            <a href="#/vendor/{{model.vendorId}}" class="navbar-link">
-                <span class="glyphicon glyphicon-vendor"></span>
-            </a>
-        </div>
-    </div>
-</nav>

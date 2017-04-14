@@ -3,18 +3,18 @@
     <div class="container">
         <div class="navbar-header">
             <a class="navbar-brand" href="#/host/{{model.hostID}}/event/{{model.eventID}}/home">
-                {{model.event.name}} Guests
+                GUESTS
             </a>
         </div>
         <div class="collapse navbar-collapse" id="myNavbar">
             <ul class="nav navbar-nav navbar-right">
-                <li><a href="#/host/{{model.hostID}}/event/" >EVENTS HOME</a></li>
+                <li><a href="#/host/{{model.hostID}}/event/{{model.eventID}}/home" >EVENT HOME</a></li>
             </ul>
         </div>
     </div>
 </nav>
 
-<div class="container-fluid">
+<div class="container">
 
     <h3 class="text-center">{{model.event.name}} Guests</h3>
     <ul class="nav nav-tabs">
@@ -45,12 +45,59 @@
             <ul class="list-group">
                 <div ng-repeat="guest in model.guests track by $index">
                     <li class="list-group-item">
-                        <a href="">
-                            {{guest}}
+                        <a href=""
+                           data-toggle="modal"
+                           data-target="#showGuest"
+                           data-dismiss="modal"
+                           target="_self"
+                           ng-click="model.showGuestDetails(guest)">
+                            {{guest.username}}
                         </a>
+
                     </li>
                 </div>
             </ul>
+        </div>
+
+        <div class="modal fade" id="showGuest" role="dialog" data-backdrop="false">
+            <div class="modal-dialog">
+
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header-login">
+                        <h2>Guest Details</h2>
+
+                    </div>
+                    <div class="modal-body">
+                        <form class="form-horizontal">
+                            <div class="form-group">
+                                <label class="col-sm-4 control-label">Guest Username</label>
+                                <div class="col-sm-8">
+                                    <p class="form-control-static">{{model.guestDetails.username}}</p>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-4 control-label">Guest First Name</label>
+                                <div class="col-sm-8">
+                                    <p class="form-control-static">{{model.guestDetails.firstName}}</p>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-4 control-label">Guest Last Name</label>
+                                <div class="col-sm-8">
+                                    <p class="form-control-static">{{model.guestDetails.lastName}}</p>
+                                </div>
+                            </div>
+
+
+                        </form>
+                    </div>
+
+                    <a href="" class="btn btn-primary btn-block" data-dismiss="modal">
+                        Close
+                    </a>
+                </div>
+            </div>
         </div>
 
         <div id="conGuests" class="tab-pane fade">
@@ -99,15 +146,17 @@
                 </a>
             </div>
 
-            <div ng-show="model.guestname">
-                <div class="col-xs-6">
-                    {{model.guestname}}
-                </div>
+            <div class="row">
+                <div ng-show="model.guestname">
+                    <div class="col-xs-6">
+                        {{model.guestname}}
+                    </div>
 
-                <div class="col-xs-6">
-                    <a class="btn btn-danger btn-block" ng-click="model.createInvite()">
-                        <span class="glyphicon glyphicon-plus"></span>
-                    </a>
+                    <div class="col-xs-6">
+                        <a class="btn btn-danger btn-block" ng-click="model.createInvite()">
+                            SEND INVITATION
+                        </a>
+                    </div>
                 </div>
             </div>
 
@@ -125,12 +174,4 @@
 
 </div>
 
-<nav class="navbar navbar-default navbar-fixed-bottom">
-    <div class="container-fluid">
-        <div class="navbar-text pull-right">
-            <a href="#/host/{{model.hostID}}">
-                <span class="glyphicon glyphicon-user"></span>
-            </a>
-        </div>
-    </div>
-</nav>
+

@@ -18,6 +18,7 @@
         vm.searchServiceByType = searchServiceByType;
         vm.setServiceId = setServiceId;
         vm.createOrder = createOrder;
+        vm.setShowService = setShowService;
 
         function init() {
             $('#timepicker3').timepicker();
@@ -60,7 +61,7 @@
                                         .success(function (service) {
                                             if(!order.cancelled)
                                             {
-                                                serviceList.push(service.name);
+                                                serviceList.push(service);
                                             }
                                             order.type = service.type;
                                         });
@@ -78,6 +79,10 @@
                 });
         }
         init();
+
+        function setShowService(service) {
+            vm.showService = service;
+        }
 
         function findService(vendor) {
             vm.vendors= undefined;
@@ -160,7 +165,7 @@
 
         function findServiceByCity(cityname) {
             vm.vendor = undefined;
-            vm.services = undefined;
+            vm.servicesByCity = undefined;
             if(cityname != ""){
                 cityname = angular.lowercase(cityname);
 
@@ -168,7 +173,7 @@
                     .findAllServicesInCity(cityname)
                     .success(function (services) {
                         if(services){
-                            vm.services = services;
+                            vm.servicesByCity = services;
                             }
                     });
             }

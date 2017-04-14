@@ -13,6 +13,7 @@
         vm.createInvite = createInvite;
         vm.refreshData = refreshData;
         vm.cancelInvitation = cancelInvitation;
+        vm.showGuestDetails = showGuestDetails;
 
         function init() {
             vm.guests = undefined;
@@ -28,7 +29,7 @@
                         UserService
                             .findUserById(guestsList[i])
                             .success(function (user) {
-                                myguests.push(user.username);
+                                myguests.push(user);
                             });
                     }
                     vm.guests = myguests;
@@ -70,6 +71,10 @@
 
         function refreshData() {
             init();
+        }
+
+        function showGuestDetails(guest) {
+            vm.guestDetails = guest;
         }
 
         function findUser(username) {

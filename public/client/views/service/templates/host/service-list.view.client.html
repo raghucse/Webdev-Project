@@ -2,7 +2,7 @@
     <div class="container">
         <div class="navbar-header">
             <a class="navbar-brand" href="#/host/{{model.hostID}}/event/{{model.eventID}}/home">
-                {{model.event.name}} Services
+                SERVICES
             </a>
         </div>
         <div class="collapse navbar-collapse" id="myNavbar">
@@ -45,12 +45,13 @@
             <ul class="list-group">
                 <div ng-repeat="service in model.services track by $index">
                     <li class="list-group-item">
-                        <a href="#/vendor/{{model.vendorId}}/service/{{service._id}}/view">
-                            {{service}}
-                        </a>
-                        <a href="#/vendor/{{model.vendorId}}/service/{{service._id}}" class="pull-right">
-                            <span class="glyphicon glyphicon-cog">
-                            </span>
+                        <a href=""
+                           data-toggle="modal"
+                           data-target="#showService"
+                           data-dismiss="modal"
+                           target="_self"
+                           ng-click="model.setShowService(service)">
+                            {{service.name}}
                         </a>
                     </li>
                 </div>
@@ -171,10 +172,10 @@
                                 </button>
                             </span>
                     </div>
-                    <ul class="list-group">
+                    <ul class="list-group" ng-show="model.vendors">
                         <div ng-repeat="vendor in model.vendors">
                             <li class="list-group-item">
-                                <a href="#/vendor/{{model.vendorId}}/services">
+                                <a href="">
                                     Vendor Name : {{vendor.name}}
                                 </a>
                                 <ul class="list-group">
@@ -212,10 +213,11 @@
                         </span>
                     </div>
 
-                    <ul class="list-group">
-                        <div ng-repeat="service in model.services track by $index">
+                    <ul class="list-group" ng-show="model.servicesByCity">
+                        <div ng-repeat="service in model.servicesByCity track by $index">
                             <li class="list-group-item">
-                                <a href=""
+                                <a
+                                   href=""
                                    data-toggle="modal"
                                    data-target="#orderService"
                                    data-dismiss="modal"
@@ -269,7 +271,7 @@
                         </div>
                     </form>
 
-                    <ul class="list-group">
+                    <ul class="list-group" ng-show="model.servicesByType">
                         <div ng-repeat="service in model.servicesByType track by $index">
                             <li class="list-group-item">
                                 <a href=""
@@ -346,11 +348,13 @@
                                    class="form-control"
                                    type="number"
                                    min="1"
+                                   max="{{model.modalService.capacity}}"
                                    placeholder="Number of Plates" required/>
                         </div>
 
                         <div class="error" ng-show="model.modalServicefood && orderform.numberOfPlates.$invalid && orderform.$submitted">
                             <li>Please Enter Number to Plates that needs to be Ordered</li>
+                            <li>Note : Number of Plates must be less than the service capacity</li>
                         </div>
 
                         <div class="input-group bootstrap-timepicker timepicker">
@@ -395,6 +399,64 @@
 
                 <a href="" class="btn btn-primary btn-block" data-dismiss="modal">
                         Cancel
+                </a>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="modal fade" id="showService" role="dialog" data-backdrop="false">
+        <div class="modal-dialog">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header-login">
+                    <h2>Service</h2>
+
+                </div>
+                <div class="modal-body">
+                    <form class="form-horizontal">
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label">Service Name</label>
+                            <div class="col-sm-8">
+                                <p class="form-control-static">{{model.showService.name}}</p>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label">Service Description</label>
+                            <div class="col-sm-8">
+                                <p class="form-control-static">{{model.showService.description}}</p>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label">Service Capacity</label>
+                            <div class="col-sm-8">
+                                <p class="form-control-static">{{model.showService.capacity}}</p>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label">Service City</label>
+                            <div class="col-sm-8">
+                                <p class="form-control-static">{{model.showService.city}}</p>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label">Service Address</label>
+                            <div class="col-sm-8">
+                                <p class="form-control-static">{{model.showService.address}}</p>
+                            </div>
+                        </div>
+                        <div class="form-group" ng-show="model.showServicefood">
+                            <label class="col-sm-4 control-label">Per Plate Cost</label>
+                            <div class="col-sm-8">
+                                <p class="form-control-static">{{model.showService.perPlateCost}}</p>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+
+                <a href="" class="btn btn-primary btn-block" data-dismiss="modal">
+                    Close
                 </a>
             </div>
         </div>

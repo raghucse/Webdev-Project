@@ -1,24 +1,18 @@
-<nav class="navbar navbar-default navbar-fixed-top">
-    <div class="row container-fluid">
-        <div class="col-sm-4 hidden-xs">
-            <div class="navbar-text pull-left">
-                <a href="#/vendor/{{model.vendorId}}/service" class="navbar-link">
-                      <span class="glyphicon glyphicon-chevron-left">
-                      </span>
-                </a>
-            </div>
-            <a class="navbar-brand" href="#/vendor/{{model.vendorId}}/service">
-                <label>Services</label>
-            </a>
-        </div>
 
-        <div class="col-xs-12 visible-xs">
-            <div class="navbar-text pull-left">
-                <a href="#/vendor/{{model.vendorId}}/service" class="navbar-link">
-                      <span class="glyphicon glyphicon-chevron-left">
-                      </span>
-                </a>
-            </div>
+<nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <div class="navbar-brand">PlanIT</div>
+        </div>
+        <div class="collapse navbar-collapse" id="myNavbar">
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="#/vendor/{{model.vendorId}}/service">SERVICES HOME</a></li>
+            </ul>
         </div>
     </div>
 </nav>

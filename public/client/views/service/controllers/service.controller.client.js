@@ -17,6 +17,7 @@
         vm.update =  update;
         vm.deleteVendor = deleteVendor;
         vm.logout = logout;
+        vm.refreshData = refreshData;
 
         function init() {
             var promise = VendorService.findVendorById(vm.vendorId);
@@ -62,6 +63,10 @@
                 });
         }
         init();
+
+        function refreshData() {
+            init();
+        }
 
         function acceptOrder(order) {
             var newOrder = {};
