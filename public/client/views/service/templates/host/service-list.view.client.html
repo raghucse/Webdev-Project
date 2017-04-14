@@ -51,7 +51,7 @@
                            data-dismiss="modal"
                            target="_self"
                            ng-click="model.setShowService(service)">
-                            {{service.name}}
+                            <h4>{{service.name}}</h4>
                         </a>
                     </li>
                 </div>
@@ -63,7 +63,7 @@
                     <li class="list-group-item">
                         <div class="row">
                             <a href="#{{order._id}}1" data-toggle="collapse" target="_self">
-                                Order Id : {{order._id}}
+                                <h4>Order Id : {{order._id}}</h4>
                             </a>
                             <div id="{{order._id}}1" class="collapse">
                                 <div class="panel panel-default">
@@ -103,7 +103,7 @@
                     <li class="list-group-item">
                         <div class="row">
                             <a href="#{{order._id}}2" data-toggle="collapse" target="_self">
-                                Order Id : {{order._id}}
+                                <h4>Order Id : {{order._id}}</h4>
                             </a>
                             <div id="{{order._id}}2" class="collapse">
                                 <div class="panel panel-default">
@@ -176,7 +176,7 @@
                         <div ng-repeat="vendor in model.vendors">
                             <li class="list-group-item">
                                 <a href="">
-                                    Vendor Name : {{vendor.name}}
+                                    <h4>Vendor Name : {{vendor.name}}</h4>
                                 </a>
                                 <ul class="list-group">
                                     <div ng-repeat="vendorservice in vendor.services track by $index">
@@ -187,7 +187,7 @@
                                                data-dismiss="modal"
                                                target="_self"
                                                ng-click="model.setServiceId(vendorservice._id)">
-                                                Service Name : {{vendorservice.name}}
+                                                <h4>Service Name : {{vendorservice.name}}</h4>
                                             </a>
                                         </li>
                                     </div>
@@ -223,7 +223,7 @@
                                    data-dismiss="modal"
                                    target="_self"
                                    ng-click="model.setServiceId(service._id)">
-                                    Service Name :    {{service.name}}
+                                    <h4>Service Name :    {{service.name}}</h4>
                                 </a>
                             </li>
                         </div>
@@ -280,7 +280,7 @@
                                    data-dismiss="modal"
                                    target="_self"
                                    ng-click="model.setServiceId(service._id)">
-                                    Service Name :    {{service.name}}
+                                    <h4>Service Name :    {{service.name}}</h4>
                                 </a>
                             </li>
                         </div>

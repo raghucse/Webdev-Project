@@ -64,7 +64,7 @@
                     <div class="row">
                         <div class="col-xs-6">
                             <a href="#/host/{{event.host}}/event/{{event._id}}/home">
-                                {{event.name}}
+                                <h4>{{event.name}}</h4>
                             </a>
                         </div>
                         <div class="col-xs-6">
@@ -82,12 +82,12 @@
                 <li ng-repeat="event in model.upcomingEvents" class="list-group-item">
                     <div class="row">
                         <div class="col-xs-6">
-                            Event Name
+                            <h4>Event Name</h4>
                         </div>
 
                         <div class="col-xs-6">
                             <a href="#/guest/{{model.hostID}}/event/{{event.event}}">
-                                {{event.eventname}}
+                                <h4>{{event.eventname}}</h4>
                             </a>
                         </div>
                     </div>
@@ -213,11 +213,12 @@
                 <div ng-repeat="invite in model.invites track by $index">
                     <li class="list-group-item">
                         <div class="row">
-                            <p>{{invite.sender}} invited you to his
+                            <h4>
+                            <p>{{invite.sender}} invited you to
                                 <a href="#/guest/{{model.hostID}}/event/{{invite.event}}">
                                     {{invite.eventname}}
                                 </a>
-                            </p>
+                            </p></h4>
                             <button class="btn btn-success" ng-click="model.acceptInvitation(invite)">
                                 Accept Invitation
                             </button>

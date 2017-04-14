@@ -158,12 +158,7 @@
             </div>
             <div class="modal-body">
                     <h3>Register</h3>
-                    <div ng-show="model.error" class="alert alert-danger">
-                        {{model.error}}
-                    </div>
-                    <div ng-show="model.passworderror" class="alert alert-danger">
-                        {{model.passworderror}}
-                    </div>
+
 
                     <form id="registerform" ng-submit="model.register(model.user)" data-toggle="validator">
 
@@ -223,6 +218,13 @@
                             <div class="help-block with-errors"></div>
                         </div>
 
+                        <div ng-show="model.error" class="alert alert-danger">
+                            {{model.error}}
+                        </div>
+                        <div ng-show="model.passworderror" class="alert alert-danger">
+                            {{model.passworderror}}
+                        </div>
+
                         <button type="submit" class="btn btn-primary btn-block">
                             Register
                         </button>
@@ -249,13 +251,7 @@
 
                 <h1>Login</h1>
 
-                <div ng-show="model.Verror" class="alert alert-danger">
-                    {{model.Verror}}
-                </div>
 
-                <div ng-show="model.message" class="alert alert-info">
-                    {{model.message}}
-                </div>
 
                 <form name="vendorlogin" ng-submit="model.vendorlogin(model.vendor)" data-toggle="validator">
                     <div class="form-group">
@@ -276,6 +272,15 @@
                     </div>
                     <button type="submit"  class="btn btn-primary btn-block">Login</button>
                 </form>
+
+                <div ng-show="model.Verror" class="alert alert-danger">
+                    {{model.Verror}}
+                </div>
+
+                <div ng-show="model.message" class="alert alert-info">
+                    {{model.message}}
+                </div>
+
                 <a class="btn btn-danger btn-block" data-dismiss="modal">
                     Cancel
                 </a>
@@ -310,9 +315,8 @@
             </div>
             <div class="modal-body">
                 <h3>Register</h3>
-                <div ng-show="model.passworderrorV" class="alert alert-danger">
-                    {{model.passworderrorV}}
-                </div>
+
+
                 <form id="registerformV" ng-submit="model.register()" data-toggle="validator">
 
                     <div class="form-group">
@@ -370,6 +374,10 @@
                         <div class="help-block with-errors"></div>
                     </div>
 
+                    <div ng-show="model.passworderrorV" class="alert alert-danger">
+                        {{model.passworderrorV}}
+                    </div>
+
                 <button type="submit" class="btn btn-primary btn-block" ng-click="model.vendorregister(model.vendor)">
                     Register
                 </button>
@@ -382,101 +390,3 @@
         </div>
     </div>
 </div>
-
-<!-- HOW IT WORKS -->
-<!--<div id="how-it-works">-->
-    <!--<div class="container text-center">-->
-        <!--<div class="text-center space-60">-->
-            <!--<h2 class="section-header animatedItem animated fadeInDown full-visible">How it works?</h2>-->
-            <!--<p>PlanIT is crazy simple to use</p>-->
-        <!--</div>-->
-        <!--<div class="row steps">-->
-            <!--<div class="col-sm-4 space-60">-->
-                <!--&lt;!&ndash; ICON FACTS 1 &ndash;&gt;-->
-                <!--<div class="step animatedItem animated fadeInDown">-->
-                    <!--<img ng-src="https://cloud.peachd.com/prod/images/gateway_v2/how-it-works/daily-notification.svg"-->
-                         <!--alt="Daily Menu via Text"-->
-                         <!--src="https://cloud.peachd.com/prod/images/gateway_v2/how-it-works/daily-notification.svg">-->
-                    <!--<div class="content">-->
-                        <!--<h3>Daily Menu</h3>-->
-                        <!--<p>Simply reply with your dish choice by 10:30 a.m.</p>-->
-                    <!--</div>-->
-                <!--</div>-->
-            <!--</div>-->
-            <!--<div class="col-sm-4 space-60">-->
-                <!--&lt;!&ndash; ICON FACTS 2 &ndash;&gt;-->
-                <!--<div class="step animatedItem animated fadeInDown">-->
-                    <!--<img ng-src="https://cloud.peachd.com/prod/images/gateway_v2/how-it-works/lunch-arrives.svg"-->
-                         <!--alt="Lunch Arrives"-->
-                         <!--src="https://cloud.peachd.com/prod/images/gateway_v2/how-it-works/lunch-arrives.svg">-->
-                    <!--<div class="content">-->
-                        <!--<h3>Lunch Arrives</h3>-->
-                        <!--<p>We’ll notify you when lunch arrives at your office.</p>-->
-                    <!--</div>-->
-                <!--</div>-->
-            <!--</div>-->
-            <!--<div class="col-sm-4">-->
-                <!--&lt;!&ndash; ICON FACTS 3 &ndash;&gt;-->
-                <!--<div class="step animatedItem animated fadeInDown">-->
-                    <!--<img ng-src="https://cloud.peachd.com/prod/images/gateway_v2/how-it-works/grab-lunch.svg"-->
-                         <!--alt="Grab Your Lunch"-->
-                         <!--src="https://cloud.peachd.com/prod/images/gateway_v2/how-it-works/grab-lunch.svg">-->
-                    <!--<div class="content">-->
-                        <!--<h3>Grab Your Lunch</h3>-->
-                        <!--<p>Find the dish you ordered and enjoy!</p>-->
-                    <!--</div>-->
-                <!--</div>-->
-            <!--</div>-->
-        <!--</div>-->
-    <!--</div>-->
-<!--</div>-->
-<!--&lt;!&ndash; HOW IT WORKS END &ndash;&gt;-->
-
-
-<!--<div id="our-promise">-->
-    <!--<div class="container">-->
-        <!--<div class="text-center">-->
-            <!--<h1>Our Promise</h1>-->
-        <!--</div>-->
-        <!--<div class="row">-->
-            <!--<div class="col-sm-4 space-60">-->
-                <!--<div class="text-center">-->
-                    <!--<img src="http://www.allseated.com/wp-content/uploads/2016/01/index-customer.png"-->
-                         <!--class="mobile-small"-->
-                         <!--alt="24-7 support is available to ensure your event planning success" />-->
-
-                    <!--<div class="content">-->
-                        <!--<h3>24/7 Customer Service</h3>-->
-                        <!--<p>We are always around to help! And you never know, you may even get help from our CEO through our 24-hour Live Chat!</p>-->
-
-                    <!--</div>-->
-                <!--</div>-->
-            <!--</div>-->
-
-            <!--<div class="col-sm-4 space-60">-->
-                <!--<div class="text-center">-->
-                    <!--<img src="http://www.allseated.com/wp-content/uploads/2016/01/index-innovation.png"-->
-                         <!--class="mobile-small"-->
-                         <!--alt="AllSeated constantly launches new features to make event planning easier" />-->
-
-                    <!--<div class="content">-->
-                        <!--<h3>Continued Innovation</h3>-->
-                        <!--<p>We hear you and are constantly developing cutting-edge technology to make the tools simple for everyday use.</p>-->
-                    <!--</div>-->
-                <!--</div>-->
-            <!--</div>-->
-
-            <!--<div class="col-sm-4 space-60">-->
-                <!--<div class="text-center">-->
-                    <!--<img src="http://www.allseated.com/wp-content/uploads/2016/01/index-secure.png"-->
-                         <!--class="mobile-small"-->
-                         <!--alt="AllSeated is safe and secure" />-->
-                    <!--<div class="content">-->
-                        <!--<h3>Secured & Protected</h3>-->
-                        <!--<p>We take security seriously! Our servers are hosted in fully redundant data centers with multi-layer protection and dedicated Firewalls.</p>-->
-                    <!--</div>-->
-                <!--</div>-->
-            <!--</div>-->
-        <!--</div>-->
-    <!--</div>-->
-<!--</div>-->

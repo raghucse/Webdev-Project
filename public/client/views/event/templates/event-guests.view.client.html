@@ -51,7 +51,7 @@
                            data-dismiss="modal"
                            target="_self"
                            ng-click="model.showGuestDetails(guest)">
-                            {{guest.username}}
+                            <h4>{{guest.username}}</h4>
                         </a>
 
                     </li>
@@ -105,7 +105,7 @@
                 <div ng-repeat="guest in model.acceptedGuests track by $index">
                     <li class="list-group-item">
                         <a href="">
-                            {{guest}}
+                            <h4>{{guest}}</h4>
                         </a>
                     </li>
                 </div>
@@ -118,7 +118,7 @@
                     <li class="list-group-item">
                         <div class="row">
                             <a href="">
-                                {{guest.username}}
+                                <h4>{{guest.username}}</h4>
                             </a>
 
                             <button class="btn btn-danger" ng-click="model.cancelInvitation(guest)">
@@ -149,7 +149,7 @@
             <div class="row">
                 <div ng-show="model.guestname">
                     <div class="col-xs-6">
-                        {{model.guestname}}
+                        <h4> {{model.guestname}}</h4>
                     </div>
 
                     <div class="col-xs-6">
