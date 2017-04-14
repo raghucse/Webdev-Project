@@ -52,7 +52,6 @@ module.exports = function (app, userModel, vendorModel) {
             .findUserByFacebookId(profile.id)
             .then(
                 function(user) {
-                    console.log(user);
                     if(user) {
                         return done(null, user);
                     } else {
