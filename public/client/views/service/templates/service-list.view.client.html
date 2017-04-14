@@ -1,18 +1,18 @@
+
 <nav class="navbar navbar-default navbar-fixed-top">
-    <div class="container-fluid">
-        <div class="navbar-text pull-left">
-            <a href="#/vendor/{{model.vendorId}}" class="navbar-link">
-                  <span class="glyphicon glyphicon-chevron-left">
-                  </span>
-            </a>
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <div class="navbar-brand">PlanIT</div>
         </div>
-        <a class="navbar-brand">
-            <label>Services</label>
-        </a>
-        <div class="navbar-text pull-right">
-            <a href="#/vendor/{{model.vendorId}}/service/new" class="navbar-link btn btn-danger">
-                Create New Service
-            </a>
+        <div class="collapse navbar-collapse" id="myNavbar">
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="#/vendor/{{model.vendorId}}/service/new">ADD NEW SERVICE</a></li>
+            </ul>
         </div>
     </div>
 </nav>
@@ -206,7 +206,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                </div>
+
                                 <hr class="colorgraph">
 
                                 <div class="row">
@@ -242,14 +242,5 @@
 
 </div>
 </div>
-<div class="bottom-padding"></div>
 
-<nav class="navbar navbar-default navbar-fixed-bottom">
-    <div class="container-fluid">
-        <div class="navbar-text pull-right">
-            <a href="#/vendor/{{model.vendorId}}" class="navbar-link">
-                <span class="glyphicon glyphicon-vendor"></span>
-            </a>
-        </div>
-    </div>
-</nav>
+

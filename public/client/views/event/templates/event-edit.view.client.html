@@ -8,7 +8,7 @@
                 </a>
             </div>
             <div class="navbar-header">
-                <a class="navbar-brand">
+                <a class="navbar-brand" href="#/host/{{model.hostID}}/event">
                     EVENTS
                 </a>
             </div>
@@ -21,7 +21,7 @@
                 </a>
            </div>
             <div class="navbar-header">
-                <a class="navbar-brand" href="">
+                <a class="navbar-brand">
                     Edit Event
                 </a>
             </div>
@@ -29,41 +29,12 @@
     </div>
 </nav>
 
-<div class="container">
+<div class="row container">
+    <div class="col-sm-4 hidden-xs wbdv-left-pane">
 
-
-    <div class="col-sm-4 pull-left hidden-xs">
-        <ul class="list-group">
-            <li class="list-group-item">
-                <div class="row">
-                    <div class="col-xs-6">
-                        Name
-                    </div>
-                    <div class="col-xs-6">
-                        <a href="#/host/{{model.hostID}}/event/new" class="pull-right">
-                            <span class="glyphicon glyphicon-plus"></span>
-                        </a>
-                    </div>
-
-                </div>
-            </li>
-            <li ng-repeat="event in model.events" class="list-group-item">
-                <div class="row">
-                    <div class="col-xs-6">
-                        {{event.name}}
-                    </div>
-                    <div class="col-xs-6">
-                        <a href="#/host/{{event.host}}/event/{{event._id}}" class="pull-right">
-                            <span class="glyphicon glyphicon-cog"></span>
-                        </a>
-                    </div>
-                </div>
-            </li>
-
-        </ul>
     </div>
 
-    <div class="col-sm-8">
+    <div class="col-sm-8 col-xs-12 wbdv-right-pane">
         <form name="editevent" novalidate>
             <label for="event-edit-event-name">Event Name</label>
             <input class="form-control"

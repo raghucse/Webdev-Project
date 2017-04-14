@@ -1,62 +1,78 @@
+<!--<nav class="navbar navbar-default navbar-fixed-top">-->
+    <!--<div class="row container">-->
+        <!--<div class="col-sm-4 hidden-xs">-->
+            <!--<div class="navbar-text pull-left">-->
+                <!--<a href="#/vendor/{{model.vendorId}}/service" class="navbar-link">-->
+                      <!--<span class="glyphicon glyphicon-chevron-left">-->
+                      <!--</span>-->
+                <!--</a>-->
+            <!--</div>-->
+            <!--<div class="navbar-header">-->
+            <!--<a class="navbar-brand" href="#/vendor/{{model.vendorId}}/service">-->
+                <!--<label>SERVICES</label>-->
+            <!--</a>-->
+            <!--</div>-->
+
+        <!--</div>-->
+        <!--<div class="col-sm-8 hidden-xs">-->
+            <!--<div class="navbar-header">-->
+            <!--<a class="navbar-brand">-->
+                <!--<label>New Service</label>-->
+            <!--</a>-->
+            <!--</div>-->
+        <!--</div>-->
+
+        <!--<div class="col-xs-12 visible-xs">-->
+            <!--<div class="navbar-text pull-left">-->
+                <!--<a href="#/vendor/{{model.vendorId}}/service" class="navbar-link">-->
+                      <!--<span class="glyphicon glyphicon-chevron-left">-->
+                      <!--</span>-->
+                <!--</a>-->
+            <!--</div>-->
+            <!--<a class="navbar-brand">-->
+                <!--<label>New Service</label>-->
+            <!--</a>-->
+        <!--</div>-->
+    <!--</div>-->
+<!--</nav>-->
+
+
+
 <nav class="navbar navbar-default navbar-fixed-top">
-    <div class="row container-fluid">
+    <div class="container row">
         <div class="col-sm-4 hidden-xs">
             <div class="navbar-text pull-left">
-                <a href="#/vendor/{{model.vendorId}}/service" class="navbar-link">
-                      <span class="glyphicon glyphicon-chevron-left">
-                      </span>
+                <a href="#/vendor/{{model.vendorId}}/service">
+                    <span class="glyphicon glyphicon-chevron-left"></span>
                 </a>
             </div>
-            <a class="navbar-brand" href="#/vendor/{{model.vendorId}}/service">
-                <label>Services</label>
-            </a>
-
-            <div class="navbar-text pull-right">
-                <a href="#/vendor/{{model.vendorId}}/service/new" class="navbar-link">
-                      <span class="glyphicon glyphicon-plus">
-                      </span>
+            <div class="navbar-header">
+                <a class="navbar-brand">
+                    SERVICES
                 </a>
             </div>
         </div>
-        <div class="col-sm-8 hidden-xs">
-            <a class="navbar-brand">
-                <label>New Service</label>
-            </a>
-        </div>
-
-        <div class="col-xs-12 visible-xs">
-            <div class="navbar-text pull-left">
-                <a href="#/vendor/{{model.vendorId}}/service" class="navbar-link">
-                      <span class="glyphicon glyphicon-chevron-left">
-                      </span>
+        <div class="col-sm-8">
+            <div class="navbar-text pull-left visible-xs">
+                <a href="#/vendor/{{model.vendorId}}/service">
+                    <span class="glyphicon glyphicon-chevron-left"></span>
                 </a>
             </div>
-            <a class="navbar-brand">
-                <label>New Service</label>
-            </a>
+            <div class="navbar-header">
+                <a class="navbar-brand" href="">
+                    Add New Service
+                </a>
+            </div>
         </div>
     </div>
 </nav>
 
 
 <div class="row container">
-    <div class="col-sm-4 hidden-xs wbdv-left-pane">
-        <ul class="list-group">
-            <div ng-repeat="service in model.services">
-                <li class="list-group-item">
-                    <a href="#/vendor/{{model.vendorId}}/service/{{service._id}}/view">
-                        {{service.name}}
-                    </a>
-                    <a href="#/vendor/{{model.vendorId}}/service/{{service._id}}" class="pull-right">
-              <span class="glyphicon glyphicon-cog">
-              </span>
-                    </a>
-                </li>
-            </div>
-        </ul>
-    </div>
+    <div class="col-sm-4 hidden-xs"></div>
 
-    <div class="col-sm-8 col-xs-12 wbdv-right-pane">
+
+    <div class="col-sm-8 col-xs-12">
         <form name="newservice" novalidate>
             <label for="service-type" class="form-control-label">Service Type</label>
             <select class="form-control" ng-model="model.service.type" name="serviceType"
@@ -171,13 +187,3 @@
 </div>
 
 
-
-<nav class="navbar navbar-default navbar-fixed-bottom">
-    <div class="container-fluid">
-        <div class="navbar-text pull-right">
-            <a href="#/vendor/{{model.vendorId}}" class="navbar-link">
-                <span class="glyphicon glyphicon-vendor"></span>
-            </a>
-        </div>
-    </div>
-</nav>

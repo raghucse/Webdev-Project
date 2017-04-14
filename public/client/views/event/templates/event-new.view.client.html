@@ -28,40 +28,8 @@
     </div>
 </nav>
 
-<div class="container">
-    <div class="col-sm-4 pull-left hidden-xs">
-        <ul class="list-group">
-            <li class="list-group-item">
-                <div class="row">
-                    <div class="col-xs-6">
-                        Event Name
-                    </div>
-                    <div class="col-xs-6">
-                        <a href="#/host/{{model.hostID}}/event/new" class="pull-right">
-                            <span class="glyphicon glyphicon-plus"></span>
-                        </a>
-                    </div>
-
-                </div>
-
-
-            </li>
-            <li ng-repeat="event in model.events" class="list-group-item">
-                <div class="row">
-                    <div class="col-xs-6">
-                        {{event.name}}
-                    </div>
-                    <div class="col-xs-6">
-                        <a href="#/host/{{event.host}}/event/{{event._id}}" class="pull-right">
-                            <span class="glyphicon glyphicon-cog"></span>
-                        </a>
-                    </div>
-                </div>
-            </li>
-
-        </ul>
-    </div>
-
+<div class="container row">
+    <div class="col-sm-4 hidden-xs"></div>
     <div class="col-sm-8">
         <form name="newevent" novalidate>
             <label for="event-new-event-name">Event Name</label>
@@ -143,13 +111,4 @@
 
 </div>
 
-<nav class="navbar navbar-default navbar-fixed-bottom">
-    <div class="container-fluid">
-        <div class="navbar-text pull-right">
-            <a href="#/host/{{model.hostID}}/event">
-                <span class="glyphicon glyphicon-user"></span>
-            </a>
-        </div>
-    </div>
-</nav>
 
