@@ -55,8 +55,20 @@
                       id="event-edit-event-description"
                       rows="2"></textarea>
 
+            <label for="event-edit-event-address">Event Address</label>
+            <input class="form-control"
+                   name="editAddress"
+                   ng-model="model.event.address"
+                   id="event-edit-event-address"
+                   value="Boston, MA"
+                   type="text" required/>
 
-            <label for="event-edit-event-location">Event Location</label>
+            <div class="error" ng-show="editevent.editAddress.$invalid && editevent.$submitted">
+                <li>Event Address cannot be Blank</li>
+            </div>
+
+
+            <label for="event-edit-event-location">Event City</label>
             <input class="form-control"
                    name="editLocation"
                    ng-model="model.event.location"
@@ -65,7 +77,7 @@
                    type="text" required/>
 
             <div class="error" ng-show="editevent.editLocation.$invalid && editevent.$submitted">
-                <li>Event Location cannot be Blank</li>
+                <li>Event City cannot be Blank</li>
             </div>
 
             <label for="edit-event-date">Event Data</label>

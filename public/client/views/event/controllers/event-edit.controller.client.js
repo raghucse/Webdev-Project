@@ -40,7 +40,7 @@
         init();
 
         function editEvent(event) {
-            if(event && event.name && event.location && event.time && event.date){
+            if(event && event.name && event.location && event.time && event.date && event.address){
                 EventService
                     .updateEvent(vm.eventID, event)
                     .success(function () {
