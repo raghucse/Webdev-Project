@@ -71,6 +71,7 @@
         init();
 
         function refreshData() {
+            vm.guestNotFound =  undefined;
             init();
         }
 
@@ -88,11 +89,17 @@
         }
 
         function findUser(username) {
+            vm.guestNotFound =  undefined;
             UserService
                 .findUserByUsername(username)
                 .success(function (user) {
-                    vm.guestname = user[0].username;
-                    vm.guestID = user[0]._id;
+                    if(!user[0]){
+                        vm.guestNotFound = "User not found";
+                    }else
+                    {
+                        vm.guestname = user[0].username;
+                        vm.guestID = user[0]._id;
+                    }
                 })
         }
 
