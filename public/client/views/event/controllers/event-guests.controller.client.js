@@ -17,8 +17,10 @@
         vm.deleteInvite = deleteInvite;
 
         function init() {
-            vm.guests = undefined;
-            vm.notComingguests = undefined;
+            vm.guests = [];
+            vm.notComingguests = [];
+            vm.acceptedGuests = [];
+            vm.pennGuests = [];
 
             EventService
                 .findEventById(vm.eventID)

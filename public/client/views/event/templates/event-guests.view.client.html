@@ -41,22 +41,6 @@
     </ul>
 
     <div class="tab-content">
-        <div id="ntGuests" class="tab-pane fade in active">
-            <ul class="list-group">
-                <div ng-repeat="guest in model.notComingguests track by $index">
-                    <li class="list-group-item">
-                        <a href=""
-                           data-toggle="modal"
-                           data-target="#showGuest"
-                           data-dismiss="modal"
-                           target="_self"
-                           ng-click="model.showGuestDetails(guest)">
-                            <h4>{{guest.username}}</h4>
-                        </a>
-                    </li>
-                </div>
-            </ul>
-        </div>
 
         <div class="modal fade" id="showGuest" role="dialog" data-backdrop="false">
             <div class="modal-dialog">
@@ -97,6 +81,23 @@
                     </a>
                 </div>
             </div>
+        </div>
+
+        <div id="ntGuests" class="tab-pane fade">
+            <ul class="list-group">
+                <div ng-repeat="guest in model.notComingguests track by $index">
+                    <li class="list-group-item">
+                        <a href=""
+                           data-toggle="modal"
+                           data-target="#showGuest"
+                           data-dismiss="modal"
+                           target="_self"
+                           ng-click="model.showGuestDetails(guest)">
+                            <h4>{{guest.username}}</h4>
+                        </a>
+                    </li>
+                </div>
+            </ul>
         </div>
 
         <div id="conGuests" class="tab-pane fade">
