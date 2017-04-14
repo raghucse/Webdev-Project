@@ -62,7 +62,8 @@ module.exports = function (app, userModel, vendorModel) {
                             facebook: {
                                 id:    profile.id,
                                 token: token
-                            }
+                            },
+                            type: 'USER'
                         };
                         return userModel.createUser(newFacebookUser);
                     }
@@ -83,7 +84,7 @@ module.exports = function (app, userModel, vendorModel) {
 
 
     function localStrategy(username, password, done) {
-        userModel.findUserByUsername(username)
+        userModel.findUserByEmail(username)
             .then(
                 function(user) {
                     if(user[0] && bcrypt.compareSync(password, user[0].password)) {
@@ -176,6 +177,7 @@ module.exports = function (app, userModel, vendorModel) {
     function register (req, res) {
         var user = req.body;
         user.password = bcrypt.hashSync(user.password);
+        user.type = "USER";
         userModel
             .createUser(user)
             .then(function(user){
@@ -190,18 +192,6 @@ module.exports = function (app, userModel, vendorModel) {
                 }
             });
     }
-
-
-    //
-    // function login(req, res) {
-    //     var user = req.user;
-    //     res.json(user);
-    // }
-    //
-    // function logout(req, res) {
-    //     req.logOut();
-    //     res.send(200);
-    // }
 
     function loggedin(req, res) {
         res.send(req.isAuthenticated() ? req.user : '0');

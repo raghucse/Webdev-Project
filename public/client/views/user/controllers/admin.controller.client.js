@@ -80,10 +80,14 @@
             UserService.findUserByUsername(vm.userName)
                 .then(function (user) {
                     vm.user = user.data[0];
-                    vm.vendor = false;
-                    vm.user.name = vm.user.firstName +" "+ vm.user.lastName;
-                    if(user[0]){
+                    console.log(user.data[0]);
+                    if(!user[0]){
                         vm.userNfound = "User not found";
+                    }
+                    else
+                    {
+                        vm.vendor = false;
+                        vm.user.name = vm.user.firstName +" "+ vm.user.lastName;
                     }
                 },  function (err) {
                     vm.userNfound = "User not found";
