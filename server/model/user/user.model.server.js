@@ -23,7 +23,8 @@ module.exports = function (mongoose, q) {
         "deleteUser" : deleteUser,
         "addWebsite" : addWebsite,
         "findUserByFacebookId" : findUserByFacebookId,
-        "findAllUsers" : findAllUsers
+        "findAllUsers" : findAllUsers,
+        "findUserByEmail" : findUserByEmail
     };
     return api;
 
@@ -55,6 +56,20 @@ module.exports = function (mongoose, q) {
     }
 
     function findUserByUsername(username) {
+        var deferred = q.defer();
+
+        UserModel.find({$and: [{username: username}, {type: "USER"}]}, function (err, user) {
+            if(err){
+                deferred.reject(err);
+            }
+            else {
+                deferred.resolve(user);
+            }
+        });
+        return deferred.promise;
+    }
+
+    function findUserByEmail(username) {
         var deferred = q.defer();
 
         UserModel.find({username: username}, function (err, user) {

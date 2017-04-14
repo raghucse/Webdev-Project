@@ -1,13 +1,12 @@
 module.exports = function (mongoose) {
 
-    var types = ['USER', 'ADMIN'];
+    var types = ["USER", "ADMIN"];
     var UserSchema = mongoose.Schema({
         type: {type: String, enum: types},
         username: String,
         password: String,
         firstName: String,
         lastName: String,
-        email: String,
         phone: String,
         address: String,
         dateCreated: { type: Date, default: Date.now },
