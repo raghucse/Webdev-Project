@@ -5,7 +5,8 @@
     app.controller("HostServiceListController", HostServiceListController);
     app.controller("HostServiceOrderController", HostServiceOrderController);
 
-    function HostServiceListController($routeParams, EventService, ServiceService, VendorService, OrderService, $location) {
+    function HostServiceListController($routeParams, EventService, ServiceService, VendorService,
+                                       OrderService, $location, UserService, $rootScope) {
         var vm = this;
         vm.eventID = $routeParams["eid"];
         vm.hostID = $routeParams["hid"];
@@ -19,6 +20,7 @@
         vm.setServiceId = setServiceId;
         vm.createOrder = createOrder;
         vm.setShowService = setShowService;
+        vm.logout = logout;
 
         function init() {
             $('#timepicker3').timepicker();
@@ -82,6 +84,15 @@
 
         function setShowService(service) {
             vm.showService = service;
+        }
+
+        function logout() {
+            UserService
+                .logout()
+                .then(function(response) {
+                    $rootScope.currentUser = null;
+                    $location.url("/home");
+                });
         }
 
         function findService(vendor) {

@@ -1,6 +1,6 @@
 
 <nav class="navbar navbar-default navbar-fixed-top">
-    <div class="container">
+    <div class="container-fluid">
         <div class="navbar-text pull-left">
             <a href="#/host/{{model.hostId}}/event/{{model.eventId}}/home" class="navbar-link">
                       <span class="glyphicon glyphicon-chevron-left">
@@ -17,6 +17,9 @@
             <div class="navbar-brand">PRODUCTS</div>
         </div>
         <div class="collapse navbar-collapse" id="myNavbar">
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="" ng-click="model.logout()">LOGOUT</a></li>
+            </ul>
             <ul class="nav navbar-nav navbar-right">
                 <li><a href="#/host/{{model.hostId}}/event/{{model.eventId}}/shopping/search">ADD NEW PRODUCT</a></li>
             </ul>
@@ -41,7 +44,7 @@
     {{model.deleteSucces}}
 </div>
 
-<div class="container">
+<div class="container-fluid">
     <ul class="nav nav-tabs">
         <li class="active">
             <a data-toggle="tab" ng-click="model.intializeMessages()" href="#claimed" target="_self">

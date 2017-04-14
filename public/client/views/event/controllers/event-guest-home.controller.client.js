@@ -4,10 +4,12 @@
         .module("WebAppMaker")
         .controller("GuestController", guestController);
 
-    function guestController($routeParams, InviteService, EventService, UserService) {
+    function guestController($routeParams, InviteService, EventService, UserService, $rootScope, $location) {
         var vm = this;
         vm.guestID = $routeParams['gid'];
         vm.eventID = $routeParams['eid'];
+
+        vm.logout = logout;
 
 
         function init() {
@@ -38,6 +40,17 @@
 
         }
         init();
+
+
+            function logout() {
+                UserService
+                    .logout()
+                    .then(function(response) {
+                        $rootScope.currentUser = null;
+                        $location.url("/home");
+                    });
+            }
+
 
 
 

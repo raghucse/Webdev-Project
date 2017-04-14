@@ -3,7 +3,7 @@
         .module("WebAppMaker")
         .controller("EventHomeController", EventHomeController);
 
-    function EventHomeController($routeParams, EventService,$location) {
+    function EventHomeController($routeParams, EventService, UserService, $location, $rootScope) {
         var vm = this;
         vm.hostID = $routeParams['hid'];
         vm.eventID = $routeParams['eid'];
@@ -11,6 +11,7 @@
         //Event Handler
         vm.editEvent = editEvent;
         vm.deleteEvent = deleteEvent;
+        vm.logout = logout;
 
         function init() {
             EventService
@@ -52,6 +53,15 @@
                 .success(function () {
                     $location.url("/host/" + vm.hostID + "/event/");
                 })
+        }
+
+        function logout() {
+            UserService
+                .logout()
+                .then(function(response) {
+                    $rootScope.currentUser = null;
+                    $location.url("/home");
+                });
         }
 
         function deleteEvent(){

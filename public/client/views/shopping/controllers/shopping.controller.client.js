@@ -8,18 +8,21 @@
     app.controller("SearchShoppingController", SearchShoppingController);
     app.controller("ShoppingGuestListController", ShoppingGuestListController);
 
-    function ShoppingListController($routeParams, ShoppingService, UserService) {
+    function ShoppingListController($routeParams, ShoppingService, UserService, $rootScope, $location) {
         var vm = this;
         vm.hostId = $routeParams["hid"];
         vm.eventId = $routeParams["eid"];
+        vm.claimedItems = [];
+        vm.unClaimedItems = [];
+
         vm.updateItem = updateItem;
         vm.deleteItem = deleteItem;
         vm.intializeMessages = intializeMessages;
         vm.unclaimItem = unclaimItem;
-        vm.claimItem = claimItem
+        vm.claimItem = claimItem;
         vm.checkGuest = checkGuest;
-        vm.claimedItems = [];
-        vm.unClaimedItems = [];
+        vm.logout = logout;
+
 
         function init() {
             ShoppingService
@@ -52,6 +55,15 @@
         }
 
         init();
+
+        function logout() {
+            UserService
+                .logout()
+                .then(function(response) {
+                    $rootScope.currentUser = null;
+                    $location.url("/home");
+                });
+        }
 
 
         function updateItem(item) {
@@ -149,17 +161,21 @@
         }
     }
 
-    function ShoppingGuestListController($routeParams, ShoppingService, $scope, UserService) {
+    function ShoppingGuestListController($routeParams, ShoppingService, $scope, UserService, $rootScope, $location) {
         var vm = this;
         vm.eventId = $routeParams["eid"];
         vm.guestId = $routeParams["gid"];
+        vm.claimedItems = [];
+        vm.unClaimedItems = [];
+        vm.items = [];
+
         vm.checkGuest = checkGuest;
         vm.claimItem = claimItem;
         vm.unclaimItem = unclaimItem;
         vm.intializeMessages = intializeMessages;
-        vm.claimedItems = [];
-        vm.unClaimedItems = [];
-        vm.items = [];
+        vm.logout = logout;
+
+
 
         function init() {
             ShoppingService
@@ -249,6 +265,15 @@
             }
         }
 
+        function logout() {
+            UserService
+                .logout()
+                .then(function(response) {
+                    $rootScope.currentUser = null;
+                    $location.url("/home");
+                });
+        }
+
         function intializeMessages() {
 
             init();
@@ -261,12 +286,16 @@
 
     }
 
-    function SearchShoppingController($routeParams, ShoppingService, $scope, EventService) {
+    function SearchShoppingController($routeParams, ShoppingService, $scope, EventService, UserService, $rootScope
+                                        ,$location) {
         var vm = this;
         vm.hostId = $routeParams["hid"];
         vm.eventId = $routeParams["eid"];
+
         vm.searchItems = searchItems;
         vm.addItem = addItem;
+        vm.logout = logout;
+
 
         function init() {
         }
@@ -309,6 +338,16 @@
                 });
 
         }
+
+        function logout() {
+            UserService
+                .logout()
+                .then(function(response) {
+                    $rootScope.currentUser = null;
+                    $location.url("/home");
+                });
+        }
+
     }
 
 })();

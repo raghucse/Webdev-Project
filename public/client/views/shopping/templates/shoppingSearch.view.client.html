@@ -18,6 +18,9 @@
         </div>
         <div class="collapse navbar-collapse" id="myNavbar">
             <ul class="nav navbar-nav navbar-right">
+                <li><a href="" ng-click="model.logout()">LOGOUT</a></li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
                 <li><a href="#/host/{{model.hostId}}/event/{{model.eventId}}/home">EVENT HOME</a></li>
             </ul>
         </div>
@@ -94,13 +97,3 @@
 </div>
 
 
-
-<nav class="navbar navbar-default navbar-fixed-bottom">
-    <div class="container-fluid">
-        <div class="navbar-text pull-right">
-            <a href="#/vendor/{{model.vendorId}}" class="navbar-link">
-                <span class="glyphicon glyphicon-vendor"></span>
-            </a>
-        </div>
-    </div>
-</nav>

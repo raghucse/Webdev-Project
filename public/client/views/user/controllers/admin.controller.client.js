@@ -9,6 +9,7 @@
     function AdminHomeController($routeParams, VendorService, $location, UserService) {
         var vm = this;
         vm.aid = $routeParams["aid"];
+
         vm.getAllUsers = getAllUsers;
         vm.getAllVendors = getAllVendors;
         vm.findVendorByUserName = findVendorByUserName;
