@@ -10,6 +10,10 @@ body {
     color: #818181;
 }
 
+html, body {
+    max-width: 100%;
+    overflow-x: hidden;
+}
 
 .navbar {
     margin-bottom: 0;
@@ -263,14 +267,30 @@ video#bgvid{
     word-wrap:break-word;
 }
 
-#profilelgEmail{
+#profilexsEmail{
     display:block;
-    width:700px;
+    width:350px;
     word-wrap:break-word;
+    text-align: center;
+}
+
+#profilesmEmail{
+    display:block;
+    width:400px;
+    word-wrap:break-word;
+    text-align: center;
+}
+
+#profileEmail{
+    display:block;
+    width:350px;
+    word-wrap:break-word;
+    text-align: center;
 }
 
 #profilemdEmail{
     display:block;
-    width:300px;
+    width:280px;
     word-wrap:break-word;
+    text-align: center;
 }
