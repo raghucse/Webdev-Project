@@ -42,17 +42,13 @@
         init();
 
 
-            function logout() {
-                UserService
-                    .logout()
-                    .then(function(response) {
-                        $rootScope.currentUser = null;
-                        $location.url("/home");
-                    });
-            }
-
-
-
-
+        function logout() {
+            UserService
+                .logout()
+                .then(function(response) {
+                    $rootScope.currentUser = null;
+                    $location.url("/home");
+                });
+        }
     }
 })();

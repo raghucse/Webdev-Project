@@ -18,7 +18,7 @@
                 <a href="#/host/{{model.hostID}}/event">
                     <span class="glyphicon glyphicon-chevron-left"></span>
                 </a>
-           </div>
+            </div>
             <div class="navbar-header">
                 <a class="navbar-brand">
                     Edit Event
@@ -82,10 +82,10 @@
 
             <label for="edit-event-date">Event Data</label>
             <input id="edit-event-date"
-                       name="editDate"
-                       type="text"
-                       class="form-control"
-                       ng-model="model.event.date" required/>
+                   name="editDate"
+                   type="text"
+                   class="form-control"
+                   ng-model="model.event.date" required/>
 
             <div class="error" ng-show="editevent.editDate.$invalid && editevent.$submitted">
                 <li>Event needs to have a Date</li>
