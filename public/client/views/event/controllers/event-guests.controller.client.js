@@ -108,6 +108,7 @@
 
         function findUser(username) {
             vm.guestNotFound =  undefined;
+            vm.guestname = undefined;
             UserService
                 .findUserByUsername(username)
                 .success(function (user) {
