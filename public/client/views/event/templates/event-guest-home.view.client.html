@@ -42,9 +42,14 @@
             </div>
         </div>
         <br><br>
+        <div ng-show="model.acceptError" class="alert alert-danger container">
+            {{model.acceptError}}
+        </div>
+
         <div class="row slideanim">
+
             <div class="col-sm-6">
-                <a href="#/guest/{{model.guestID}}/event/{{model.eventID}}/shopping">
+                <a href="" ng-click="model.checkProducts()">
                     <span class="glyphicon glyphicon-briefcase logo-small"></span>
                 </a>
                 <h4>PRODUCTS</h4>
@@ -59,7 +64,6 @@
         </div>
         <br><br>
     </div>
-
 
 
     <div class="modal fade" id="guests" role="dialog">

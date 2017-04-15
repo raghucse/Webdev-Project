@@ -10,6 +10,7 @@
         vm.eventID = $routeParams['eid'];
 
         vm.logout = logout;
+        vm.checkProducts = checkProducts;
 
 
         function init() {
@@ -33,7 +34,6 @@
                                     guestList.push(user.username);
                                 })
                         }
-
                     }
                     vm.guests = guestList;
                 });
@@ -41,6 +41,19 @@
         }
         init();
 
+        function checkProducts() {
+            InviteService.findInviteByEventAndGuest(vm.guestID, vm.eventID)
+                .then(function (invite) {
+                    invite = invite.data[0];
+                    if(invite){
+                        if(invite.accepted){
+                            $location.url("/guest/"+vm.guestID+"/event/"+vm.eventID+"/shopping");
+                        }else {
+                            vm.acceptError = "Please accept the invitation to view the products";
+                        }
+                    }
+                })
+        }
 
         function logout() {
             UserService
