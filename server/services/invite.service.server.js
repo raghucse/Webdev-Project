@@ -14,7 +14,6 @@ module.exports = function (app, inviteModel) {
         var eventID = req.params.eventId;
         inviteModel.findNotAttendingGuests(eventID, hostID)
             .then(function (invite) {
-                console.log(invite);
                 res.json(invite);
             }, function (err) {
                 res.sendStatus(500).send(err);
@@ -89,7 +88,6 @@ module.exports = function (app, inviteModel) {
 
     function deleteInvite(req, res) {
         var guestId = req.params.guestId;
-        console.log(guestId);
         inviteModel.deleteInvite(guestId)
             .then(function (status) {
                 res.sendStatus(200);

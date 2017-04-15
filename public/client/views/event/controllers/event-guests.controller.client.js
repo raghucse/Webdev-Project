@@ -134,13 +134,11 @@
             if(!selfInvite){
                 InviteService.findInvite(vm.eventID, vm.hostID, vm.guestID)
                     .then(function(invite){
-                        console.log(invite.data[0]);
                        var invite = invite.data[0];
                         if(invite){
                             vm.invitationstatus = "Invitation Already Sent to this user"
                         }
                         else {
-                            console.log(invite);
                             InviteService
                                 .createInvite(vm.hostID, vm.guestID, vm.eventID)
                                 .success(function (invite) {
@@ -190,7 +188,6 @@
         }
 
         function deleteInvite(guest) {
-            console.log(guest);
             InviteService.deleteInvite(guest)
                 .then(function () {
                     vm.inviteDelted = "Invite Deleted"
