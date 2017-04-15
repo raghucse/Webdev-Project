@@ -10,7 +10,6 @@
         //event handler
         vm.createEvent = createEvent;
 
-
         function init() {
             $(document).ready(function(){
                 var date_input=$('input[name="date"]'); //our date input has the name "date"
@@ -25,7 +24,6 @@
             });
 
             $('#event-time').timepicker();
-
 
             EventService
                 .findAllEventsForUser(vm.hostID)

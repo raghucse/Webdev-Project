@@ -11,10 +11,25 @@ module.exports = function (mongoose, q) {
         "findInvite" : findInvite,
         "updateInvite" : updateInvite,
         "deleteInvite": deleteInvite,
-        "findNotAttendingGuests": findNotAttendingGuests
+        "findNotAttendingGuests": findNotAttendingGuests,
+        "findInviteByEventAndGuest": findInviteByEventAndGuest
     };
 
     return api;
+
+    function findInviteByEventAndGuest(guestId, eventId) {
+        var deferred = q.defer();
+        InviteModel.find({event : eventId, receiver : guestId}, function (err, invite) {
+            if(err){
+                deferred.reject(err);
+            }
+            else {
+                deferred.resolve(invite);
+            }
+        });
+        return deferred.promise;
+    }
+
 
     function findNotAttendingGuests(eventId, hostId) {
         var deferred = q.defer();

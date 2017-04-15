@@ -135,13 +135,11 @@
             if(!selfInvite){
                 InviteService.findInvite(vm.eventID, vm.hostID, vm.guestID)
                     .then(function(invite){
-                        console.log(invite.data[0]);
-                       var invite = invite.data[0];
+                        var invite = invite.data[0];
                         if(invite){
                             vm.invitationstatus = "Invitation Already Sent to this user"
                         }
                         else {
-                            console.log(invite);
                             InviteService
                                 .createInvite(vm.hostID, vm.guestID, vm.eventID)
                                 .success(function (invite) {
@@ -152,14 +150,14 @@
                                         });
                                 });
                         }
-                })
+                    })
             }else if(selfInvite){
                 vm.invitationstatus = "You cannot send Invitation to yourself"
             }
             init();
         }
 
-        
+
         function cancelInvitation(invite) {
             InviteService
                 .findInviteById(invite._id)
@@ -174,24 +172,23 @@
                                 .findEventById(vm.eventID)
                                 .success(function (myevent) {
                                     var myguests = myevent.guests;
-                                            for(var p in myguests){
-                                                if(myguests[p] == invitaton[0].receiver){
-                                                    myguests.splice(p, 1);
-                                                }
-                                            }
-                                            myevent.guests = myguests;
-                                            EventService
-                                                .updateEvent(vm.eventID, myevent)
-                                                .success(function (response) {
-                                                    init();
-                                                })
-                                        });
+                                    for(var p in myguests){
+                                        if(myguests[p] == invitaton[0].receiver){
+                                            myguests.splice(p, 1);
+                                        }
+                                    }
+                                    myevent.guests = myguests;
+                                    EventService
+                                        .updateEvent(vm.eventID, myevent)
+                                        .success(function (response) {
+                                            init();
+                                        })
+                                });
                         })
                 })
         }
 
         function deleteInvite(guest) {
-            console.log(guest);
             InviteService.deleteInvite(guest)
                 .then(function () {
                     vm.inviteDelted = "Invite Deleted"

@@ -9,18 +9,12 @@
     function ShoppingService($http) {
         var api = {
             "addItem": addItem,
-    /*        "findAllItemsForHost": findAllItemsForHost,*/
             "findAllItemsForEvent": findAllItemsForEvent,
             "findItemsByItemId": findItemsByItemId,
             "updateItemQuantity": updateItemQuantity,
             "deleteItem": deleteItem,
             "claimItem": claimItem,
             "findItemById": findItemById,
-  /*          "findServiceById": findServiceById,
-            "updateService": updateService,
-            "deleteService": deleteService,
-            "findAllServicesForVendor": findAllServicesForVendor,
-            "updatePage": updatePage,*/
             "searchItem": searchItem
         };
         return api;
@@ -43,10 +37,6 @@
         function addItem(hostId, item, eventId) {
             return $http.post("/api/host/"+hostId+"/event/"+eventId+"/shopping/add", item);
         }
-
-     /*   function findAllItemsForHost(hostId) {
-            return $http.get("/api/host/"+hostId+"/shopping");
-        }*/
 
         function findAllItemsForEvent(eventId) {
             return $http.get("/api/event/"+eventId+"/shopping");
@@ -71,23 +61,6 @@
         function claimItem(guestId, id, guest) {
             return $http.put("/api/guest/"+guestId+"/shopping/"+id, guest);
         }
-        /*
-
-        function findServiceById(serviceId) {
-            return $http.get("/api/service/"+serviceId);
-        }
-
-        function updateService(serviceId, service) {
-            return $http.put("/api/service/"+serviceId, service);
-        }
-
-        function deleteService(serviceId) {
-            return $http.delete("/api/service/"+serviceId);
-        }
-
-        function updatePage(serviceId, pageId) {
-            return $http.put("/api/service/"+serviceId+"/page/"+pageId);
-        }*/
     }
 
 })();
