@@ -22,7 +22,6 @@ module.exports = function (app) {
 
     require("./services/user.service.server.js")(app, model.userModel, model.vendorModel);
     require("./services/event.service.server.js")(app, model.eventModel);
-    require("./services/product.service.server.js")(app, model.productModel);
     require("./services/service.service.server.js")(app, model.serviceModel);
     require("./services/vendor.service.server.js")(app, model.vendorModel);
     require("./services/invite.service.server")(app, model.inviteModel);
