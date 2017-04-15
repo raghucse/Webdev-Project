@@ -8,7 +8,7 @@
     app.controller("SearchShoppingController", SearchShoppingController);
     app.controller("ShoppingGuestListController", ShoppingGuestListController);
 
-    function ShoppingListController($routeParams, ShoppingService, UserService, $rootScope, $location) {
+    function ShoppingListController($routeParams, ShoppingService, EventService, UserService, $rootScope, $location) {
         var vm = this;
         vm.hostId = $routeParams["hid"];
         vm.eventId = $routeParams["eid"];
@@ -26,6 +26,14 @@
 
         function init() {
             intializeMessages();
+
+            EventService.findEventById(vm.eventId)
+                .then(function (event) {
+                    event = event.data;
+                    if(event.host != vm.hostId){
+                        $location.url('/404');
+                    }
+                })
 
             ShoppingService
                 .findAllItemsForEvent(vm.eventId)
