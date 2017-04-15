@@ -96,27 +96,33 @@
         }
 
         function findService(vendor) {
+            vm.vendorNotFound = undefined;
             vm.vendors= undefined;
             vm.services = undefined;
             VendorService
                 .findVendorByVendorname(vendor)
                 .success(function (vendor) {
 
-                    var vendorList = vendor;
-                    var vendors = [];
-                    for(var i = 0; i < vendorList.length ; i++){
-                        var vendorname = {
-                        };
-                        vendorname["name"] = vendorList[i].vendorname;
+                    if(!vendor[0]){
+                        vm.vendorNotFound = "Vendor not found";
+                    }else{
+                        var vendorList = vendor;
+                        var vendors = [];
+                        for(var i = 0; i < vendorList.length ; i++){
+                            var vendorname = {
+                            };
+                            vendorname["name"] = vendorList[i].vendorname;
 
-                        ServiceService
-                            .findAllServicesForVendor(vendorList[i]._id)
-                            .success(function (services) {
-                               vendorname["services"] = services;
-                            });
-                        vendors.push(vendorname);
+                            ServiceService
+                                .findAllServicesForVendor(vendorList[i]._id)
+                                .success(function (services) {
+                                    vendorname["services"] = services;
+                                });
+                            vendors.push(vendorname);
                         }
                         vm.vendors = vendors;
+                    }
+
                 });
         }
 
@@ -175,6 +181,7 @@
         }
 
         function findServiceByCity(cityname) {
+            vm.serviceNotCity = undefined;
             vm.vendor = undefined;
             vm.servicesByCity = undefined;
             if(cityname != ""){
@@ -183,30 +190,42 @@
                 ServiceService
                     .findAllServicesInCity(cityname)
                     .success(function (services) {
-                        if(services){
-                            vm.servicesByCity = services;
+                        if(!services[0]){
+                            vm.serviceNotCity = "No Service found in the given city";
                             }
+                            else{
+                            vm.servicesByCity = services;
+                        }
                     });
             }
         }
 
         function searchServiceByType(serviceType, serviceCity) {
             vm.servicesByType = undefined;
-
+            vm.serviceTypeNotFound = undefined;
             if(serviceType != "" && serviceCity != ""){
                 serviceCity = angular.lowercase(serviceCity);
 
                 ServiceService
                     .findAllServicesInCity(serviceCity)
                     .success(function (services) {
-                        if(services){
-                            var serviceList = []
+                        if(!services[0]){
+                            vm.serviceTypeNotFound = "No Service found";
+                        }
+                        else{
+                            var serviceList = [];
                             for(var i = 0; i < services.length ; i++){
                                 if(services[i].type == serviceType){
                                     serviceList.push(services[i]);
                                 }
                             }
-                            vm.servicesByType = serviceList;
+                            if(serviceList.length != 0){
+                                vm.servicesByType = serviceList;
+                            }
+                            else{
+                                vm.serviceTypeNotFound = "No Service found";
+                            }
+
                         }
                     });
             }
