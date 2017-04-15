@@ -2,23 +2,14 @@
  * Created by raghu on 2/8/2017.
  */
 module.exports =  function(app, ShoppingModel) {
+
     app.post("/api/host/:hostId/event/:eventId/shopping/add", addItem);
-    /*app.get("/api/host/:hostId/shopping", findAllItemsForHost); */
     app.get("/api/event/:eventId/shopping", findAllItemsForEvent);
     app.get("/api/host/:hostId/shopping/:itemId", findItemsByItemId);
     app.put("/api/shopping/:id/quantity/:quantity", updateItemQuantity);
     app.delete("/api/shopping/delete/:id", deleteItem);
     app.put("/api/guest/:guestId/shopping/:id", claimItem);
     app.get("/api/shopping/:id", findItemById);
-
-
-
-
-    /*   app.get("/api/service/:serviceId", findServiceById);
-        app.put("/api/service/:serviceId", updateService);
-        app.delete("/api/service/:serviceId", deleteService);
-        app.post("/api/vendor/:vendorId/service", createService);
-        app.put("/api/service/:serviceId/page/:pageId", updatePage);*/
 
     function addItem(req, res) {
         var itemf = req.body;
@@ -107,51 +98,5 @@ module.exports =  function(app, ShoppingModel) {
                 res.sendStatus(500).send(err);
             })
     }
-
-
-    /*  function findItemById(req, res) {
-          var serviceId = req.params.serviceId;
-          ServiceModel.findServiceById(serviceId)
-              .then(function (service) {
-                  res.json(service);
-              }, function (err) {
-                  res.sendStatus(500).send(err);
-              })
-      }
-
-      function updateService(req, res) {
-          var serviceId = req.params.serviceId;
-          var service = req.body;
-          ServiceModel.updateService(serviceId, service)
-              .then(function (service) {
-                  res.json(service);
-              }, function (err) {
-                  res.sendStatus(500).send(err);
-              })
-
-      }
-
-      function deleteService(req, res) {
-          var serviceId = req.params.serviceId;
-          ServiceModel.deleteService(serviceId)
-              .then(function (status) {
-                  res.sendStatus(200);
-              }, function (err) {
-                  res.sendStatus(500).send(err);
-              })
-
-      }
-
-      function updatePage(req, res) {
-          var serviceId = req.params.serviceId;
-          var pageId = req.params.pageId;
-
-          ServiceModel.updatePage(serviceId, pageId)
-              .then(function (service) {
-                  res.send(200);
-              }, function (err) {
-                  res.sendStatus(500).send(err);
-              })
-      }*/
 }
 
