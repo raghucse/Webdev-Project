@@ -108,7 +108,7 @@
             </ul>
         </div>
 
-        <div id="conGuests" class="tab-pane fade">
+        <div id="conGuests" class="tab-pane fade in active">
             <ul class="list-group">
                 <div ng-repeat="guest in model.acceptedGuests track by $index">
                     <li class="list-group-item">
@@ -148,6 +148,7 @@
                        value="18:00 EST"
                        type="text"/>
 
+
                 <a class="btn btn-danger btn-block" ng-click="model.findUser(model.username)">
                     Find User
                 </a>
@@ -175,6 +176,7 @@
             </div>
         </div>
     </div>
+
 </div>
 
 
