@@ -35,8 +35,8 @@ module.exports = function (app, userModel, vendorModel) {
         passport.authenticate('facebookUser', {
             failureRedirect: '/client/#/home'
         }), function (req, res) {
-        if(req.user)
-            res.redirect('/client/#/host/'+ req.user._id +'/event');
+            if(req.user)
+                res.redirect('/client/#/host/'+ req.user._id +'/event');
         });
 
     function authorized (req, res, next) {
