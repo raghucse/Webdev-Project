@@ -8,19 +8,31 @@ module.exports = function (app, inviteModel) {
     app.put("/api/invite/invitation/:inviteId", updateInvite);
     app.delete("/api/invite/delete/:guestId", deleteInvite);
     app.get("/api/invite/notComing/:hostId/:eventId", findNotAttendingGuests);
+    app.get("/api/invite/:guestId/event/:eventId", findInviteByEventAndGuest);
+
+
+    function findInviteByEventAndGuest(req, res) {
+        var guestId = req.params.guestId;
+        var eventId = req.params.eventId;
+
+        inviteModel.findInviteByEventAndGuest(guestId, eventId)
+            .then(function (invite) {
+                res.json(invite);
+            }, function (err) {
+                res.sendStatus(500).send(err)
+            })
+    }
 
     function findNotAttendingGuests(req, res) {
         var hostID = req.params.hostId;
         var eventID = req.params.eventId;
         inviteModel.findNotAttendingGuests(eventID, hostID)
             .then(function (invite) {
-                console.log(invite);
                 res.json(invite);
             }, function (err) {
                 res.sendStatus(500).send(err);
             });
     }
-
 
     function createInvite(req, res) {
         var hostID = req.params.hostId;
@@ -89,7 +101,6 @@ module.exports = function (app, inviteModel) {
 
     function deleteInvite(req, res) {
         var guestId = req.params.guestId;
-        console.log(guestId);
         inviteModel.deleteInvite(guestId)
             .then(function (status) {
                 res.sendStatus(200);

@@ -11,7 +11,7 @@ module.exports = function (app, eventModel) {
     app.put("/api/event/:eventId/guest/:guestId", addGuest);
     app.put("/api/event/:eventId/order/:orderId", addOrder);
     app.put("/api/event/:eventId/product/:productId", addProduct);
-    
+
     function createEvent(req, res) {
         var hostID = req.params.hostId;
         var newEvent = req.body;
@@ -22,7 +22,7 @@ module.exports = function (app, eventModel) {
                 res.sendStatus(500).send(err);
             });
     }
-    
+
     function findEventsForUser(req, res) {
         var hostId = req.params.hostId;
         eventModel.findAllEventsForUser(hostId)
@@ -62,7 +62,7 @@ module.exports = function (app, eventModel) {
                 res.sendStatus(500).send(err);
             });
     }
-    
+
     function findEventById(req, res) {
         var eventId = req.params.eventId;
         eventModel.findEventById(eventId)
@@ -72,7 +72,7 @@ module.exports = function (app, eventModel) {
                 res.sendStatus(500).send(err);
             });
     }
-    
+
     function updateEvent(req, res) {
         var eventId = req.params.eventId;
         var newEvent = req.body;
@@ -83,7 +83,7 @@ module.exports = function (app, eventModel) {
                 res.sendStatus(500).send(err);
             });
     }
-    
+
     function deleteEvent(req, res) {
         var eventId = req.params.eventId;
         eventModel.deleteEvent(eventId)
@@ -104,7 +104,7 @@ module.exports = function (app, eventModel) {
                 res.sendStatus(500).send(err);
             });
     }
-    
+
     function addOrder(req, res) {
         var eventId = req.params.eventId;
         var orderId = req.params.orderId;
@@ -115,7 +115,7 @@ module.exports = function (app, eventModel) {
                 res.sendStatus(500).send(err);
             });
     }
-    
+
     function addProduct(req, res) {
         var eventId = req.params.eventId;
         var productId = req.params.productId;
@@ -126,5 +126,5 @@ module.exports = function (app, eventModel) {
                 res.sendStatus(500).send(err);
             });
     }
-    
+
 };

@@ -133,9 +133,6 @@
                         vm.error = "Unable to UnRegister User";
                     })
             }
-
         }
-
-
     }
 })();
