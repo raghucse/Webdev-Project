@@ -102,6 +102,7 @@
         }
 
         function logout() {
+            $('#myNavbar').collapse('hide');
             VendorService
                 .logout()
                 .then(function (status) {
@@ -156,6 +157,7 @@
         init();
 
         function logout() {
+            $('#myNavbar').collapse('hide');
             UserService
                 .logout()
                 .then(function(response) {

@@ -82,6 +82,7 @@
         }
 
         function logout() {
+            $('#myNavbar').collapse('hide');
             UserService
                 .logout()
                 .then(function(response) {

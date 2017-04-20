@@ -133,7 +133,12 @@ html, body {
     font-size: 200px;
 }
 
+.modal{
+    margin-top: 20px;
+}
+
 .modal-footer{
+    z-index: 2;
     max-height: 100px;
 }
 
@@ -142,12 +147,14 @@ html, body {
     color: #fff !important;
     text-align: center;
     font-size: 30px;
+    z-index: 2;
 }
 
 .modal-body {
     max-height: 400px;
     overflow-y: scroll;
     padding: 40px 50px;
+    z-index: 2;
 }
 .center-block {
     display: block;
@@ -170,6 +177,7 @@ html, body {
     font-size: 40px;
     padding: 10px 10px;
     font-family: "Kaushan Script", "Helvetica Neue", Helvetica, Arial, cursive;
+    z-index: 2;
 }
 
 a:hover{text-decoration: none;}

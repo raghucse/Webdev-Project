@@ -37,6 +37,7 @@
             $('#vendorlogin').modal('hide');
             $('#userregister').modal('hide');
             $('#vendorregister').modal('hide');
+            $('#myNavbar').collapse('hide');
         }
 
         function closeallmodalsAbout() {
@@ -45,6 +46,7 @@
             $('#vendorlogin').modal('hide');
             $('#userregister').modal('hide');
             $('#vendorregister').modal('hide');
+            $('#myNavbar').collapse('hide');
         }
 
         function login(user) {
