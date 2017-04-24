@@ -8,9 +8,7 @@
         var vm = this;
         vm.guestID = $routeParams['gid'];
         vm.eventID = $routeParams['eid'];
-
         vm.logout = logout;
-
 
         function init() {
             EventService
@@ -42,18 +40,14 @@
         init();
 
 
-            function logout() {
-                $('#myNavbar').collapse('hide');
-                UserService
-                    .logout()
-                    .then(function(response) {
-                        $rootScope.currentUser = null;
-                        $location.url("/home");
-                    });
-            }
-
-
-
-
+        function logout() {
+            $('#myNavbar').collapse('hide');
+            UserService
+                .logout()
+                .then(function(response) {
+                    $rootScope.currentUser = null;
+                    $location.url("/home");
+                });
+        }
     }
 })();
