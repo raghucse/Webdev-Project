@@ -39,10 +39,8 @@
                     .createEventForUser(vm.hostID, event)
                     .success(function (newEvent) {
                         $location.url("/host/" + vm.hostID + "/event");
-
                     });
             }
-
         }
 
     }
