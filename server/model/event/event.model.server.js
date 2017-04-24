@@ -14,11 +14,11 @@ module.exports = function (mongoose, q) {
         "deleteEvent": deleteEvent,
         "addGuest": addGuest,
         "addOrder": addOrder,
-        "addProduct": addProduct 
+        "addProduct": addProduct
     };
 
     return api;
-    
+
     function createEventForUser(hostId, event) {
         var deferred = q.defer();
         event.host = hostId;
@@ -32,7 +32,7 @@ module.exports = function (mongoose, q) {
         });
         return deferred.promise;
     }
-    
+
     function findAllEventsForUser(hostId) {
         var deferred = q.defer();
         EventModel.find({host: hostId}, function (err, events) {
@@ -84,7 +84,7 @@ module.exports = function (mongoose, q) {
         });
         return deferred.promise;
     }
-    
+
     function findEventById(eventId) {
         var deferred = q.defer();
         EventModel.findById(eventId, function (err, event) {
@@ -97,7 +97,7 @@ module.exports = function (mongoose, q) {
         });
         return deferred.promise;
     }
-    
+
     function updateEvent(eventId, event) {
         var deferred = q.defer();
         EventModel.update({ _id:eventId },event
@@ -111,7 +111,7 @@ module.exports = function (mongoose, q) {
             });
         return deferred.promise;
     }
-    
+
     function deleteEvent(eventId) {
         var deferred = q.defer();
         EventModel.findByIdAndRemove({_id: eventId}, function (err, event) {
@@ -140,7 +140,7 @@ module.exports = function (mongoose, q) {
         });
         return deferred.promise;
     }
-    
+
     function addOrder(eventId, orderId) {
         var deferred = q.defer();
         EventModel.findById(eventId, function (err, event) {

@@ -104,16 +104,16 @@ module.exports = function (mongoose, q) {
     }
 
     function updateOrder(serviceId, orderId) {
-         var deferred = q.defer();
-         ServiceModel.findById(serviceId, function (err, service) {
-         if(err){
-            deferred.reject(err);
-         }
-         else {
-            service.orders.push(orderId);
-            service.save();
-            deferred.resolve();
-         }});
-         return deferred.promise;
-     }
+        var deferred = q.defer();
+        ServiceModel.findById(serviceId, function (err, service) {
+            if(err){
+                deferred.reject(err);
+            }
+            else {
+                service.orders.push(orderId);
+                service.save();
+                deferred.resolve();
+            }});
+        return deferred.promise;
+    }
 };
