@@ -42,8 +42,8 @@
                             ServiceService
                                 .findServiceById(vm.orderlist[i].service)
                                 .then(function (service) {
-                                   service = service.data;
-                                   vm.orderlist[i].service = service.name;
+                                    service = service.data;
+                                    vm.orderlist[i].service = service.name;
                                 });
                             if(!vm.orderlist[i].accepted && !vm.orderlist[i].cancelled){
                                 myOrders.push(vm.orderlist[i]);
@@ -281,7 +281,7 @@
             ServiceService
                 .findServiceById(vm.serviceId)
                 .then(function (service) {
-                            vm.service = service.data;
+                    vm.service = service.data;
                     if(vm.service.type == 'place'){
                         vm.place = true;
                         vm.food = false;
