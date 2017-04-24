@@ -231,12 +231,12 @@
                         <div ng-repeat="service in model.servicesByCity track by $index">
                             <li class="list-group-item">
                                 <a
-                                   href=""
-                                   data-toggle="modal"
-                                   data-target="#orderService"
-                                   data-dismiss="modal"
-                                   target="_self"
-                                   ng-click="model.setServiceId(service._id)">
+                                        href=""
+                                        data-toggle="modal"
+                                        data-target="#orderService"
+                                        data-dismiss="modal"
+                                        target="_self"
+                                        ng-click="model.setServiceId(service._id)">
                                     <h4>Service Name :    {{service.name}}</h4>
                                 </a>
                             </li>
@@ -412,7 +412,7 @@
 
 
                         <button type="submit" class="btn btn-success btn-block"
-                           ng-click="model.createOrder(model.modalService._id, model.platesrequested, model.deliveryDate, model.deliveryTime)">
+                                ng-click="model.createOrder(model.modalService._id, model.platesrequested, model.deliveryDate, model.deliveryTime)">
                             Place Order
                         </button>
 
@@ -421,7 +421,7 @@
                 </div>
 
                 <a href="" class="btn btn-primary btn-block" data-dismiss="modal">
-                        Cancel
+                    Cancel
                 </a>
             </div>
         </div>
