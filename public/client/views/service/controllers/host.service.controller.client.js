@@ -158,24 +158,24 @@
                     order.cost = platesrequested * vm.modalService.perPlateCost;
                 }
 
-                    order.date = deliveryDate;
-                    order.time = deliveryTime;
-                    order.cancelled = false;
-                    OrderService
-                        .createOrder(serviceId, vm.hostID, vm.modalService._vendor, order)
-                        .success(function (order) {
-                            ServiceService
-                                .updateOrder(serviceId, order._id)
-                                .success(function (service) {
-                                    EventService
-                                        .addOrder(vm.eventID, order._id)
-                                        .success(function (response) {
-                                            vm.orderstatus = "Order Placed";
-                                            $location.url("/host/" + vm.hostID + "/event/" + vm.eventID + "/services");
-                                            $('#orderService').modal('hide');
-                                        });
-                                });
-                        });
+                order.date = deliveryDate;
+                order.time = deliveryTime;
+                order.cancelled = false;
+                OrderService
+                    .createOrder(serviceId, vm.hostID, vm.modalService._vendor, order)
+                    .success(function (order) {
+                        ServiceService
+                            .updateOrder(serviceId, order._id)
+                            .success(function (service) {
+                                EventService
+                                    .addOrder(vm.eventID, order._id)
+                                    .success(function (response) {
+                                        vm.orderstatus = "Order Placed";
+                                        $location.url("/host/" + vm.hostID + "/event/" + vm.eventID + "/services");
+                                        $('#orderService').modal('hide');
+                                    });
+                            });
+                    });
 
             }
 
@@ -193,8 +193,8 @@
                     .success(function (services) {
                         if(!services[0]){
                             vm.serviceNotCity = "No Service found in the given city";
-                            }
-                            else{
+                        }
+                        else{
                             vm.servicesByCity = services;
                         }
                     });
@@ -243,7 +243,7 @@
                     EventService
                         .findEventById(vm.eventID)
                         .success(function (myevent) {
-                           var orders = myevent.orders;
+                            var orders = myevent.orders;
                             for(var p in orders){
                                 if(orders[p] == order._id){
                                     orders.splice(p, 1);
