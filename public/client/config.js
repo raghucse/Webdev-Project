@@ -108,7 +108,7 @@
                 controller: "SearchShoppingController",
                 controllerAs: "model",
                 resolve: { loggedin: checkUserLoggedin }
-             })
+            })
             .when("/host/:hid/event/:eid/shopping", {
                 templateUrl: "views/shopping/templates/shoppingList.view.client.html",
                 controller: "ShoppingListController",

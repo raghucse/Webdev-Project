@@ -311,7 +311,7 @@
     }
 
     function SearchShoppingController($routeParams, ShoppingService, $scope, EventService, UserService, $rootScope
-                                        ,$location) {
+        ,$location) {
         var vm = this;
         vm.hostId = $routeParams["hid"];
         vm.eventId = $routeParams["eid"];
